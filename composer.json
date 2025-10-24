@@ -10,6 +10,7 @@
         "filament/filament": "^3.3",
         "laravel/framework": "^12.0",
         "laravel/horizon": "^5.37",
+        "laravel/pulse": "^1.4",
         "laravel/telescope": "^5.14",
         "laravel/tinker": "^2.10.1",
         "predis/predis": "^3.2",
