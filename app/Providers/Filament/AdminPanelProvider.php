@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
+use Illuminate\Support\Facades\Auth;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -18,6 +19,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationItem;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -28,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->darkMode(false)
+            ->defaultThemeMode(ThemeMode::Light)
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -41,6 +43,34 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
+            ])
+            ->navigationItems([
+                NavigationItem::make('telescope')
+                    ->label('Telescope')
+                    ->badge(fn (): string => '●')
+                    ->badgeTooltip('Telescope helps track what happens behind the scenes in your app.')
+                    ->url(fn (): string => ! app()->environment('testing') ? route('telescope') : '#', shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-chart-bar-square')
+                    ->group('Monitor')
+                    ->visible(fn (): bool => ! app()->environment('testing') && Auth::user()->isAdmin),
+
+                NavigationItem::make('pulse')
+                    ->label('Pulse')
+                    ->badge(fn (): string => '●')
+                    ->badgeTooltip('Pulse provides real-time insights into your application\'s performance and health.')
+                    ->url(fn (): string => route('pulse'), shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-heart')
+                    ->group('Monitor')
+                    ->visible(fn (): bool => ! app()->environment('testing') && Auth::user()->isAdmin),
+
+                NavigationItem::make('horizon')
+                    ->label('Horizon')
+                    ->badge(fn (): string => '●')
+                    ->badgeTooltip('Horizon gives you a simple way to manage and monitor background tasks.')
+                    ->url(fn (): string => route('horizon.index'), shouldOpenInNewTab: true)
+                    ->icon('heroicon-o-lifebuoy')
+                    ->group('Monitor')
+                    ->visible(fn (): bool => ! app()->environment('testing') && Auth::user()->isAdmin),
             ])
             ->middleware([
                 EncryptCookies::class,
