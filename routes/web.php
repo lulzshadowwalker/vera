@@ -3,11 +3,10 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::get('/auth/login', [LoginController::class, 'index'])->name('auth.login.index');
 Route::get('/auth/register', [RegisterController::class, 'index'])->name('auth.register.index');

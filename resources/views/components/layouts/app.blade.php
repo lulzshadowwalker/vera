@@ -11,13 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
+    <script src="https://kit.fontawesome.com/a51f251d24.js" crossorigin="anonymous"></script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
-    <main>
+<body class="min-h-screen flex flex-col">
+    <main class="flex-1">
         @yield('content')
     </main>
+    <x-footer />
 
     @stack('scripts')
 </body>
