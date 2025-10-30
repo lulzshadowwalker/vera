@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Enums\Role;
+use App\Models\Review;
+use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -24,5 +26,10 @@ class DatabaseSeeder extends Seeder
             'password' => '4g8rCaaO+wBehgYG',
         ]);
         $admin->assignRole(Role::admin);
+
+        // Seed additional fake data
+        User::factory(10)->create();
+        Supplier::factory(5)->create();
+        Review::factory(20)->create();
     }
 }

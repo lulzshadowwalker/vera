@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Supplier;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SupplierFactory extends Factory
 {
@@ -21,9 +20,9 @@ class SupplierFactory extends Factory
     public function definition(): array
     {
         return [
-            'domain' => fake()->word(),
-            'name' => fake()->name(),
-            'country' => fake()->country(),
+            'domain' => fake()->unique()->domainName(),
+            'name' => fake()->company(),
+            'country' => fake()->countryCode(),
         ];
     }
 }
