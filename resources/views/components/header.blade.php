@@ -3,7 +3,7 @@
         :class="{ 'border-border': scrolled }">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center gap-2">
             <nav class="flex items-center me-auto">
-                <a href="#" class="[&amp;&gt;svg]:size-6 mr-4 flex items-center gap-2">
+                <a href="{{ route('home.index') }}" class="[&amp;&gt;svg]:size-6 mr-4 flex items-center gap-2">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
                         class="min-w-fit w-5 h-5 md:w-7 md:h-7" height="1em" width="1em"
                         xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@
                 <a href="#" class="max-sm:w-full uk-btn uk-btn-ghost uk-btn-sm">
                     Testimonials
                 </a>
-                <a href="#" class="max-sm:w-full uk-btn uk-btn-ghost uk-btn-sm">
+                <a href="#faq" class="max-sm:w-full uk-btn uk-btn-ghost uk-btn-sm">
                     FAQ
                 </a>
                 <a class="max-sm:w-full uk-btn uk-btn-primary uk-btn-sm"

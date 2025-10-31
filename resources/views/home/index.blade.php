@@ -55,4 +55,20 @@
         </li>
     </ul>
 </section>
+
+<!-- CTA -->
+<section class="bg-blue-600 text-white">
+    <div class="max-w-7xl mx-auto px-6 py-12 md:py-16">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h2 class="font-semibold text-3xl md:text-4xl">Ready to get started?</h2>
+                <p class="text-blue-200 text-lg mt-3">Create an account to leave a review or browse our directory of industrial suppliers.</p>
+            </div>
+            <div class="flex justify-center md:justify-end gap-4">
+                <a href="{{ route('auth.register.index') }}" class="uk-btn uk-btn-primary uk-btn-lg">Create an account</a>
+                <a href="{{ route('suppliers.index') }}" class="uk-btn uk-btn-default uk-btn-lg bg-white text-blue-600 hover:bg-gray-100">Browse suppliers</a>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection
