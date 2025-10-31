@@ -2,29 +2,29 @@
     <div class="max-w-7xl w-full mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
             <a class="flex items-center gap-2" href="/">
-                <h3 class="text-4xl font-semibold cursor-pointer">{{ config('app.name') }}</h3>
+                <h3 class="text-3xl md:text-4xl font-semibold cursor-pointer">{{ config('app.name') }}</h3>
             </a>
-            <p class="mt-3.5 text-foreground-accent">
+            <p class="mt-3.5 text-foreground-accent leading-6 tracking-wide">
                 A secure, scalable B2B web application built to foster transparency and trust in the industrial supply
                 chain.
             </p>
         </div>
         <div>
-            <h4 class="text-2xl font-semibold mb-5">Quick Links</h4>
+            <h4 class="text-xl md:text-2xl font-semibold mb-5">Quick Links</h4>
             <ul class="text-foreground-accent">
                 <li class="mb-2"><a class="uk-link-text" href="/">Home</a></li>
                 <li class="mb-2"><a class="uk-link-text" href="/suppliers">Browse Suppliers</a></li>
             </ul>
         </div>
         <div>
-            <h4 class="text-2xl font-semibold mb-5">Legal</h4>
+            <h4 class="text-xl md:text-2xl font-semibold mb-5">Legal</h4>
             <ul class="text-foreground-accent">
                 <li class="mb-2"><a class="uk-link-text" href="#">Terms of Service</a></li>
                 <li class="mb-2"><a class="uk-link-text" href="#">Privacy Policy</a></li>
             </ul>
         </div>
         <div>
-            <h4 class="text-2xl font-semibold mb-5">Contact Us</h4>
+            <h4 class="text-xl md:text-2xl font-semibold mb-5">Contact Us</h4>
             <div class="flex items-center gap-1">
                 Email: <a href="mailto:contact@vera.com" class="block uk-link-text">contact@vera.com</a>
             </div>
