@@ -33,9 +33,9 @@
                     FAQ
                 </a>
                 <a class="max-sm:w-full uk-btn uk-btn-primary uk-btn-sm"
-                    href="#">Register</a>
+                    href="{{ route('auth.register.index') }}">Register</a>
                 <a class="max-sm:w-full uk-btn uk-btn-default uk-btn-sm"
-                    href="#">Login</a>
+                    href="{{ route('auth.login.index') }}">Login</a>
                 <form
                     action="#"
                     method="get" class="inline-block">
@@ -81,7 +81,7 @@
                     <a class="uk-btn uk-btn-ghost uk-btn-lg justify-between px-4" href="#">
                         FAQ
                     </a>
-                    <a class="uk-btn uk-btn-primary uk-btn-lg justify-between px-4 mt-auto" href="#">
+                    <a class="uk-btn uk-btn-primary uk-btn-lg justify-between px-4 mt-auto" href="{{ route('auth.register.index') }}">
                         Register
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
@@ -91,7 +91,7 @@
                             <path d="m12 5 7 7-7 7"></path>
                         </svg>
                     </a>
-                    <a class="uk-btn uk-btn-secondary uk-btn-lg px-4 justify-between" href="#">
+                    <a class="uk-btn uk-btn-secondary uk-btn-lg px-4 justify-between" href="{{ route('auth.login.index') }}">
                         Login
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
