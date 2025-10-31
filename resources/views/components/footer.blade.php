@@ -19,8 +19,8 @@
         <div>
             <h4 class="text-xl md:text-2xl font-semibold mb-5">Legal</h4>
             <ul class="text-foreground-accent">
-                <li class="mb-2"><a class="uk-link-text" href="#">Terms of Service</a></li>
-                <li class="mb-2"><a class="uk-link-text" href="#">Privacy Policy</a></li>
+                <li class="mb-2"><a class="uk-link-text" href="{{ route('terms-and-conditions.index') }}">Terms of Service</a></li>
+                <li class="mb-2"><a class="uk-link-text" href="{{ route('privacy-policy.index') }}">Privacy Policy</a></li>
             </ul>
         </div>
         <div>

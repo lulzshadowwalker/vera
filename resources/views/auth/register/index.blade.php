@@ -70,8 +70,8 @@
 
                 <p class="text-muted-foreground px-8 text-center text-sm">
                     By clicking continue, you agree to our
-                    <a class="uk-link" href="#"> Terms of Service </a> and
-                    <a class="uk-link" href="#" uk-toggle> Privacy Policy </a>.
+                    <a class="uk-link" href="{{ route('terms-and-conditions.index') }}"> Terms of Service </a> and
+                    <a class="uk-link" href="{{ route('privacy-policy.index') }}" uk-toggle> Privacy Policy </a>.
                 </p>
 
                 <div class="text-center text-sm text-muted-foreground mt-2">
