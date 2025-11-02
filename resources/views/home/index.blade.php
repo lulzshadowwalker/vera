@@ -57,6 +57,7 @@
 </section>
 
 <!-- CTA -->
+@guest
 <section class="bg-blue-600 text-white">
     <div class="max-w-7xl mx-auto px-6 py-12 md:py-16">
         <div class="grid md:grid-cols-2 gap-8 items-center">
@@ -71,4 +72,5 @@
         </div>
     </div>
 </section>
+@endguest
 @endsection
