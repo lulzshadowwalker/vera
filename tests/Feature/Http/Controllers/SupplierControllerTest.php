@@ -56,4 +56,22 @@ final class SupplierControllerTest extends TestCase
         $response->assertViewIs('supplier.index');
         $response->assertViewHas('suppliers');
     }
+
+    #[Test]
+    public function show_paginated_reviews(): void
+    {
+        $supplier = Supplier::factory()->create();
+        \App\Models\Review::factory()
+            ->count(15)
+            ->create([
+                'reviewed_supplier_id' => $supplier->id,
+            ]);
+
+        $response = $this->get(route('suppliers.show', $supplier));
+
+        $response->assertOk();
+        $response->assertViewHas('reviews', function ($reviews) {
+            return $reviews instanceof \Illuminate\Pagination\LengthAwarePaginator;
+        });
+    }
 }
