@@ -113,25 +113,47 @@
             </div>
 
             <!-- Pagination -->
+            @if ($suppliers->hasPages())
             <nav class="flex justify-center mt-8" aria-label="Pagination">
                 <ul class="uk-pgn uk-pgn-default">
+                    @if ($suppliers->onFirstPage())
+                    <li class="uk-disabled">
+                        <span data-uk-pgn-previous></span>
+                    </li>
+                    @else
                     <li>
-                        <a href="#">
+                        <a href="{{ $suppliers->previousPageUrl() }}">
                             <span data-uk-pgn-previous></span>
                         </a>
                     </li>
-                    <li><a href="#">1</a></li>
-                    <li class="uk-active"><span aria-current="page">2</span></li>
-                    <li><a href="#">3</a></li>
-                    <li class="uk-disabled"><span>...</span></li>
-                    <li><a href="#">10</a></li>
+                    @endif
+
+                    @foreach (range(1, $suppliers->lastPage()) as $page)
+                    @if ($page == $suppliers->currentPage())
                     <li>
-                        <a href="#">
+                        <span class="uk-active" aria-current="page">{{ $page }}</span>
+                    </li>
+                    @else
+                    <li>
+                        <a href="{{ $suppliers->url($page) }}">{{ $page }}</a>
+                    </li>
+                    @endif
+                    @endforeach
+
+                    @if ($suppliers->hasMorePages())
+                    <li>
+                        <a href="{{ $suppliers->nextPageUrl() }}">
                             <span data-uk-pgn-next></span>
                         </a>
                     </li>
+                    @else
+                    <li class="uk-disabled">
+                        <span data-uk-pgn-next></span>
+                    </li>
+                    @endif
                 </ul>
             </nav>
+            @endif
         </div>
     </div>
 </div>
