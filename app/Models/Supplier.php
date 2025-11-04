@@ -56,6 +56,35 @@ class Supplier extends Model
      *
      * @return array<string, mixed>
      */
+    public function getAverageRatingAttribute()
+    {
+        $reviews = $this->reviews()->get();
+        if ($reviews->isEmpty()) {
+            return 0;
+        }
+
+        $total = 0;
+        $count = 0;
+        foreach ($reviews as $review) {
+            $avg =
+                ($review->cost +
+                    $review->speed +
+                    $review->communication +
+                    $review->reliability +
+                    $review->quality +
+                    $review->support +
+                    $review->flexibility +
+                    $review->innovation +
+                    $review->value +
+                    $review->timeliness) /
+                10;
+            $total += $avg;
+            $count++;
+        }
+
+        return $count > 0 ? round($total / $count, 1) : 0;
+    }
+
     public function toSearchableArray(): array
     {
         return array_merge($this->toArray(), [

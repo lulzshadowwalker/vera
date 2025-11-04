@@ -64,7 +64,7 @@
         <div class="lg:col-span-3">
             <!-- Results Summary -->
             <div class="flex justify-between items-center mb-6">
-                <p class="text-gray-600">Showing 1-12 of 150 suppliers</p>
+                <p class="text-gray-600">Showing {{ $suppliers->firstItem() }}-{{ $suppliers->lastItem() }} of {{ $suppliers->total() }} suppliers</p>
                 <div class="flex items-center gap-2">
                     <label class="text-sm font-medium text-gray-700">Sort:</label>
                     <select class="uk-select">
@@ -96,16 +96,25 @@
                             <p class="text-sm text-gray-600">{{ $supplier->description }}</p>
                         </div>
                     </div>
-                    <div class="flex items-center gap-2 mb-2 mt-auto">
+                    <div class="flex items-center gap-2 mb-2">
+                        @php
+                            $rating = $supplier->average_rating;
+                            $fullStars = floor($rating);
+                            $hasHalf = ($rating - $fullStars) >= 0.5;
+                        @endphp
                         <div class="flex">
-                            <uk-icon icon="star" class="text-yellow-400"></uk-icon>
-                            <uk-icon icon="star" class="text-yellow-400"></uk-icon>
-                            <uk-icon icon="star" class="text-yellow-400"></uk-icon>
-                            <uk-icon icon="star" class="text-yellow-400"></uk-icon>
-                            <uk-icon icon="star" class="text-yellow-400"></uk-icon>
+                            @for($i = 1; $i <= 5; $i++)
+                                @if($i <= $fullStars)
+                                    <uk-icon icon="star" class="text-yellow-400"></uk-icon>
+                                @elseif($i == $fullStars + 1 && $hasHalf)
+                                    <uk-icon icon="star_half" class="text-yellow-400"></uk-icon>
+                                @else
+                                    <uk-icon icon="star" class="text-gray-300"></uk-icon>
+                                @endif
+                            @endfor
                         </div>
-                        <span class="font-bold">4.8</span>
-                        <span class="text-gray-500">(128 reviews)</span>
+                        <span class="font-bold">{{ number_format($rating, 1) }}</span>
+                        <span class="text-gray-500">({{ $supplier->reviews()->count() }} reviews)</span>
                     </div>
                     <a href="{{ route('suppliers.show', $supplier) }}" class="uk-btn uk-btn-primary uk-btn-small w-full">View Profile</a>
                 </div>
