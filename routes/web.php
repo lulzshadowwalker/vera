@@ -85,6 +85,11 @@ Route::get('/suppliers/{supplier}', [
     'show',
 ])->name('suppliers.show');
 
+Route::get('/suppliers/{supplier}/reviews/create', [
+    App\Http\Controllers\ReviewController::class,
+    'create',
+])->name('reviews.create');
+
 Route::resource('reviews', App\Http\Controllers\ReviewController::class)->only(
     'create',
     'store',
