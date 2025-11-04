@@ -11,11 +11,13 @@
         "laravel/framework": "^12.0",
         "laravel/horizon": "^5.37",
         "laravel/pulse": "^1.4",
+        "laravel/scout": "^10.20",
         "laravel/telescope": "^5.14",
         "laravel/tinker": "^2.10.1",
         "predis/predis": "^3.2",
         "spatie/laravel-one-time-passwords": "^1.0",
-        "spatie/laravel-permission": "^6.21"
+        "spatie/laravel-permission": "^6.21",
+        "typesense/typesense-php": "^5.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

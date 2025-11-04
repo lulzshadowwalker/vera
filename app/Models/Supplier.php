@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
 
 class Supplier extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, Searchable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -43,5 +44,24 @@ class Supplier extends Model
     public function reviewedReviewsForeigns(): HasMany
     {
         return $this->hasMany(ReviewAs::class);
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array<string, mixed>
+     */
+    public function toSearchableArray(): array
+    {
+        return array_merge($this->toArray(), [
+            'id' => (string) $this->id,
+            'name' => $this->name,
+            'domain' => $this->domain,
+
+            // TODO: I believe country should be a relation to a countries table instead
+            'country' => $this->country,
+            'description' => $this->description,
+            'created_at' => $this->created_at->timestamp,
+        ]);
     }
 }
