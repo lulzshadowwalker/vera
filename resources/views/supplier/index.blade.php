@@ -6,13 +6,13 @@
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-900 mb-4">Browse Suppliers</h1>
         <!-- Search Bar -->
-        <form class="max-w-2xl">
+        <form action="{{ route('suppliers.index') }}" method="GET" class="max-w-2xl">
             <div class="flex">
                 <div class="uk-inline flex-1">
                     <span class="uk-form-icon">
                         <uk-icon icon="search"></uk-icon>
                     </span>
-                    <input type="search" class="uk-input uk-form-large" placeholder="Search suppliers by name or domain..." value="{{ request('search') }}" />
+                    <input type="search" role="search" name="search" class="uk-input uk-form-large" placeholder="Search suppliers by name or domain..." value="{{ request('search') }}" />
                 </div>
                 <button type="submit" class="uk-btn uk-btn-primary uk-form-large ml-2">Search</button>
             </div>

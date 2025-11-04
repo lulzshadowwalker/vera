@@ -10,7 +10,13 @@ class SupplierController extends Controller
 {
     public function index(Request $request): View
     {
-        $suppliers = Supplier::all();
+        $query = $request->get('search');
+
+        if ($query) {
+            $suppliers = Supplier::search($query)->paginate(12);
+        } else {
+            $suppliers = Supplier::paginate(12);
+        }
 
         return view('supplier.index', [
             'suppliers' => $suppliers,

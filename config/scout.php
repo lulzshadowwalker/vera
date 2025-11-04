@@ -217,31 +217,35 @@ return [
             Supplier::class => [
                 'collection-schema' => [
                     'fields' => [
-                        'name' => 'id',
-                        'type' => 'string',
+                        [
+                            'name' => 'id',
+                            'type' => 'string',
+                        ],
+                        [
+                            'name' => 'name',
+                            'type' => 'string',
+                        ],
+                        [
+                            'name' => 'description',
+                            'type' => 'string',
+                            'optional' => true,
+                        ],
+                        [
+                            'name' => 'domain',
+                            'type' => 'string',
+                        ],
+                        [
+                            'name' => 'country',
+                            'type' => 'string',
+                            'optional' => true,
+                        ],
+                        [
+                            'name' => 'created_at',
+                            'type' => 'int64',
+                        ],
                     ],
-                    [
-                        'name' => 'name',
-                        'type' => 'string',
-                    ],
-                    [
-                        'name' => 'description',
-                        'type' => 'string',
-                    ],
-                    [
-                        'name' => 'domain',
-                        'type' => 'string',
-                    ],
-                    [
-                        'name' => 'country',
-                        'type' => 'string',
-                    ],
-                    [
-                        'name' => 'created_at',
-                        'type' => 'int64',
-                    ],
+                    'default_sorting_field' => 'created_at',
                 ],
-                'default_sorting_field' => 'created_at',
                 'search-parameters' => [
                     'query_by' => 'name,description,domain,country',
                 ],

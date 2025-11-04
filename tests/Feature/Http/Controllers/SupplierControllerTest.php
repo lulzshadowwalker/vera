@@ -37,4 +37,19 @@ final class SupplierControllerTest extends TestCase
         $response->assertViewIs('supplier.show');
         $response->assertViewHas('supplier');
     }
+
+    #[Test]
+    public function index_handles_search_query(): void
+    {
+        Supplier::factory()->create(['name' => 'Searchable Supplier']);
+        Supplier::factory()->create(['name' => 'Other Supplier']);
+
+        $response = $this->get(
+            route('suppliers.index', ['search' => 'Searchable']),
+        );
+
+        $response->assertOk();
+        $response->assertViewIs('supplier.index');
+        $response->assertViewHas('suppliers');
+    }
 }
