@@ -6,7 +6,7 @@
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-900 mb-4">Browse Suppliers</h1>
         <!-- Search Bar -->
-        <form action="{{ route('suppliers.index') }}" method="GET" class="max-w-2xl">
+        <form x-target="js-results" action="{{ route('suppliers.index') }}" method="GET" class="max-w-2xl">
             <div class="flex">
                 <div class="uk-inline flex-1">
                     <span class="uk-form-icon">
@@ -19,7 +19,7 @@
         </form>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <div id="js-results" class="grid grid-cols-1 lg:grid-cols-4 gap-8 scroll-mt-20">
         <!-- Filters Sidebar -->
         <aside class="lg:col-span-1">
             <div class="bg-white border border-gray-200 rounded-lg p-6">
@@ -122,7 +122,7 @@
                     </li>
                     @else
                     <li>
-                        <a href="{{ $suppliers->previousPageUrl() }}">
+                        <a x-target="js-results" @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })" href="{{ $suppliers->previousPageUrl() }}">
                             <span data-uk-pgn-previous></span>
                         </a>
                     </li>
@@ -135,14 +135,14 @@
                     </li>
                     @else
                     <li>
-                        <a href="{{ $suppliers->url($page) }}">{{ $page }}</a>
+                        <a x-target="js-results" @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })" href="{{ $suppliers->url($page) }}">{{ $page }}</a>
                     </li>
                     @endif
                     @endforeach
 
                     @if ($suppliers->hasMorePages())
                     <li>
-                        <a href="{{ $suppliers->nextPageUrl() }}">
+                        <a x-target="js-results" @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })" href="{{ $suppliers->nextPageUrl() }}">
                             <span data-uk-pgn-next></span>
                         </a>
                     </li>
