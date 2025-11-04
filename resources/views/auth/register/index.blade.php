@@ -37,11 +37,11 @@
                         <div class="flex-1">
                             <label for="first_name" class="uk-form-label uk-form-label-required">First Name</label>
                             <div class="uk-form-controls">
-                                <input 
-                                    type="text" 
-                                    id="first_name" 
+                                <input
+                                    type="text"
+                                    id="first_name"
                                     name="first_name"
-                                    class="uk-input @error('first_name') uk-form-destructive @enderror" 
+                                    class="uk-input @error('first_name') uk-form-destructive @enderror"
                                     placeholder="John"
                                     value="{{ old('first_name') }}"
                                     required
@@ -55,11 +55,11 @@
                         <div class="flex-1">
                             <label for="last_name" class="uk-form-label uk-form-label-required">Last Name</label>
                             <div class="uk-form-controls">
-                                <input 
-                                    type="text" 
-                                    id="last_name" 
+                                <input
+                                    type="text"
+                                    id="last_name"
                                     name="last_name"
-                                    class="uk-input @error('last_name') uk-form-destructive @enderror" 
+                                    class="uk-input @error('last_name') uk-form-destructive @enderror"
                                     placeholder="Doe"
                                     value="{{ old('last_name') }}"
                                     required
@@ -74,11 +74,11 @@
                     <div>
                         <label for="email" class="uk-form-label uk-form-label-required">Work Email</label>
                         <div class="uk-form-controls">
-                            <input 
-                                type="email" 
-                                id="email" 
+                            <input
+                                type="email"
+                                id="email"
                                 name="email"
-                                class="uk-input @error('email') uk-form-destructive @enderror" 
+                                class="uk-input @error('email') uk-form-destructive @enderror"
                                 placeholder="email@company.com"
                                 value="{{ old('email') }}"
                                 required
@@ -93,11 +93,11 @@
                     <div>
                         <label for="backup_email" class="uk-form-label">Backup Email</label>
                         <div class="uk-form-controls">
-                            <input 
-                                type="email" 
-                                id="backup_email" 
+                            <input
+                                type="email"
+                                id="backup_email"
                                 name="backup_email"
-                                class="uk-input @error('backup_email') uk-form-destructive @enderror" 
+                                class="uk-input @error('backup_email') uk-form-destructive @enderror"
                                 placeholder="backup@company.com"
                                 value="{{ old('backup_email') }}"
                             >
@@ -114,8 +114,8 @@
 
                 <p class="text-muted-foreground px-8 text-center text-sm">
                     By clicking continue, you agree to our
-                    <a class="uk-link" href="{{ route('terms-and-conditions.index') }}"> Terms of Service </a> and
-                    <a class="uk-link" href="{{ route('privacy-policy.index') }}" uk-toggle> Privacy Policy </a>.
+                    <a class="uk-link" href="{{ route('terms-and-conditions.index') }}" target="_blank"> Terms of Service </a> and
+                    <a class="uk-link" href="{{ route('privacy-policy.index') }}" target="_blank" uk-toggle> Privacy Policy </a>.
                 </p>
 
                 <div class="text-center text-sm text-muted-foreground mt-2">
