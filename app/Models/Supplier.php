@@ -16,11 +16,7 @@ class Supplier extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'domain',
-        'name',
-        'country',
-    ];
+    protected $fillable = ['domain', 'name', 'country', 'description'];
 
     /**
      * Get the attributes that should be cast.

@@ -23,6 +23,7 @@ class SupplierFactory extends Factory
             'domain' => fake()->unique()->domainName(),
             'name' => fake()->company(),
             'country' => fake()->countryCode(),
+            'description' => fake()->sentence(),
         ];
     }
 }
