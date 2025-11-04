@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         $admin->assignRole(Role::admin);
 
         // Create test users with different suppliers
-        User::create([
+        User::factory()->create([
             'name' => 'John Doe',
             'email' => 'john@acme.com',
             'backup_email' => 'john.backup@acme.com',
@@ -61,19 +61,29 @@ class DatabaseSeeder extends Seeder
             'supplier_id' => $acmeSupplier->id,
         ]);
 
-        User::create([
+        User::factory()->create([
             'name' => 'Jane Smith',
             'email' => 'jane@techsolutions.io',
             'email_verified_at' => now(),
             'supplier_id' => $techSupplier->id,
         ]);
 
-        User::create([
+        User::factory()->create([
             'name' => 'Bob Johnson',
             'email' => 'bob@industrial-supply.com',
             'backup_email' => 'robert@industrial-supply.com',
             'email_verified_at' => now(),
             'supplier_id' => $industrialSupplier->id,
+        ]);
+
+        Review::factory(10)->create([
+            'reviewed_supplier_id' => $acmeSupplier->id,
+        ]);
+        Review::factory(8)->create([
+            'reviewed_supplier_id' => $techSupplier->id,
+        ]);
+        Review::factory(6)->create([
+            'reviewed_supplier_id' => $industrialSupplier->id,
         ]);
 
         // Create additional random suppliers and users
@@ -84,9 +94,10 @@ class DatabaseSeeder extends Seeder
                     'supplier_id' => $supplier->id,
                     'email_verified_at' => now(),
                 ]);
-            });
 
-        // Create some reviews
-        Review::factory(20)->create();
+                Review::factory(rand(5, 12))->create([
+                    'reviewed_supplier_id' => $supplier->id,
+                ]);
+            });
     }
 }

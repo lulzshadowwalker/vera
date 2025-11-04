@@ -38,7 +38,7 @@ class ReviewFactory extends Factory
             'value' => fake()->numberBetween(1, 10),
             'timeliness' => fake()->numberBetween(1, 10),
             'deal_again' => fake()->boolean(),
-            'comment' => fake()->regexify('[A-Za-z0-9]{160}'),
+            'comment' => fake()->paragraph(),
             'anonymous' => fake()->boolean(),
             'published' => fake()->boolean(),
         ];

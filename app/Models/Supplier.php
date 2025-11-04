@@ -36,6 +36,11 @@ class Supplier extends Model
         return $this->hasMany(User::class);
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'reviewed_supplier_id');
+    }
+
     public function reviewerReviews(): HasMany
     {
         return $this->hasMany(ReviewAs::class);

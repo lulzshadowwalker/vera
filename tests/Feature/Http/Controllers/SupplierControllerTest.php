@@ -30,12 +30,16 @@ final class SupplierControllerTest extends TestCase
     public function show_displays_view(): void
     {
         $supplier = Supplier::factory()->create();
+        \App\Models\Review::factory()->create([
+            'reviewed_supplier_id' => $supplier->id,
+        ]);
 
         $response = $this->get(route('suppliers.show', $supplier));
 
         $response->assertOk();
         $response->assertViewIs('supplier.show');
         $response->assertViewHas('supplier');
+        $response->assertViewHas('reviews');
     }
 
     #[Test]
