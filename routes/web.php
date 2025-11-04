@@ -71,10 +71,19 @@ Route::get('/terms-and-conditions', [
     'index',
 ])->name('terms-and-conditions.index');
 
-Route::resource(
-    'suppliers',
+// Route::resource(
+//     "suppliers",
+//     App\Http\Controllers\SupplierController::class,
+// )->only("index", "show");
+
+Route::get('/suppliers', [
     App\Http\Controllers\SupplierController::class,
-)->only('index', 'show');
+    'index',
+])->name('suppliers.index');
+Route::get('/suppliers/{supplier}', [
+    App\Http\Controllers\SupplierController::class,
+    'show',
+])->name('suppliers.show');
 
 Route::resource('reviews', App\Http\Controllers\ReviewController::class)->only(
     'create',

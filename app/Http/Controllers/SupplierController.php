@@ -25,8 +25,7 @@ class SupplierController extends Controller
 
     public function show(Request $request, Supplier $supplier): View
     {
-        // TODO: We need to handle infinite scroll pagination
-        $reviews = $supplier->reviews()->get();
+        $reviews = $supplier->reviews()->paginate(12);
 
         return view('supplier.show', [
             'supplier' => $supplier,

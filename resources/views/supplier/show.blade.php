@@ -94,9 +94,9 @@
             </div>
         </div>
 
-        <div class="space-y-6">
+        <ul id="js-reviews" x-merge="append" class="space-y-6">
             @foreach($reviews ?? [] as $review)
-            <div class="uk-card uk-card-default uk-card-body">
+            <li class="uk-card uk-card-default uk-card-body">
                 <div class="flex flex-col md:flex-row gap-6">
                     <div class="md:w-1/4 flex flex-col items-center gap-4">
                         @php
@@ -155,8 +155,11 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </li>
             @endforeach
+        </ul>
+
+        <div id="js-pagination" x-init x-intersect="$ajax('{{ route("suppliers.show", [ 'supplier' => request()->supplier, 'page' => (int) request()->input('page', 0) + 1 ]) }}', { target: 'js-reviews js-pagination' })">
         </div>
     </div>
 </div>
