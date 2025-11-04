@@ -1,7 +1,4 @@
-{{--
-    @extends('layouts.app')
+@extends('components.layouts.app')
 
-    @section('content')
-        supplier.index template
-    @endsection
---}}
+@section('content')
+@endsection
