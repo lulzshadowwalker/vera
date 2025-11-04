@@ -123,4 +123,65 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Blocked Email Providers
+    |--------------------------------------------------------------------------
+    |
+    | This array contains a list of public email provider domains that are
+    | blocked from registration. Only work/business emails are allowed to
+    | ensure B2B verification and authenticity.
+    |
+    */
+
+    'blocked_email_providers' => [
+        'gmail.com',
+        'yahoo.com',
+        'hotmail.com',
+        'outlook.com',
+        'aol.com',
+        'icloud.com',
+        'mail.com',
+        'protonmail.com',
+        'proton.me',
+        'zoho.com',
+        'yandex.com',
+        'gmx.com',
+        'inbox.com',
+        'mail.ru',
+        'tutanota.com',
+        'fastmail.com',
+        'hushmail.com',
+        'live.com',
+        'msn.com',
+        'me.com',
+        'mac.com',
+        'googlemail.com',
+        'hey.com',
+        'pm.me',
+        'yahoo.co.uk',
+        'yahoo.fr',
+        'yahoo.de',
+        'hotmail.co.uk',
+        'hotmail.fr',
+        'outlook.fr',
+        'outlook.de',
+        'outlook.es',
+        'outlook.it',
+        'qq.com',
+        '163.com',
+        '126.com',
+        'sina.com',
+        'sohu.com',
+        'rediffmail.com',
+        'mailinator.com',
+        'guerrillamail.com',
+        'tempmail.com',
+        '10minutemail.com',
+        'throwaway.email',
+        'maildrop.cc',
+        'getnada.com',
+        'trashmail.com',
+    ],
+
 ];

@@ -16,6 +16,10 @@
 
 <body>
     <main>
+        <div class="fixed bottom-4 right-4 z-50 max-w-md">
+            <x-alerts />
+        </div>
+
         @yield('content')
     </main>
 

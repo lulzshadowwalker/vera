@@ -10,14 +10,16 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\OneTimePasswords\Models\Concerns\HasOneTimePasswords;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, HasRoles, Notifiable;
+    use HasFactory, HasOneTimePasswords, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +30,9 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'backup_email',
+        'supplier_id',
+        'email_verified_at',
     ];
 
     /**
@@ -35,10 +40,7 @@ class User extends Authenticatable implements FilamentUser
      *
      * @var list<string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['remember_token', 'password'];
 
     /**
      * Get the attributes that should be cast.
@@ -68,5 +70,15 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->is_admin;
+    }
+
+    public function supplier(): BelongsTo
+    {
+        return $this->belongsTo(Supplier::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }
