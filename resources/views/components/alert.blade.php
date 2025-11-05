@@ -25,7 +25,7 @@ $config = $types[$type] ?? $types['info'];
 
 <div class="{{ $config['class'] }}" data-uk-alert>
     <a href class="uk-alert-close" data-uk-close></a>
-    <div class="flex items-start gap-3">
+    <div class="flex items-center gap-3">
         <div class="shrink-0">
             <uk-icon icon="{{ $config['icon'] }}" class="size-5"></uk-icon>
         </div>
