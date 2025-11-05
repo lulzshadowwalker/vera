@@ -18,7 +18,7 @@
 
 <body class="min-h-screen flex flex-col">
     <x-header />
-    <main class="flex-1">
+    <main class="flex-1 bg-background text-foreground">
         <div class="fixed bottom-4 right-4 z-50 max-w-md">
             <x-alerts />
         </div>

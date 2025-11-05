@@ -64,9 +64,9 @@
         <div class="lg:col-span-3">
             <!-- Results Summary -->
             <div class="flex justify-between items-center mb-6">
-                <p class="text-muted">Showing {{ $suppliers->firstItem() }}-{{ $suppliers->lastItem() }} of {{ $suppliers->total() }} suppliers</p>
+                <p class="text-muted-foreground">Showing {{ $suppliers->firstItem() }}-{{ $suppliers->lastItem() }} of {{ $suppliers->total() }} suppliers</p>
                 <div class="flex items-center gap-2">
-                    <label class="text-sm font-medium text-muted">Sort:</label>
+                    <label class="text-sm font-medium text-muted-foreground">Sort:</label>
                     <select class="uk-select">
                         <option>Relevance</option>
                         <option>Rating</option>

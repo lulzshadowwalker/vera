@@ -1,11 +1,13 @@
 @extends('components.layouts.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-6 lg:px-8 py-4">
-    <h1 class="uk-h1 mb-4">Create Review for {{ $supplier->name }}</h1>
-    <p class="tracking-wide leading-6 text-neutral-500 max-w-prose mb-8">Share your experience working with {{ $supplier->name }} by filling out the form below. Your feedback helps others make informed decisions.</p>
+<div class="px-6 lg:px-8 bg-background text-foreground my-8">
+    <header class="max-w-7xl mx-auto">
+        <h1 class="uk-h1 mb-4">Create Review for {{ $supplier->name }}</h1>
+        <p class="tracking-wide leading-6 text-muted-foreground max-w-prose mb-8">Share your experience working with {{ $supplier->name }} by filling out the form below. Your feedback helps others make informed decisions.</p>
+    </header>
 
-    <form action="{{ route('reviews.store') }}" method="POST" class="uk-form-stacked space-y-6">
+    <form action="{{ route('reviews.store') }}" method="POST" class="uk-form-stacked space-y-6 max-w-7xl mx-auto">
         @csrf
 
         <input type="hidden" name="reviewed_supplier_id" value="{{ $supplier->id }}">

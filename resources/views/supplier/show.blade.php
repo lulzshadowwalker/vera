@@ -1,22 +1,22 @@
 @extends('components.layouts.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-6 py-8">
+<div class="max-w-7xl mx-auto px-6 py-8 bg-background text-foreground">
     <!-- Supplier Header -->
     <div class="uk-card uk-card-default uk-card-body mb-8">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div class="flex items-center gap-6">
-                <div class="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <uk-icon icon="building" class="text-4xl text-gray-500"></uk-icon>
+                <div class="w-20 h-20 bg-muted rounded-lg flex items-center justify-center">
+                    <uk-icon icon="building" class="text-4xl text-muted-foreground"></uk-icon>
                 </div>
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">{{ $supplier->name }}</h1>
-                    <a href="https://{{ $supplier->domain }}" class="text-blue-600 hover:underline flex items-center gap-1">
-                        <uk-icon icon="globe" class="text-gray-400"></uk-icon>
+                    <h1 class="text-3xl font-bold text-foreground">{{ $supplier->name }}</h1>
+                    <a href="https://{{ $supplier->domain }}" class="text-primary hover:underline flex items-center gap-1">
+                        <uk-icon icon="globe" class="text-muted-foreground"></uk-icon>
                         {{ $supplier->domain }}
                     </a>
-                    <p class="text-gray-600 flex items-center gap-1">
-                        <uk-icon icon="map-pin" class="text-gray-400"></uk-icon>
+                    <p class="text-muted-foreground flex items-center gap-1">
+                        <uk-icon icon="map-pin" class="text-muted-foreground"></uk-icon>
                         {{ $supplier->country }}
                     </p>
                 </div>
@@ -29,50 +29,50 @@
     <div class="uk-card uk-card-default uk-card-body mb-8">
         <div class="flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="text-center md:text-left">
-                <div class="text-5xl font-bold text-blue-600 mb-2">4.5</div>
+                <div class="text-5xl font-bold text-primary mb-2">4.5</div>
                 <div class="flex justify-center md:justify-start mb-2">
-                    <uk-icon icon="star" class="text-yellow-400"></uk-icon>
-                    <uk-icon icon="star" class="text-yellow-400"></uk-icon>
-                    <uk-icon icon="star" class="text-yellow-400"></uk-icon>
-                    <uk-icon icon="star" class="text-yellow-400"></uk-icon>
-                    <uk-icon icon="star_half" class="text-yellow-400"></uk-icon>
+                    <uk-icon icon="star" class="text-primary"></uk-icon>
+                    <uk-icon icon="star" class="text-primary"></uk-icon>
+                    <uk-icon icon="star" class="text-primary"></uk-icon>
+                    <uk-icon icon="star" class="text-primary"></uk-icon>
+                    <uk-icon icon="star_half" class="text-primary"></uk-icon>
                 </div>
-                <p class="text-gray-600">Based on {{ $supplier->reviews()->count() }} reviews</p>
+                <p class="text-muted-foreground">Based on {{ $supplier->reviews()->count() }} reviews</p>
             </div>
             <div class="flex-1 max-w-md">
                 <div class="space-y-2">
                     <div class="flex items-center gap-2">
                         <span class="text-sm w-8">5</span>
-                        <div class="flex-1 bg-gray-200 rounded-full h-2">
-                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 40%"></div>
+                        <div class="flex-1 bg-muted rounded-full h-2">
+                            <div class="bg-primary h-2 rounded-full" style="width: 40%"></div>
                         </div>
                         <span class="text-sm">40%</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-sm w-8">4</span>
-                        <div class="flex-1 bg-gray-200 rounded-full h-2">
-                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 35%"></div>
+                        <div class="flex-1 bg-muted rounded-full h-2">
+                            <div class="bg-primary h-2 rounded-full" style="width: 35%"></div>
                         </div>
                         <span class="text-sm">35%</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-sm w-8">3</span>
-                        <div class="flex-1 bg-gray-200 rounded-full h-2">
-                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 15%"></div>
+                        <div class="flex-1 bg-muted rounded-full h-2">
+                            <div class="bg-primary h-2 rounded-full" style="width: 15%"></div>
                         </div>
                         <span class="text-sm">15%</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-sm w-8">2</span>
-                        <div class="flex-1 bg-gray-200 rounded-full h-2">
-                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 7%"></div>
+                        <div class="flex-1 bg-muted rounded-full h-2">
+                            <div class="bg-primary h-2 rounded-full" style="width: 7%"></div>
                         </div>
                         <span class="text-sm">7%</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-sm w-8">1</span>
-                        <div class="flex-1 bg-gray-200 rounded-full h-2">
-                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 3%"></div>
+                        <div class="flex-1 bg-muted rounded-full h-2">
+                            <div class="bg-primary h-2 rounded-full" style="width: 3%"></div>
                         </div>
                         <span class="text-sm">3%</span>
                     </div>
@@ -101,12 +101,12 @@
                     <div class="md:w-1/4 flex flex-col items-center gap-4">
                         @php
                             $avgScore = ($review->cost + $review->speed + $review->communication + $review->reliability + $review->quality + $review->support + $review->flexibility + $review->innovation + $review->value + $review->timeliness) / 10;
-                            $colorClass = $avgScore >= 8 ? 'bg-green-100 text-green-800 border-green-300' : ($avgScore >= 6 ? 'bg-yellow-100 text-yellow-800 border-yellow-300' : 'bg-red-100 text-red-800 border-red-300');
+                            $colorClass = $avgScore >= 8 ? 'bg-accent text-accent-foreground border-accent' : ($avgScore >= 6 ? 'bg-muted text-muted-foreground border-muted' : 'bg-destructive text-destructive-foreground border-destructive');
                         @endphp
                         <div class="w-20 h-20 {{ $colorClass }} border-4 rounded-full flex items-center justify-center shadow-lg">
                             <span class="text-3xl font-bold">{{ number_format($avgScore, 1) }}</span>
                         </div>
-                        <div class="flex items-center gap-2 {{ $review->deal_again ? 'text-green-600' : 'text-red-600' }}">
+                        <div class="flex items-center gap-2 {{ $review->deal_again ? 'text-primary' : 'text-destructive' }}">
                             <uk-icon icon="{{ $review->deal_again ? 'thumbs-up' : 'thumbs-down' }}" class="text-lg"></uk-icon>
                             <span class="text-sm font-medium">{{ $review->deal_again ? 'Would deal again' : 'Would not deal again' }}</span>
                         </div>
@@ -115,11 +115,11 @@
                         <div class="flex justify-between items-start mb-4">
                             <div>
                                 <h3 class="font-semibold text-lg">{{ $review->comment ? Str::limit($review->comment, 50) : 'Review' }}</h3>
-                                <p class="text-sm text-gray-500">{{ $review->created_at->diffForHumans() }}</p>
+                                <p class="text-sm text-muted-foreground">{{ $review->created_at->diffForHumans() }}</p>
                             </div>
                             <div class="flex items-center gap-2">
                                 <span class="text-sm">{{ $review->anonymous ? 'Anonymous' : $review->user->first_name . ' ' . substr($review->user->first_name, 0, 1) . '.' }}</span>
-                                <span class="text-sm text-gray-500">{{ $review->country }}</span>
+                                <span class="text-sm text-muted-foreground">{{ $review->country }}</span>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-8 md:gap-x-12 mb-4 text-sm">
@@ -149,7 +149,7 @@
                             </div>
                         </div>
                         @if($review->comment)
-                        <blockquote class="border-l-4 border-gray-300 pl-4 italic text-gray-600">
+                        <blockquote class="border-l-4 border-border pl-4 italic text-muted-foreground">
                             {{ $review->comment }}
                         </blockquote>
                         @endif
