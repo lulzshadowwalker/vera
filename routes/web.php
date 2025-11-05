@@ -80,12 +80,12 @@ Route::get('/suppliers', [
     App\Http\Controllers\SupplierController::class,
     'index',
 ])->name('suppliers.index');
-Route::get('/suppliers/{supplier}', [
+Route::get('/suppliers/{supplier:slug}', [
     App\Http\Controllers\SupplierController::class,
     'show',
 ])->name('suppliers.show');
 
-Route::get('/suppliers/{supplier}/reviews/create', [
+Route::get('/suppliers/{supplier:slug}/reviews/create', [
     App\Http\Controllers\ReviewController::class,
     'create',
 ])->name('reviews.create');

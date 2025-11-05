@@ -31,7 +31,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('value');
             $table->unsignedTinyInteger('timeliness');
             $table->boolean('deal_again');
-            $table->string('comment')->nullable();
+            $table->text('comment')->nullable();
             $table->boolean('anonymous')->default(true);
             $table->boolean('published')->default(true);
             $table->unique(['user_id', 'reviewed_supplier_id']);

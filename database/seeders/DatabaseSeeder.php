@@ -7,13 +7,10 @@ use App\Models\Review;
 use App\Models\Supplier;
 use App\Models\User;
 use App\Services\DomainNormalizationService;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
@@ -24,26 +21,26 @@ class DatabaseSeeder extends Seeder
         $domainService = app(DomainNormalizationService::class);
 
         // Create test suppliers
-        $acmeSupplier = Supplier::create([
+        $acmeSupplier = Supplier::factory()->create([
             'domain' => 'acme.com',
             'name' => 'Acme Corporation',
             'country' => 'US',
         ]);
 
-        $techSupplier = Supplier::create([
+        $techSupplier = Supplier::factory()->create([
             'domain' => 'techsolutions.io',
             'name' => 'Tech Solutions',
             'country' => 'UK',
         ]);
 
-        $industrialSupplier = Supplier::create([
+        $industrialSupplier = Supplier::factory()->create([
             'domain' => 'industrial-supply.com',
             'name' => 'Industrial Supply Co',
             'country' => 'DE',
         ]);
 
         // Create admin user
-        $admin = User::create([
+        $admin = User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@acme.com',
             'password' => '4g8rCaaO+wBehgYG',
