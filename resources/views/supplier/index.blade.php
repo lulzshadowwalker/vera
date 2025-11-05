@@ -126,17 +126,6 @@
                         Showing <span class="font-semibold text-foreground">{{ $suppliers->firstItem() ?? 0 }}-{{ $suppliers->lastItem() ?? 0 }}</span> of
                         <span class="font-semibold text-foreground">{{ $suppliers->total() ?? 0 }}</span> suppliers
                     </p>
-                    <div class="flex items-center gap-2">
-                        <label class="text-sm font-medium text-muted-foreground">View:</label>
-                        <div class="uk-button-group">
-                            <button class="uk-btn uk-btn-default uk-btn-small uk-active">
-                                <uk-icon icon="grid"></uk-icon>
-                            </button>
-                            <button class="uk-btn uk-btn-default uk-btn-small">
-                                <uk-icon icon="list"></uk-icon>
-                            </button>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Supplier Cards Grid -->
@@ -207,7 +196,7 @@
                     </div>
                     @empty
                     <div class="col-span-full">
-                        <div class="uk-card uk-card-default uk-card-body text-center py-12">
+                        <div class="uk-card uk-card-default uk-card-body text-center py-12 flex flex-col items-center justify-center">
                             <uk-icon icon="search" class="text-muted-foreground mb-4" width="48" height="48"></uk-icon>
                             <h3 class="text-xl font-semibold mb-2">No Suppliers Found</h3>
                             <p class="text-muted-foreground mb-6">Try adjusting your search or filters to find what you're looking for.</p>
@@ -221,24 +210,26 @@
 
                 <!-- Pagination -->
                 @if ($suppliers->hasPages())
-                <nav class="flex justify-center" aria-label="Pagination">
-                    <ul class="uk-pagination uk-flex-center">
+                <nav class="mt-8" aria-label="Pagination">
+                    <ul class="uk-pgn uk-pgn-default justify-center">
                         @if ($suppliers->onFirstPage())
                         <li class="uk-disabled">
-                            <span><uk-icon icon="chevron-left"></uk-icon></span>
+                            <span>
+                                <span data-uk-pgn-previous></span>
+                            </span>
                         </li>
                         @else
                         <li>
                             <a x-target="js-results" @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })" href="{{ $suppliers->previousPageUrl() }}">
-                                <uk-icon icon="chevron-left"></uk-icon>
+                                <span data-uk-pgn-previous></span>
                             </a>
                         </li>
                         @endif
 
                         @foreach (range(1, $suppliers->lastPage()) as $page)
                             @if ($page == $suppliers->currentPage())
-                            <li class="uk-active">
-                                <span>{{ $page }}</span>
+                            <li>
+                                <span class="uk-active" aria-current="page">{{ $page }}</span>
                             </li>
                             @elseif ($page == 1 || $page == $suppliers->lastPage() || abs($page - $suppliers->currentPage()) <= 2)
                             <li>
@@ -254,12 +245,14 @@
                         @if ($suppliers->hasMorePages())
                         <li>
                             <a x-target="js-results" @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })" href="{{ $suppliers->nextPageUrl() }}">
-                                <uk-icon icon="chevron-right"></uk-icon>
+                                <span data-uk-pgn-next></span>
                             </a>
                         </li>
                         @else
                         <li class="uk-disabled">
-                            <span><uk-icon icon="chevron-right"></uk-icon></span>
+                            <span>
+                                <span data-uk-pgn-next></span>
+                            </span>
                         </li>
                         @endif
                     </ul>

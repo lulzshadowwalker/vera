@@ -50,7 +50,7 @@ export default defineConfig({
                     "--accent-foreground": "0 0% 98%",
                     "--destructive": "0 70% 50%",
                     "--destructive-foreground": "0 0% 100%",
-                    "--border": "0 0% 25%",
+                    "--border": "220 15% 90%",
                     "--input": "0 0% 20%",
                     "--ring": "35 25% 70%",
                 },
