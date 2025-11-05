@@ -1,107 +1,185 @@
-<header class="sticky top-0 bg-[#1B1B1B] text-[#F0E9D6] z-50 transition-color duration-300 border-b border-background"
-        x-data="{ scrolled: false }" @scroll.window="scrolled = window.scrollY &gt; 0"
-        :class="{ 'border-border': scrolled }">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center gap-2">
-            <nav class="flex items-center me-auto">
-                <a href="{{ route('home.index') }}" class="[&amp;&gt;svg]:size-6 mr-4 flex items-center gap-2">
+<header class="sticky top-0 bg-card text-foreground z-50 border-b border-border shadow-sm" x-data="{ mobileMenuOpen: false }">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <a href="{{ route('home.index') }}" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                        class="min-w-fit w-5 h-5 md:w-7 md:h-7" height="1em" width="1em"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M256.12 245.96c-13.25 0-24 10.74-24 24 1.14 72.25-8.14 141.9-27.7 211.55-2.73 9.72 2.15 30.49 23.12 30.49 10.48 0 20.11-6.92 23.09-17.52 13.53-47.91 31.04-125.41 29.48-224.52.01-13.25-10.73-24-23.99-24zm-.86-81.73C194 164.16 151.25 211.3 152.1 265.32c.75 47.94-3.75 95.91-13.37 142.55-2.69 12.98 5.67 25.69 18.64 28.36 13.05 2.67 25.67-5.66 28.36-18.64 10.34-50.09 15.17-101.58 14.37-153.02-.41-25.95 19.92-52.49 54.45-52.34 31.31.47 57.15 25.34 57.62 55.47.77 48.05-2.81 96.33-10.61 143.55-2.17 13.06 6.69 25.42 19.76 27.58 19.97 3.33 26.81-15.1 27.58-19.77 8.28-50.03 12.06-101.21 11.27-152.11-.88-55.8-47.94-101.88-104.91-102.72zm-110.69-19.78c-10.3-8.34-25.37-6.8-33.76 3.48-25.62 31.5-39.39 71.28-38.75 112 .59 37.58-2.47 75.27-9.11 112.05-2.34 13.05 6.31 25.53 19.36 27.89 20.11 3.5 27.07-14.81 27.89-19.36 7.19-39.84 10.5-80.66 9.86-121.33-.47-29.88 9.2-57.88 28-80.97 8.35-10.28 6.79-25.39-3.49-33.76zm109.47-62.33c-15.41-.41-30.87 1.44-45.78 4.97-12.89 3.06-20.87 15.98-17.83 28.89 3.06 12.89 16 20.83 28.89 17.83 11.05-2.61 22.47-3.77 34-3.69 75.43 1.13 137.73 61.5 138.88 134.58.59 37.88-1.28 76.11-5.58 113.63-1.5 13.17 7.95 25.08 21.11 26.58 16.72 1.95 25.51-11.88 26.58-21.11a929.06 929.06 0 0 0 5.89-119.85c-1.56-98.75-85.07-180.33-186.16-181.83zm252.07 121.45c-2.86-12.92-15.51-21.2-28.61-18.27-12.94 2.86-21.12 15.66-18.26 28.61 4.71 21.41 4.91 37.41 4.7 61.6-.11 13.27 10.55 24.09 23.8 24.2h.2c13.17 0 23.89-10.61 24-23.8.18-22.18.4-44.11-5.83-72.34zm-40.12-90.72C417.29 43.46 337.6 1.29 252.81.02 183.02-.82 118.47 24.91 70.46 72.94 24.09 119.37-.9 181.04.14 246.65l-.12 21.47c-.39 13.25 10.03 24.31 23.28 24.69.23.02.48.02.72.02 12.92 0 23.59-10.3 23.97-23.3l.16-23.64c-.83-52.5 19.16-101.86 56.28-139 38.76-38.8 91.34-59.67 147.68-58.86 69.45 1.03 134.73 35.56 174.62 92.39 7.61 10.86 22.56 13.45 33.42 5.86 10.84-7.62 13.46-22.59 5.84-33.43z">
-                        </path>
+                        class="w-6 h-6 md:w-8 md:h-8 text-primary" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M256.12 245.96c-13.25 0-24 10.74-24 24 1.14 72.25-8.14 141.9-27.7 211.55-2.73 9.72 2.15 30.49 23.12 30.49 10.48 0 20.11-6.92 23.09-17.52 13.53-47.91 31.04-125.41 29.48-224.52.01-13.25-10.73-24-23.99-24zm-.86-81.73C194 164.16 151.25 211.3 152.1 265.32c.75 47.94-3.75 95.91-13.37 142.55-2.69 12.98 5.67 25.69 18.64 28.36 13.05 2.67 25.67-5.66 28.36-18.64 10.34-50.09 15.17-101.58 14.37-153.02-.41-25.95 19.92-52.49 54.45-52.34 31.31.47 57.15 25.34 57.62 55.47.77 48.05-2.81 96.33-10.61 143.55-2.17 13.06 6.69 25.42 19.76 27.58 19.97 3.33 26.81-15.1 27.58-19.77 8.28-50.03 12.06-101.21 11.27-152.11-.88-55.8-47.94-101.88-104.91-102.72zm-110.69-19.78c-10.3-8.34-25.37-6.8-33.76 3.48-25.62 31.5-39.39 71.28-38.75 112 .59 37.58-2.47 75.27-9.11 112.05-2.34 13.05 6.31 25.53 19.36 27.89 20.11 3.5 27.07-14.81 27.89-19.36 7.19-39.84 10.5-80.66 9.86-121.33-.47-29.88 9.2-57.88 28-80.97 8.35-10.28 6.79-25.39-3.49-33.76zm109.47-62.33c-15.41-.41-30.87 1.44-45.78 4.97-12.89 3.06-20.87 15.98-17.83 28.89 3.06 12.89 16 20.83 28.89 17.83 11.05-2.61 22.47-3.77 34-3.69 75.43 1.13 137.73 61.5 138.88 134.58.59 37.88-1.28 76.11-5.58 113.63-1.5 13.17 7.95 25.08 21.11 26.58 16.72 1.95 25.51-11.88 26.58-21.11a929.06 929.06 0 0 0 5.89-119.85c-1.56-98.75-85.07-180.33-186.16-181.83zm252.07 121.45c-2.86-12.92-15.51-21.2-28.61-18.27-12.94 2.86-21.12 15.66-18.26 28.61 4.71 21.41 4.91 37.41 4.7 61.6-.11 13.27 10.55 24.09 23.8 24.2h.2c13.17 0 23.89-10.61 24-23.8.18-22.18.4-44.11-5.83-72.34zm-40.12-90.72C417.29 43.46 337.6 1.29 252.81.02 183.02-.82 118.47 24.91 70.46 72.94 24.09 119.37-.9 181.04.14 246.65l-.12 21.47c-.39 13.25 10.03 24.31 23.28 24.69.23.02.48.02.72.02 12.92 0 23.59-10.3 23.97-23.3l.16-23.64c-.83-52.5 19.16-101.86 56.28-139 38.76-38.8 91.34-59.67 147.68-58.86 69.45 1.03 134.73 35.56 174.62 92.39 7.61 10.86 22.56 13.45 33.42 5.86 10.84-7.62 13.46-22.59 5.84-33.43z"></path>
                     </svg>
-
-                    <span class="text-xl font-bold cursor-pointer">{{ config('app.name') }}</span>
+                    <span class="text-xl md:text-2xl font-bold">{{ config('app.name') }}</span>
                 </a>
-            </nav>
+            </div>
 
-            <nav class="items-center gap-2 hidden min-[800px]:flex">
-                <a href="#" class="max-sm:w-full uk-btn uk-btn-ghost uk-btn-sm">
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-2">
+                <!-- Common Links -->
+                <a href="{{ route('home.index') }}" class="uk-btn uk-btn-ghost uk-btn-small {{ request()->routeIs('home.index') ? 'uk-active' : '' }}">
                     Home
                 </a>
-                <a href="#" class="max-sm:w-full uk-btn uk-btn-ghost uk-btn-sm">
-                    Features
+                <a href="{{ route('suppliers.index') }}" class="uk-btn uk-btn-ghost uk-btn-small {{ request()->routeIs('suppliers.*') ? 'uk-active' : '' }}">
+                    Browse Suppliers
                 </a>
-                <a href="#" class="max-sm:w-full uk-btn uk-btn-ghost uk-btn-sm">
-                    Pricing
-                </a>
-                <a href="#" class="max-sm:w-full uk-btn uk-btn-ghost uk-btn-sm">
-                    Testimonials
-                </a>
-                <a href="#faq" class="max-sm:w-full uk-btn uk-btn-ghost uk-btn-sm">
-                    FAQ
-                </a>
-                <a class="max-sm:w-full uk-btn uk-btn-primary uk-btn-sm"
-                    href="{{ route('auth.register.index') }}">Register</a>
-                <a class="max-sm:w-full uk-btn uk-btn-default uk-btn-sm"
-                    href="{{ route('auth.login.index') }}">Login</a>
-                <form
-                    action="#"
-                    method="get" class="inline-block">
-                    <button type="submit" class="btn-icon-outline size-8"
-                        aria-label="{{ __('profile.toggle-language') }}"
-                        data-tooltip="{{ __('profile.toggle-language') }}" data-side="bottom"
-                        data-align="{{ ($locale ?? 'en') === 'ar' ? 'start' : 'end' }}">
-                        <i class="hgi hgi-stroke hgi-translate"></i>
-                    </button>
-                </form>
+
+                @auth
+                    <!-- Authenticated User Links -->
+                    <a href="{{ route('reviews.create', 1) }}" class="uk-btn uk-btn-primary uk-btn-small ml-2">
+                        <uk-icon icon="pencil" width="16" height="16" class="mr-1"></uk-icon>
+                        Write Review
+                    </a>
+
+                    <!-- User Dropdown -->
+                    <div class="relative">
+                        <button type="button" class="uk-btn uk-btn-default uk-btn-small rounded-full w-12 h-12 flex items-center gap-2 cursor-pointer">
+                            <uk-icon icon="user"></uk-icon>
+                            {{-- <uk-icon icon="chevron-down" width="14" height="14"></uk-icon> --}}
+                        </button>
+                        <div class="uk-drop uk-dropdown min-w-64" data-uk-dropdown="mode: click; pos: bottom-right; animation: uk-anmt-slide-top-sm">
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <!-- User Info Header -->
+                                <li class="uk-nav-header">
+                                    <div class="px-3 py-2">
+                                        <p class="text-sm font-semibold truncate">{{ auth()->user()->email }}</p>
+                                        @if(auth()->user()->supplier)
+                                        <p class="text-xs text-muted-foreground truncate">{{ auth()->user()->supplier->name }}</p>
+                                        @endif
+                                    </div>
+                                </li>
+                                <li class="uk-nav-divider"></li>
+
+                                <!-- My Organization -->
+                                @if(auth()->user()->supplier)
+                                <li>
+                                    <a href="{{ route('suppliers.show', auth()->user()->supplier) }}" class="flex items-center gap-2 text-sm">
+                                        <uk-icon icon="building" width="16" height="16"></uk-icon>
+                                        My Organization
+                                    </a>
+                                </li>
+                                @endif
+
+                                <li class="uk-nav-divider"></li>
+
+                                <!-- Theme Toggle -->
+                                <li>
+                                    <button
+                                        type="button"
+                                        onclick="toggleTheme()"
+                                        class="w-full text-left text-sm flex items-center gap-2 mx-1 px-1 py-2 hover:bg-muted rounded transition-colors cursor-pointer"
+                                    >
+                                        <uk-icon icon="swatch-book"></uk-icon>
+                                        <span>Toggle Theme</span>
+                                    </button>
+                                </li>
+
+                                <li class="uk-nav-divider"></li>
+
+                                <!-- Logout -->
+                                <li>
+                                    <form action="{{ route('auth.logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="w-full text-left text-sm flex items-center gap-2 text-destructive px-3 py-2 hover:bg-destructive/10 rounded transition-colors cursor-pointer">
+                                            <uk-icon icon="log-out"></uk-icon>
+                                            Sign Out
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                @else
+                    <!-- Guest Links -->
+                    <a href="{{ route('auth.login.index') }}" class="uk-btn uk-btn-default uk-btn-small ml-2">
+                        Sign In
+                    </a>
+                    <a href="{{ route('auth.register.index') }}" class="uk-btn uk-btn-primary uk-btn-small">
+                        Get Started
+                    </a>
+                @endauth
             </nav>
 
-            <div class="min-[800px]:hidden" x-data="{ isOpen: false }">
-                <button type="button" class="btn-sm-icon-ghost" @click="isOpen = !isOpen">
-                    <span x-show="!isOpen"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu">
-                            <path d="M4 12h16"></path>
-                            <path d="M4 18h16"></path>
-                            <path d="M4 6h16"></path>
-                        </svg></span>
-                    <span x-show="isOpen" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x">
-                            <path d="M18 6 6 18"></path>
-                            <path d="m6 6 12 12"></path>
-                        </svg></span>
-                </button>
-                <nav class="fixed inset-0 top-16 bg-background z-50 flex flex-col gap-2 p-4 transition-all opacity-0 scale-95 -translate-y-16 invisible"
-                    :class="{ 'opacity-100 scale-100 translate-y-0 visible': isOpen }">
-                    <a class="uk-btn uk-btn-ghost uk-btn-lg justify-between px-4" href="#">
-                        Home
-                    </a>
-                    <a class="uk-btn uk-btn-ghost uk-btn-lg justify-between px-4" href="#">
-                        Features
-                    </a>
-                    <a class="uk-btn uk-btn-ghost uk-btn-lg justify-between px-4" href="#">
-                        Pricing
-                    </a>
-                    <a class="uk-btn uk-btn-ghost uk-btn-lg justify-between px-4" href="#">
-                        Testimonials
-                    </a>
-                    <a class="uk-btn uk-btn-ghost uk-btn-lg justify-between px-4" href="#">
-                        FAQ
-                    </a>
-                    <a class="uk-btn uk-btn-primary uk-btn-lg justify-between px-4 mt-auto" href="{{ route('auth.register.index') }}">
-                        Register
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="lucide lucide-arrow-right-icon lucide-arrow-right rtl:scale-x-[-1]">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </a>
-                    <a class="uk-btn uk-btn-secondary uk-btn-lg px-4 justify-between" href="{{ route('auth.login.index') }}">
-                        Login
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="lucide lucide-arrow-right-icon lucide-arrow-right rtl:scale-x-[-1]">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </a>
-                </nav>
-            </div>
+            <!-- Mobile Menu Button -->
+            <button
+                type="button"
+                @click="mobileMenuOpen = !mobileMenuOpen"
+                class="lg:hidden uk-btn uk-btn-ghost uk-btn-small cursor-pointer"
+                aria-label="Toggle menu"
+            >
+                <uk-icon :icon="mobileMenuOpen ? 'x' : 'menu'" width="24" height="24"></uk-icon>
+            </button>
         </div>
-    </header>
+
+        <!-- Mobile Navigation -->
+        <nav
+            x-show="mobileMenuOpen"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            class="lg:hidden mt-4 pt-4 border-t border-border"
+            style="display: none;"
+        >
+            <div class="flex flex-col gap-2">
+                <!-- Common Mobile Links -->
+                <a href="{{ route('home.index') }}" class="uk-btn uk-btn-ghost uk-btn-large justify-start {{ request()->routeIs('home.index') ? 'uk-active' : '' }}">
+                    <uk-icon icon="home" class="mr-2" width="20" height="20"></uk-icon>
+                    Home
+                </a>
+                <a href="{{ route('suppliers.index') }}" class="uk-btn uk-btn-ghost uk-btn-large justify-start {{ request()->routeIs('suppliers.*') ? 'uk-active' : '' }}">
+                    <uk-icon icon="search" class="mr-2" width="20" height="20"></uk-icon>
+                    Browse Suppliers
+                </a>
+
+                @auth
+                    <!-- Authenticated Mobile Links -->
+                    <a href="{{ route('reviews.create', 1) }}" class="uk-btn uk-btn-primary uk-btn-large justify-start">
+                        <uk-icon icon="pencil" class="mr-2" width="20" height="20"></uk-icon>
+                        Write Review
+                    </a>
+
+                    <div class="border-t border-border my-2 pt-2">
+                        <div class="px-4 py-2 bg-muted/50 rounded-lg mb-2">
+                            <p class="text-sm font-semibold truncate">{{ auth()->user()->email }}</p>
+                            @if(auth()->user()->supplier)
+                            <p class="text-xs text-muted-foreground truncate">{{ auth()->user()->supplier->name }}</p>
+                            @endif
+                        </div>
+                    </div>
+
+                    @if(auth()->user()->supplier)
+                    <a href="{{ route('suppliers.show', auth()->user()->supplier) }}" class="uk-btn uk-btn-ghost uk-btn-large justify-start">
+                        <uk-icon icon="building" class="mr-2" width="20" height="20"></uk-icon>
+                        My Organization
+                    </a>
+                    @endif
+
+                    <button type="button" onclick="toggleTheme()" class="uk-btn uk-btn-ghost uk-btn-large justify-start">
+                        <uk-icon icon="swatch-book" class="mr-2" width="20" height="20"></uk-icon>
+                        Toggle Theme
+                    </button>
+
+                    <form action="{{ route('auth.logout') }}" method="POST" class="mt-2">
+                        @csrf
+                        <button type="submit" class="w-full uk-btn uk-btn-destructive uk-btn-large justify-start">
+                            <uk-icon icon="log-out" class="mr-2" width="20" height="20"></uk-icon>
+                            Sign Out
+                        </button>
+                    </form>
+                @else
+                    <!-- Guest Mobile Links -->
+                    <div class="border-t border-border my-2 pt-2"></div>
+                    <a href="{{ route('auth.login.index') }}" class="uk-btn uk-btn-default uk-btn-large justify-start">
+                        <uk-icon icon="log-in" class="mr-2" width="20" height="20"></uk-icon>
+                        Sign In
+                    </a>
+                    <a href="{{ route('auth.register.index') }}" class="uk-btn uk-btn-primary uk-btn-large justify-start">
+                        <uk-icon icon="user-plus" class="mr-2" width="20" height="20"></uk-icon>
+                        Get Started
+                    </a>
+                @endauth
+            </div>
+        </nav>
+    </div>
+</header>

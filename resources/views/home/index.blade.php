@@ -307,8 +307,8 @@
 <section class="py-20 bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
     <div class="max-w-7xl mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Make Better Procurement Decisions?</h2>
-            <p class="text-xl mb-10 text-primary-foreground/90">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-pretty">Ready to Make Better Procurement Decisions?</h2>
+            <p class="text-xl mb-10 text-primary-foreground/90 tracking-wide leading-6">
                 Join thousands of businesses finding trusted suppliers through authentic, verified reviews.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -316,7 +316,7 @@
                     <uk-icon icon="user"></uk-icon>
                     Create Free Account
                 </a>
-                <a href="{{ route('suppliers.index') }}" class="uk-btn uk-btn-lg uk-btn-default border-2 border-white text-white hover:bg-white/10">
+                <a href="{{ route('suppliers.index') }}" class="uk-btn uk-btn-lg uk-btn-ghost border-2 border-white text-white hover:bg-white/10">
                     <uk-icon icon="search"></uk-icon>
                     Browse Suppliers
                 </a>
