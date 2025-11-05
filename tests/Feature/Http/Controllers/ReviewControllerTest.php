@@ -57,7 +57,7 @@ final class ReviewControllerTest extends TestCase
             'timeliness' => 5,
             'deal_again' => true,
             'anonymous' => false,
-            'comment' => 'Great supplier',
+            'comment' => 'Great service',
         ];
 
         $response = $this->actingAs($user)->post(route('reviews.store'), $data);
@@ -81,7 +81,7 @@ final class ReviewControllerTest extends TestCase
             'timeliness' => 5,
             'deal_again' => 1,
             'anonymous' => 0,
-            'comment' => 'Great supplier',
+            'comment' => 'Great service',
         ]);
     }
 
@@ -154,7 +154,7 @@ final class ReviewControllerTest extends TestCase
             'timeliness' => 5,
             'deal_again' => true,
             'anonymous' => false,
-            'comment' => 'Great supplier',
+            'comment' => 'Great service',
         ];
 
         $response = $this->actingAs($user)->post(route('reviews.store'), $data);
@@ -201,6 +201,50 @@ final class ReviewControllerTest extends TestCase
 
         $response->assertSessionHasErrors([
             'comment' => 'Comments are not allowed for anonymous reviews.',
+        ]);
+    }
+
+    #[Test]
+    public function store_rejects_reviews_with_profanity(): void
+    {
+        $user = User::factory()->create();
+        $reviewerSupplier = Supplier::factory()->create();
+        $user->supplier()->associate($reviewerSupplier);
+        $user->save();
+
+        $reviewedSupplier = Supplier::factory()->create();
+
+        $data = [
+            'reviewed_supplier_id' => $reviewedSupplier->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'user_id' => $user->id,
+            'deal_date' => '2023-01-01',
+            'country' => 'US',
+            'cost' => 5,
+            'speed' => 5,
+            'communication' => 5,
+            'reliability' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'flexibility' => 5,
+            'innovation' => 5,
+            'value' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => false,
+            'comment' => 'This is fucking awesome',
+        ];
+
+        $response = $this->actingAs($user)->post(route('reviews.store'), $data);
+
+        $response->assertRedirect();
+        $response->assertSessionHasErrors([
+            'comment' => 'Your comment contains offensive language. Please review the masked words and modify accordingly.',
+        ]);
+        $this->assertDatabaseMissing('reviews', [
+            'reviewed_supplier_id' => $reviewedSupplier->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'user_id' => $user->id,
         ]);
     }
 }

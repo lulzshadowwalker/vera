@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\NoProfanity;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ReviewStoreRequest extends FormRequest
@@ -57,6 +58,7 @@ class ReviewStoreRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:160',
+                new NoProfanity,
                 function ($attribute, $value, $fail) {
                     if ($this->anonymous && ! empty($value)) {
                         $fail(
