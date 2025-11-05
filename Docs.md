@@ -1,7 +1,3 @@
-Here’s your revised **Industrial Supplier Reviews Platform: Business & Technical Overview** — cleaned up per your request, with no API endpoints, no mail driver mentions, and the AI/ML and references sections removed.
-
----
-
 # Industrial Supplier Reviews Platform: Business & Technical Overview
 
 ## 1. Introduction
@@ -175,7 +171,3 @@ The **Industrial Supplier Reviews Platform** is a secure, scalable B2B web appli
 * **Profile Claiming**: Verified ownership for supplier profiles.
 * **Analytics**: Dashboards summarizing submitted and received reviews, CSV exports.
 * **Integrations**: CRM widgets, API connections, and PWA/mobile extension.
-
----
-
-Would you like me to version it as `1.1` with a “changelog summary” section at the end for future tracking (e.g., removed API/AI/contacts sections, refined security paragraph)? It helps keep internal documents auditable without editing the main text each time.

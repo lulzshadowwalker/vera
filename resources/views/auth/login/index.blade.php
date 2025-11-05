@@ -18,7 +18,7 @@
             <footer class="text-sm">Sofia Davis</footer>
         </blockquote>
     </div>
-    <div class="col-span-2 flex flex-col p-8 lg:col-span-1">
+    <div class="col-span-2 flex flex-col p-8 lg:col-span-1 bg-background text-foreground">
         <div class="flex flex-1 items-center justify-center">
             <div class="w-xs space-y-4">
                 <div class="flex flex-col space-y-2 text-center">
@@ -35,11 +35,11 @@
                     <div>
                         <label for="email" class="uk-form-label uk-form-label-required">Email</label>
                         <div class="uk-form-controls">
-                            <input 
-                                type="email" 
-                                id="email" 
+                            <input
+                                type="email"
+                                id="email"
                                 name="email"
-                                class="uk-input @error('email') uk-form-destructive @enderror" 
+                                class="uk-input @error('email') uk-form-destructive @enderror"
                                 placeholder="email@example.com"
                                 value="{{ old('email') }}"
                                 required

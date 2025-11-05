@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Hero -->
-<section class="py-16 md:py-24">
+<section class="py-16 md:py-24 bg-background text-foreground">
     <div class="max-w-7xl mx-auto px-6 text-center">
         <h1 class="font-bold text-4xl md:text-5xl lg:text-6xl leading-tight text-balance">Connecting You with Trusted Industrial Suppliers</h1>
         <p class="mt-6 text-lg md:text-xl max-w-2xl mx-auto text-gray-600 tracking-wide leading-6">Discover, review, and connect with top industrial suppliers to meet your business needs. Make informed decisions with authentic feedback.</p>
@@ -22,31 +22,31 @@
 
 
 <!-- Stats -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-background text-foreground">
     <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div class="flex flex-col items-center">
-                <div class="text-4xl font-bold text-blue-600">{{ $totalReviews ?? '1,250' }}</div>
-                <p class="mt-2 text-gray-600">Total Reviews</p>
+                <div class="text-4xl font-bold text-primary">{{ $totalReviews ?? '1,250' }}</div>
+                <p class="mt-2 text-neutral-500 dark:text-neutral-400">Total Reviews</p>
             </div>
             <div class="flex flex-col items-center">
-                <div class="text-4xl font-bold text-blue-600">{{ $totalSuppliers ?? '500' }}</div>
-                <p class="mt-2 text-gray-600">Verified Suppliers</p>
+                <div class="text-4xl font-bold text-primary">{{ $totalSuppliers ?? '500' }}</div>
+                <p class="mt-2 text-neutral-500 dark:text-neutral-400">Verified Suppliers</p>
             </div>
             <div class="flex flex-col items-center">
-                <div class="text-4xl font-bold text-blue-600">{{ $totalUsers ?? '2,000' }}</div>
-                <p class="mt-2 text-gray-600">Active Users</p>
+                <div class="text-4xl font-bold text-primary">{{ $totalUsers ?? '2,000' }}</div>
+                <p class="mt-2 text-neutral-500 dark:text-neutral-400">Active Users</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Features -->
-<section class="py-16 bg-gray-50">
+<section class="py-16 bg-gray-50 bg-secondary text-secondary-foreground">
     <div class="max-w-7xl mx-auto px-6">
         <header class="text-center mb-12">
-            <h2 class="font-semibold text-3xl md:text-4xl text-gray-900">Why Choose Our Platform?</h2>
-            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Empower your procurement decisions with verified reviews and comprehensive supplier insights.</p>
+            <h2 class="font-semibold text-3xl md:text-4xl text-pretty">Why Choose Our Platform?</h2>
+            <p class="mt-4 text-lg text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto tracking-wide leading-6">Empower your procurement decisions with verified reviews and comprehensive supplier insights.</p>
         </header>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="uk-card uk-card-default uk-card-body text-center">
@@ -75,8 +75,8 @@
 </section>
 
 <!-- FAQ -->
-<section class="max-w-7xl mx-auto px-6 py-16">
-    <header>
+<section class="px-6 py-16 bg-background text-foreground">
+    <header class="max-w-7xl mx-auto">
         <h2 class="font-semibold text-2xl md:text-3xl text-center mb-3">Frequently Asked Questions</h2>
         <p class="leading-6 tracking-wide text-neutral-400 text-pretty text-center max-w-prose mx-auto">Have questions? We've got answers. If you can't find what you're looking for, feel free to contact us.</p>
     </header>

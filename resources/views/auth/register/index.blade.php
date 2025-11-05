@@ -18,7 +18,7 @@
             <footer class="text-sm">Sofia Davis</footer>
         </blockquote>
     </div>
-    <div class="col-span-2 flex flex-col p-8 lg:col-span-1">
+    <div class="col-span-2 flex flex-col p-8 lg:col-span-1 bg-background text-foreground">
         <div class="flex flex-1 items-center justify-center">
             <div class="w-sm space-y-5">
                 <div class="flex flex-col space-y-2 text-center">

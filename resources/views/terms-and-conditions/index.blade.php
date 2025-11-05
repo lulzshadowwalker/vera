@@ -1,8 +1,8 @@
 @extends('components.layouts.app')
 
 @section('content')
-    <div class="max-w-4xl mx-auto px-6 py-12 md:py-16">
-        <article class="prose lg:prose-xl">
+    <div class="px-6 py-12 md:py-16 bg-background">
+        <article class="max-w-4xl mx-auto prose lg:prose-xl dark:prose-invert">
             <h1>Terms and Conditions</h1>
             <p>Last updated: October 31, 2025</p>
             <p>Please read these terms and conditions carefully before using Our Service.</p>

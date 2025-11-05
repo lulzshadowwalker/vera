@@ -1,10 +1,10 @@
 @extends('components.layouts.app')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-6 py-8">
+<div class="px-6 py-8 bg-background text-foreground">
     <!-- Page Header -->
-    <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-4">Browse Suppliers</h1>
+    <div class="max-w-7xl mx-auto mb-8">
+        <h1 class="text-3xl font-bold mb-4">Browse Suppliers</h1>
         <!-- Search Bar -->
         <form x-target="js-results" action="{{ route('suppliers.index') }}" method="GET" class="max-w-2xl">
             <div class="flex">
@@ -19,15 +19,15 @@
         </form>
     </div>
 
-    <div id="js-results" class="grid grid-cols-1 lg:grid-cols-4 gap-8 scroll-mt-20">
+    <div id="js-results" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8 scroll-mt-20">
         <!-- Filters Sidebar -->
         <aside class="lg:col-span-1">
-            <div class="bg-white border border-gray-200 rounded-lg p-6">
+            <div class="bg-card text-card-foreground rounded-lg p-6">
                 <h2 class="text-lg font-semibold mb-4">Filters</h2>
                 <div class="space-y-4">
                     <!-- Country Filter -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Country</label>
+                        <label class="block text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-2">Country</label>
                         <select class="uk-select w-full">
                             <option>All Countries</option>
                             <option>United States</option>
@@ -38,7 +38,7 @@
                     </div>
                     <!-- Rating Filter -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Rating</label>
+                        <label class="block text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-2">Minimum Rating</label>
                         <select class="uk-select w-full">
                             <option>Any Rating</option>
                             <option>4 Stars & Up</option>
@@ -48,7 +48,7 @@
                     </div>
                     <!-- Sort By -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
+                        <label class="block text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-2">Sort By</label>
                         <select class="uk-select w-full">
                             <option>Relevance</option>
                             <option>Highest Rating</option>
@@ -64,9 +64,9 @@
         <div class="lg:col-span-3">
             <!-- Results Summary -->
             <div class="flex justify-between items-center mb-6">
-                <p class="text-gray-600">Showing {{ $suppliers->firstItem() }}-{{ $suppliers->lastItem() }} of {{ $suppliers->total() }} suppliers</p>
+                <p class="text-muted">Showing {{ $suppliers->firstItem() }}-{{ $suppliers->lastItem() }} of {{ $suppliers->total() }} suppliers</p>
                 <div class="flex items-center gap-2">
-                    <label class="text-sm font-medium text-gray-700">Sort:</label>
+                    <label class="text-sm font-medium text-muted">Sort:</label>
                     <select class="uk-select">
                         <option>Relevance</option>
                         <option>Rating</option>
