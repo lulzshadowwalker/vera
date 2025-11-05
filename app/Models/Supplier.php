@@ -28,6 +28,7 @@ class Supplier extends Model
     {
         return [
             'id' => 'integer',
+            'slug' => 'string',
         ];
     }
 
@@ -91,6 +92,7 @@ class Supplier extends Model
             'id' => (string) $this->id,
             'name' => $this->name,
             'domain' => $this->domain,
+            'slug' => $this->slug,
 
             // TODO: I believe country should be a relation to a countries table instead
             'country' => $this->country,

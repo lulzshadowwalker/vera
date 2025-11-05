@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\Supplier;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -19,7 +20,8 @@ final class ReviewControllerTest extends TestCase
     #[Test]
     public function create_displays_view(): void
     {
-        $response = $this->get(route('reviews.create'));
+        $supplier = Supplier::factory()->create();
+        $response = $this->get(route('reviews.create', $supplier));
 
         $response->assertOk();
         $response->assertViewIs('review.create');
