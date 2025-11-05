@@ -1,4 +1,4 @@
-<header class="sticky top-0 bg-background text-foreground z-50 transition-color duration-300 border-b border-background"
+<header class="sticky top-0 bg-[#1B1B1B] text-[#F0E9D6] z-50 transition-color duration-300 border-b border-background"
         x-data="{ scrolled: false }" @scroll.window="scrolled = window.scrollY &gt; 0"
         :class="{ 'border-border': scrolled }">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center gap-2">

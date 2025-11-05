@@ -1,4 +1,4 @@
-<footer class="bg-secondary text-secondary-foreground py-10">
+<footer class="bg-[#1B1B1B] text-[#F0E9D6] py-10">
     <div class="max-w-7xl w-full mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
             <a class="flex items-center gap-2" href="/">
