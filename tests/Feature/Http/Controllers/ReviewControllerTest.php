@@ -56,6 +56,7 @@ final class ReviewControllerTest extends TestCase
             'value' => 5,
             'timeliness' => 5,
             'deal_again' => true,
+            'anonymous' => false,
             'comment' => 'Great supplier',
         ];
 
@@ -79,6 +80,7 @@ final class ReviewControllerTest extends TestCase
             'value' => 5,
             'timeliness' => 5,
             'deal_again' => 1,
+            'anonymous' => 0,
             'comment' => 'Great supplier',
         ]);
     }
@@ -151,6 +153,7 @@ final class ReviewControllerTest extends TestCase
             'value' => 5,
             'timeliness' => 5,
             'deal_again' => true,
+            'anonymous' => false,
             'comment' => 'Great supplier',
         ];
 
@@ -161,5 +164,43 @@ final class ReviewControllerTest extends TestCase
             'error',
             'You have already submitted a review for this supplier.',
         );
+    }
+
+    #[Test]
+    public function store_fails_validation_when_comment_provided_for_anonymous_review(): void
+    {
+        $user = User::factory()->create();
+        $reviewerSupplier = Supplier::factory()->create();
+        $user->supplier()->associate($reviewerSupplier);
+        $user->save();
+
+        $reviewedSupplier = Supplier::factory()->create();
+
+        $data = [
+            'reviewed_supplier_id' => $reviewedSupplier->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'user_id' => $user->id,
+            'deal_date' => '2023-01-01',
+            'country' => 'US',
+            'cost' => 5,
+            'speed' => 5,
+            'communication' => 5,
+            'reliability' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'flexibility' => 5,
+            'innovation' => 5,
+            'value' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => true,
+            'comment' => 'This should fail',
+        ];
+
+        $response = $this->actingAs($user)->post(route('reviews.store'), $data);
+
+        $response->assertSessionHasErrors([
+            'comment' => 'Comments are not allowed for anonymous reviews.',
+        ]);
     }
 }
