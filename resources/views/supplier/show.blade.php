@@ -120,6 +120,9 @@
                             <div class="flex items-center gap-2">
                                 <span class="text-sm">{{ $review->anonymous ? 'Anonymous' : $review->user->first_name . ' ' . substr($review->user->first_name, 0, 1) . '.' }}</span>
                                 <span class="text-sm text-muted-foreground">{{ $review->country }}</span>
+                                <a href="{{ route('reviews.show', $review) }}" class="uk-btn uk-btn-primary uk-btn-small" title="Share this review">
+                                    <uk-icon icon="share" class="text-sm"></uk-icon>
+                                </a>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-8 md:gap-x-12 mb-4 text-sm">

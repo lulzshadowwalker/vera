@@ -25,6 +25,8 @@ class ReviewController extends Controller
 
     public function show(Request $request, Review $review): View
     {
+        $review->load(['reviewedSupplier', 'user']);
+
         return view('review.show', [
             'review' => $review,
         ]);
