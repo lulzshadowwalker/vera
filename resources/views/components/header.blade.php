@@ -1,4 +1,4 @@
-<header class="sticky top-0 bg-card text-foreground z-50 border-b border-border shadow-sm" x-data="{ mobileMenuOpen: false }">
+<header class="-mb-18 sticky top-0 z-50 {{ request()->routeIs('home.index') ? 'bg-black/80 backdrop-blur-md text-white border-b border-white/10' : 'bg-card text-foreground border-b border-border shadow-sm' }}" x-data="{ mobileMenuOpen: false }">
     <div class="max-w-7xl mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
             <!-- Logo -->

@@ -2,13 +2,17 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative py-20 md:py-28 bg-gradient-to-br from-background via-background to-secondary/20">
-    <div class="max-w-7xl mx-auto px-6">
+<section class="relative py-20 md:py-28 bg-black min-h-[90vh]">
+    <!-- Unicorn Studio Background -->
+    <div class="absolute inset-0 w-full h-full overflow-hidden">
+        <div data-us-project="KJT9Cc9mnGfTRbyIClhJ" data-us-scale="1" data-us-dpi="1.5" data-us-lazyload="true" class="w-full h-full"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
         <div class="text-center max-w-4xl mx-auto">
-            <h1 class="font-bold text-4xl md:text-5xl lg:text-6xl leading-tight text-balance mb-6">
+            <h1 class="font-bold text-4xl md:text-5xl lg:text-6xl leading-tight text-balance mb-6 text-white">
                 Find Trusted Industrial Suppliers, Fast
             </h1>
-            <p class="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-lg md:text-xl text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed">
                 Access authentic reviews from verified businesses. Make confident procurement decisions backed by real experiences from your peers.
             </p>
 
@@ -18,7 +22,7 @@
                     <uk-icon icon="search"></uk-icon>
                     Browse Suppliers
                 </a>
-                <a href="{{ route('auth.register.index') }}" class="uk-btn uk-btn-default uk-btn-lg w-full sm:w-auto">
+                <a href="{{ route('auth.register.index') }}" class="uk-btn uk-btn-lg w-full sm:w-auto bg-white/10 text-white border border-white/20 hover:bg-white/20">
                     <uk-icon icon="pencil"></uk-icon>
                     Write a Review
                 </a>
@@ -34,14 +38,14 @@
                         <input
                             type="search"
                             role="search"
-                            class="uk-input uk-form-large rounded-lg shadow-lg"
+                            class="uk-input uk-form-large rounded-lg shadow-lg bg-white/10 border-white/20 text-white placeholder:text-white/50"
                             name="search"
                             placeholder="Search by supplier name or domain..."
                             aria-label="Search for suppliers"
                         />
                     </div>
                 </form>
-                <p class="text-sm text-muted-foreground mt-3">
+                <p class="text-sm text-white/50 mt-3">
                     Try searching for companies like "acme.com" or "ABC Manufacturing"
                 </p>
             </div>
@@ -325,4 +329,14 @@
     </div>
 </section>
 @endguest
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.UnicornStudio) {
+            UnicornStudio.init().catch(console.error);
+        }
+    });
+</script>
+@endpush
 @endsection

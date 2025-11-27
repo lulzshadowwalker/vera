@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/a51f251d24.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.36/dist/unicornStudio.umd.js"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
