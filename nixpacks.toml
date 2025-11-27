@@ -4,7 +4,12 @@ nixPkgs = ["...", "python311Packages.supervisor"]
 [phases.build]
 cmds = [
     # Create required directories in one command
-    "mkdir -p /var/log /app/storage/framework/{views,cache,sessions} /app/bootstrap/cache /etc/supervisor/conf.d",
+    "mkdir -p /var/log",
+    "mkdir -p /app/storage/framework/views",
+    "mkdir -p /app/storage/framework/cache",
+    "mkdir -p /app/storage/framework/sessions",
+    "mkdir -p /app/bootstrap/cache",
+    "mkdir -p /etc/supervisor/conf.d",
 
     # Set permissions in a single command
     "chown -R www-data:www-data /var/log /app/storage /app/bootstrap/cache",
