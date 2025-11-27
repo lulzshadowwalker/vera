@@ -22,7 +22,7 @@ final class ReviewControllerTest extends TestCase
     public function create_displays_view(): void
     {
         $supplier = Supplier::factory()->create();
-        $response = $this->get(route('reviews.create', $supplier));
+        $response = $this->get(route('suppliers.reviews.create', $supplier));
 
         $response->assertOk();
         $response->assertViewIs('review.create');
@@ -110,7 +110,7 @@ final class ReviewControllerTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)->get(
-            route('reviews.create', $supplier),
+            route('suppliers.reviews.create', $supplier),
         );
 
         $response->assertRedirect(route('suppliers.show', $supplier));

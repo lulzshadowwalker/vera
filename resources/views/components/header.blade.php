@@ -24,7 +24,7 @@
 
                 @auth
                     <!-- Authenticated User Links -->
-                    <a href="{{ route('reviews.create', 1) }}" class="uk-btn uk-btn-primary uk-btn-small ml-2">
+                    <a href="{{ route('suppliers.reviews.create', 1) }}" class="uk-btn uk-btn-primary uk-btn-small ml-2">
                         <uk-icon icon="pencil" width="16" height="16" class="mr-1"></uk-icon>
                         Write Review
                     </a>
@@ -134,7 +134,7 @@
 
                 @auth
                     <!-- Authenticated Mobile Links -->
-                    <a href="{{ route('reviews.create', 1) }}" class="uk-btn uk-btn-primary uk-btn-large justify-start">
+                    <a href="{{ route('suppliers.reviews.create', 1) }}" class="uk-btn uk-btn-primary uk-btn-large justify-start">
                         <uk-icon icon="pencil" class="mr-2" width="20" height="20"></uk-icon>
                         Write Review
                     </a>

@@ -28,7 +28,6 @@ cmds = [
     "php artisan livewire:publish --assets",
     "php artisan filament:optimize",
     "php artisan horizon:terminate",
-    "php artisan reverb:restart",
 ]
 # The postbuild phase can be configured to depend on other phases.
 dependsOn = ["build"]

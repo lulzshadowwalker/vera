@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 @auth
-                <a href="{{ route('reviews.create', ['supplier' => $supplier]) }}" class="uk-btn uk-btn-primary uk-btn-large w-full lg:w-auto">
+                <a href="{{ route('suppliers.reviews.create', ['supplier' => $supplier]) }}" class="uk-btn uk-btn-primary uk-btn-large w-full lg:w-auto">
                     <uk-icon icon="pencil"></uk-icon>
                     Write a Review
                 </a>

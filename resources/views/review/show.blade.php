@@ -46,7 +46,7 @@
                         All Reviews
                     </a>
                     @auth
-                    <a href="{{ route('reviews.create', ['supplier' => $review->reviewedSupplier]) }}" class="uk-btn uk-btn-primary">
+                    <a href="{{ route('suppliers.reviews.create', ['supplier' => $review->reviewedSupplier]) }}" class="uk-btn uk-btn-primary">
                         <uk-icon icon="pencil"></uk-icon>
                         Write Review
                     </a>

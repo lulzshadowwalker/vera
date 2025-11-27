@@ -88,7 +88,7 @@ Route::get('/suppliers/{supplier:slug}', [
 Route::get('/suppliers/{supplier:slug}/reviews/create', [
     App\Http\Controllers\ReviewController::class,
     'create',
-])->name('reviews.create');
+])->name('suppliers.reviews.create');
 
 Route::resource('reviews', App\Http\Controllers\ReviewController::class)->only(
     'create',
