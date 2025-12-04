@@ -71,17 +71,14 @@ class Supplier extends Model
         $count = 0;
         foreach ($reviews as $review) {
             $avg =
-                ($review->cost +
-                    $review->speed +
+                ($review->quality +
+                    $review->accuracy +
                     $review->communication +
-                    $review->reliability +
-                    $review->quality +
-                    $review->support +
-                    $review->flexibility +
-                    $review->innovation +
-                    $review->value +
-                    $review->timeliness) /
-                10;
+                    $review->cost +
+                    $review->compliance +
+                    $review->timeliness +
+                    $review->support) /
+                7;
             $total += $avg;
             $count++;
         }

@@ -113,16 +113,13 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     @foreach([
-                        'cost' => ['label' => 'Cost', 'icon' => 'credit-card', 'description' => 'Pricing and value for money'],
-                        'speed' => ['label' => 'Speed', 'icon' => 'bolt', 'description' => 'Delivery and turnaround time'],
-                        'communication' => ['label' => 'Communication', 'icon' => 'audio-lines', 'description' => 'Responsiveness and clarity'],
-                        'reliability' => ['label' => 'Reliability', 'icon' => 'check', 'description' => 'Consistency and dependability'],
-                        'quality' => ['label' => 'Quality', 'icon' => 'star', 'description' => 'Product/service excellence'],
-                        'support' => ['label' => 'Support', 'icon' => 'headset', 'description' => 'Customer service quality'],
-                        'flexibility' => ['label' => 'Flexibility', 'icon' => 'split', 'description' => 'Adaptability to changes'],
-                        'innovation' => ['label' => 'Innovation', 'icon' => 'lightbulb', 'description' => 'Creative solutions offered'],
-                        'value' => ['label' => 'Value', 'icon' => 'tag', 'description' => 'Overall worth for price'],
-                        'timeliness' => ['label' => 'Timeliness', 'icon' => 'clock', 'description' => 'Meeting deadlines']
+                        'quality' => ['label' => 'Product quality or the service Provided', 'icon' => 'star', 'description' => 'Compliance with the advertisement or description'],
+                        'accuracy' => ['label' => 'Credibility, clarity & accuracy of information', 'icon' => 'shield-check', 'description' => 'Integrity in dealing'],
+                        'communication' => ['label' => 'Customer Service and efficiency of response', 'icon' => 'headset', 'description' => 'Effectiveness of support provided'],
+                        'cost' => ['label' => 'Prices Suitability for the product or service', 'icon' => 'credit-card', 'description' => 'Price level compared to its equivalent'],
+                        'compliance' => ['label' => 'Financial dealing', 'icon' => 'banknote', 'description' => 'Transparency + fulfilment of commitments'],
+                        'timeliness' => ['label' => 'Adherence to delivery deadlines and timely completion', 'icon' => 'clock', 'description' => 'Compliance with the agreed schedule without delay'],
+                        'support' => ['label' => 'After-sale Service', 'icon' => 'wrench', 'description' => 'Quality of support and follow up after sale']
                     ] as $metric => $data)
                     <div>
                         <label class="block mb-3" for="{{ $metric }}">

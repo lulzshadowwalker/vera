@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\NoProfanity;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ReviewStoreRequest extends FormRequest
@@ -43,14 +42,11 @@ class ReviewStoreRequest extends FormRequest
             'deal_date' => ['required', 'date'],
             'country' => ['nullable', 'string', 'max:2'],
             'cost' => ['required', 'integer', 'min:1', 'max:10'],
-            'speed' => ['required', 'integer', 'min:1', 'max:10'],
+            'accuracy' => ['required', 'integer', 'min:1', 'max:10'],
+            'compliance' => ['required', 'integer', 'min:1', 'max:10'],
             'communication' => ['required', 'integer', 'min:1', 'max:10'],
-            'reliability' => ['required', 'integer', 'min:1', 'max:10'],
             'quality' => ['required', 'integer', 'min:1', 'max:10'],
             'support' => ['required', 'integer', 'min:1', 'max:10'],
-            'flexibility' => ['required', 'integer', 'min:1', 'max:10'],
-            'innovation' => ['required', 'integer', 'min:1', 'max:10'],
-            'value' => ['required', 'integer', 'min:1', 'max:10'],
             'timeliness' => ['required', 'integer', 'min:1', 'max:10'],
             'deal_again' => ['boolean'],
             'anonymous' => ['boolean'],
@@ -58,7 +54,6 @@ class ReviewStoreRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:160',
-                new NoProfanity,
                 function ($attribute, $value, $fail) {
                     if ($this->anonymous && ! empty($value)) {
                         $fail(

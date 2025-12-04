@@ -61,7 +61,7 @@
                 <!-- Left Column: Score & Metadata -->
                 <div class="lg:col-span-3 flex flex-col items-center gap-6 lg:border-r border-border lg:pr-8">
                     @php
-                        $avgScore = ($review->cost + $review->speed + $review->communication + $review->reliability + $review->quality + $review->support + $review->flexibility + $review->innovation + $review->value + $review->timeliness) / 10;
+                        $avgScore = $review->average_score;
                     @endphp
 
                     <!-- Overall Score -->
@@ -122,16 +122,13 @@
                         <h2 class="text-xl font-bold mb-6">Detailed Ratings</h2>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @foreach([
-                                'cost' => ['label' => 'Cost', 'icon' => 'credit-card'],
-                                'speed' => ['label' => 'Speed', 'icon' => 'bolt'],
-                                'communication' => ['label' => 'Communication', 'icon' => 'comment'],
-                                'reliability' => ['label' => 'Reliability', 'icon' => 'check'],
-                                'quality' => ['label' => 'Quality', 'icon' => 'star'],
-                                'support' => ['label' => 'Support', 'icon' => 'lifesaver'],
-                                'flexibility' => ['label' => 'Flexibility', 'icon' => 'refresh'],
-                                'innovation' => ['label' => 'Innovation', 'icon' => 'lightbulb'],
-                                'value' => ['label' => 'Value', 'icon' => 'tag'],
-                                'timeliness' => ['label' => 'Timeliness', 'icon' => 'clock']
+                                'quality' => ['label' => 'Product quality', 'icon' => 'star'],
+                                'accuracy' => ['label' => 'Credibility & Accuracy', 'icon' => 'shield-check'],
+                                'communication' => ['label' => 'Customer Service', 'icon' => 'headset'],
+                                'cost' => ['label' => 'Price Suitability', 'icon' => 'credit-card'],
+                                'compliance' => ['label' => 'Financial Dealing', 'icon' => 'banknote'],
+                                'timeliness' => ['label' => 'Timeliness', 'icon' => 'clock'],
+                                'support' => ['label' => 'After-sale Service', 'icon' => 'wrench']
                             ] as $key => $data)
                             @php
                                 $score = $review->$key;
@@ -193,7 +190,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($review->reviewedSupplier->reviews()->where('id', '!=', $review->id)->limit(3)->get() as $otherReview)
                 @php
-                    $otherAvg = ($otherReview->cost + $otherReview->speed + $otherReview->communication + $otherReview->reliability + $otherReview->quality + $otherReview->support + $otherReview->flexibility + $otherReview->innovation + $otherReview->value + $otherReview->timeliness) / 10;
+                    $otherAvg = $otherReview->average_score;
                 @endphp
                 <div class="uk-card uk-card-default uk-card-body uk-card-hover">
                     <div class="flex items-start gap-4 mb-4">
@@ -206,7 +203,7 @@
                                 {{ $otherReview->is_anonymous ? 'Anonymous' : ($otherReview->user->reviewerSupplier->name ?? 'Anonymous') }}
                             </p>
                             <div class="flex items-center gap-1 mt-1 text-muted-foreground">
-                                <uk-icon icon="{{ $otherReview->deal_again ? 'check' : 'close' }}" width="14" height="14"></uk-icon>
+                                <uk-icon icon="{{ $otherReview->deal_again ? 'check-circle' : 'circle-x' }}" width="14" height="14"></uk-icon>
                                 <span class="text-xs">{{ $otherReview->deal_again ? 'Would work again' : 'Would not work again' }}</span>
                             </div>
                         </div>

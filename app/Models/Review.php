@@ -23,14 +23,11 @@ class Review extends Model
         'deal_date',
         'country',
         'cost',
-        'speed',
+        'accuracy',
+        'compliance',
         'communication',
-        'reliability',
         'quality',
         'support',
-        'flexibility',
-        'innovation',
-        'value',
         'timeliness',
         'deal_again',
         'comment',
@@ -55,14 +52,11 @@ class Review extends Model
             'anonymous' => 'boolean',
             'published' => 'boolean',
             'cost' => 'integer',
-            'speed' => 'integer',
+            'accuracy' => 'integer',
+            'compliance' => 'integer',
             'communication' => 'integer',
-            'reliability' => 'integer',
             'quality' => 'integer',
             'support' => 'integer',
-            'flexibility' => 'integer',
-            'innovation' => 'integer',
-            'value' => 'integer',
             'timeliness' => 'integer',
         ];
     }
@@ -90,5 +84,20 @@ class Review extends Model
     public function reviewedSupplier(): BelongsTo
     {
         return $this->belongsTo(Supplier::class);
+    }
+
+    public function getAverageScoreAttribute(): float
+    {
+        return round(
+            ($this->quality +
+                $this->accuracy +
+                $this->communication +
+                $this->cost +
+                $this->compliance +
+                $this->timeliness +
+                $this->support) /
+                7,
+            1,
+        );
     }
 }
