@@ -7,6 +7,17 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TermsAndConditionsController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/robots.txt', function () {
+    if (app()->environment('production')) {
+        $content = "User-agent: *\nDisallow:";
+    } else {
+        $content = "User-agent: *\nDisallow: /";
+    }
+
+    return response($content, 200)
+        ->header('Content-Type', 'text/plain');
+});
+
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 // Authentication Routes (Guest Only)
