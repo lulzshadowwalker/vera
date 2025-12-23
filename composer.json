@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.10.1",
         "league/flysystem-aws-s3-v3": "^3.0",
         "predis/predis": "^3.2",
+        "shaffe/laravel-mail-log-channel": "^2.5",
         "spatie/laravel-one-time-passwords": "^1.0",
         "spatie/laravel-permission": "^6.21",
         "symfony/http-client": "^8.0",
