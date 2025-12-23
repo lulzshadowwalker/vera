@@ -194,7 +194,7 @@ http {
     server {
         listen ${PORT};
         listen [::]:${PORT};
-        server_name staging.reviews.lulzie.tech;
+        server_name ${APP_DOMAIN};
 
         $if(NIXPACKS_PHP_ROOT_DIR) (
             root ${NIXPACKS_PHP_ROOT_DIR};
