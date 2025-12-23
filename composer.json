@@ -15,6 +15,7 @@
         "laravel/scout": "^10.20",
         "laravel/telescope": "^5.14",
         "laravel/tinker": "^2.10.1",
+        "league/flysystem-aws-s3-v3": "^3.0",
         "predis/predis": "^3.2",
         "spatie/laravel-one-time-passwords": "^1.0",
         "spatie/laravel-permission": "^6.21",
