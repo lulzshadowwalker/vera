@@ -42,7 +42,7 @@ return [
      * The Livewire component will redirect successfully authenticated users
      * to this URL.
      */
-    'redirect_successful_authentication_to' => '/dashboard',
+    'redirect_successful_authentication_to' => '/suppliers',
 
     /*
      * These values are used to rate limit the number of attempts

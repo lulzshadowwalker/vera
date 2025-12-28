@@ -69,10 +69,15 @@ Route::post('/auth/logout', [LoginController::class, 'destroy'])
 
 // Dashboard (Authenticated Only)
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect()->route('suppliers.index');
+    // return view('dashboard');
 })
     ->middleware('auth')
     ->name('dashboard');
+
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])
+    ->middleware('auth')
+    ->name('profile.show');
 
 Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index'])->name(
     'privacy-policy.index',

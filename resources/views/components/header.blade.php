@@ -48,6 +48,14 @@
                                 </li>
                                 <li class="uk-nav-divider"></li>
 
+                                <!-- My Profile -->
+                                <li>
+                                    <a href="{{ route('profile.show') }}" class="flex items-center gap-2 text-sm">
+                                        <uk-icon icon="user" width="16" height="16"></uk-icon>
+                                        My Profile
+                                    </a>
+                                </li>
+
                                 <!-- My Organization -->
                                 @if(auth()->user()->supplier)
                                 <li>
