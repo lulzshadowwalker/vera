@@ -24,10 +24,10 @@
 
                 @auth
                     <!-- Authenticated User Links -->
-                    <a href="{{ route('suppliers.reviews.create', 1) }}" class="uk-btn uk-btn-primary uk-btn-small ml-2">
+                    <button class="uk-btn uk-btn-primary uk-btn-small ml-2" uk-toggle="target: #review-modal">
                         <uk-icon icon="pencil" width="16" height="16" class="mr-1"></uk-icon>
                         Write Review
-                    </a>
+                    </button>
 
                     <!-- User Dropdown -->
                     <div class="relative">
@@ -134,10 +134,10 @@
 
                 @auth
                     <!-- Authenticated Mobile Links -->
-                    <a href="{{ route('suppliers.reviews.create', 1) }}" class="uk-btn uk-btn-primary uk-btn-large justify-start">
+                    <button class="uk-btn uk-btn-primary uk-btn-large justify-start" uk-toggle="target: #review-modal">
                         <uk-icon icon="pencil" class="mr-2" width="20" height="20"></uk-icon>
                         Write Review
-                    </a>
+                    </button>
 
                     <div class="border-t border-border my-2 pt-2">
                         <div class="px-4 py-2 bg-muted/50 rounded-lg mb-2">
@@ -183,3 +183,5 @@
         </nav>
     </div>
 </header>
+
+<x-review-modal />
