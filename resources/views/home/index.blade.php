@@ -95,8 +95,6 @@
                         Create your account using your business email. We verify your company automatically—no lengthy forms.
                     </p>
                 </div>
-                <!-- Connector Line (hidden on mobile) -->
-                <div class="hidden md:block absolute top-8 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-0.5 bg-border"></div>
             </div>
 
             <!-- Step 2 -->
@@ -110,8 +108,6 @@
                         Search our directory, read authentic reviews, or share your own experience with suppliers you've worked with.
                     </p>
                 </div>
-                <!-- Connector Line (hidden on mobile) -->
-                <div class="hidden md:block absolute top-8 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-0.5 bg-border"></div>
             </div>
 
             <!-- Step 3 -->
