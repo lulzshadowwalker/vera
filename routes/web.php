@@ -106,6 +106,11 @@ Route::get('/suppliers/{supplier:slug}/reviews/create', [
     'create',
 ])->name('suppliers.reviews.create');
 
+Route::post('/reviews/initiate', [
+    App\Http\Controllers\ReviewInitiationController::class,
+    'store',
+])->name('reviews.initiate')->middleware('auth');
+
 Route::resource('reviews', App\Http\Controllers\ReviewController::class)->only(
     'create',
     'store',

@@ -52,7 +52,7 @@
 
     <div id="js-results" class="max-w-7xl mx-auto px-6 py-8 scroll-mt-20">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <!-- Filters Sidebar -->
+            {{-- <!-- Filters Sidebar -->
             <aside class="lg:col-span-1">
                 <div class="uk-card uk-card-default uk-card-body sticky top-20">
                     <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
@@ -116,10 +116,11 @@
                         </div>
                     </div>
                 </div>
-            </aside>
+            </aside> --}}
 
             <!-- Main Content -->
-            <div class="lg:col-span-3">
+            {{-- <div class="lg:col-span-3"> --}}
+            <div class="lg:col-span-4">
                 <!-- Results Summary -->
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                     <p class="text-muted-foreground">
@@ -129,7 +130,7 @@
                 </div>
 
                 <!-- Supplier Cards Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     @forelse($suppliers ?? [] as $supplier)
                     <div class="uk-card uk-card-default uk-card-hover uk-card-body group transition-all">
                         <div class="flex flex-col h-full">
