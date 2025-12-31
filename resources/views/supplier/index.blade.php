@@ -1,59 +1,61 @@
 @extends('components.layouts.app')
 
 @section('content')
-<div class="bg-background text-foreground min-h-screen">
-    <!-- Breadcrumb -->
-    <div class="bg-card border-b border-border">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <nav aria-label="Breadcrumb">
-                <ol class="breadcrumb">
-                    <li><a href="{{ route('home.index') }}">Home</a></li>
-                    <li class="separator">/</li>
-                    <li><span aria-current="page">Suppliers</span></li>
-                </ol>
-            </nav>
+    <div class="bg-background text-foreground min-h-screen">
+        <!-- Breadcrumb -->
+        <div class="bg-card border-border border-b">
+            <div class="mx-auto max-w-7xl px-6 py-4">
+                <nav aria-label="Breadcrumb">
+                    <ol class="breadcrumb">
+                        <li><a href="{{ route('home.index') }}">Home</a></li>
+                        <li class="separator">/</li>
+                        <li><span aria-current="page">Suppliers</span></li>
+                    </ol>
+                </nav>
+            </div>
         </div>
-    </div>
 
-    <!-- Page Header -->
-    <div class="bg-card border-b border-border">
-        <div class="max-w-7xl mx-auto px-6 py-8">
-            <h1 class="text-3xl md:text-4xl font-bold mb-2">Browse Suppliers</h1>
-            <p class="text-muted-foreground text-lg">Discover trusted industrial suppliers with verified reviews from real businesses</p>
+        <!-- Page Header -->
+        <div class="bg-card border-border border-b">
+            <div class="mx-auto max-w-7xl px-6 py-8">
+                <h1 class="mb-2 text-3xl font-bold md:text-4xl">Browse Suppliers</h1>
+                <p class="text-muted-foreground text-lg">Discover trusted industrial suppliers with verified reviews from
+                    real businesses</p>
+            </div>
         </div>
-    </div>
 
-    <!-- Search Section -->
-    <div class="bg-secondary/20 border-b border-border">
-        <div class="max-w-7xl mx-auto px-6 py-6">
-            <form x-target="js-results" action="{{ route('suppliers.index') }}" method="GET">
-                <div class="flex flex-col md:flex-row gap-3">
-                    <div class="relative flex-1">
-                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                            <!-- TODO: ICON: search -->
-                        </span>
-                        <input
-                            type="search"
-                            role="search"
-                            name="search"
-                            class="input input-lg w-full pl-10"
-                            placeholder="Search by supplier name or domain..."
-                            value="{{ request('search') }}"
-                            aria-label="Search suppliers"
-                        />
+        <!-- Search Section -->
+        <div class="bg-secondary/20 border-border border-b">
+            <div class="mx-auto max-w-7xl px-6 py-6">
+                <form x-target="js-results"
+                      action="{{ route('suppliers.index') }}"
+                      method="GET">
+                    <div class="flex flex-col gap-3 md:flex-row">
+                        <div class="relative flex-1">
+                            <span class="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2">
+                                <i class="hgi hgi-stroke hgi-search-01"></i>
+                            </span>
+                            <input type="search"
+                                   role="search"
+                                   name="search"
+                                   class="input input-lg w-full pl-9"
+                                   placeholder="Search by supplier name or domain..."
+                                   value="{{ request('search') }}"
+                                   aria-label="Search suppliers" />
+                        </div>
+                        <button type="submit"
+                                class="btn btn-primary btn-lg">
+                            Search
+                        </button>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg">
-                        <!-- TODO: ICON: search -->
-                        Search
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <div id="js-results" class="max-w-7xl mx-auto px-6 py-8 scroll-mt-20">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {{-- <!-- Filters Sidebar -->
+        <div id="js-results"
+             class="mx-auto max-w-7xl scroll-mt-20 px-6 py-8">
+            <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
+                {{-- <!-- Filters Sidebar -->
             <aside class="lg:col-span-1">
                 <div class="card p-6 sticky top-20">
                     <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
@@ -119,149 +121,195 @@
                 </div>
             </aside> --}}
 
-            <!-- Main Content -->
-            {{-- <div class="lg:col-span-3"> --}}
-            <div class="lg:col-span-4">
-                <!-- Results Summary -->
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                    <p class="text-muted-foreground">
-                        Showing <span class="font-semibold text-foreground">{{ $suppliers->firstItem() ?? 0 }}-{{ $suppliers->lastItem() ?? 0 }}</span> of
-                        <span class="font-semibold text-foreground">{{ $suppliers->total() ?? 0 }}</span> suppliers
-                    </p>
-                </div>
+                <!-- Main Content -->
+                {{-- <div class="lg:col-span-3"> --}}
+                <div class="lg:col-span-4">
+                    <!-- Results Summary -->
+                    <div class="mb-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+                        <p class="text-muted-foreground">
+                            Showing <span
+                                  class="text-foreground font-semibold">{{ $suppliers->firstItem() ?? 0 }}-{{ $suppliers->lastItem() ?? 0 }}</span>
+                            of
+                            <span class="text-foreground font-semibold">{{ $suppliers->total() ?? 0 }}</span> suppliers
+                        </p>
+                    </div>
 
-                <!-- Supplier Cards Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    @forelse($suppliers ?? [] as $supplier)
-                    <div class="card p-6 hover:shadow-lg transition-all group">
-                        <div class="flex flex-col h-full">
-                            <!-- Header -->
-                            <div class="flex items-start gap-4 mb-4">
-                                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                                    <!-- TODO: ICON: building -->
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <h3 class="font-bold text-lg mb-1 truncate group-hover:text-primary transition-colors">
-                                        {{ $supplier->name }}
-                                    </h3>
-                                    <a href="https://{{ $supplier->domain }}" target="_blank" class="text-sm text-muted-foreground hover:text-primary flex items-center gap-1 truncate">
-                                        <!-- TODO: ICON: globe -->
-                                        {{ $supplier->domain }}
-                                    </a>
-                                    @if($supplier->country)
-                                    <p class="text-sm text-muted-foreground flex items-center gap-1 mt-1">
-                                        <!-- TODO: ICON: location -->
-                                        {{ $supplier->country }}
-                                    </p>
+                    <!-- Supplier Cards Grid -->
+                    <div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+                        @forelse($suppliers ?? [] as $supplier)
+                            <div class="card group p-6 transition-all hover:shadow-lg">
+                                <div class="flex h-full flex-col">
+                                    <!-- Header -->
+                                    <div class="mb-4 flex items-start gap-4">
+                                        <div
+                                             class="bg-primary/10 group-hover:bg-primary/20 flex h-14 w-14 shrink-0 items-center justify-center rounded-xl transition-colors">
+                                            <i class="hgi hgi-stroke hgi-building-03 text-2xl"></i>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <h3
+                                                class="group-hover:text-primary mb-1 truncate text-lg font-bold transition-colors">
+                                                {{ $supplier->name }}
+                                            </h3>
+                                            <a href="https://{{ $supplier->domain }}"
+                                               target="_blank"
+                                               class="text-muted-foreground hover:text-primary flex items-center gap-1 truncate text-sm">
+                                                <i class="hgi hgi-stroke hgi-globe-02"></i>
+                                                {{ $supplier->domain }}
+                                            </a>
+                                            @if ($supplier->country)
+                                                <p class="text-muted-foreground mt-1 flex items-center gap-1 text-sm">
+                                                    <i class="hgi hgi-stroke hgi-location-03"></i>
+                                                    {{ $supplier->country }}
+                                                </p>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <!-- Rating -->
+                                    <div class="border-border mb-4 flex items-center gap-3 border-b pb-4">
+                                        @php
+                                            $rating = $supplier->average_rating ?? 0;
+                                            $fullStars = floor($rating);
+                                            $hasHalf = $rating - $fullStars >= 0.5;
+                                            $reviewCount = $supplier->reviews()->count();
+                                        @endphp
+                                        <div class="flex items-center gap-1">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @if ($i <= $fullStars)
+                                                    {{-- TODO: Better star icons setup --}}
+                                                    <i class="hgi hgi-stroke hgi-star"></i>
+                                                @elseif($i == $fullStars + 1 && $hasHalf)
+                                                    <i class="hgi hgi-stroke hgi-star"></i>
+                                                @else
+                                                    <i class="hgi hgi-stroke hgi-star"></i>
+                                                @endif
+                                            @endfor
+                                        </div>
+                                        <span class="text-lg font-bold">{{ number_format($rating, 1) }}</span>
+                                        <span class="text-muted-foreground text-sm">({{ $reviewCount }}
+                                            {{ Str::plural('review', $reviewCount) }})</span>
+                                    </div>
+
+                                    <!-- Description -->
+                                    @if ($supplier->description)
+                                        <p class="text-muted-foreground mb-4 flex-1 text-sm leading-relaxed">
+                                            {{ Str::limit($supplier->description, 120) }}
+                                        </p>
                                     @endif
+
+                                    <!-- Action -->
+                                    <div class="mt-auto">
+                                        <a href="{{ route('suppliers.show', $supplier) }}"
+                                           class="btn btn-primary btn-sm w-full transition-shadow group-hover:shadow-md">
+                                            View Profile
+                                            <i class="hgi hgi-stroke hgi-arrow-right-02"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- Rating -->
-                            <div class="flex items-center gap-3 mb-4 pb-4 border-b border-border">
-                                @php
-                                    $rating = $supplier->average_rating ?? 0;
-                                    $fullStars = floor($rating);
-                                    $hasHalf = ($rating - $fullStars) >= 0.5;
-                                    $reviewCount = $supplier->reviews()->count();
-                                @endphp
-                                <div class="flex items-center gap-1">
-                                    @for($i = 1; $i <= 5; $i++)
-                                        @if($i <= $fullStars)
-                                            <!-- TODO: ICON: star -->
-                                        @elseif($i == $fullStars + 1 && $hasHalf)
-                                            <!-- TODO: ICON: star-half -->
-                                        @else
-                                            <!-- TODO: ICON: star (muted) -->
-                                        @endif
-                                    @endfor
+                        @empty
+                            <div class="col-span-full">
+                                <div
+                                     class="border-border flex min-w-0 flex-1 flex-col items-center justify-center gap-6 text-balance rounded-lg border border-dashed p-6 text-center md:p-12">
+                                    <header class="flex max-w-sm flex-col items-center gap-2 text-center">
+                                        <div
+                                             class="bg-secondary/20 text-foreground mb-2 flex size-10 shrink-0 items-center justify-center rounded-lg">
+                                            <i class="hgi hgi-stroke hgi-search-01 text-xl"></i>
+                                        </div>
+                                        <h3 class="text-lg font-medium tracking-tight">No Suppliers Found</h3>
+                                        <p class="text-muted-foreground text-sm/relaxed">
+                                            Try adjusting your search or filters to find what you're looking for.
+                                        </p>
+                                    </header>
+                                    <section
+                                             class="flex w-full min-w-0 max-w-sm flex-col items-center gap-4 text-balance text-sm">
+                                        <div class="flex gap-2">
+                                            <a href="{{ route('suppliers.index') }}"
+                                               class="btn btn-primary">
+                                                Clear Search
+                                            </a>
+                                        </div>
+                                    </section>
                                 </div>
-                                <span class="font-bold text-lg">{{ number_format($rating, 1) }}</span>
-                                <span class="text-sm text-muted-foreground">({{ $reviewCount }} {{ Str::plural('review', $reviewCount) }})</span>
                             </div>
-
-                            <!-- Description -->
-                            @if($supplier->description)
-                            <p class="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
-                                {{ Str::limit($supplier->description, 120) }}
-                            </p>
-                            @endif
-
-                            <!-- Action -->
-                            <div class="mt-auto">
-                                <a href="{{ route('suppliers.show', $supplier) }}" class="btn btn-primary btn-sm w-full group-hover:shadow-md transition-shadow">
-                                    View Profile
-                                    <!-- TODO: ICON: arrow-right -->
-                                </a>
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
-                    @empty
-                    <div class="col-span-full">
-                        <div class="card p-12 text-center flex flex-col items-center justify-center">
-                            <!-- TODO: ICON: search -->
-                            <h3 class="text-xl font-semibold mb-2">No Suppliers Found</h3>
-                            <p class="text-muted-foreground mb-6">Try adjusting your search or filters to find what you're looking for.</p>
-                            <a href="{{ route('suppliers.index') }}" class="btn btn-default">
-                                Clear Search
-                            </a>
-                        </div>
-                    </div>
-                    @endforelse
+
+                    <!-- Pagination -->
+                    @if ($suppliers->hasPages())
+                        <nav role="navigation"
+                             aria-label="pagination"
+                             class="mx-auto mt-8 flex w-full justify-center">
+                            <ul class="flex flex-row items-center gap-1">
+                                {{-- Previous Page Link --}}
+                                <li>
+                                    @if ($suppliers->onFirstPage())
+                                        <span class="btn-ghost opacity-50"
+                                              aria-disabled="true">
+                                            <i class="hgi hgi-stroke hgi-arrow-left-01"></i>
+                                            Previous
+                                        </span>
+                                    @else
+                                        <a href="{{ $suppliers->previousPageUrl() }}"
+                                           class="btn-ghost"
+                                           x-target="js-results"
+                                           @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })"
+                                           rel="prev">
+                                            <i class="hgi hgi-stroke hgi-arrow-left-01"></i>
+                                            Previous
+                                        </a>
+                                    @endif
+                                </li>
+
+                                {{-- Pagination Elements --}}
+                                @foreach (range(1, $suppliers->lastPage()) as $page)
+                                    @if ($page == $suppliers->currentPage())
+                                        <li>
+                                            <span class="btn-icon-outline"
+                                                  aria-current="page">{{ $page }}</span>
+                                        </li>
+                                    @elseif ($page == 1 || $page == $suppliers->lastPage() || abs($page - $suppliers->currentPage()) <= 2)
+                                        <li>
+                                            <a href="{{ $suppliers->url($page) }}"
+                                               class="btn-icon-ghost"
+                                               x-target="js-results"
+                                               @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })">
+                                                {{ $page }}
+                                            </a>
+                                        </li>
+                                    @elseif (abs($page - $suppliers->currentPage()) == 3)
+                                        <li>
+                                            <div class="flex size-9 items-center justify-center">
+                                                <i class="hgi hgi-stroke hgi-more-horizontal text-muted-foreground"></i>
+                                            </div>
+                                        </li>
+                                    @endif
+                                @endforeach
+
+                                {{-- Next Page Link --}}
+                                <li>
+                                    @if ($suppliers->hasMorePages())
+                                        <a href="{{ $suppliers->nextPageUrl() }}"
+                                           class="btn-ghost"
+                                           x-target="js-results"
+                                           @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })"
+                                           rel="next">
+                                            Next
+                                            <i class="hgi hgi-stroke hgi-arrow-right-01"></i>
+                                        </a>
+                                    @else
+                                        <span class="btn-ghost opacity-50"
+                                              aria-disabled="true">
+                                            Next
+                                            <i class="hgi hgi-stroke hgi-arrow-right-01"></i>
+                                        </span>
+                                    @endif
+                                </li>
+                            </ul>
+                        </nav>
+                    @endif
                 </div>
-
-                <!-- Pagination -->
-                @if ($suppliers->hasPages())
-                <nav class="mt-8" aria-label="Pagination">
-                    <ul class="pagination justify-center">
-                        @if ($suppliers->onFirstPage())
-                        <li class="disabled">
-                            <span>
-                                <!-- TODO: ICON: chevron-left -->
-                            </span>
-                        </li>
-                        @else
-                        <li>
-                            <a x-target="js-results" @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })" href="{{ $suppliers->previousPageUrl() }}">
-                                <!-- TODO: ICON: chevron-left -->
-                            </a>
-                        </li>
-                        @endif
-
-                        @foreach (range(1, $suppliers->lastPage()) as $page)
-                            @if ($page == $suppliers->currentPage())
-                            <li class="active">
-                                <span aria-current="page">{{ $page }}</span>
-                            </li>
-                            @elseif ($page == 1 || $page == $suppliers->lastPage() || abs($page - $suppliers->currentPage()) <= 2)
-                            <li>
-                                <a x-target="js-results" @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })" href="{{ $suppliers->url($page) }}">
-                                    {{ $page }}
-                                </a>
-                            </li>
-                            @elseif (abs($page - $suppliers->currentPage()) == 3)
-                            <li class="disabled"><span>...</span></li>
-                            @endif
-                        @endforeach
-
-                        @if ($suppliers->hasMorePages())
-                        <li>
-                            <a x-target="js-results" @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })" href="{{ $suppliers->nextPageUrl() }}">
-                                <!-- TODO: ICON: chevron-right -->
-                            </a>
-                        </li>
-                        @else
-                        <li class="disabled">
-                            <span>
-                                <!-- TODO: ICON: chevron-right -->
-                            </span>
-                        </li>
-                        @endif
-                    </ul>
-                </nav>
-                @endif
             </div>
         </div>
     </div>
-</div>
 @endsection

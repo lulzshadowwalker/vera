@@ -19,11 +19,11 @@
             <!-- Primary Actions -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
                 <a href="{{ route('suppliers.index') }}" class="btn btn-primary h-12 px-6 w-full sm:w-auto">
-                    <!-- TODO: ICON: search -->
+                    <i class="hgi hgi-stroke hgi-search-01"></i>
                     Browse Suppliers
                 </a>
                 <a href="{{ route('auth.register.index') }}" class="btn h-12 px-6 w-full sm:w-auto bg-white/10 text-white border border-white/20 hover:bg-white/20">
-                    <!-- TODO: ICON: pencil -->
+                    <i class="hgi hgi-stroke hgi-quill-write-01"></i>
                     Write a Review
                 </a>
             </div>
@@ -33,7 +33,7 @@
                 <form action="{{ route('suppliers.index') }}" method="GET">
                     <div class="relative w-full">
                         <span class="absolute right-3 top-1/2 -translate-y-1/2 text-white/70">
-                            <!-- TODO: ICON: search -->
+                            <i class="hgi hgi-stroke hgi-quill-write-01"></i>
                         </span>
                         <input
                             type="search"
@@ -138,7 +138,7 @@
             <!-- Feature 1 -->
             <div class="card p-6 hover:shadow-lg transition-shadow">
                 <div class="mb-4 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <!-- TODO: ICON: check -->
+<i class="hgi hgi-stroke hgi-checkmark-badge-01 text-2xl"></i>
                 </div>
                 <h3 class="text-xl font-semibold mb-3">100% Verified Reviews</h3>
                 <p class="text-muted-foreground leading-relaxed">
@@ -149,7 +149,7 @@
             <!-- Feature 2 -->
             <div class="card p-6 hover:shadow-lg transition-shadow">
                 <div class="mb-4 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <!-- TODO: ICON: search -->
+                    <i class="hgi hgi-stroke hgi-search-01 text-2xl"></i>
                 </div>
                 <h3 class="text-xl font-semibold mb-3">Smart Search</h3>
                 <p class="text-muted-foreground leading-relaxed">
@@ -160,7 +160,7 @@
             <!-- Feature 3 -->
             <div class="card p-6 hover:shadow-lg transition-shadow">
                 <div class="mb-4 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <!-- TODO: ICON: star -->
+<i class="hgi hgi-stroke hgi-star text-2xl"></i>
                 </div>
                 <h3 class="text-xl font-semibold mb-3">10-Point Ratings</h3>
                 <p class="text-muted-foreground leading-relaxed">
@@ -171,7 +171,7 @@
             <!-- Feature 4 -->
             <div class="card p-6 hover:shadow-lg transition-shadow">
                 <div class="mb-4 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <!-- TODO: ICON: lock -->
+                    <i class="hgi hgi-stroke hgi-square-lock-02 text-2xl"></i>
                 </div>
                 <h3 class="text-xl font-semibold mb-3">Secure & Private</h3>
                 <p class="text-muted-foreground leading-relaxed">
@@ -182,7 +182,7 @@
             <!-- Feature 5 -->
             <div class="card p-6 hover:shadow-lg transition-shadow">
                 <div class="mb-4 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <!-- TODO: ICON: globe -->
+<i class="hgi hgi-stroke hgi-earth text-2xl"></i>
                 </div>
                 <h3 class="text-xl font-semibold mb-3">Global Coverage</h3>
                 <p class="text-muted-foreground leading-relaxed">
@@ -193,7 +193,7 @@
             <!-- Feature 6 -->
             <div class="card p-6 hover:shadow-lg transition-shadow">
                 <div class="mb-4 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <!-- TODO: ICON: users -->
+<i class="hgi hgi-stroke hgi-user-multiple-02 text-2xl"></i>
                 </div>
                 <h3 class="text-xl font-semibold mb-3">B2B Community</h3>
                 <p class="text-muted-foreground leading-relaxed">
@@ -219,7 +219,7 @@
                 <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
                     How do I leave a review for a supplier?
                     <span class="transition-transform group-open:rotate-180">
-                        <!-- TODO: ICON: chevron-down -->
+<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
                     </span>
                 </summary>
                 <div class="mt-4 text-muted-foreground leading-relaxed">
@@ -233,7 +233,7 @@
                 <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
                     Is the platform free to use?
                     <span class="transition-transform group-open:rotate-180">
-                        <!-- TODO: ICON: chevron-down -->
+<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
                     </span>
                 </summary>
                 <div class="mt-4 text-muted-foreground leading-relaxed">
@@ -247,7 +247,7 @@
                 <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
                     How are suppliers verified?
                     <span class="transition-transform group-open:rotate-180">
-                        <!-- TODO: ICON: chevron-down -->
+<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
                     </span>
                 </summary>
                 <div class="mt-4 text-muted-foreground leading-relaxed">
@@ -261,7 +261,7 @@
                 <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
                     Can I share supplier profiles?
                     <span class="transition-transform group-open:rotate-180">
-                        <!-- TODO: ICON: chevron-down -->
+<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
                     </span>
                 </summary>
                 <div class="mt-4 text-muted-foreground leading-relaxed">
@@ -275,7 +275,7 @@
                 <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
                     Can I review anonymously?
                     <span class="transition-transform group-open:rotate-180">
-                        <!-- TODO: ICON: chevron-down -->
+<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
                     </span>
                 </summary>
                 <div class="mt-4 text-muted-foreground leading-relaxed">
@@ -289,7 +289,7 @@
                 <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
                     What metrics are included in reviews?
                     <span class="transition-transform group-open:rotate-180">
-                        <!-- TODO: ICON: chevron-down -->
+<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
                     </span>
                 </summary>
                 <div class="mt-4 text-muted-foreground leading-relaxed">
@@ -313,11 +313,11 @@
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{{ route('auth.register.index') }}" class="btn btn-lg bg-white text-primary hover:bg-white/90">
-                    <!-- TODO: ICON: user -->
+<i class="hgi hgi-stroke hgi-user"></i>
                     Create Free Account
                 </a>
                 <a href="{{ route('suppliers.index') }}" class="btn btn-lg btn-ghost border-2 border-white text-white hover:bg-white/10">
-                    <!-- TODO: ICON: search -->
+<i class="hgi hgi-stroke hgi-search-01"></i>
                     Browse Suppliers
                 </a>
             </div>
