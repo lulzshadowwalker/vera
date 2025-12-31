@@ -7,7 +7,7 @@
             alt="Login Image" class="absolute inset-0 h-full w-full object-cover object-center -z-10" />
         <div class="flex items-center text-lg font-medium">
             <a href="#">
-                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="Acme Inc." data-uk-svg />
+                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="Acme Inc." class="h-8" />
             </a>
         </div>
         <blockquote class="space-y-2">
@@ -30,21 +30,52 @@
                     </p>
                 </div>
 
-                <form action="#" method="POST" class="uk-form-stacked space-y-4" x-data="{ code: '' }" @uk-input-pin:input.window="code = $event.detail.value">
+                <form action="#" method="POST" class="space-y-4" x-data="{
+                    pin: ['', '', '', ''],
+                    get code() { return this.pin.join(''); },
+                    focusNext(index) {
+                        if (this.pin[index] && index < 3) {
+                            this.$refs[`pin_${index + 1}`].focus();
+                        }
+                    },
+                    focusPrev(index) {
+                        if (!this.pin[index] && index > 0) {
+                            this.$refs[`pin_${index - 1}`].focus();
+                        }
+                    },
+                    handlePaste(e) {
+                        e.preventDefault();
+                        const text = e.clipboardData.getData('text').slice(0, 4);
+                        this.pin = text.split('').concat(Array(4).fill('')).slice(0, 4);
+                        this.$nextTick(() => this.$refs.pin_3.focus());
+                    }
+                }">
                     @csrf
 
-                    <div class="mt-4 h-14 flex justify-center">
-                        <uk-input-pin name="code" autofocus cls-custom="uk-form-md" onchange="console.log"></uk-input-pin>
+                    <div class="mt-4 flex justify-center gap-2">
+                        <template x-for="(digit, index) in pin" :key="index">
+                            <input type="text"
+                                maxlength="1"
+                                class="input w-12 h-12 text-center text-lg"
+                                x-model="pin[index]"
+                                :x-ref="`pin_${index}`"
+                                @input="focusNext(index)"
+                                @keydown.backspace="focusPrev(index)"
+                                @paste="handlePaste"
+                                :autofocus="index === 0"
+                            >
+                        </template>
                     </div>
+                    <input type="hidden" name="code" :value="code">
 
-                    <button class="uk-btn uk-btn-primary w-full" :disabled="!code">
+                    <button class="btn btn-primary w-full" :disabled="code.length !== 4">
                         Verify
                     </button>
                 </form>
 
                 <div class="text-center text-sm text-muted-foreground">
                     Didn't receive the code?
-                    <a href="#" class="uk-link">
+                    <a href="#" class="link link-primary">
                         Resend
                     </a>
                 </div>

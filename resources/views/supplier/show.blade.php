@@ -6,11 +6,13 @@
     <div class="bg-card border-b border-border">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <nav aria-label="Breadcrumb">
-                <ul class="uk-breadcrumb">
+                <ol class="breadcrumb">
                     <li><a href="{{ route('home.index') }}">Home</a></li>
+                    <li class="separator">/</li>
                     <li><a href="{{ route('suppliers.index') }}">Suppliers</a></li>
+                    <li class="separator">/</li>
                     <li><span aria-current="page">{{ $supplier->name }}</span></li>
-                </ul>
+                </ol>
             </nav>
         </div>
     </div>
@@ -21,18 +23,18 @@
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
                 <div class="flex items-start gap-6">
                     <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
-                        <uk-icon icon="building" class="text-primary" width="40" height="40"></uk-icon>
+                        <!-- TODO: ICON: building -->
                     </div>
                     <div>
                         <h1 class="text-3xl md:text-4xl font-bold mb-2">{{ $supplier->name }}</h1>
                         <div class="flex flex-wrap items-center gap-4 text-muted-foreground">
                             <a href="https://{{ $supplier->domain }}" target="_blank" rel="noopener" class="hover:text-primary flex items-center gap-1 transition-colors">
-                                <uk-icon icon="globe" width="16" height="16"></uk-icon>
+                                <!-- TODO: ICON: globe -->
                                 <span>{{ $supplier->domain }}</span>
                             </a>
                             @if($supplier->country)
                             <span class="flex items-center gap-1">
-                                <uk-icon icon="location" width="16" height="16"></uk-icon>
+                                <!-- TODO: ICON: location -->
                                 <span>{{ $supplier->country }}</span>
                             </span>
                             @endif
@@ -40,13 +42,13 @@
                     </div>
                 </div>
                 @auth
-                <a href="{{ route('suppliers.reviews.create', ['supplier' => $supplier]) }}" class="uk-btn uk-btn-primary uk-btn-large w-full lg:w-auto">
-                    <uk-icon icon="pencil"></uk-icon>
+                <a href="{{ route('suppliers.reviews.create', ['supplier' => $supplier]) }}" class="btn btn-primary btn-lg w-full lg:w-auto">
+                    <!-- TODO: ICON: pencil -->
                     Write a Review
                 </a>
                 @else
-                <a href="{{ route('auth.register.index') }}" class="uk-btn uk-btn-primary uk-btn-large w-full lg:w-auto">
-                    <uk-icon icon="pencil"></uk-icon>
+                <a href="{{ route('auth.register.index') }}" class="btn btn-primary btn-lg w-full lg:w-auto">
+                    <!-- TODO: ICON: pencil -->
                     Sign Up to Review
                 </a>
                 @endauth
@@ -56,17 +58,17 @@
 
     <div class="max-w-7xl mx-auto px-6 py-8">
         <!-- Rating Summary -->
-        <div class="uk-card uk-card-default uk-card-body mb-8">
+        <div class="card p-6 mb-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Overall Rating -->
                 <div class="flex flex-col items-center justify-center text-center lg:border-r border-border">
                     <div class="text-6xl font-bold text-primary mb-3">4.5</div>
                     <div class="flex items-center gap-1 mb-2">
-                        <uk-icon icon="star" class="text-primary" width="24" height="24"></uk-icon>
-                        <uk-icon icon="star" class="text-primary" width="24" height="24"></uk-icon>
-                        <uk-icon icon="star" class="text-primary" width="24" height="24"></uk-icon>
-                        <uk-icon icon="star" class="text-primary" width="24" height="24"></uk-icon>
-                        <uk-icon icon="star-half" class="text-primary" width="24" height="24"></uk-icon>
+                        <!-- TODO: ICON: star -->
+                        <!-- TODO: ICON: star -->
+                        <!-- TODO: ICON: star -->
+                        <!-- TODO: ICON: star -->
+                        <!-- TODO: ICON: star-half -->
                     </div>
                     <p class="text-muted-foreground text-lg">Based on <span class="font-semibold text-foreground">{{ $supplier->reviews()->count() }}</span> reviews</p>
                 </div>
@@ -82,7 +84,7 @@
                         <div class="flex items-center gap-3">
                             <div class="flex items-center gap-1 w-16">
                                 <span class="text-sm font-medium">{{ $stars }}</span>
-                                <uk-icon icon="star" class="text-primary" width="14" height="14"></uk-icon>
+                                <!-- TODO: ICON: star -->
                             </div>
                             <div class="flex-1 bg-muted rounded-full h-2 overflow-hidden">
                                 <div class="bg-primary h-full rounded-full transition-all" style="width: {{ $percentage }}%"></div>
@@ -100,7 +102,7 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                 <h2 class="text-2xl font-bold">Reviews ({{ $supplier->reviews()->count() }})</h2>
                 <div class="flex flex-wrap gap-3">
-                    <select class="uk-select uk-form-width-medium">
+                    <select class="select w-48">
                         <option>Sort by: Most Recent</option>
                         <option>Sort by: Highest Rating</option>
                         <option>Sort by: Lowest Rating</option>
@@ -118,7 +120,7 @@
             <!-- Infinite Scroll Trigger -->
             @if($reviews->hasMorePages())
             <div id="js-pagination" class="py-8 text-center" x-init x-intersect="$ajax('{{ route('suppliers.show', ['supplier' => $supplier, 'page' => $reviews->currentPage() + 1]) }}', { target: 'js-reviews js-pagination' })">
-                <div class="uk-spinner" data-uk-spinner></div>
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
                 <p class="text-muted-foreground mt-2">Loading more reviews...</p>
             </div>
             @else
@@ -152,21 +154,13 @@ function shareReview(url, supplierName) {
         navigator.clipboard.writeText(url)
             .then(() => {
                 // Show success message
-                UIkit.notification({
-                    message: '<uk-icon icon="check"></uk-icon> Link copied to clipboard!',
-                    status: 'success',
-                    pos: 'top-right',
-                    timeout: 3000
-                });
+                // TODO: Replace UIkit.notification with a standard toast/notification
+                alert('Link copied to clipboard!');
             })
             .catch(err => {
                 console.error('Failed to copy:', err);
-                UIkit.notification({
-                    message: 'Failed to copy link',
-                    status: 'danger',
-                    pos: 'top-right',
-                    timeout: 3000
-                });
+                // TODO: Replace UIkit.notification with a standard toast/notification
+                alert('Failed to copy link');
             });
     }
 }

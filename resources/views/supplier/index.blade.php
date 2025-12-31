@@ -6,10 +6,11 @@
     <div class="bg-card border-b border-border">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <nav aria-label="Breadcrumb">
-                <ul class="uk-breadcrumb">
+                <ol class="breadcrumb">
                     <li><a href="{{ route('home.index') }}">Home</a></li>
+                    <li class="separator">/</li>
                     <li><span aria-current="page">Suppliers</span></li>
-                </ul>
+                </ol>
             </nav>
         </div>
     </div>
@@ -27,22 +28,22 @@
         <div class="max-w-7xl mx-auto px-6 py-6">
             <form x-target="js-results" action="{{ route('suppliers.index') }}" method="GET">
                 <div class="flex flex-col md:flex-row gap-3">
-                    <div class="uk-inline flex-1">
-                        <span class="uk-form-icon">
-                            <uk-icon icon="search"></uk-icon>
+                    <div class="relative flex-1">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                            <!-- TODO: ICON: search -->
                         </span>
                         <input
                             type="search"
                             role="search"
                             name="search"
-                            class="uk-input uk-form-large w-full"
+                            class="input input-lg w-full pl-10"
                             placeholder="Search by supplier name or domain..."
                             value="{{ request('search') }}"
                             aria-label="Search suppliers"
                         />
                     </div>
-                    <button type="submit" class="uk-btn uk-btn-primary uk-btn-large">
-                        <uk-icon icon="search"></uk-icon>
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <!-- TODO: ICON: search -->
                         Search
                     </button>
                 </div>
@@ -54,9 +55,9 @@
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {{-- <!-- Filters Sidebar -->
             <aside class="lg:col-span-1">
-                <div class="uk-card uk-card-default uk-card-body sticky top-20">
+                <div class="card p-6 sticky top-20">
                     <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                        <uk-icon icon="settings"></uk-icon>
+                        <!-- TODO: ICON: settings -->
                         Filters
                     </h2>
 
@@ -64,7 +65,7 @@
                         <!-- Country Filter -->
                         <div>
                             <label class="block text-sm font-semibold mb-3">Country</label>
-                            <select class="uk-select w-full">
+                            <select class="select w-full">
                                 <option>All Countries</option>
                                 <option>United States</option>
                                 <option>Germany</option>
@@ -77,7 +78,7 @@
                         <!-- Rating Filter -->
                         <div>
                             <label class="block text-sm font-semibold mb-3">Minimum Rating</label>
-                            <select class="uk-select w-full">
+                            <select class="select w-full">
                                 <option>Any Rating</option>
                                 <option>⭐ 4+ Stars</option>
                                 <option>⭐ 3+ Stars</option>
@@ -88,7 +89,7 @@
                         <!-- Review Count -->
                         <div>
                             <label class="block text-sm font-semibold mb-3">Minimum Reviews</label>
-                            <select class="uk-select w-full">
+                            <select class="select w-full">
                                 <option>Any Amount</option>
                                 <option>10+ Reviews</option>
                                 <option>25+ Reviews</option>
@@ -99,7 +100,7 @@
                         <!-- Sort By -->
                         <div>
                             <label class="block text-sm font-semibold mb-3">Sort By</label>
-                            <select class="uk-select w-full">
+                            <select class="select w-full">
                                 <option>Relevance</option>
                                 <option>Highest Rating</option>
                                 <option>Most Reviews</option>
@@ -109,8 +110,8 @@
                         </div>
 
                         <div class="pt-4 border-t border-border">
-                            <button type="button" class="uk-btn uk-btn-default uk-btn-small w-full">
-                                <uk-icon icon="refresh-ccw"></uk-icon>
+                            <button type="button" class="btn btn-secondary w-full">
+                                <!-- TODO: ICON: refresh-ccw -->
                                 Reset Filters
                             </button>
                         </div>
@@ -132,24 +133,24 @@
                 <!-- Supplier Cards Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     @forelse($suppliers ?? [] as $supplier)
-                    <div class="uk-card uk-card-default uk-card-hover uk-card-body group transition-all">
+                    <div class="card p-6 hover:shadow-lg transition-all group">
                         <div class="flex flex-col h-full">
                             <!-- Header -->
                             <div class="flex items-start gap-4 mb-4">
                                 <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                                    <uk-icon icon="building" class="text-primary" width="28" height="28"></uk-icon>
+                                    <!-- TODO: ICON: building -->
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <h3 class="font-bold text-lg mb-1 truncate group-hover:text-primary transition-colors">
                                         {{ $supplier->name }}
                                     </h3>
                                     <a href="https://{{ $supplier->domain }}" target="_blank" class="text-sm text-muted-foreground hover:text-primary flex items-center gap-1 truncate">
-                                        <uk-icon icon="globe" width="14" height="14"></uk-icon>
+                                        <!-- TODO: ICON: globe -->
                                         {{ $supplier->domain }}
                                     </a>
                                     @if($supplier->country)
                                     <p class="text-sm text-muted-foreground flex items-center gap-1 mt-1">
-                                        <uk-icon icon="location" width="14" height="14"></uk-icon>
+                                        <!-- TODO: ICON: location -->
                                         {{ $supplier->country }}
                                     </p>
                                     @endif
@@ -167,11 +168,11 @@
                                 <div class="flex items-center gap-1">
                                     @for($i = 1; $i <= 5; $i++)
                                         @if($i <= $fullStars)
-                                            <uk-icon icon="star" class="text-primary" width="18" height="18"></uk-icon>
+                                            <!-- TODO: ICON: star -->
                                         @elseif($i == $fullStars + 1 && $hasHalf)
-                                            <uk-icon icon="star-half" class="text-primary" width="18" height="18"></uk-icon>
+                                            <!-- TODO: ICON: star-half -->
                                         @else
-                                            <uk-icon icon="star" class="text-muted" width="18" height="18"></uk-icon>
+                                            <!-- TODO: ICON: star (muted) -->
                                         @endif
                                     @endfor
                                 </div>
@@ -188,20 +189,20 @@
 
                             <!-- Action -->
                             <div class="mt-auto">
-                                <a href="{{ route('suppliers.show', $supplier) }}" class="uk-btn uk-btn-primary uk-btn-small w-full group-hover:shadow-md transition-shadow">
+                                <a href="{{ route('suppliers.show', $supplier) }}" class="btn btn-primary btn-sm w-full group-hover:shadow-md transition-shadow">
                                     View Profile
-                                    <uk-icon icon="arrow-right" class="ml-2" width="16" height="16"></uk-icon>
+                                    <!-- TODO: ICON: arrow-right -->
                                 </a>
                             </div>
                         </div>
                     </div>
                     @empty
                     <div class="col-span-full">
-                        <div class="uk-card uk-card-default uk-card-body text-center py-12 flex flex-col items-center justify-center">
-                            <uk-icon icon="search" class="text-muted-foreground mb-4" width="48" height="48"></uk-icon>
+                        <div class="card p-12 text-center flex flex-col items-center justify-center">
+                            <!-- TODO: ICON: search -->
                             <h3 class="text-xl font-semibold mb-2">No Suppliers Found</h3>
                             <p class="text-muted-foreground mb-6">Try adjusting your search or filters to find what you're looking for.</p>
-                            <a href="{{ route('suppliers.index') }}" class="uk-btn uk-btn-default">
+                            <a href="{{ route('suppliers.index') }}" class="btn btn-default">
                                 Clear Search
                             </a>
                         </div>
@@ -212,25 +213,25 @@
                 <!-- Pagination -->
                 @if ($suppliers->hasPages())
                 <nav class="mt-8" aria-label="Pagination">
-                    <ul class="uk-pgn uk-pgn-default justify-center">
+                    <ul class="pagination justify-center">
                         @if ($suppliers->onFirstPage())
-                        <li class="uk-disabled">
+                        <li class="disabled">
                             <span>
-                                <span data-uk-pgn-previous></span>
+                                <!-- TODO: ICON: chevron-left -->
                             </span>
                         </li>
                         @else
                         <li>
                             <a x-target="js-results" @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })" href="{{ $suppliers->previousPageUrl() }}">
-                                <span data-uk-pgn-previous></span>
+                                <!-- TODO: ICON: chevron-left -->
                             </a>
                         </li>
                         @endif
 
                         @foreach (range(1, $suppliers->lastPage()) as $page)
                             @if ($page == $suppliers->currentPage())
-                            <li>
-                                <span class="uk-active" aria-current="page">{{ $page }}</span>
+                            <li class="active">
+                                <span aria-current="page">{{ $page }}</span>
                             </li>
                             @elseif ($page == 1 || $page == $suppliers->lastPage() || abs($page - $suppliers->currentPage()) <= 2)
                             <li>
@@ -239,20 +240,20 @@
                                 </a>
                             </li>
                             @elseif (abs($page - $suppliers->currentPage()) == 3)
-                            <li class="uk-disabled"><span>...</span></li>
+                            <li class="disabled"><span>...</span></li>
                             @endif
                         @endforeach
 
                         @if ($suppliers->hasMorePages())
                         <li>
                             <a x-target="js-results" @ajax:success="document.getElementById('js-results').scrollIntoView({ behavior: 'smooth', block: 'start' })" href="{{ $suppliers->nextPageUrl() }}">
-                                <span data-uk-pgn-next></span>
+                                <!-- TODO: ICON: chevron-right -->
                             </a>
                         </li>
                         @else
-                        <li class="uk-disabled">
+                        <li class="disabled">
                             <span>
-                                <span data-uk-pgn-next></span>
+                                <!-- TODO: ICON: chevron-right -->
                             </span>
                         </li>
                         @endif

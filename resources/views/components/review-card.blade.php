@@ -1,6 +1,6 @@
 @props(['review'])
 
-<li class="uk-card uk-card-default uk-card-body uk-card-hover">
+<li class="card p-6 hover:shadow-md transition-shadow">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <!-- Left: Score & Metadata -->
         <div class="lg:col-span-3 flex flex-col items-center lg:items-start gap-4 lg:border-r border-border lg:pr-6">
@@ -14,7 +14,7 @@
 
             <div class="text-center lg:text-left">
                 <div class="flex items-center gap-2 justify-center lg:justify-start mb-2 {{ $review->deal_again ? 'text-green-600' : 'text-red-600' }}">
-                    <uk-icon icon="{{ $review->deal_again ? 'check-circle' : 'circle-x' }}" width="18" height="18"></uk-icon>
+                    <!-- TODO: ICON: {{ $review->deal_again ? 'check-circle' : 'circle-x' }} -->
                     <span class="text-sm font-medium">{{ $review->deal_again ? 'Would work again' : 'Would not work again' }}</span>
                 </div>
                 <p class="text-sm text-muted-foreground">{{ $review->created_at->diffForHumans() }}</p>
@@ -27,7 +27,7 @@
                     </p>
                     @if($review->country)
                     <p class="text-sm text-muted-foreground flex items-center gap-1 justify-center lg:justify-start mt-1">
-                        <uk-icon icon="location" width="14" height="14"></uk-icon>
+                        <!-- TODO: ICON: location -->
                         {{ $review->country }}
                     </p>
                     @endif
@@ -61,7 +61,7 @@
                 @endphp
                 <div class="flex flex-col items-center p-2 rounded-lg bg-muted/50">
                     <span class="text-xs text-muted-foreground mb-1">{{ $label }}</span>
-                    <span class="uk-badge {{ $badgeClass }} font-bold">{{ $score }}/10</span>
+                    <span class="badge {{ $badgeClass }} font-bold">{{ $score }}/10</span>
                 </div>
                 @endforeach
             </div>
@@ -73,14 +73,14 @@
                 @else
                     <button
                         onclick="shareReview('{{ route('reviews.show', $review) }}', '{{ $review->reviewedSupplier->name }}')"
-                        class="uk-btn uk-btn-default uk-btn-small"
+                        class="btn btn-secondary btn-sm"
                         title="Share this review"
                     >
-                        <uk-icon icon="share" width="16" height="16" class="mr-1"></uk-icon>
+                        <!-- TODO: ICON: share -->
                         Share
                     </button>
-                    <a href="{{ route('reviews.show', $review) }}" class="uk-btn uk-btn-default uk-btn-small">
-                        <uk-icon icon="expand" width="16" height="16" class="mr-1"></uk-icon>
+                    <a href="{{ route('reviews.show', $review) }}" class="btn btn-secondary btn-sm">
+                        <!-- TODO: ICON: expand -->
                         View Details
                     </a>
                 @endif

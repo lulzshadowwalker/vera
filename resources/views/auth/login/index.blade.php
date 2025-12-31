@@ -7,7 +7,7 @@
             alt="Login Image" class="absolute inset-0 h-full w-full object-cover object-center -z-10" />
         <div class="flex items-center text-lg font-medium">
             <a href="#">
-                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="Acme Inc." data-uk-svg />
+                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="Acme Inc." />
             </a>
         </div>
         <blockquote class="space-y-2">
@@ -30,16 +30,16 @@
                     </p>
                 </div>
 
-                <form action="{{ route('auth.login.store') }}" method="POST" class="uk-form-stacked space-y-4">
+                <form action="{{ route('auth.login.store') }}" method="POST" class="space-y-4">
                     @csrf
                     <div>
-                        <label for="email" class="uk-form-label uk-form-label-required">Email</label>
-                        <div class="uk-form-controls">
+                        <label for="email" class="label">Email <span class="text-destructive">*</span></label>
+                        <div>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
-                                class="uk-input @error('email') uk-form-destructive @enderror"
+                                class="input w-full @error('email') border-destructive @enderror"
                                 placeholder="email@example.com"
                                 value="{{ old('email') }}"
                                 required
@@ -47,18 +47,18 @@
                             >
                         </div>
                         @error('email')
-                            <div class="uk-form-help text-destructive mt-1">{{ $message }}</div>
+                            <div class="text-destructive text-sm mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <button type="submit" class="uk-btn uk-btn-primary w-full">
+                    <button type="submit" class="btn btn-primary w-full">
                         Continue
                     </button>
                 </form>
 
                 <div class="text-center text-sm text-muted-foreground">
                     Don't have an account?
-                    <a href="{{ route('auth.register.index') }}" class="uk-link">
+                    <a href="{{ route('auth.register.index') }}" class="text-primary hover:underline">
                         Sign Up
                     </a>
                 </div>

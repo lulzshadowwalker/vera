@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import 'franken-ui/css/franken-ui.css';
+@import 'basecoat-css';
 
 @plugin "@tailwindcss/typography";
 
@@ -8,7 +8,7 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
-@theme {
+/* @theme {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-muted: hsl(var(--muted));
@@ -41,4 +41,4 @@
   body {
     font-family: 'Manrope', sans-serif;
   }
-}
+} */

@@ -1,10 +1,10 @@
 const htmlElement = document.documentElement
 
-const __FRANKEN__ = JSON.parse(localStorage.getItem('__FRANKEN__') || '{}')
+const __THEME__ = JSON.parse(localStorage.getItem('__THEME__') || '{}')
 
 if (
-  __FRANKEN__.mode === 'dark' ||
-  (!__FRANKEN__.mode &&
+  __THEME__.mode === 'dark' ||
+  (!__THEME__.mode &&
     window.matchMedia('(prefers-color-scheme: dark)').matches)
 ) {
   htmlElement.classList.add('dark')
@@ -12,30 +12,18 @@ if (
   htmlElement.classList.remove('dark')
 }
 
-htmlElement.classList.add(__FRANKEN__.theme || 'uk-theme-slateblue')
-htmlElement.classList.add(__FRANKEN__.radii || 'uk-radii-md')
-htmlElement.classList.add(__FRANKEN__.shadows || 'uk-shadows-sm')
-htmlElement.classList.add(__FRANKEN__.font || 'uk-font-md')
-htmlElement.classList.add(__FRANKEN__.chart || 'uk-chart-default')
-
 function toggleTheme() {
-  let __FRANKEN__ = JSON.parse(localStorage.getItem('__FRANKEN__') || '{}')
+  let __THEME__ = JSON.parse(localStorage.getItem('__THEME__') || '{}')
 
-  if (
-    __FRANKEN__.mode === 'dark' ||
-    (!__FRANKEN__.mode &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
+  if (htmlElement.classList.contains('dark')) {
     htmlElement.classList.remove('dark')
-    __FRANKEN__.mode = 'light'
+    __THEME__.mode = 'light'
   } else {
-    __FRANKEN__.mode = 'dark'
     htmlElement.classList.add('dark')
+    __THEME__.mode = 'dark'
   }
 
-  console.log(__FRANKEN__)
-
-  localStorage.setItem('__FRANKEN__', JSON.stringify(__FRANKEN__))
+  localStorage.setItem('__THEME__', JSON.stringify(__THEME__))
 }
 
 window.toggleTheme = toggleTheme

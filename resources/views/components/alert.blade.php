@@ -3,19 +3,19 @@
 @php
 $types = [
     'success' => [
-        'class' => 'uk-alert',
+        'class' => 'alert',
         'icon' => 'circle-check',
     ],
     'error' => [
-        'class' => 'uk-alert uk-alert-destructive',
+        'class' => 'alert-destructive',
         'icon' => 'circle-x',
     ],
     'warning' => [
-        'class' => 'uk-alert uk-alert-destructive',
+        'class' => 'alert-destructive',
         'icon' => 'circle-alert',
     ],
     'info' => [
-        'class' => 'uk-alert',
+        'class' => 'alert',
         'icon' => 'info',
     ],
 ];
@@ -23,14 +23,13 @@ $types = [
 $config = $types[$type] ?? $types['info'];
 @endphp
 
-<div class="{{ $config['class'] }}" data-uk-alert>
-    <a href class="uk-alert-close" data-uk-close></a>
-    <div class="flex items-center gap-3">
-        <div class="shrink-0">
-            <uk-icon icon="{{ $config['icon'] }}" class="size-5"></uk-icon>
-        </div>
-        <div class="flex-1">
-            {{ $slot }}
-        </div>
-    </div>
+<div class="{{ $config['class'] }}" x-data="{ show: true }" x-show="show" x-transition>
+    <!-- TODO: ICON: {{ $config['icon'] }} -->
+    <section class="flex-1">
+        {{ $slot }}
+    </section>
+    <button type="button" @click="show = false" class="ml-auto cursor-pointer hover:opacity-70">
+        <!-- TODO: ICON: x -->
+        ✕
+    </button>
 </div>

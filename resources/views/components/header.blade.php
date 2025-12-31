@@ -15,92 +15,91 @@
             <!-- Desktop Navigation -->
             <nav class="hidden lg:flex items-center gap-2">
                 <!-- Common Links -->
-                <a href="{{ route('home.index') }}" class="uk-btn uk-btn-ghost uk-btn-small {{ request()->routeIs('home.index') ? 'uk-active' : '' }}">
+                <a href="{{ route('home.index') }}" class="btn btn-ghost btn-sm {{ request()->routeIs('home.index') ? 'active' : '' }}">
                     Home
                 </a>
-                <a href="{{ route('suppliers.index') }}" class="uk-btn uk-btn-ghost uk-btn-small {{ request()->routeIs('suppliers.*') ? 'uk-active' : '' }}">
+                <a href="{{ route('suppliers.index') }}" class="btn btn-ghost btn-sm {{ request()->routeIs('suppliers.*') ? 'active' : '' }}">
                     Browse Suppliers
                 </a>
 
                 @auth
                     <!-- Authenticated User Links -->
-                    <button class="uk-btn uk-btn-primary uk-btn-small ml-2" uk-toggle="target: #review-modal">
-                        <uk-icon icon="pencil" width="16" height="16" class="mr-1"></uk-icon>
+                    <button class="btn btn-primary btn-sm ml-2" onclick="document.getElementById('review-modal').showModal()">
+                        <!-- TODO: ICON: pencil -->
                         Write Review
                     </button>
 
                     <!-- User Dropdown -->
-                    <div class="relative">
-                        <button type="button" class="uk-btn uk-btn-default uk-btn-small rounded-full w-12 h-12 flex items-center gap-2 cursor-pointer">
-                            <uk-icon icon="user"></uk-icon>
-                            {{-- <uk-icon icon="chevron-down" width="14" height="14"></uk-icon> --}}
+                    <div class="dropdown-menu relative">
+                        <button type="button" popovertarget="user-dropdown-popover" class="btn btn-outline btn-sm rounded-full w-12 h-12 flex items-center gap-2 cursor-pointer">
+                            <!-- TODO: ICON: user -->
                         </button>
-                        <div class="uk-drop uk-dropdown min-w-64" data-uk-dropdown="mode: click; pos: bottom-right; animation: uk-anmt-slide-top-sm">
-                            <ul class="uk-nav uk-dropdown-nav">
+                        <div id="user-dropdown-popover" popover class="popover min-w-64" data-pos="bottom-right">
+                            <div role="menu">
                                 <!-- User Info Header -->
-                                <li class="uk-nav-header">
+                                <div role="group">
                                     <div class="px-3 py-2">
                                         <p class="text-sm font-semibold truncate">{{ auth()->user()->email }}</p>
                                         @if(auth()->user()->supplier)
                                         <p class="text-xs text-muted-foreground truncate">{{ auth()->user()->supplier->name }}</p>
                                         @endif
                                     </div>
-                                </li>
-                                <li class="uk-nav-divider"></li>
+                                </div>
+                                <hr role="separator" />
 
                                 <!-- My Profile -->
-                                <li>
-                                    <a href="{{ route('profile.show') }}" class="flex items-center gap-2 text-sm">
-                                        <uk-icon icon="user" width="16" height="16"></uk-icon>
+                                <div role="menuitem">
+                                    <a href="{{ route('profile.show') }}" class="flex items-center gap-2 text-sm w-full">
+                                        <!-- TODO: ICON: user -->
                                         My Profile
                                     </a>
-                                </li>
+                                </div>
 
                                 <!-- My Organization -->
                                 @if(auth()->user()->supplier)
-                                <li>
-                                    <a href="{{ route('suppliers.show', auth()->user()->supplier) }}" class="flex items-center gap-2 text-sm">
-                                        <uk-icon icon="building" width="16" height="16"></uk-icon>
+                                <div role="menuitem">
+                                    <a href="{{ route('suppliers.show', auth()->user()->supplier) }}" class="flex items-center gap-2 text-sm w-full">
+                                        <!-- TODO: ICON: building -->
                                         My Organization
                                     </a>
-                                </li>
+                                </div>
                                 @endif
 
-                                <li class="uk-nav-divider"></li>
+                                <hr role="separator" />
 
                                 <!-- Theme Toggle -->
-                                <li>
+                                <div role="menuitem">
                                     <button
                                         type="button"
                                         onclick="toggleTheme()"
-                                        class="w-full text-left text-sm flex items-center gap-2 mx-1 px-1 py-2 hover:bg-muted rounded transition-colors cursor-pointer"
+                                        class="w-full text-left text-sm flex items-center gap-2 cursor-pointer"
                                     >
-                                        <uk-icon icon="swatch-book"></uk-icon>
+                                        <!-- TODO: ICON: swatch-book -->
                                         <span>Toggle Theme</span>
                                     </button>
-                                </li>
+                                </div>
 
-                                <li class="uk-nav-divider"></li>
+                                <hr role="separator" />
 
                                 <!-- Logout -->
-                                <li>
-                                    <form action="{{ route('auth.logout') }}" method="POST">
+                                <div role="menuitem">
+                                    <form action="{{ route('auth.logout') }}" method="POST" class="w-full">
                                         @csrf
-                                        <button type="submit" class="w-full text-left text-sm flex items-center gap-2 text-destructive px-3 py-2 hover:bg-destructive/10 rounded transition-colors cursor-pointer">
-                                            <uk-icon icon="log-out"></uk-icon>
+                                        <button type="submit" class="w-full text-left text-sm flex items-center gap-2 text-destructive cursor-pointer">
+                                            <!-- TODO: ICON: log-out -->
                                             Sign Out
                                         </button>
                                     </form>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @else
                     <!-- Guest Links -->
-                    <a href="{{ route('auth.login.index') }}" class="uk-btn uk-btn-default uk-btn-small ml-2">
-                        Sign In
+                    <a href="{{ route('auth.login.index') }}" class="btn btn-outline btn-sm ml-2">
+                        Log In
                     </a>
-                    <a href="{{ route('auth.register.index') }}" class="uk-btn uk-btn-primary uk-btn-small">
+                    <a href="{{ route('auth.register.index') }}" class="btn btn-primary btn-sm">
                         Get Started
                     </a>
                 @endauth
@@ -110,10 +109,11 @@
             <button
                 type="button"
                 @click="mobileMenuOpen = !mobileMenuOpen"
-                class="lg:hidden uk-btn uk-btn-ghost uk-btn-small cursor-pointer"
+                class="lg:hidden btn btn-ghost btn-sm cursor-pointer"
                 aria-label="Toggle menu"
             >
-                <uk-icon :icon="mobileMenuOpen ? 'x' : 'menu'" width="24" height="24"></uk-icon>
+                <!-- TODO: ICON: menu/x -->
+                <span x-text="mobileMenuOpen ? '✕' : '☰'" class="text-xl"></span>
             </button>
         </div>
 
@@ -131,19 +131,19 @@
         >
             <div class="flex flex-col gap-2">
                 <!-- Common Mobile Links -->
-                <a href="{{ route('home.index') }}" class="uk-btn uk-btn-ghost uk-btn-large justify-start {{ request()->routeIs('home.index') ? 'uk-active' : '' }}">
-                    <uk-icon icon="home" class="mr-2" width="20" height="20"></uk-icon>
+                <a href="{{ route('home.index') }}" class="btn btn-ghost justify-start {{ request()->routeIs('home.index') ? 'active' : '' }}">
+                    <!-- TODO: ICON: home -->
                     Home
                 </a>
-                <a href="{{ route('suppliers.index') }}" class="uk-btn uk-btn-ghost uk-btn-large justify-start {{ request()->routeIs('suppliers.*') ? 'uk-active' : '' }}">
-                    <uk-icon icon="search" class="mr-2" width="20" height="20"></uk-icon>
+                <a href="{{ route('suppliers.index') }}" class="btn btn-ghost justify-start {{ request()->routeIs('suppliers.*') ? 'active' : '' }}">
+                    <!-- TODO: ICON: search -->
                     Browse Suppliers
                 </a>
 
                 @auth
                     <!-- Authenticated Mobile Links -->
-                    <button class="uk-btn uk-btn-primary uk-btn-large justify-start" uk-toggle="target: #review-modal">
-                        <uk-icon icon="pencil" class="mr-2" width="20" height="20"></uk-icon>
+                    <button class="btn btn-primary justify-start" onclick="document.getElementById('review-modal').showModal()">
+                        <!-- TODO: ICON: pencil -->
                         Write Review
                     </button>
 
@@ -157,33 +157,33 @@
                     </div>
 
                     @if(auth()->user()->supplier)
-                    <a href="{{ route('suppliers.show', auth()->user()->supplier) }}" class="uk-btn uk-btn-ghost uk-btn-large justify-start">
-                        <uk-icon icon="building" class="mr-2" width="20" height="20"></uk-icon>
+                    <a href="{{ route('suppliers.show', auth()->user()->supplier) }}" class="btn btn-ghost justify-start">
+                        <!-- TODO: ICON: building -->
                         My Organization
                     </a>
                     @endif
 
-                    <button type="button" onclick="toggleTheme()" class="uk-btn uk-btn-ghost uk-btn-large justify-start">
-                        <uk-icon icon="swatch-book" class="mr-2" width="20" height="20"></uk-icon>
+                    <button type="button" onclick="toggleTheme()" class="btn btn-ghost justify-start">
+                        <!-- TODO: ICON: swatch-book -->
                         Toggle Theme
                     </button>
 
                     <form action="{{ route('auth.logout') }}" method="POST" class="mt-2">
                         @csrf
-                        <button type="submit" class="w-full uk-btn uk-btn-destructive uk-btn-large justify-start">
-                            <uk-icon icon="log-out" class="mr-2" width="20" height="20"></uk-icon>
+                        <button type="submit" class="w-full btn btn-destructive justify-start">
+                            <!-- TODO: ICON: log-out -->
                             Sign Out
                         </button>
                     </form>
                 @else
                     <!-- Guest Mobile Links -->
                     <div class="border-t border-border my-2 pt-2"></div>
-                    <a href="{{ route('auth.login.index') }}" class="uk-btn uk-btn-default uk-btn-large justify-start">
-                        <uk-icon icon="log-in" class="mr-2" width="20" height="20"></uk-icon>
+                    <a href="{{ route('auth.login.index') }}" class="btn btn-outline justify-start">
+                        <!-- TODO: ICON: log-in -->
                         Sign In
                     </a>
-                    <a href="{{ route('auth.register.index') }}" class="uk-btn uk-btn-primary uk-btn-large justify-start">
-                        <uk-icon icon="user-plus" class="mr-2" width="20" height="20"></uk-icon>
+                    <a href="{{ route('auth.register.index') }}" class="btn btn-primary justify-start">
+                        <!-- TODO: ICON: user-plus -->
                         Get Started
                     </a>
                 @endauth

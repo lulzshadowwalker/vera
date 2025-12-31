@@ -7,7 +7,7 @@
             alt="Login Image" class="absolute inset-0 h-full w-full object-cover object-center -z-10" />
         <div class="flex items-center text-lg font-medium">
             <a href="{{ route('home.index') }}">
-                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="{{ config('app.name') }}" data-uk-svg />
+                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="{{ config('app.name') }}" />
             </a>
         </div>
         <blockquote class="space-y-2">
@@ -30,19 +30,60 @@
                     </p>
                 </div>
 
-                <form action="{{ route('auth.login.confirm-otp') }}" method="POST" class="uk-form-stacked space-y-4" x-data="{ code: '' }" @uk-input-pin:input.window="code = $event.detail.value">
+                <form action="{{ route('auth.login.confirm-otp') }}" method="POST" class="space-y-4" x-data="{
+                    otp: ['', '', '', '', '', ''],
+                    get code() { return this.otp.join(''); },
+                    handleInput(index, event) {
+                        const value = event.target.value;
+                        if (value.length > 1) {
+                            this.otp[index] = value.slice(0, 1);
+                            return;
+                        }
+                        this.otp[index] = value;
+                        if (value && index < 5) {
+                            this.$refs[`input_${index + 1}`].focus();
+                        }
+                    },
+                    handlePaste(event) {
+                        event.preventDefault();
+                        const pastedData = event.clipboardData.getData('text').slice(0, 6).split('');
+                        pastedData.forEach((char, i) => {
+                            if (i < 6) this.otp[i] = char;
+                        });
+                        if (pastedData.length === 6) {
+                            this.$refs.input_5.focus();
+                        }
+                    },
+                    handleBackspace(index, event) {
+                        if (event.key === 'Backspace' && !this.otp[index] && index > 0) {
+                            this.$refs[`input_${index - 1}`].focus();
+                        }
+                    }
+                }">
                     @csrf
                     <input type="hidden" name="email" value="{{ session('login_email') }}">
+                    <input type="hidden" name="otp" :value="code">
 
-                    <div class="mt-4 h-14 flex justify-center">
-                        <uk-input-pin name="otp" autofocus cls-custom="uk-form-md"></uk-input-pin>
+                    <div class="mt-4 flex justify-center gap-2">
+                        <template x-for="(digit, index) in otp" :key="index">
+                            <input type="text"
+                                :x-ref="`input_${index}`"
+                                x-model="otp[index]"
+                                @input="handleInput(index, $event)"
+                                @keydown="handleBackspace(index, $event)"
+                                @paste="handlePaste($event)"
+                                maxlength="1"
+                                class="input h-14 w-10 text-center text-xl font-bold"
+                                :autofocus="index === 0"
+                            >
+                        </template>
                     </div>
 
                     @error('otp')
-                        <div class="uk-form-help text-destructive text-center mt-2">{{ $message }}</div>
+                        <div class="text-destructive text-center mt-2 text-sm">{{ $message }}</div>
                     @enderror
 
-                    <button type="submit" class="uk-btn uk-btn-primary w-full" :disabled="code.length !== 6">
+                    <button type="submit" class="btn btn-primary w-full" :disabled="code.length !== 6">
                         Verify & Sign In
                     </button>
                 </form>
@@ -50,19 +91,19 @@
                 <div class="flex items-center justify-between text-sm text-muted-foreground">
                     <form action="{{ route('auth.login.resend-otp') }}" method="POST">
                         @csrf
-                        <button type="submit" class="uk-link">
+                        <button type="submit" class="text-primary hover:underline">
                             Resend code
                         </button>
                     </form>
 
-                    <a href="{{ route('auth.login.index') }}" class="uk-link">
+                    <a href="{{ route('auth.login.index') }}" class="text-primary hover:underline">
                         Use different email
                     </a>
                 </div>
 
                 <div class="text-center text-sm text-muted-foreground">
                     Don't have an account?
-                    <a href="{{ route('auth.register.index') }}" class="uk-link">
+                    <a href="{{ route('auth.register.index') }}" class="text-primary hover:underline">
                         Sign Up
                     </a>
                 </div>

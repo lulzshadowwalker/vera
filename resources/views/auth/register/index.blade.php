@@ -7,7 +7,7 @@
             alt="Login Image" class="absolute inset-0 h-full w-full object-cover object-center -z-10" />
         <div class="flex items-center text-lg font-medium">
             <a href="#">
-                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="Acme Inc." data-uk-svg />
+                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="Acme Inc." />
             </a>
         </div>
         <blockquote class="space-y-2">
@@ -30,97 +30,97 @@
                     </p>
                 </div>
 
-                <form action="{{ route('auth.register.store') }}" method="POST" class="uk-form-stacked space-y-4">
+                <form action="{{ route('auth.register.store') }}" method="POST" class="space-y-4">
                     @csrf
 
                     <div class="flex items-center gap-2">
                         <div class="flex-1">
-                            <label for="first_name" class="uk-form-label uk-form-label-required">First Name</label>
-                            <div class="uk-form-controls">
+                            <label for="first_name" class="label">First Name <span class="text-destructive">*</span></label>
+                            <div>
                                 <input
                                     type="text"
                                     id="first_name"
                                     name="first_name"
-                                    class="uk-input @error('first_name') uk-form-destructive @enderror"
+                                    class="input w-full @error('first_name') border-destructive @enderror"
                                     placeholder="John"
                                     value="{{ old('first_name') }}"
                                     required
                                 >
                             </div>
                             @error('first_name')
-                                <div class="uk-form-help text-destructive mt-1">{{ $message }}</div>
+                                <div class="text-destructive text-sm mt-1">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="flex-1">
-                            <label for="last_name" class="uk-form-label uk-form-label-required">Last Name</label>
-                            <div class="uk-form-controls">
+                            <label for="last_name" class="label">Last Name <span class="text-destructive">*</span></label>
+                            <div>
                                 <input
                                     type="text"
                                     id="last_name"
                                     name="last_name"
-                                    class="uk-input @error('last_name') uk-form-destructive @enderror"
+                                    class="input w-full @error('last_name') border-destructive @enderror"
                                     placeholder="Doe"
                                     value="{{ old('last_name') }}"
                                     required
                                 >
                             </div>
                             @error('last_name')
-                                <div class="uk-form-help text-destructive mt-1">{{ $message }}</div>
+                                <div class="text-destructive text-sm mt-1">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
                     <div>
-                        <label for="email" class="uk-form-label uk-form-label-required">Work Email</label>
-                        <div class="uk-form-controls">
+                        <label for="email" class="label">Work Email <span class="text-destructive">*</span></label>
+                        <div>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
-                                class="uk-input @error('email') uk-form-destructive @enderror"
+                                class="input w-full @error('email') border-destructive @enderror"
                                 placeholder="email@company.com"
                                 value="{{ old('email') }}"
                                 required
                             >
                         </div>
                         @error('email')
-                            <div class="uk-form-help text-destructive mt-1">{{ $message }}</div>
+                            <div class="text-destructive text-sm mt-1">{{ $message }}</div>
                         @enderror
-                        <div class="uk-form-help mt-1">Please use your work email. Public email providers are not allowed.</div>
+                        <div class="text-muted-foreground text-sm mt-1">Please use your work email. Public email providers are not allowed.</div>
                     </div>
 
                     <div>
-                        <label for="backup_email" class="uk-form-label">Backup Email</label>
-                        <div class="uk-form-controls">
+                        <label for="backup_email" class="label">Backup Email</label>
+                        <div>
                             <input
                                 type="email"
                                 id="backup_email"
                                 name="backup_email"
-                                class="uk-input @error('backup_email') uk-form-destructive @enderror"
+                                class="input w-full @error('backup_email') border-destructive @enderror"
                                 placeholder="backup@company.com"
                                 value="{{ old('backup_email') }}"
                             >
                         </div>
                         @error('backup_email')
-                            <div class="uk-form-help text-destructive mt-1">{{ $message }}</div>
+                            <div class="text-destructive text-sm mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <button type="submit" class="uk-btn uk-btn-primary w-full">
+                    <button type="submit" class="btn btn-primary w-full">
                         Continue
                     </button>
                 </form>
 
                 <p class="text-muted-foreground px-8 text-center text-sm">
                     By clicking continue, you agree to our
-                    <a class="uk-link" href="{{ route('terms-and-conditions.index') }}" target="_blank"> Terms of Service </a> and
-                    <a class="uk-link" href="{{ route('privacy-policy.index') }}" target="_blank" uk-toggle> Privacy Policy </a>.
+                    <a class="text-primary hover:underline" href="{{ route('terms-and-conditions.index') }}" target="_blank"> Terms of Service </a> and
+                    <a class="text-primary hover:underline" href="{{ route('privacy-policy.index') }}" target="_blank"> Privacy Policy </a>.
                 </p>
 
                 <div class="text-center text-sm text-muted-foreground mt-2">
                     Already have an account?
-                    <a href="{{ route('auth.login.index') }}" class="uk-link">
+                    <a href="{{ route('auth.login.index') }}" class="text-primary hover:underline">
                         Sign In
                     </a>
                 </div>

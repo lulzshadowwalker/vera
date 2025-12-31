@@ -1,8 +1,12 @@
-<div id="review-modal" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        
-        <h2 class="uk-modal-title font-bold text-xl mb-4">Write a Review</h2>
+<dialog id="review-modal" class="dialog w-full sm:max-w-[425px]" onclick="if (event.target === this) this.close()">
+    <div>
+        <header class="flex justify-between items-start mb-4">
+            <h2 class="font-bold text-xl">Write a Review</h2>
+            <button type="button" onclick="this.closest('dialog').close()" class="text-muted-foreground hover:text-foreground cursor-pointer">
+                <!-- TODO: ICON: x -->
+                ✕
+            </button>
+        </header>
         
         <p class="text-muted-foreground mb-6">
             Enter the website domain of the supplier you want to review. If they aren't in our system yet, we'll add them for you.
@@ -14,12 +18,12 @@
             <div>
                 <label for="domain" class="block text-sm font-medium mb-2">Supplier Domain</label>
                 <div class="relative">
-                    <uk-icon icon="globe" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4"></uk-icon>
+                    <!-- TODO: ICON: globe -->
                     <input 
                         type="text" 
                         name="domain" 
                         id="domain" 
-                        class="uk-input pl-10" 
+                        class="input pl-10 w-full" 
                         placeholder="example.com" 
                         required
                         autofocus
@@ -30,13 +34,13 @@
                 @enderror
             </div>
 
-            <div class="flex justify-end gap-2 mt-6">
-                <button class="uk-btn uk-btn-default uk-modal-close" type="button">Cancel</button>
-                <button class="uk-btn uk-btn-primary" type="submit">
+            <footer class="flex justify-end gap-2 mt-6">
+                <button class="btn btn-outline" type="button" onclick="this.closest('dialog').close()">Cancel</button>
+                <button class="btn btn-primary" type="submit">
                     Continue
-                    <uk-icon icon="arrow-right" class="ml-2 w-4 h-4"></uk-icon>
+                    <!-- TODO: ICON: arrow-right -->
                 </button>
-            </div>
+            </footer>
         </form>
     </div>
-</div>
+</dialog>
