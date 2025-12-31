@@ -1,6 +1,5 @@
-
-
 # File: accessibility.md
+
 ==================================================
 
 ## Accessibility
@@ -48,9 +47,9 @@ As a single attribute prefixed with `data-`:
 Or pass the i18n option to the component programmatically:
 
 ```js
-UIkit.marker(".marker", {
-  i18n: { label: "Open" },
-});
+UIkit.marker('.marker', {
+  i18n: { label: 'Open' },
+})
 ```
 
 ### Globally
@@ -60,10 +59,10 @@ The default texts for a component can be changed globally by extending the compo
 ```js
 UIkit.mixin(
   {
-    i18n: { label: "Open" },
+    i18n: { label: 'Open' },
   },
-  "marker",
-);
+  'marker'
+)
 ```
 
 ### Complete Translation
@@ -72,40 +71,39 @@ Here is an example of all available component translation strings applied.
 
 ```js
 const i18n = {
-  close: { label: "Close" },
-  totop: { label: "Back to top" },
-  marker: { label: "Open" },
-  navbarToggleIcon: { label: "Open menu" },
-  paginationPrevious: { label: "Next page" },
-  paginationNext: { label: "Previous page" },
+  close: { label: 'Close' },
+  totop: { label: 'Back to top' },
+  marker: { label: 'Open' },
+  navbarToggleIcon: { label: 'Open menu' },
+  paginationPrevious: { label: 'Next page' },
+  paginationNext: { label: 'Previous page' },
   slider: {
-    next: "Next slide",
-    previous: "Previous slide",
-    slideX: "Slide %s",
-    slideLabel: "%s of %s",
+    next: 'Next slide',
+    previous: 'Previous slide',
+    slideX: 'Slide %s',
+    slideLabel: '%s of %s',
   },
   slideshow: {
-    next: "Next slide",
-    previous: "Previous slide",
-    slideX: "Slide %s",
-    slideLabel: "%s of %s",
+    next: 'Next slide',
+    previous: 'Previous slide',
+    slideX: 'Slide %s',
+    slideLabel: '%s of %s',
   },
   lightboxPanel: {
-    next: "Next slide",
-    previous: "Previous slide",
-    slideLabel: "%s of %s",
-    close: "Close",
+    next: 'Next slide',
+    previous: 'Previous slide',
+    slideLabel: '%s of %s',
+    close: 'Close',
   },
-};
+}
 
 for (const component in i18n) {
-  UIkit.mixin({ i18n: i18n[component] }, component);
+  UIkit.mixin({ i18n: i18n[component] }, component)
 }
 ```
 
-
-
 # File: accordion.md
+
 ==================================================
 
 ## Accordion
@@ -306,7 +304,7 @@ To display multiple content sections at the same time without one collapsing whe
 
 To specify which items should be opened initially, add the `.uk-open` class to the item. You can also use this to open multiple items. Just make sure to add the option `multiple: true` to the `data-uk-accordion` attribute.
 
-Note:  Alternatively, you can open a single item by adding the `active: <index>` option to the `data-uk-accordion` attribute, e.g. `active: 1` to show the second element (the index is zero-based). Note that this will overwrite the `uk-open` class.
+Note: Alternatively, you can open a single item by adding the `active: <index>` option to the `data-uk-accordion` attribute, e.g. `active: 1` to show the second element (the index is zero-based). Note that this will overwrite the `uk-open` class.
 
 ```html
 <ul data-uk-accordion>
@@ -390,7 +388,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.accordion(element, options);
+UIkit.accordion(element, options)
 ```
 
 ### Events
@@ -413,7 +411,7 @@ The following methods are available for the component:
 #### Toggle
 
 ```javascript
-UIkit.accordion(element).toggle(index, animate);
+UIkit.accordion(element).toggle(index, animate)
 ```
 
 Toggles the content pane.
@@ -437,9 +435,8 @@ The Accordion component can be accessed through keyboard using the following key
 - The <kbd>tab</kbd> or <kbd>shift+tab</kbd> keys navigate through accordion titles.
 - The <kbd>enter</kbd> or <kbd>space</kbd> key toggles the content of the focused title.
 
-
-
 # File: alert.md
+
 ==================================================
 
 ## Alert
@@ -521,7 +518,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.alert(element, options);
+UIkit.alert(element, options)
 ```
 
 ### Events
@@ -540,14 +537,13 @@ The following methods are available for the component:
 #### Close
 
 ```javascript
-UIkit.alert(element).close();
+UIkit.alert(element).close()
 ```
 
 Closes and removes the Alert.
 
-
-
 # File: animation.md
+
 ==================================================
 
 ## Animation
@@ -933,9 +929,8 @@ A much easier way is to use the [SVG component](https://franken-ui.dev/docs/2.1/
 </div>
 ```
 
-
-
 # File: avatar.md
+
 ==================================================
 
 ## Avatar
@@ -1108,9 +1103,8 @@ Stack multiple avatars together to represent a group or team. Use flex utilities
 </div>
 ```
 
-
-
 # File: badge.md
+
 ==================================================
 
 ## Badge
@@ -1124,8 +1118,7 @@ To create a badge, just add the `.uk-badge` class to an inline element like `<a>
 ### Example
 
 ```html
-<span class="uk-badge">1</span>
-<span class="uk-badge">100</span>
+<span class="uk-badge">1</span> <span class="uk-badge">100</span>
 ```
 
 ## Style modifiers
@@ -1147,9 +1140,8 @@ There are several style modifiers available. Just add one of the following class
 <span class="uk-badge uk-badge-destructive">100</span>
 ```
 
-
-
 # File: breadcrumb.md
+
 ==================================================
 
 ## Breadcrumb
@@ -1196,9 +1188,8 @@ In order for the Breadcrumb component to adhere to the [Breadcrumb design patter
 </nav>
 ```
 
-
-
 # File: button.md
+
 ==================================================
 
 ## Button
@@ -1393,9 +1384,8 @@ A button can be used to trigger a dropdown menu from the [Dropdown component](ht
 </div>
 ```
 
-
-
 # File: calendar.md
+
 ==================================================
 
 ## Calendar
@@ -1739,9 +1729,8 @@ The Calendar component triggers the following events on elements with this compo
 | -------------------- | ----------------------------------- |
 | `uk-calendar:change` | Fired when active date has changed. |
 
-
-
 # File: card.md
+
 ==================================================
 
 ## Card
@@ -1890,9 +1879,8 @@ You can also divide a card into header and footer — around the default body. J
 </div>
 ```
 
-
-
 # File: chart-area.md
+
 ==================================================
 
 ## Smooth
@@ -2082,9 +2070,8 @@ Displays multiple lines on the same chart to compare different data series.
 </div>
 ```
 
-
-
 # File: chart-line.md
+
 ==================================================
 
 ## Smooth
@@ -2469,9 +2456,8 @@ Displays multiple lines on the same chart to compare different data series.
 </div>
 ```
 
-
-
 # File: chart.md
+
 ==================================================
 
 ## Chart
@@ -2494,7 +2480,6 @@ To include the Chart library via CDN, add the following to your HTML `<head>`:
 ```
 
 For stability in production, it's recommended that you hardcode the latest version in the CDN link.
-      
 
 This method is the quickest way to get started, especially for prototypes or demos.
 
@@ -2503,7 +2488,7 @@ This method is the quickest way to get started, especially for prototypes or dem
 If you're building a modern app with a bundler, you can import the JavaScript file from `franken-ui` into your `app.js` file.
 
 ```javascript
-import "franken-ui/js/chart.iife";
+import 'franken-ui/js/chart.iife'
 ```
 
 ## CSS
@@ -2515,19 +2500,17 @@ Starting with version `2.1`, core styling has been removed from the default buil
 If you are using the Tailwind CSS plugin, edit your `tailwind.config.js` file.
 
 ```js
-import franken from "franken-ui/shadcn-ui/preset-quick";
-import chart from "franken-ui/extensions/chart";
+import franken from 'franken-ui/shadcn-ui/preset-quick'
+import chart from 'franken-ui/extensions/chart'
 
 /** @type {import('tailwindcss').Config} */
 export default {
   presets: [
     franken({
-      extensions: [
-        [chart, {}],
-      ],
+      extensions: [[chart, {}]],
     }),
   ],
-};
+}
 ```
 
 ### Vite plugin
@@ -2535,18 +2518,18 @@ export default {
 If you are using the Vite plugin, edit your `vite.config.js` file.
 
 ```js
-import { defineConfig } from "vite";
-import franken from "franken-ui/plugin-vite";
+import { defineConfig } from 'vite'
+import franken from 'franken-ui/plugin-vite'
 
 export default defineConfig({
   plugins: [
     franken({
       preflight: false,
       layer: true,
-      layerExceptions: ["chart"],
+      layerExceptions: ['chart'],
     }),
   ],
-});
+})
 ```
 
 Once everything is configured, you may now use the `<uk-chart>` markup in your HTML code with one `<script type="application/json"></script>` tag as options reference.
@@ -2571,9 +2554,8 @@ To enable reactivity, simply add the `reactive` attribute to the `<uk-chart>` co
 | `cls-custom`             | String  |         | Allows you to add custom CSS classes, which will be attached to the `<div>` tag.                                                                           |
 | `reactive`               | Boolean | false   | Enables reactivity by using `MutationObserver` to monitor the referenced `<script>` element for changes, triggering updates to the `<uk-chart>` component. |
 
-
-
 # File: close.md
+
 ==================================================
 
 ## Close
@@ -2709,9 +2691,8 @@ The Close component uses the following translation strings. Learn more about [tr
 | ------- | ------- | ----------------------- |
 | `label` | `Close` | `aria-label` attribute. |
 
-
-
 # File: command.md
+
 ==================================================
 
 ## Command
@@ -2846,13 +2827,13 @@ To get started, assign an ID to your command component and attach an event liste
 </uk-command>
 
 <script>
-  const el = document.getElementById("cmd-demo");
+  const el = document.getElementById('cmd-demo')
 
-  el?.addEventListener("uk-command:click", (e) => {
-    console.log(e.detail.value.value);
+  el?.addEventListener('uk-command:click', (e) => {
+    console.log(e.detail.value.value)
 
     // location.href = e.detail.value.value;
-  });
+  })
 </script>
 ```
 
@@ -2928,23 +2909,22 @@ The Command component triggers the following events on elements with this compon
 | ------------------- | ----------------------------------------------------------------------------------------------- |
 | `uk-command:select` | Fired after an item was selected or clicked, providing an opportunity to respond to user input. |
 
-
-
 # File: comment.md
+
 ==================================================
 
 ## Comment
 
 The Comment component consists of the comment itself, a comment header, including an avatar, a title and meta text, and a comment body.
 
-| Class                | Description                                                                           |
-| -------------------- | ------------------------------------------------------------------------------------- |
-| `.uk-comment`        | Add this class to define the Comment component.                                       |
-| `.uk-comment-body`   | Add this class to create a comment body.                                              |
-| `.uk-comment-header` | Add this class to create a comment header.                                            |
-| `.uk-comment-title`  | Add this class to a heading to create a comment title.                                |
-| `.uk-comment-meta`   | Add this class to create meta text about your comment.                                |
-| `.uk-comment-avatar` | Add this class to an `<img>` element to create an avatar for the comment author.      |
+| Class                | Description                                                                      |
+| -------------------- | -------------------------------------------------------------------------------- |
+| `.uk-comment`        | Add this class to define the Comment component.                                  |
+| `.uk-comment-body`   | Add this class to create a comment body.                                         |
+| `.uk-comment-header` | Add this class to create a comment header.                                       |
+| `.uk-comment-title`  | Add this class to a heading to create a comment title.                           |
+| `.uk-comment-meta`   | Add this class to create meta text about your comment.                           |
+| `.uk-comment-avatar` | Add this class to an `<img>` element to create an avatar for the comment author. |
 
 ```html
 <article class="uk-comment">
@@ -3194,9 +3174,8 @@ Set the appropriate WAI-ARIA roles, states and properties to the Comment compone
 </ul>
 ```
 
-
-
 # File: container.md
+
 ==================================================
 
 ## Container
@@ -3233,9 +3212,8 @@ Add one of the following classes to the container to apply a different max-width
 <div class="uk-container uk-container-expand"></div>
 ```
 
-
-
 # File: cover.md
+
 ==================================================
 
 ## Cover
@@ -3345,12 +3323,11 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.cover(element, options);
+UIkit.cover(element, options)
 ```
 
-
-
 # File: divider.md
+
 ==================================================
 
 ## Divider
@@ -3393,8 +3370,8 @@ Add the `.uk-divider-vertical` class to a `<hr>` or `<div>` element to create a 
 <hr class="uk-divider-vertical" />
 ```
 
-
 # File: dotnav.md
+
 ==================================================
 
 ## Dotnav
@@ -3447,9 +3424,8 @@ The dotnav can also be displayed vertically. Just add the `.uk-dotnav-vertical` 
 </ul>
 ```
 
-
-
 # File: drop.md
+
 ==================================================
 
 ## Drop
@@ -3909,7 +3885,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.drop(element, options);
+UIkit.drop(element, options)
 ```
 
 ### Events
@@ -3934,7 +3910,7 @@ The following methods are available for the component:
 #### Show
 
 ```javascript
-UIkit.drop(element).show();
+UIkit.drop(element).show()
 ```
 
 Shows the drop.
@@ -3942,7 +3918,7 @@ Shows the drop.
 #### Hide
 
 ```javascript
-UIkit.drop(element).hide(delay);
+UIkit.drop(element).hide(delay)
 ```
 
 Hides the drop.
@@ -3964,9 +3940,8 @@ The Drop component can be accessed through keyboard using the following keys.
 - The <kbd>enter</kbd> or <kbd>space</kbd> keys open and close the drop.
 - The <kbd>esc</kbd> key closes the drop even if focus has moved to another element.
 
-
-
 # File: dropdown.md
+
 ==================================================
 
 ## Dropdown
@@ -4005,9 +3980,8 @@ A dropdown is an example of the [drop](https://franken-ui.dev/docs/2.1/drop) tha
 </div>
 ```
 
-
-
 # File: filter.md
+
 ==================================================
 
 ## Filter
@@ -4860,7 +4834,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```js
-UIkit.filter(element, options);
+UIkit.filter(element, options)
 ```
 
 ### Events
@@ -4878,9 +4852,8 @@ The Filter component automatically sets the appropriate WAI-ARIA roles, states a
 
 - The _filter controls_ have the `aria-selected` state.
 
-
-
 # File: form.md
+
 ==================================================
 
 ## Form
@@ -5511,9 +5484,8 @@ Set the appropriate WAI-ARIA roles, states and properties to the Form component.
 <input class="uk-input" type="text" aria-label="..." />
 ```
 
-
-
 # File: franken-ui.md
+
 ==================================================
 
 ## Overview
@@ -5525,8 +5497,8 @@ Franken UI is an open-source library of UI components. Under the hood, it uses U
 If you'd like to use Tailwind CSS v4 alongside Franken UI, you can manually configure your `@theme` directives like so:
 
 ```css
-@import "tailwindcss";
-@import "franken-ui/css/franken-ui.css";
+@import 'tailwindcss';
+@import 'franken-ui/css/franken-ui.css';
 
 @theme {
   --color-background: hsl(var(--background));
@@ -5549,34 +5521,36 @@ If you'd like to use Tailwind CSS v4 alongside Franken UI, you can manually conf
   --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-ring: hsl(var(--ring));
 
-  --font-geist-sans: Geist Sans, ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
-  --font-geist-mono: Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-geist-sans:
+    Geist Sans, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', Segoe UI Symbol, 'Noto Color Emoji';
+  --font-geist-mono:
+    Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
 }
 ```
 
 This will allow you to use utilities like `bg-primary`, `bg-muted`, and other custom utility classes within your project. Make sure to update your `vite.config.js` as well.
 
 ```js
-import franken from "franken-ui/plugin-vite";
-import { defineConfig } from "vite";
+import franken from 'franken-ui/plugin-vite'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
     franken({
       preflight: false,
       layer: true,
-      layerExceptions: ["chart"],
+      layerExceptions: ['chart'],
     }),
   ],
-});
+})
 ```
 
 Note: If you choose to use Franken UI alongside Tailwind CSS v4, make sure to set `preflight` to `false` in your `vite.config.js`, as Tailwind already includes this feature. You also need to set `layer` to `true` to make the class hirarchy equal. Adding components inside `layerExceptions` will disable CSS layering for those components, placing them at the highest level of hierarchy.
 
-
 # File: icon-library.md
+
 ==================================================
 
 ## Icon Library
@@ -7168,9 +7142,8 @@ Note: If you choose to use Franken UI alongside Tailwind CSS v4, make sure to se
 - `{icon_name: "zoom-in", synonyms: [magnifying glass, plus], usage: "<uk-icon icon=\"zoom-in\"></uk-icon>" }`
 - `{icon_name: "zoom-out", synonyms: [magnifying glass, plus], usage: "<uk-icon icon=\"zoom-out\"></uk-icon>" }`
 
-
-
 # File: icon.md
+
 ==================================================
 
 ## Icon
@@ -7205,8 +7178,8 @@ When loading Web Components, there may be a brief delay before the content is fu
 | `height`       | String | 16      | Customizes the height of the icon.                                               |
 | `width`        | String | 16      | Customizes the width of the icon.                                                |
 
-
 # File: image.md
+
 ==================================================
 
 ## Image
@@ -7404,14 +7377,13 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```js
-UIkit.img(element, options);
+UIkit.img(element, options)
 ```
 
 Note: The Image component keeps records of already loaded images in the Session Storage. That's how it tries to determine if an image is already cached. A cached image is loaded immediately, without the lazy loading mechanism to prevent any rendering flashes. Prior to testing the Image component, make sure to clear these records from your browser's Session Storage.
 
-
-
 # File: input-date.md
+
 ==================================================
 
 ## Input date
@@ -7613,28 +7585,28 @@ Because this component uses [Calendar](https://franken-ui.dev/docs/2.1/calendar#
 
 The following attributes are available for this component:
 
-| Name                     | Type    | Default    | Description                                                                                                               |
-| ------------------------ | ------- | ---------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `force-prevent-rerender` | Boolean | false      | Forcefully prevents component rerendering.                                                                                |
-| `weekday-abbr-length`    | String  | 3          | Customize the length of weekday abbreviations (e.g., Monday → Mon).                                                       |
-| `today`                  | Boolean | false      | Automatically sets today as the active date.                                                                              |
-| `jumpable`               | Boolean | false      | Allows user to select a month and type a year for the calendar to "jump" to a specific date.                              |
-| `starts-with`            | String  | 0 (Sunday) | Sets the starting day of the week. Either "0" (Sunday) or "1" (Monday).                                                   |
-| `disabled-dates`         | String  |            | A comma-separated list of dates to disable. Dates must be in the format YYYY-MM-DD.                                       |
-| `marked-dates`           | String  |            | A comma-separated list of dates to add an indicator. Dates must be in the format YYYY-MM-DD.                              |
-| `view-date`              | String  |            | Sets the initial view date of the calendar. Dates must be in the format YYYY-MM-DD.                                       |
-| `min`                    | String  |            | Sets the minimum date that can be selected. Date must be in the format YYYY-MM-DD.                                        |
-| `max`                    | String  |            | Sets the maximum date that can be selected. Date must be in the format YYYY-MM-DD.                                        |
-| `cls-custom`             | String  |            | Allows you to add custom CSS classes.                                                                                     |
-| `disabled`               | Boolean | false      | Disables all input fields, making the entire component read-only.                                                         |
-| `name`                   | String  |            | Defines the name of the input, allowing you to capture its value on your server.                                          |
-| `value`                  | String  |            | A valid date time in `YYYY-MM-DD` or `YYYY-MM-DDTHH:MM` format that will be prepopulated in the input field.              |
-| `i18n`                   | String  |            | Enables internationalization. Please see [Internationalization](#internationalization) for available options.             |
-| `icon`                   | String  |            | Sets a customized icon. If no icon is passed, it will default to a calendar icon.                                         |
-| `drop`                   | String  |            | Customize the dropping option for the dropdown. See [Drop](https://franken-ui.dev/docs/2.1/drop) component for more options.                    |
-| `with-time`              | Boolean | false      | Allows inputting of time.                                                                                                 |
-| `require-time`           | Boolean | false      | Requires time input. If user leaves it blank, it will prepopulate the current time.                                       |
-| `display-format`         | String  |            | Customize the display format of the date. See [Customize display format](#customize-display-format) for available tokens. |
+| Name                     | Type    | Default    | Description                                                                                                                  |
+| ------------------------ | ------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `force-prevent-rerender` | Boolean | false      | Forcefully prevents component rerendering.                                                                                   |
+| `weekday-abbr-length`    | String  | 3          | Customize the length of weekday abbreviations (e.g., Monday → Mon).                                                          |
+| `today`                  | Boolean | false      | Automatically sets today as the active date.                                                                                 |
+| `jumpable`               | Boolean | false      | Allows user to select a month and type a year for the calendar to "jump" to a specific date.                                 |
+| `starts-with`            | String  | 0 (Sunday) | Sets the starting day of the week. Either "0" (Sunday) or "1" (Monday).                                                      |
+| `disabled-dates`         | String  |            | A comma-separated list of dates to disable. Dates must be in the format YYYY-MM-DD.                                          |
+| `marked-dates`           | String  |            | A comma-separated list of dates to add an indicator. Dates must be in the format YYYY-MM-DD.                                 |
+| `view-date`              | String  |            | Sets the initial view date of the calendar. Dates must be in the format YYYY-MM-DD.                                          |
+| `min`                    | String  |            | Sets the minimum date that can be selected. Date must be in the format YYYY-MM-DD.                                           |
+| `max`                    | String  |            | Sets the maximum date that can be selected. Date must be in the format YYYY-MM-DD.                                           |
+| `cls-custom`             | String  |            | Allows you to add custom CSS classes.                                                                                        |
+| `disabled`               | Boolean | false      | Disables all input fields, making the entire component read-only.                                                            |
+| `name`                   | String  |            | Defines the name of the input, allowing you to capture its value on your server.                                             |
+| `value`                  | String  |            | A valid date time in `YYYY-MM-DD` or `YYYY-MM-DDTHH:MM` format that will be prepopulated in the input field.                 |
+| `i18n`                   | String  |            | Enables internationalization. Please see [Internationalization](#internationalization) for available options.                |
+| `icon`                   | String  |            | Sets a customized icon. If no icon is passed, it will default to a calendar icon.                                            |
+| `drop`                   | String  |            | Customize the dropping option for the dropdown. See [Drop](https://franken-ui.dev/docs/2.1/drop) component for more options. |
+| `with-time`              | Boolean | false      | Allows inputting of time.                                                                                                    |
+| `require-time`           | Boolean | false      | Requires time input. If user leaves it blank, it will prepopulate the current time.                                          |
+| `display-format`         | String  |            | Customize the display format of the date. See [Customize display format](#customize-display-format) for available tokens.    |
 
 ## Events
 
@@ -7644,9 +7616,8 @@ The Input Date component triggers the following events on elements with this com
 | --------------------- | ------------------------------------------------------------------------------------- |
 | `uk-input-date:input` | Fired after the value has changed, providing an opportunity to respond to user input. |
 
-
-
 # File: input-pin.md
+
 ==================================================
 
 ## Input pin
@@ -7781,9 +7752,8 @@ The Input PIN component triggers the following events on elements with this comp
 | -------------------- | ------------------------------------------------------------------------------------- |
 | `uk-input-pin:input` | Fired after the value has changed, providing an opportunity to respond to user input. |
 
-
-
 # File: input-range.md
+
 ==================================================
 
 ## Input range
@@ -7950,9 +7920,8 @@ The Input Range component triggers the following events on elements with this co
 | ---------------------- | ------------------------------------------------------------------------------------- |
 | `uk-input-range:input` | Fired after the value has changed, providing an opportunity to respond to user input. |
 
-
-
 # File: input-tag.md
+
 ==================================================
 
 ## Input tag
@@ -8161,9 +8130,8 @@ The Input Tag component triggers the following events on elements with this comp
 | -------------------- | ------------------------------------------------------------------------------------- |
 | `uk-input-tag:input` | Fired after the value has changed, providing an opportunity to respond to user input. |
 
-
-
 # File: input-time.md
+
 ==================================================
 
 ## Input time
@@ -8314,9 +8282,8 @@ The Input Time component triggers the following events on elements with this com
 | --------------------- | ------------------------------------------------------------------------------------- |
 | `uk-input-time:input` | Fired after the value has changed, providing an opportunity to respond to user input. |
 
-
-
 # File: installation.md
+
 ==================================================
 
 ## Installation
@@ -8356,7 +8323,9 @@ Use this quickstart template to get started with your project immediately.
     <style>
       :root {
         font-family: Inter, sans-serif;
-        font-feature-settings: "liga" 1, "calt" 1;
+        font-feature-settings:
+          'liga' 1,
+          'calt' 1;
       }
       @supports (font-variation-settings: normal) {
         :root {
@@ -8375,27 +8344,27 @@ Use this quickstart template to get started with your project immediately.
     />
 
     <script>
-      const htmlElement = document.documentElement;
+      const htmlElement = document.documentElement
 
       const __FRANKEN__ = JSON.parse(
-        localStorage.getItem("__FRANKEN__") || "{}"
-      );
+        localStorage.getItem('__FRANKEN__') || '{}'
+      )
 
       if (
-        __FRANKEN__.mode === "dark" ||
+        __FRANKEN__.mode === 'dark' ||
         (!__FRANKEN__.mode &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
       ) {
-        htmlElement.classList.add("dark");
+        htmlElement.classList.add('dark')
       } else {
-        htmlElement.classList.remove("dark");
+        htmlElement.classList.remove('dark')
       }
 
-      htmlElement.classList.add(__FRANKEN__.theme || "uk-theme-zinc");
-      htmlElement.classList.add(__FRANKEN__.radii || "uk-radii-md");
-      htmlElement.classList.add(__FRANKEN__.shadows || "uk-shadows-sm");
-      htmlElement.classList.add(__FRANKEN__.font || "uk-font-sm");
-      htmlElement.classList.add(__FRANKEN__.chart || "uk-chart-default");
+      htmlElement.classList.add(__FRANKEN__.theme || 'uk-theme-zinc')
+      htmlElement.classList.add(__FRANKEN__.radii || 'uk-radii-md')
+      htmlElement.classList.add(__FRANKEN__.shadows || 'uk-shadows-sm')
+      htmlElement.classList.add(__FRANKEN__.font || 'uk-font-sm')
+      htmlElement.classList.add(__FRANKEN__.chart || 'uk-chart-default')
     </script>
 
     <script
@@ -8452,8 +8421,8 @@ npm install franken-ui
 Next, configure your `vite.config.js` file to use the Franken UI plugin.
 
 ```js
-import franken from "franken-ui/plugin-vite";
-import { defineConfig } from "vite";
+import franken from 'franken-ui/plugin-vite'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
@@ -8461,13 +8430,13 @@ export default defineConfig({
       preflight: true,
     }),
   ],
-});
+})
 ```
 
 Once the plugin is configured, import the `franken-ui.css` file into your main CSS file:
 
 ```css
-@import "franken-ui/css/franken-ui.css";
+@import 'franken-ui/css/franken-ui.css';
 ```
 
 Alternatively, you can pull Franken UI CSS directly from the `node_modules` directory.
@@ -8480,9 +8449,8 @@ Note: Franken UI compiles CSS behind the scenes, so make sure to import the Vite
 
 Once you're done, you may now proceed adding [JavaScript](https://franken-ui.dev/docs/2.1/javascript).
 
-
-
 # File: javascript.md
+
 ==================================================
 
 ## JavaScript
@@ -8505,15 +8473,14 @@ You can include the JavaScript files on your page by adding them to the `<head>`
 ```
 
 For stability in production, it's recommended that you hardcode the latest version in the CDN link.
-      
 
 ## Installation via NPM
 
 You can import the JavaScript from `franken-ui`, which you installed earlier, into your `app.js` file.
 
 ```javascript
-import "franken-ui/js/core.iife";
-import "franken-ui/js/icon.iife";
+import 'franken-ui/js/core.iife'
+import 'franken-ui/js/icon.iife'
 ```
 
 ## UIkit and reactive JavaScript frameworks
@@ -8535,15 +8502,15 @@ Note: [React](https://facebook.github.io/react/) will work with `data-uk-*` pref
 You can also initialize components via JavaScript and apply them to elements in your document.
 
 ```js
-var sticky = UIkit.sticky("#sticky", {
+var sticky = UIkit.sticky('#sticky', {
   offset: 50,
-});
+})
 ```
 
 You can retrieve an already initialized component by passing a selector or an element as a first Argument to the component function.
 
 ```js
-var sticky = UIkit.sticky("#sticky");
+var sticky = UIkit.sticky('#sticky')
 ```
 
 Omitting the second parameter will not re-initialize the component but serve as a getter function.
@@ -8584,13 +8551,13 @@ You can also pass options to the component constructor programmatically.
 
 ```js
 // Passing an options object.
-UIkit.sticky(".sticky", {
+UIkit.sticky('.sticky', {
   offset: 50,
   top: 100,
-});
+})
 
 // If the component supports Primary options.
-UIkit.drop("#drop", "top-left");
+UIkit.drop('#drop', 'top-left')
 ```
 
 ### Precedence
@@ -8615,8 +8582,8 @@ UIkit.mixin(
       top: 100,
     },
   },
-  "sticky",
-);
+  'sticky'
+)
 ```
 
 Omitting the second parameter, will apply the custom behavior to every UIkit instance created afterwards.
@@ -8627,13 +8594,13 @@ Programmatically, components may be initialized with the `element, options` argu
 
 ```js
 // Passing a selector and an options object.
-var sticky = UIkit.sticky(".sticky", {
+var sticky = UIkit.sticky('.sticky', {
   offset: 50,
   top: 100,
-});
+})
 
 // Functional components should omit the 'element' argument.
-var notifications = UIkit.notification("MyMessage", "destructive");
+var notifications = UIkit.notification('MyMessage', 'destructive')
 ```
 
 Note: The options names must be in their camel-cased representation, e.g. `show-on-up` becomes `showOnUp`.
@@ -8642,13 +8609,13 @@ After initialization, you can get your component by calling the same initializat
 
 ```javascript
 // Sticky is now the prior initialised components
-var sticky = UIkit.sticky(".sticky");
+var sticky = UIkit.sticky('.sticky')
 ```
 
 Note: Using `UIkit[componentName](selector)` with CSS selectors will always return the first occurrence only! If you need to access all instances do [query](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) the elements first. Then apply the getter to each element separately - `UIkit[componentName](element)`. Initializing your components programmatically gives you the possibility to invoke their functions directly.
 
 ```js
-UIkit.offcanvas("#offcanvas").toggle();
+UIkit.offcanvas('#offcanvas').toggle()
 ```
 
 Any component functions and variables prefixed with an underscore are considered as part of the internal API, which may change at any given time.
@@ -8656,9 +8623,9 @@ Any component functions and variables prefixed with an underscore are considered
 Each component triggers DOM events that you can react to. For example when a Modal is shown or a Scrollspy element becomes visible.
 
 ```js
-UIkit.util.on("#offcanvas", "show", function () {
+UIkit.util.on('#offcanvas', 'show', function () {
   // do something
-});
+})
 ```
 
 The component's documentation page lists its events.
@@ -8671,20 +8638,20 @@ UIkit offers several ways of updating a component. Omitting the `type` parameter
 
 ```js
 // Calls the update hook on components registered on the element itself, its parents and children.
-UIkit.update((element = document.body), (type = "update"));
+UIkit.update((element = document.body), (type = 'update'))
 
 // Updates the component itself.
-component.$emit((type = "update"));
+component.$emit((type = 'update'))
 ```
 
 If you need to make sure a component is properly destroyed, for example upon removal from the DOM, you can call its `$destroy` function.
 
 ```js
 // Destroys the component. For example unbind its event listeners.
-component.$destroy();
+component.$destroy()
 
 // Also destroys the component, but also removes the element from the DOM.
-component.$destroy(true);
+component.$destroy(true)
 ```
 
 ## UIkit initialization
@@ -8696,14 +8663,13 @@ This hook allows you to register custom components or component mixins.
 You can hook into this step in the lifecycle by listening for the `uikit:init` event UIkit triggers on the document.
 
 ```js
-document.addEventListener("uikit:init", () => {
+document.addEventListener('uikit:init', () => {
   // do something
-});
+})
 ```
 
-
-
 # File: label.md
+
 ==================================================
 
 ## Label
@@ -8746,9 +8712,8 @@ Add one of the following classes for additional styles.
 <span class="uk-label uk-label-destructive">Destructive</span>
 ```
 
-
-
 # File: leader.md
+
 ==================================================
 
 ## Leader
@@ -8791,11 +8756,11 @@ Note: The default fill character can be set through CSS variable.
 
 ```css
 .uk-leader-fill-content::before {
-  content: ".";
+  content: '.';
 }
 
 :root {
-  --uk-leader-fill-content: ".";
+  --uk-leader-fill-content: '.';
 }
 ```
 
@@ -8823,12 +8788,11 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.leader(element, options);
+UIkit.leader(element, options)
 ```
 
-
-
 # File: lightbox.md
+
 ==================================================
 
 ## Lightbox
@@ -9215,10 +9179,10 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 
 ```javascript
 // To apply lightbox to a group of links
-UIkit.lightbox(element, options);
+UIkit.lightbox(element, options)
 
 // To dynamically initialize the lightbox panel
-UIkit.lightboxPanel(panelOptions);
+UIkit.lightboxPanel(panelOptions)
 ```
 
 ### Methods
@@ -9228,7 +9192,7 @@ The following methods are available for the component:
 #### Show
 
 ```javascript
-UIkit.lightbox(element).show(index);
+UIkit.lightbox(element).show(index)
 ```
 
 Shows the Lightbox's Panel and item.
@@ -9236,7 +9200,7 @@ Shows the Lightbox's Panel and item.
 #### Hide
 
 ```javascript
-UIkit.lightbox(element).hide();
+UIkit.lightbox(element).hide()
 ```
 
 Hides the Lightbox's Panel.
@@ -9290,7 +9254,7 @@ The following methods are available for the component:
 #### Show
 
 ```javascript
-UIkit.lightboxPanel(element).show(index);
+UIkit.lightboxPanel(element).show(index)
 ```
 
 Shows the Lightbox Panel and item.
@@ -9302,7 +9266,7 @@ Shows the Lightbox Panel and item.
 #### Hide
 
 ```javascript
-UIkit.lightboxPanel(element).hide();
+UIkit.lightboxPanel(element).hide()
 ```
 
 Hides the Lightbox Panel.
@@ -9310,7 +9274,7 @@ Hides the Lightbox Panel.
 #### startAutoplay
 
 ```javascript
-UIkit.lightboxPanel(element).startAutoplay();
+UIkit.lightboxPanel(element).startAutoplay()
 ```
 
 Starts the Lightbox's autoplay.
@@ -9318,7 +9282,7 @@ Starts the Lightbox's autoplay.
 #### stopAutoplay
 
 ```javascript
-UIkit.lightboxPanel(element).stopAutoplay();
+UIkit.lightboxPanel(element).stopAutoplay()
 ```
 
 Stops the Lightbox's autoplay.
@@ -9358,9 +9322,8 @@ The Lightbox component uses the following translation strings. Learn more about 
 | `slideLabel` | `%s of %s`       | `aria-label` for slide.                 |
 | `close`      | `Close`          | `aria-label` for close button.          |
 
-
-
 # File: link.md
+
 ==================================================
 
 ## Link
@@ -9449,9 +9412,8 @@ To use an anchor as a parent element and apply the link style on one of its chil
 </a>
 ```
 
-
-
 # File: list.md
+
 ==================================================
 
 ## List
@@ -9659,9 +9621,8 @@ Set the appropriate WAI-ARIA roles, states and properties to the List component.
 </div>
 ```
 
-
-
 # File: masonry-grid.md
+
 ==================================================
 
 ## Masonry grid
@@ -10009,12 +9970,11 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```js
-UIkit.grid(element, options);
+UIkit.grid(element, options)
 ```
 
-
-
 # File: modal.md
+
 ==================================================
 
 ## Modal
@@ -10292,7 +10252,7 @@ To create a modal, that fills the entire page, add the `.uk-modal-full` class.
     <div class="grid md:grid-cols-2">
       <div
         class="h-screen bg-cover"
-        style="background-image: url(&quot;/images/photo.jpg&quot;)"
+        style='background-image: url("/images/photo.jpg")'
       ></div>
       <div class="p-8">
         <h1 class="uk-h1">Headline</h1>
@@ -10641,7 +10601,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.modal(element, options);
+UIkit.modal(element, options)
 ```
 
 ### Events
@@ -10664,7 +10624,7 @@ The following methods are available for the component:
 #### Show
 
 ```javascript
-UIkit.modal(element).show();
+UIkit.modal(element).show()
 ```
 
 Shows the Modal.
@@ -10672,7 +10632,7 @@ Shows the Modal.
 #### Hide
 
 ```javascript
-UIkit.modal(element).hide();
+UIkit.modal(element).hide()
 ```
 
 Hides the Modal.
@@ -10693,14 +10653,14 @@ The component comes with a number of prepared modal dialogs that you can use for
 To process the user input, the modal uses a promise based interface which provides a `then()` function to register your callback functions. The `UIkit.modal.dialog` function however will return the modal itself.
 
 ```javascript
-UIkit.modal.confirm("UIkit confirm!").then(
+UIkit.modal.confirm('UIkit confirm!').then(
   function () {
-    console.log("Confirmed.");
+    console.log('Confirmed.')
   },
   function () {
-    console.log("Rejected.");
-  },
-);
+    console.log('Rejected.')
+  }
+)
 ```
 
 The returned promise has a property `dialog`, which holds a reference to the modal itself. This lets you manipulate e.g. the markup of the modal's element.
@@ -10708,10 +10668,10 @@ The returned promise has a property `dialog`, which holds a reference to the mod
 To translate the button labels, the dialog functions accepts an optional `options` object parameter. This has a key `i18n` and two properties `ok` and `cancel`.
 
 ```javascript
-const modal = UIkit.modal.confirm("UIkit confirm!", {
-  i18n: { ok: "okay" },
-}).dialog; // The modal component
-const el = modal.$el; // The modal element
+const modal = UIkit.modal.confirm('UIkit confirm!', {
+  i18n: { ok: 'okay' },
+}).dialog // The modal component
+const el = modal.$el // The modal element
 ```
 
 ### Example
@@ -10728,47 +10688,47 @@ const el = modal.$el; // The modal element
 
   <script>
     document
-      .getElementById("js-modal-dialog")
-      ?.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.target.blur();
-        UIkit.modal.dialog('<p class="uk-modal-body">UIkit dialog!</p>');
-      });
+      .getElementById('js-modal-dialog')
+      ?.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.target.blur()
+        UIkit.modal.dialog('<p class="uk-modal-body">UIkit dialog!</p>')
+      })
 
     document
-      .getElementById("js-modal-alert")
-      ?.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.target.blur();
-        UIkit.modal.alert("UIkit alert!").then(function () {
-          console.log("Alert closed.");
-        });
-      });
+      .getElementById('js-modal-alert')
+      ?.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.target.blur()
+        UIkit.modal.alert('UIkit alert!').then(function () {
+          console.log('Alert closed.')
+        })
+      })
 
     document
-      .getElementById("js-modal-confirm")
-      ?.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.target.blur();
-        UIkit.modal.confirm("UIkit confirm!").then(
+      .getElementById('js-modal-confirm')
+      ?.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.target.blur()
+        UIkit.modal.confirm('UIkit confirm!').then(
           function () {
-            console.log("Confirmed.");
+            console.log('Confirmed.')
           },
           function () {
-            console.log("Rejected.");
-          },
-        );
-      });
+            console.log('Rejected.')
+          }
+        )
+      })
 
     document
-      .getElementById("js-modal-prompt")
-      ?.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.target.blur();
-        UIkit.modal.prompt("Name:", "Your name").then(function (name) {
-          console.log("Prompted:", name);
-        });
-      });
+      .getElementById('js-modal-prompt')
+      ?.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.target.blur()
+        UIkit.modal.prompt('Name:', 'Your name').then(function (name) {
+          console.log('Prompted:', name)
+        })
+      })
   </script>
 </div>
 ```
@@ -10789,9 +10749,8 @@ The Modal component can be accessed through keyboard using the following keys.
 
 - The <kbd>esc</kbd> key closes the modal. This behaviour is disabled if the `bg-close: false` option is set.
 
-
-
 # File: nav.md
+
 ==================================================
 
 ## Nav
@@ -11301,16 +11260,16 @@ A nav can be used inside an offcanvas from the [Offcanvas component](https://fra
 
 Any of these options can be applied to the component attribute. Separate multiple options with a semicolon. [Learn more](https://franken-ui.dev/docs/2.1/javascript#component-configuration)
 
-| Option        | Value           | Default        | Description                                                                                |
-| ------------- | --------------- | -------------- | ------------------------------------------------------------------------------------------ |
-| `targets`     | CSS selector    | `> .uk-parent` | The element(s) to toggle.                                                                  |
-| `toggle `     | CSS selector    | `> a`          | The toggle element(s).                                                                     |
-| `content`     | CSS selector    | `> ul`         | The content element(s).                                                                    |
-| `collapsible` | Boolean         | `true`         | Allow all items to be closed.                                                              |
-| `multiple`    | Boolean         | `false`        | Allow multiple open items.                                                                 |
-| `transition`  | String          | `ease`         | The transition to use.                                                                     |
+| Option        | Value           | Default        | Description                                                                                                          |
+| ------------- | --------------- | -------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `targets`     | CSS selector    | `> .uk-parent` | The element(s) to toggle.                                                                                            |
+| `toggle `     | CSS selector    | `> a`          | The toggle element(s).                                                                                               |
+| `content`     | CSS selector    | `> ul`         | The content element(s).                                                                                              |
+| `collapsible` | Boolean         | `true`         | Allow all items to be closed.                                                                                        |
+| `multiple`    | Boolean         | `false`        | Allow multiple open items.                                                                                           |
+| `transition`  | String          | `ease`         | The transition to use.                                                                                               |
 | `animation`   | Boolean, String | `true`         | Space-separated names of [animations](https://franken-ui.dev/docs/2.1/animation). Comma-separated for animation out. |
-| `duration`    | Number          | `200`          | The animation duration in milliseconds.                                                    |
+| `duration`    | Number          | `200`          | The animation duration in milliseconds.                                                                              |
 
 ## JavaScript
 
@@ -11319,7 +11278,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.nav(element, options);
+UIkit.nav(element, options)
 ```
 
 ### Methods
@@ -11329,7 +11288,7 @@ The following methods are available for the component:
 #### Toggle
 
 ```javascript
-UIkit.nav(element).toggle(index, animate);
+UIkit.nav(element).toggle(index, animate)
 ```
 
 Toggles the content pane.
@@ -11339,9 +11298,8 @@ Toggles the content pane.
 | `index`   | String, Number, Node | 0       | Nav pane to toggle. 0 based index.           |
 | `animate` | Boolean              | true    | Suppress opening animation by passing false. |
 
-
-
 # File: notification.md
+
 ==================================================
 
 ## Notification
@@ -11352,18 +11310,18 @@ The notification will not fade out but remain visible when you hover the message
 
 ```javascript
 UIkit.notification({
-  message: "my-message!",
-  status: "primary",
-  pos: "top-right",
+  message: 'my-message!',
+  status: 'primary',
+  pos: 'top-right',
   timeout: 5000,
-});
+})
 
 // Shortcuts
-UIkit.notification("My message");
-UIkit.notification("My message", status);
-UIkit.notification("My message", {
+UIkit.notification('My message')
+UIkit.notification('My message', status)
+UIkit.notification('My message', {
   /* options */
-});
+})
 ```
 
 ### Example
@@ -11383,7 +11341,7 @@ UIkit.notification("My message", {
 You can use HTML inside your notification message, like an icon from the Icon component.
 
 ```javascript
-UIkit.notification("<uk-icon icon='rocket'></uk-icon> Message");
+UIkit.notification("<uk-icon icon='rocket'></uk-icon> Message")
 ```
 
 ### Example
@@ -11405,7 +11363,7 @@ UIkit.notification("<uk-icon icon='rocket'></uk-icon> Message");
 Add one of the following parameters to adjust the notification's position to different corners.
 
 ```javascript
-UIkit.notification("...", { pos: "top-right" });
+UIkit.notification('...', { pos: 'top-right' })
 ```
 
 | Position        | Code                                                |
@@ -11469,7 +11427,7 @@ UIkit.notification("...", { pos: "top-right" });
 ## Destructive modifier
 
 ```javascript
-UIkit.notification("...", { status: "destructive" });
+UIkit.notification('...', { status: 'destructive' })
 ```
 
 ### Example
@@ -11520,8 +11478,8 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 This is a `Functional Component` and may omit the element argument.
 
 ```javascript
-UIkit.notification(options);
-UIkit.notification(message, status);
+UIkit.notification(options)
+UIkit.notification(message, status)
 ```
 
 ### Events
@@ -11539,7 +11497,7 @@ The following methods are available for the component:
 #### Close
 
 ```javascript
-UIkit.notification(element).close(immediate);
+UIkit.notification(element).close(immediate)
 ```
 
 Closes the notification.
@@ -11554,9 +11512,8 @@ The Notification component automatically sets the appropriate WAI-ARIA role, sta
 
 - The _notification_ has the `alert` role.
 
-
-
 # File: offcanvas.md
+
 ==================================================
 
 ## Offcanvas
@@ -11581,7 +11538,11 @@ You can use any element to toggle an offcanvas sidebar. To enable the necessary 
   <!-- This is the offcanvas -->
   <div id="my-id" data-uk-offcanvas>
     <div class="uk-offcanvas-bar">
-      <button class="uk-offcanvas-close absolute top-4 right-4" type="button" data-uk-close></button>
+      <button
+        class="uk-offcanvas-close absolute top-4 right-4"
+        type="button"
+        data-uk-close
+      ></button>
     </div>
   </div>
 </body>
@@ -11957,7 +11918,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.offcanvas(element, options);
+UIkit.offcanvas(element, options)
 ```
 
 ### Events
@@ -11980,7 +11941,7 @@ The following methods are available for the component:
 #### Show
 
 ```javascript
-UIkit.offcanvas(element).show();
+UIkit.offcanvas(element).show()
 ```
 
 Shows the Offcanvas.
@@ -11988,7 +11949,7 @@ Shows the Offcanvas.
 #### Hide
 
 ```javascript
-UIkit.offcanvas(element).hide();
+UIkit.offcanvas(element).hide()
 ```
 
 Hides the Offcanvas.
@@ -12009,9 +11970,8 @@ The Offcanvas component can be accessed through keyboard using the following key
 
 - The <kbd>esc</kbd> key closes the offcanvas. This behaviour is disabled if the `bg-close: false` option is set.
 
-
-
 # File: pagination.md
+
 ==================================================
 
 ## Pagination
@@ -12359,9 +12319,8 @@ The Pagination component uses the following translation strings. Learn more abou
 | ------- | -------------------- | ----------------------- |
 | `label` | `Next/Previous page` | `aria-label` attribute. |
 
-
-
 # File: parallax.md
+
 ==================================================
 
 ## Parallax
@@ -12372,14 +12331,14 @@ To apply this component, add the `data-uk-parallax` attribute to any element. Us
 | ------------------ | ---------------------------------- | -------------- | ----------- |
 | `x`                | Animate translateX.                | Length         | `0`         |
 | `y`                | Animate translateY.                | Length         | `0`         |
-| `bgy`              | Animate background Y position.     | Length         | *Initial*   |
-| `bgx`              | Animate background X position.     | Length         | *Initial*   |
+| `bgy`              | Animate background Y position.     | Length         | _Initial_   |
+| `bgx`              | Animate background X position.     | Length         | _Initial_   |
 | `rotate`           | Animate rotation clockwise.        | `deg`          | `0`         |
 | `scale`            | Animate scaling.                   | Number, Length | `1`         |
-| `color`            | Animate color                      | Color          | *Initial*   |
-| `background-color` | Animate background-color           | Color          | *Initial*   |
-| `border-color`     | Animate border color               | Color          | *Initial*   |
-| `opacity`          | Animate the opacity.               | Number         | *Initial*   |
+| `color`            | Animate color                      | Color          | _Initial_   |
+| `background-color` | Animate background-color           | Color          | _Initial_   |
+| `border-color`     | Animate border color               | Color          | _Initial_   |
+| `opacity`          | Animate the opacity.               | Number         | _Initial_   |
 | `blur`             | Animate the blur filter.           | `px`           | `0`         |
 | `hue`              | Animate the hue rotation filter.   | `deg`          | `0`         |
 | `grayscale`        | Animate the grayscale filter.      | `%`            | `0`         |
@@ -12402,7 +12361,7 @@ Set one of the options to create an animation stop. The property is animated fro
 <div
   class="flex h-80 bg-cover"
   data-uk-parallax="bgy: -200"
-  style="background-image: url(&quot;/images/dark.jpg&quot;)"
+  style='background-image: url("/images/dark.jpg")'
 >
   <h1 class="uk-h1 uk-margin-auto-vertical m-auto w-1/2 text-center text-white">
     Headline
@@ -12423,7 +12382,7 @@ To set a custom start value, create another animation stop by using two values s
 ```html
 <div
   class="uk-overflow-hidden flex h-80 bg-cover"
-  style="background-image: url(&quot;/images/dark.jpg&quot;)"
+  style='background-image: url("/images/dark.jpg")'
 >
   <div class="uk-margin-auto-vertical m-auto w-1/2 text-center text-white">
     <h1
@@ -12456,7 +12415,7 @@ To better control the property animation, you can set intermediate stops along t
 ```html
 <div
   class="uk-overflow-hidden flex h-80 bg-cover"
-  style="background-image: url(&quot;/images/dark.jpg&quot;)"
+  style='background-image: url("/images/dark.jpg")'
 >
   <div class="uk-margin-auto-vertical m-auto w-1/2 text-center text-white">
     <h1
@@ -12489,7 +12448,7 @@ Set an optional stop position to specify the percentage along the animation sequ
 ```html
 <div
   class="uk-overflow-hidden flex h-80 bg-cover"
-  style="background-image: url(&quot;/images/dark.jpg&quot;)"
+  style='background-image: url("/images/dark.jpg")'
 >
   <div class="uk-margin-auto-vertical m-auto w-1/2 text-center text-white">
     <h1
@@ -12515,7 +12474,7 @@ Different parallax animations can easily be nested.
 
 ```html
 <div data-uk-parallax="bgx: -50">
-    <div data-uk-parallax="x: -100, 100">…</div>
+  <div data-uk-parallax="x: -100, 100">…</div>
 </div>
 ```
 
@@ -12524,7 +12483,7 @@ Different parallax animations can easily be nested.
 ```html
 <div
   class="uk-overflow-hidden flex h-80 bg-cover"
-  style="background-image: url(&quot;/images/dark.jpg&quot;)"
+  style='background-image: url("/images/dark.jpg")'
 >
   <div class="uk-margin-auto-vertical m-auto w-1/2 text-center text-white">
     <h1
@@ -12550,7 +12509,7 @@ The animation starts and stops depending on the element position in the viewport
 
 ```html
 <div id="target">
-    <div data-uk-parallax="target: #target">…</div>
+  <div data-uk-parallax="target: #target">…</div>
 </div>
 ```
 
@@ -12561,7 +12520,7 @@ The animation starts and stops depending on the element position in the viewport
   id="test-target"
   class="flex h-80 bg-cover"
   data-uk-parallax="bgy: -200"
-  style="background-image: url(&quot;/images/dark.jpg&quot;)"
+  style='background-image: url("/images/dark.jpg")'
 >
   <h1
     class="uk-h1 uk-margin-auto-vertical m-auto w-1/2 text-center text-white"
@@ -12588,7 +12547,7 @@ To adjust the animation duration, set the `start` and `end` options. The `start`
 <div
   id="test-start-end"
   class="uk-overflow-hidden flex h-80 bg-cover"
-  style="background-image: url(&quot;/images/dark.jpg&quot;)"
+  style='background-image: url("/images/dark.jpg")'
 >
   <div class="mx-auto inline-flex gap-4">
     <div>
@@ -12637,7 +12596,7 @@ To adjust the easing of the animation, add the `easing` option. `0` transitions 
 <div
   id="test-easing"
   class="uk-overflow-hidden flex h-80 bg-cover"
-  style="background-image: url(&quot;/images/dark.jpg&quot;)"
+  style='background-image: url("/images/dark.jpg")'
 >
   <div class="m-auto inline-flex gap-4">
     <div>
@@ -12741,7 +12700,7 @@ CSS filters are an easy way to add graphical effects to any element on your page
   id="test-filter"
   class="uk-overflow-hidden flex h-80 bg-cover"
   data-uk-parallax="start: 100%; end: 100%; sepia: 100;"
-  style="background-image: url(&quot;/images/light.jpg&quot;)"
+  style='background-image: url("/images/light.jpg")'
 >
   <h1
     class="uk-h1 m-auto w-1/2 text-center"
@@ -12758,7 +12717,7 @@ The Parallax component can be used to animate SVG strokes. The effect looks like
 
 ```html
 <div data-uk-parallax="stroke: 45">
-    <img src="" width="" height="" alt="" uk-svg>
+  <img src="" width="" height="" alt="" uk-svg />
 </div>
 ```
 
@@ -12781,7 +12740,7 @@ The Parallax component can be applied to the elements of inline SVG images, like
 
 ```html
 <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0" y="0" width="10" height="10" data-uk-parallax="rotate: 360"/>
+  <rect x="0" y="0" width="10" height="10" data-uk-parallax="rotate: 360" />
 </svg>
 ```
 
@@ -12814,12 +12773,11 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```js
-UIkit.parallax(element, options);
+UIkit.parallax(element, options)
 ```
 
-
-
 # File: placeholder.md
+
 ==================================================
 
 ## Placeholder
@@ -12838,9 +12796,8 @@ This component applies a specially styled area to create a placeholder space. Ju
 </div>
 ```
 
-
-
 # File: position.md
+
 ==================================================
 
 ## Position
@@ -13272,9 +13229,8 @@ This component features a number of general position utility classes:
 | `.uk-position-fixed`    | Add this class to apply fixed positioning.    |
 | `.uk-position-z-index`  | Add this class to apply a z-index of 1.       |
 
-
-
 # File: progress.md
+
 ==================================================
 
 ## Progress
@@ -13296,23 +13252,22 @@ To apply this component, add the `.uk-progress` class to a `<progress>` element.
 ></progress>
 
 <script>
-  document.addEventListener("uikit:init", () => {
-    var bar = document.getElementById("js-progressbar");
+  document.addEventListener('uikit:init', () => {
+    var bar = document.getElementById('js-progressbar')
 
     var animate = setInterval(function () {
-      bar.value += 10;
+      bar.value += 10
 
       if (bar.value >= bar.max) {
-        clearInterval(animate);
+        clearInterval(animate)
       }
-    }, 1000);
-  });
+    }, 1000)
+  })
 </script>
 ```
 
-
-
 # File: scroll.md
+
 ==================================================
 
 ## Scroll
@@ -13350,9 +13305,9 @@ To receive a callback when scrolling has completed, you can listen to the `scrol
 ```
 
 ```js
-UIkit.util.on("#js-scroll-trigger", "scrolled", function () {
-  alert("Done.");
-});
+UIkit.util.on('#js-scroll-trigger', 'scrolled', function () {
+  alert('Done.')
+})
 ```
 
 ### Example
@@ -13367,11 +13322,11 @@ UIkit.util.on("#js-scroll-trigger", "scrolled", function () {
 >
 
 <script>
-  document.addEventListener("uikit:init", () => {
-    UIkit.util.on("#js-scroll-trigger", "scrolled", function () {
-      UIkit.modal.dialog('<p class="uk-modal-body">Done</p>');
-    });
-  });
+  document.addEventListener('uikit:init', () => {
+    UIkit.util.on('#js-scroll-trigger', 'scrolled', function () {
+      UIkit.modal.dialog('<p class="uk-modal-body">Done</p>')
+    })
+  })
 </script>
 ```
 
@@ -13390,7 +13345,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```js
-UIkit.scroll(element, options);
+UIkit.scroll(element, options)
 ```
 
 ### Events
@@ -13409,7 +13364,7 @@ The following methods are available for the component:
 #### ScrollTo
 
 ```js
-UIkit.scroll(element).scrollTo(el);
+UIkit.scroll(element).scrollTo(el)
 ```
 
 Scroll to the given element.
@@ -13424,9 +13379,8 @@ Scroll to the given element.
   Scroll up
 </a>
 
-
-
 # File: scrollspy.md
+
 ==================================================
 
 ## Scrollspy
@@ -13591,7 +13545,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```js
-UIkit.scrollspy(element, options);
+UIkit.scrollspy(element, options)
 ```
 
 ### Events
@@ -13623,13 +13577,13 @@ For an example of the scrollspy nav, just check out the fixed nav on the right s
 
 Any of these options can be applied to the component attribute. Separate multiple options with a semicolon. [Learn more](https://franken-ui.dev/docs/2.1/javascript#component-configuration)
 
-| Option    | Value                 | Default     | Description                                                   |
-| --------- | --------------------- | ----------- | ------------------------------------------------------------- |
-| `cls`     | String                | `uk-active` | Class to add to the active links.                             |
-| `closest` | Boolean, CSS selector | `false`     | Target to apply the class to. Defaults to the element itself. |
-| `scroll`  | Boolean               | `false`     | Adds the [Scroll component](https://franken-ui.dev/docs/2.1/scroll) to its links.       |
-| `target`  | CSS selector          | `a[href]`   | Targets the anchor elements that should be used.              |
-| `offset`  | Number                | `0`         | Offset added to scroll top.                                   |
+| Option    | Value                 | Default     | Description                                                                       |
+| --------- | --------------------- | ----------- | --------------------------------------------------------------------------------- |
+| `cls`     | String                | `uk-active` | Class to add to the active links.                                                 |
+| `closest` | Boolean, CSS selector | `false`     | Target to apply the class to. Defaults to the element itself.                     |
+| `scroll`  | Boolean               | `false`     | Adds the [Scroll component](https://franken-ui.dev/docs/2.1/scroll) to its links. |
+| `target`  | CSS selector          | `a[href]`   | Targets the anchor elements that should be used.                                  |
+| `offset`  | Number                | `0`         | Offset added to scroll top.                                                       |
 
 ### Scrollspy nav JavaScript
 
@@ -13638,7 +13592,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Scrollspy nav initialization
 
 ```js
-UIkit.scrollspyNav(element, options);
+UIkit.scrollspyNav(element, options)
 ```
 
 ### Scrollspy nav events
@@ -13649,9 +13603,8 @@ The following events will be triggered on elements with this component attached:
 | -------- | ----------------------------------- |
 | `active` | Fires after an item becomes active. |
 
-
-
 # File: select.md
+
 ==================================================
 
 ## Select
@@ -14621,7 +14574,7 @@ The following attributes are available for this component:
 | `reactive`               | Boolean | false   | Enables reactivity by using `MutationObserver` to monitor the referenced `<select hidden>` element for changes, triggering updates to the `<uk-select>` component. |
 | `value`                  | String  |         | A comma-separated list of values that will be prepopulated in the input field.                                                                                     |
 | `icon`                   | String  |         | Sets a customized icon. If no icon is passed, it will default to a chevron down icon.                                                                              |
-| `drop`                   | String  |         | Customize the dropping option for the dropdown. See [Drop](https://franken-ui.dev/docs/2.1/drop) component for more options.                                                             |
+| `drop`                   | String  |         | Customize the dropping option for the dropdown. See [Drop](https://franken-ui.dev/docs/2.1/drop) component for more options.                                       |
 
 ## Events
 
@@ -14632,9 +14585,8 @@ The custom select component triggers the following events on elements with this 
 | `uk-select:input`  | Fired after the value has changed, providing an opportunity to respond to user input. |
 | `uk-select:search` | Fired after the value inside search box has changed.                                  |
 
-
-
 # File: slidenav.md
+
 ==================================================
 
 ## Slidenav
@@ -14642,8 +14594,7 @@ The custom select component triggers the following events on elements with this 
 To create a navigation with previous and next buttons, just add the `data-uk-slidenav` attribute to `<a>` elements. Add the `previous` or `next` parameter to the attribute to style the nav items as previous or next buttons.
 
 ```html
-<a href="" data-uk-slidenav-previous></a>
-<a href="" data-uk-slidenav-next></a>
+<a href="" data-uk-slidenav-previous></a> <a href="" data-uk-slidenav-next></a>
 ```
 
 ### Example
@@ -14721,9 +14672,8 @@ To position the slidenav on top of an element or the [Slideshow component](https
 </div>
 ```
 
-
-
 # File: slider.md
+
 ==================================================
 
 ## Slider
@@ -16129,7 +16079,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```js
-UIkit.slider(element, options);
+UIkit.slider(element, options)
 ```
 
 ### Events
@@ -16152,7 +16102,7 @@ The following methods are available for the component:
 #### Show
 
 ```js
-UIkit.slider(element).show(index);
+UIkit.slider(element).show(index)
 ```
 
 Shows the slider item.
@@ -16160,7 +16110,7 @@ Shows the slider item.
 #### StartAutoplay
 
 ```js
-UIkit.slider(element).startAutoplay();
+UIkit.slider(element).startAutoplay()
 ```
 
 Starts the slider autoplay.
@@ -16168,7 +16118,7 @@ Starts the slider autoplay.
 #### StopAutoplay
 
 ```js
-UIkit.slider(element).stopAutoplay();
+UIkit.slider(element).stopAutoplay()
 ```
 
 Stops the slider autoplay.
@@ -16210,9 +16160,8 @@ The Slider component uses the following translation strings. Learn more about [t
 | `slideX`     | `Slide %s`       | `aria-label` for pagination slide button. |
 | `slideLabel` | `%s of %s`       | `aria-label` for slide.                   |
 
-
-
 # File: slideshow.md
+
 ==================================================
 
 ## Slideshow
@@ -17243,7 +17192,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```js
-UIkit.slideshow(element, options);
+UIkit.slideshow(element, options)
 ```
 
 ### Events
@@ -17266,7 +17215,7 @@ The following methods are available for the component:
 #### Show
 
 ```js
-UIkit.slideshow(element).show(index);
+UIkit.slideshow(element).show(index)
 ```
 
 Shows the slideshow item.
@@ -17274,7 +17223,7 @@ Shows the slideshow item.
 #### startAutoplay
 
 ```js
-UIkit.slideshow(element).startAutoplay();
+UIkit.slideshow(element).startAutoplay()
 ```
 
 Starts the slideshow autoplay.
@@ -17282,7 +17231,7 @@ Starts the slideshow autoplay.
 #### stopAutoplay
 
 ```js
-UIkit.slideshow(element).stopAutoplay();
+UIkit.slideshow(element).stopAutoplay()
 ```
 
 Stops the slideshow autoplay.
@@ -17324,9 +17273,8 @@ The Slideshow component uses the following translation strings. Learn more about
 | `slideX`     | `Slide %s`       | `aria-label` for pagination slide button. |
 | `slideLabel` | `%s of %s`       | `aria-label` for slide.                   |
 
-
-
 # File: sortable.md
+
 ==================================================
 
 ## Sortable
@@ -17594,7 +17542,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.sortable(element, options);
+UIkit.sortable(element, options)
 ```
 
 ### Events
@@ -17609,9 +17557,8 @@ The following events will be triggered on elements with this component attached:
 | `added`   | Fires after an element has been added.   |
 | `removed` | Fires after an element has been removed. |
 
-
-
 # File: spinner.md
+
 ==================================================
 
 ## Spinner
@@ -17649,9 +17596,8 @@ The Spinner component automatically sets the appropriate WAI-ARIA roles, states 
 
 - The _spinner_ has the `status` role.
 
-
-
 # File: stepper.md
+
 ==================================================
 
 ## Stepper
@@ -17750,9 +17696,8 @@ This example can be used to display step numbers within the stepper, helping to 
 </ul>
 ```
 
-
-
 # File: sticky.md
+
 ==================================================
 
 ## Sticky
@@ -18255,7 +18200,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.sticky(element, options);
+UIkit.sticky(element, options)
 ```
 
 ### Events
@@ -18267,9 +18212,8 @@ The following events will be triggered on elements with this component attached:
 | `active`   | Fires after the element becomes sticky.      |
 | `inactive` | Fires after the element is no longer sticky. |
 
-
-
 # File: subnav.md
+
 ==================================================
 
 ## Subnav
@@ -18382,9 +18326,8 @@ You can also use a dropdown from the [Dropdown component](https://franken-ui.dev
 </ul>
 ```
 
-
-
 # File: svg.md
+
 ==================================================
 
 ## SVG
@@ -18409,7 +18352,7 @@ Using the `data-uk-svg` attribute also allows you to inject a symbol from the SV
 <img src="/images/icons.svg#cloud-upload" width="40" height="40" data-uk-svg />
 ```
 
-Note: SVGs will adapt the current color for their stroke and fill color. To prevent this behavior, add the `.uk-preserve` class to the SVG itself or the elements inside the SVG. 
+Note: SVGs will adapt the current color for their stroke and fill color. To prevent this behavior, add the `.uk-preserve` class to the SVG itself or the elements inside the SVG.
 Note: The `loading="lazy"` attribute for `<img>` elements is taken into account, and SVG images will be injected as inline SVG as they enter the viewport.
 
 ## Stroke Animation
@@ -18432,7 +18375,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.svg(element, options);
+UIkit.svg(element, options)
 ```
 
 ### Properties
@@ -18443,13 +18386,12 @@ A JavaScript Promise that will resolve with the added SVG Node.
 
 ```javascript
 UIkit.svg(element).svg.then(function (svg) {
-  svg.querySelector("path").style.stroke = "red";
-});
+  svg.querySelector('path').style.stroke = 'red'
+})
 ```
 
-
-
 # File: switcher.md
+
 ==================================================
 
 ## Switcher
@@ -18845,7 +18787,7 @@ The switcher can also be applied to buttons or button groups from the [Button co
 </ul>
 ```
 
-Note:  Since this example does not wrap the buttons into list items the clickable elements which trigger the content switching has to be changed by using the `toggle` option.
+Note: Since this example does not wrap the buttons into list items the clickable elements which trigger the content switching has to be changed by using the `toggle` option.
 
 ## Switcher and nav
 
@@ -18903,16 +18845,16 @@ To apply the switcher to the [Nav component](https://franken-ui.dev/docs/2.1/nav
 
 Any of these options can be applied to the component attribute. Separate multiple options with a semicolon. [Learn more](https://franken-ui.dev/docs/2.1/javascript#component-configuration)
 
-| Option        | Value        | Default              | Description                                                                                              |
-| ------------- | ------------ | -------------------- | -------------------------------------------------------------------------------------------------------- |
-| `connect`     | CSS selector | `~.uk-switcher`      | Related items container. By default succeeding elements with class 'uk-switcher'.                        |
-| `toggle `     | CSS selector | `> * > :first-child` | Select the clickable elements which trigger content switching.                                           |
-| `itemNav `    | CSS selector | `false`              | Related nav container. By default, nav items are found in related items container only.                  |
-| `active `     | Number       | `0`                  | Active index on init. Providing a negative number indicates a position starting from the end of the set. |
-| `animation`   | String       | `false`              | Space-separated names of [animations](https://franken-ui.dev/docs/2.1/animation). Comma-separated for animation out.               |
-| `duration`    | Number       | `200`                | The animation duration.                                                                                  |
-| `swiping`     | Boolean      | `true`               | Use swiping.                                                                                             |
-| `followFocus` | Boolean      | `false`              | Selection follows focus automatically.                                                                   |
+| Option        | Value        | Default              | Description                                                                                                          |
+| ------------- | ------------ | -------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `connect`     | CSS selector | `~.uk-switcher`      | Related items container. By default succeeding elements with class 'uk-switcher'.                                    |
+| `toggle `     | CSS selector | `> * > :first-child` | Select the clickable elements which trigger content switching.                                                       |
+| `itemNav `    | CSS selector | `false`              | Related nav container. By default, nav items are found in related items container only.                              |
+| `active `     | Number       | `0`                  | Active index on init. Providing a negative number indicates a position starting from the end of the set.             |
+| `animation`   | String       | `false`              | Space-separated names of [animations](https://franken-ui.dev/docs/2.1/animation). Comma-separated for animation out. |
+| `duration`    | Number       | `200`                | The animation duration.                                                                                              |
+| `swiping`     | Boolean      | `true`               | Use swiping.                                                                                                         |
+| `followFocus` | Boolean      | `false`              | Selection follows focus automatically.                                                                               |
 
 `connect` is the _Primary_ option and its key may be omitted, if it's the only option in the attribute value.
 
@@ -18927,7 +18869,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.switcher(element, options);
+UIkit.switcher(element, options)
 ```
 
 ### Events
@@ -18950,7 +18892,7 @@ The following methods are available for the component:
 #### Show
 
 ```javascript
-UIkit.switcher(element).show(index);
+UIkit.switcher(element).show(index)
 ```
 
 Shows the Switcher item with given index.
@@ -18980,9 +18922,8 @@ The toggle navigation can be accessed through keyboard using the following keys.
 
 By default, the Switcher component has the manual activation behavior. This means the corresponding content items will only be activated using the <kbd>enter</kbd> or <kbd>space</kbd>keys. To switch to automatic activation, set `follow-focus` to `true`. When navigating through toggle items, the corresponding content item will get active automatically.
 
-
-
 # File: tab.md
+
 ==================================================
 
 ## Tab
@@ -19197,7 +19138,7 @@ Any of these options can be applied to the component attribute. Separate multipl
 | `connect`   | CSS selector   | `false` | Related item's container. By default, this is the next element with the 'uk-switcher' class.                                                                 |
 | `toggle `   | CSS selector   | `> *`   | The toggle selector, which triggers content switching on click.                                                                                              |
 | `active `   | Number         | `0`     | Active index on init. Providing a negative number indicates a position starting from the end of the set.                                                     |
-| `animation` | String         | `false` | Space-separated names of [animations](https://franken-ui.dev/docs/2.1/animation). Comma-separated for animation out.                                                                   |
+| `animation` | String         | `false` | Space-separated names of [animations](https://franken-ui.dev/docs/2.1/animation). Comma-separated for animation out.                                         |
 | `duration`  | Number         | `200`   | The animation duration.                                                                                                                                      |
 | `swiping`   | Boolean        | `true`  | Use swiping.                                                                                                                                                 |
 | `media`     | Number, String | `960`   | When to switch to horizontal mode - a width as integer (e.g. 640) or a breakpoint (e.g. @s, @m, @l, @xl) or any valid media query (e.g. (min-width: 900px)). |
@@ -19209,7 +19150,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.tab(element, options);
+UIkit.tab(element, options)
 ```
 
 ### Events
@@ -19232,7 +19173,7 @@ The following methods are available for the component:
 #### Show
 
 ```javascript
-UIkit.tab(element).show(index);
+UIkit.tab(element).show(index)
 ```
 
 Shows the Tab item with given index.
@@ -19262,9 +19203,8 @@ The tab navigation can be accessed through keyboard using the following keys.
 
 By default, the Switcher component has the manual activation behavior. This means the corresponding content items will only be activated using the <kbd>enter</kbd> or <kbd>space</kbd>keys. To switch to automatic activation, set `follow-focus` to `true`. When navigating through tab items, the corresponding content item will get active automatically.
 
-
-
 # File: table.md
+
 ==================================================
 
 ## Table
@@ -19737,7 +19677,6 @@ If you want table columns to stack on small screens, add the `.uk-table-responsi
 
 Note: Resize the browser window to see the columns stack. Additionally, to improve mobile readability, add `data-label="Your Label"` to table cells to show header info next to each data value. For full details, see [PR #95](https://github.com/franken-ui/ui/pull/95).
 
-
 ## Column width modifier
 
 To modify the column width or content, you can use one of the following classes. You just need to add this class to one of the column cells. It's recommended on the header cell.
@@ -19784,7 +19723,7 @@ To optimize the display of table cells and their specific content, you can add o
 
 | Class                 | Description                                                                                                                                                                                                                                   |
 | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.uk-table-link`      | To link an entire cell, add this class to a `<th>`or `<td>` element and insert an `<a>` element. Add the `.uk-link-reset`class from the [Link component](https://franken-ui.dev/docs/2.1/link) to reset the default link styling.                                   |
+| `.uk-table-link`      | To link an entire cell, add this class to a `<th>`or `<td>` element and insert an `<a>` element. Add the `.uk-link-reset`class from the [Link component](https://franken-ui.dev/docs/2.1/link) to reset the default link styling.             |
 | `.uk-preserve-width ` | Since images are responsive by default in UIkit, using an image inside a table cell with the `.uk-table-shrink` class would reduce the image width to 0. To prevent this behavior, add the `.uk-preserve-width` class to the `<img>` element. |
 | `.uk-text-truncate`   | When applying a fixed width to a table cell, you might want to add this class to the `<td>` element to truncate the text.                                                                                                                     |
 | `.text-nowrap`        | Add this class from the Tailwind CSS to keep text from wrapping, for example when using the `.uk-table-shrink` class.                                                                                                                         |
@@ -19927,9 +19866,8 @@ To optimize the display of table cells and their specific content, you can add o
 </div>
 ```
 
-
-
 # File: theme-switcher.md
+
 ==================================================
 
 ## Theme switcher
@@ -19940,25 +19878,25 @@ To implement the Theme Switcher, you'll need to make some modifications to your 
 
 ```html
 <script>
-  const htmlElement = document.documentElement;
+  const htmlElement = document.documentElement
 
-  const __FRANKEN__ = JSON.parse(localStorage.getItem("__FRANKEN__") || "{}");
+  const __FRANKEN__ = JSON.parse(localStorage.getItem('__FRANKEN__') || '{}')
 
   if (
-    __FRANKEN__.mode === "dark" ||
+    __FRANKEN__.mode === 'dark' ||
     (!__FRANKEN__.mode &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
   ) {
-    htmlElement.classList.add("dark");
+    htmlElement.classList.add('dark')
   } else {
-    htmlElement.classList.remove("dark");
+    htmlElement.classList.remove('dark')
   }
 
-  htmlElement.classList.add(__FRANKEN__.theme || "uk-theme-neutral");
-  htmlElement.classList.add(__FRANKEN__.radii || "uk-radii-md");
-  htmlElement.classList.add(__FRANKEN__.shadows || "uk-shadows-sm");
-  htmlElement.classList.add(__FRANKEN__.font || "uk-font-sm");
-  htmlElement.classList.add(__FRANKEN__.chart || "uk-chart-default");
+  htmlElement.classList.add(__FRANKEN__.theme || 'uk-theme-neutral')
+  htmlElement.classList.add(__FRANKEN__.radii || 'uk-radii-md')
+  htmlElement.classList.add(__FRANKEN__.shadows || 'uk-shadows-sm')
+  htmlElement.classList.add(__FRANKEN__.font || 'uk-font-sm')
+  htmlElement.classList.add(__FRANKEN__.chart || 'uk-chart-default')
 </script>
 ```
 
@@ -20139,12 +20077,8 @@ To allow users to switch between chart themes, add an `<optgroup data-key="chart
       <!-- ... -->
     </optgroup>
     <optgroup data-key="chart" label="Chart">
-      <option value="uk-chart-default" selected>
-        Default
-      </option>
-      <option data-hex="#e76e50" value="uk-chart-palette">
-        Palette
-      </option>
+      <option value="uk-chart-default" selected>Default</option>
+      <option data-hex="#e76e50" value="uk-chart-palette">Palette</option>
       <option data-hex="#2563eb" value="uk-chart-sapphire">Sapphire</option>
       <option data-hex="#e21d48" value="uk-chart-ruby">Ruby</option>
       <option data-hex="#1dc355" value="uk-chart-emerald">Emerald</option>
@@ -20320,9 +20254,8 @@ The Theme Switcher component triggers the following events on elements with this
 | -------------------------- | --------------------------------- |
 | `uk-theme-switcher:change` | Fired when something has changed. |
 
-
-
 # File: theming.md
+
 ==================================================
 
 ## Theming
@@ -20433,12 +20366,12 @@ To add new colors, simply add them to your main CSS file.
   --warning: 38 92% 50%;
   --warning-foreground: 48 96% 89%;
 }
- 
+
 .dark {
   --warning: 48 96% 89%;
   --warning-foreground: 38 92% 50%;
 }
- 
+
 @theme {
   --color-warning: hsl(var(--warning));
   --color-warning-foreground: hsl(var(--warning-foreground));
@@ -20539,61 +20472,61 @@ Note: If you're using the legacy color generators from version 2.0, make sure to
 **3.** Finally, configure your `vite.config.js` to add the custom palette. You will do this inside the `customPalette` option.
 
 ```js
-import franken from "franken-ui/plugin-vite";
-import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "vite";
+import franken from 'franken-ui/plugin-vite'
+import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
     franken({
       customPalette: {
-        ".uk-theme-emerald": {
-          "--background": "0 0% 100%",
-          "--foreground": "0 0% 4%",
-          "--card": "0 0% 100%",
-          "--card-foreground": "0 0% 4%",
-          "--popover": "0 0% 100%",
-          "--popover-foreground": "0 0% 4%",
-          "--primary": "161.4 93.5% 30.4%",
-          "--primary-foreground": "151.8 81% 95.9%",
-          "--secondary": "0 0% 96%",
-          "--secondary-foreground": "0 0% 9%",
-          "--muted": "0 0% 96%",
-          "--muted-foreground": "0 0% 45%",
-          "--accent": "0 0% 96%",
-          "--accent-foreground": "0 0% 9%",
-          "--destructive": "357 100% 45%",
-          "--destructive-foreground": "0 0% 100%",
-          "--border": "0 0% 90%",
-          "--input": "0 0% 90%",
-          "--ring": "158.1 64.4% 51.6%",
+        '.uk-theme-emerald': {
+          '--background': '0 0% 100%',
+          '--foreground': '0 0% 4%',
+          '--card': '0 0% 100%',
+          '--card-foreground': '0 0% 4%',
+          '--popover': '0 0% 100%',
+          '--popover-foreground': '0 0% 4%',
+          '--primary': '161.4 93.5% 30.4%',
+          '--primary-foreground': '151.8 81% 95.9%',
+          '--secondary': '0 0% 96%',
+          '--secondary-foreground': '0 0% 9%',
+          '--muted': '0 0% 96%',
+          '--muted-foreground': '0 0% 45%',
+          '--accent': '0 0% 96%',
+          '--accent-foreground': '0 0% 9%',
+          '--destructive': '357 100% 45%',
+          '--destructive-foreground': '0 0% 100%',
+          '--border': '0 0% 90%',
+          '--input': '0 0% 90%',
+          '--ring': '158.1 64.4% 51.6%',
         },
-        ".dark.uk-theme-emerald": {
-          "--background": "0 0% 4%",
-          "--foreground": "0 0% 98%",
-          "--card": "0 0% 9%",
-          "--card-foreground": "0 0% 98%",
-          "--popover": "0 0% 15%",
-          "--popover-foreground": "0 0% 98%",
-          "--primary": "160.1 84.1% 39.4%",
-          "--primary-foreground": "151.8 81% 95.9%",
-          "--secondary": "0 0% 15%",
-          "--secondary-foreground": "0 0% 98%",
-          "--muted": "0 0% 15%",
-          "--muted-foreground": "0 0% 63%",
-          "--accent": "0 0% 25%",
-          "--accent-foreground": "0 0% 98%",
-          "--destructive": "357 100% 45%",
-          "--destructive-foreground": "0 0% 100%",
-          "--border": "0 0% 100%",
-          "--input": "0 0% 100%",
-          "--ring": "143.8 61.2% 20.2%",
+        '.dark.uk-theme-emerald': {
+          '--background': '0 0% 4%',
+          '--foreground': '0 0% 98%',
+          '--card': '0 0% 9%',
+          '--card-foreground': '0 0% 98%',
+          '--popover': '0 0% 15%',
+          '--popover-foreground': '0 0% 98%',
+          '--primary': '160.1 84.1% 39.4%',
+          '--primary-foreground': '151.8 81% 95.9%',
+          '--secondary': '0 0% 15%',
+          '--secondary-foreground': '0 0% 98%',
+          '--muted': '0 0% 15%',
+          '--muted-foreground': '0 0% 63%',
+          '--accent': '0 0% 25%',
+          '--accent-foreground': '0 0% 98%',
+          '--destructive': '357 100% 45%',
+          '--destructive-foreground': '0 0% 100%',
+          '--border': '0 0% 100%',
+          '--input': '0 0% 100%',
+          '--ring': '143.8 61.2% 20.2%',
         },
       },
     }),
     tailwindcss(),
   ],
-});
+})
 ```
 
 ## Setting the default palette
@@ -20602,27 +20535,25 @@ To set your newly added palette as the default, simply update the script in your
 
 ```html
 <script>
-  const htmlElement = document.documentElement;
+  const htmlElement = document.documentElement
 
-  const __FRANKEN__ = JSON.parse(
-    localStorage.getItem("__FRANKEN__") || "{}",
-  );
+  const __FRANKEN__ = JSON.parse(localStorage.getItem('__FRANKEN__') || '{}')
 
   if (
-    __FRANKEN__.mode === "dark" ||
+    __FRANKEN__.mode === 'dark' ||
     (!__FRANKEN__.mode &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
   ) {
-    htmlElement.classList.add("dark");
+    htmlElement.classList.add('dark')
   } else {
-    htmlElement.classList.remove("dark");
+    htmlElement.classList.remove('dark')
   }
 
-  htmlElement.classList.add(__FRANKEN__.theme || "uk-theme-emerald");
-  htmlElement.classList.add(__FRANKEN__.radii || "uk-radii-md");
-  htmlElement.classList.add(__FRANKEN__.shadows || "uk-shadows-sm");
-  htmlElement.classList.add(__FRANKEN__.font || "uk-font-sm");
-  htmlElement.classList.add(__FRANKEN__.chart || "uk-chart-default");
+  htmlElement.classList.add(__FRANKEN__.theme || 'uk-theme-emerald')
+  htmlElement.classList.add(__FRANKEN__.radii || 'uk-radii-md')
+  htmlElement.classList.add(__FRANKEN__.shadows || 'uk-shadows-sm')
+  htmlElement.classList.add(__FRANKEN__.font || 'uk-font-sm')
+  htmlElement.classList.add(__FRANKEN__.chart || 'uk-chart-default')
 </script>
 ```
 
@@ -20630,9 +20561,8 @@ To set your newly added palette as the default, simply update the script in your
 
 To register your newly added palette with the [Theme Switcher](https://franken-ui.dev/docs/2.1/theme-switcher#custom-palette), please refer to the corresponding documentation or guide for step-by-step instructions on how to integrate it.
 
-
-
 # File: thumbnav.md
+
 ==================================================
 
 ## Thumbnav
@@ -20763,9 +20693,8 @@ To position the thumbnav on top of an element or the [Slideshow component](https
 </div>
 ```
 
-
-
 # File: toggle.md
+
 ==================================================
 
 ## Toggle
@@ -20995,7 +20924,7 @@ Any of these options can be applied to the component attribute. Separate multipl
 | `mode`      | String         | `click` | Comma-separated list of trigger behaviour modes. (`hover`, `click`, `media`)                                                                                                      |
 | `cls`       | String         | `false` | The class that is being toggled. Defaults to the `hidden` attribute.                                                                                                              |
 | `media`     | Number, String | `false` | In media mode, the breakpoint that triggers the toggle - a width as integer (e.g. 640) or a breakpoint (e.g. @s, @m, @l, @xl) or any valid media query (e.g. (min-width: 900px)). |
-| `animation` | String         | `false` | Space-separated names of [animations](https://franken-ui.dev/docs/2.1/animation). Comma-separated for animation out.                                                                                        |
+| `animation` | String         | `false` | Space-separated names of [animations](https://franken-ui.dev/docs/2.1/animation). Comma-separated for animation out.                                                              |
 | `duration`  | Number         | `200`   | Animation duration in milliseconds.                                                                                                                                               |
 | `queued`    | Boolean        | `true`  | Toggle the targets successively.                                                                                                                                                  |
 
@@ -21012,7 +20941,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```js
-UIkit.toggle(element, options);
+UIkit.toggle(element, options)
 ```
 
 ### Events
@@ -21035,7 +20964,7 @@ The following methods are available for the component:
 #### Toggle
 
 ```js
-UIkit.toggle(element).toggle();
+UIkit.toggle(element).toggle()
 ```
 
 Toggles the Toggle's target.
@@ -21047,9 +20976,8 @@ The Toggle component automatically sets the appropriate WAI-ARIA roles, states a
 - The _toggle_ element has the `button` role if an `<a>` element is used.
 - To implement the [Disclosure (Show/Hide) design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/), manually set an `aria-expanded` attribute. It will automatically update when toggling.
 
-
-
 # File: tooltip.md
+
 ==================================================
 
 ## Tooltip
@@ -21168,16 +21096,16 @@ If you want the tooltip to appear with a little delay, just add the `delay` opti
 
 Any of these options can be applied to the component attribute. Separate multiple options with a semicolon. [Learn more](https://franken-ui.dev/docs/2.1/javascript#component-configuration)
 
-| Option      | Value  | Default            | Description                                                                                          |
-| ----------- | ------ | ------------------ | ---------------------------------------------------------------------------------------------------- |
-| `title`     | String |                    | Tooltip text.                                                                                        |
-| `pos`       | String | `top-center`       | Tooltip position.                                                                                    |
-| `offset`    | Number | `false`            | Tooltip offset.                                                                                      |
-| `animation` | String | `uk-anmt-scale-up` | Space-separated names of [animations](https://franken-ui.dev/docs/2.1/animation). Comma-separated for animation out.           |
-| `duration`  | Number | `100`              | The animation duration.                                                                              |
-| `delay`     | Number | `0`                | The show delay.                                                                                      |
-| `cls`       | String | `uk-active`        | The active class.                                                                                    |
-| `container` | String | `body`             | Define a target container via a selector to specify where the tooltip should be appended in the DOM. |
+| Option      | Value  | Default            | Description                                                                                                          |
+| ----------- | ------ | ------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `title`     | String |                    | Tooltip text.                                                                                                        |
+| `pos`       | String | `top-center`       | Tooltip position.                                                                                                    |
+| `offset`    | Number | `false`            | Tooltip offset.                                                                                                      |
+| `animation` | String | `uk-anmt-scale-up` | Space-separated names of [animations](https://franken-ui.dev/docs/2.1/animation). Comma-separated for animation out. |
+| `duration`  | Number | `100`              | The animation duration.                                                                                              |
+| `delay`     | Number | `0`                | The show delay.                                                                                                      |
+| `cls`       | String | `uk-active`        | The active class.                                                                                                    |
+| `container` | String | `body`             | Define a target container via a selector to specify where the tooltip should be appended in the DOM.                 |
 
 `title` is the _Primary_ option and its key may be omitted, if it's the only option in the attribute value.
 
@@ -21192,7 +21120,7 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```javascript
-UIkit.tooltip(element, options);
+UIkit.tooltip(element, options)
 ```
 
 ### Events
@@ -21211,9 +21139,9 @@ The following events will be triggered on elements, which are injected by this c
 #### Example
 
 ```javascript
-UIkit.util.on(document, "show", ".uk-tooltip.uk-active", function () {
+UIkit.util.on(document, 'show', '.uk-tooltip.uk-active', function () {
   // do something
-});
+})
 ```
 
 ### Methods
@@ -21223,7 +21151,7 @@ The following methods are available for the component:
 #### Show
 
 ```javascript
-UIkit.tooltip(element).show();
+UIkit.tooltip(element).show()
 ```
 
 Shows the Tooltip.
@@ -21231,7 +21159,7 @@ Shows the Tooltip.
 #### Hide
 
 ```javascript
-UIkit.tooltip(element).hide();
+UIkit.tooltip(element).hide()
 ```
 
 Hides the Tooltip.
@@ -21243,9 +21171,8 @@ The Tooltip component adheres to the [Tooltip Widget WAI-ARIA design pattern](ht
 - The _element with the tooltip_ has an ID.
 - The _tooltip_ has the `tooltip` role and the `aria-describedby` property set to the ID of the element with the tooltip.
 
-
-
 # File: transition.md
+
 ==================================================
 
 ## Transition
@@ -21343,9 +21270,8 @@ To toggle a transition on hover or focus, add the `.uk-transition-toggle` class 
 </div>
 ```
 
-
-
 # File: typography.md
+
 ==================================================
 
 ## Headings
@@ -21481,9 +21407,8 @@ To apply a gradient or background image to text, add the `.uk-text-background` c
 </h1>
 ```
 
-
-
 # File: utility.md
+
 ==================================================
 
 ## Overflow
@@ -21907,9 +21832,8 @@ To disable the click behavior of any element, like a `<a>`, `<button>` or `<ifra
 <a class="uk-disabled uk-btn uk-btn-default" href="#">Disabled</a>
 ```
 
-
-
 # File: video.md
+
 ==================================================
 
 ## Video
@@ -22040,6 +21964,5 @@ Learn more about [JavaScript components](https://franken-ui.dev/docs/2.1/javascr
 ### Initialization
 
 ```js
-UIkit.video(element, options);
+UIkit.video(element, options)
 ```
-

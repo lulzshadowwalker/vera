@@ -1,5 +1,5 @@
-import "./bootstrap";
-import "./theme";
+import './bootstrap'
+import './theme'
 
-import "franken-ui/js/core.iife";
-import "franken-ui/js/icon.iife";
+import 'franken-ui/js/core.iife'
+import 'franken-ui/js/icon.iife'
