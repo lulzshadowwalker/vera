@@ -47,7 +47,7 @@
                                 aria-haspopup="menu"
                                 aria-controls="js-user-dropdown-menu-menu"
                                 aria-expanded="false"
-                                class="btn btn-outline btn-sm flex h-12 w-12 cursor-pointer items-center gap-2 rounded-full">
+                                class="btn-secondary btn-sm flex h-10 w-10 cursor-pointer items-center gap-2 rounded-full">
                             <i class="hgi hgi-stroke hgi-user"></i>
                         </button>
                         <div id="js-user-dropdown-menu-popover"

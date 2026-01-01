@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\RegisterVerifyOtpRequest;
+use App\Models\Country;
 use App\Models\Supplier;
 use App\Models\User;
 use App\Notifications\OtpNotification;
@@ -30,7 +31,9 @@ class RegisterController extends Controller
      */
     public function index(): View
     {
-        return view('auth.register.index');
+        return view('auth.register.index', [
+            'countries' => Country::orderBy('name')->get(),
+        ]);
     }
 
     /**
@@ -82,6 +85,7 @@ class RegisterController extends Controller
                 'last_name' => $validated['last_name'],
                 'email' => $validated['email'],
                 'backup_email' => $validated['backup_email'] ?? null,
+                'country_id' => $validated['country_id'] ?? null,
                 'domain' => $domain,
             ],
         ]);
@@ -228,6 +232,7 @@ class RegisterController extends Controller
                     $registrationData['last_name'],
                 'email' => $registrationData['email'],
                 'backup_email' => $registrationData['backup_email'],
+                'country_id' => $registrationData['country_id'] ?? null,
                 'supplier_id' => $supplier->id,
                 'email_verified_at' => now(),
                 'password' => bcrypt(Str::random(16)),
