@@ -30,60 +30,30 @@
                     </p>
                 </div>
 
-                <form action="{{ route('auth.register.confirm-otp') }}" method="POST" class="space-y-4" x-data="{
-                    otp: ['', '', '', '', '', ''],
-                    get code() { return this.otp.join(''); },
-                    handleInput(index, event) {
-                        const value = event.target.value;
-                        if (value.length > 1) {
-                            this.otp[index] = value.slice(0, 1);
-                            return;
-                        }
-                        this.otp[index] = value;
-                        if (value && index < 5) {
-                            this.$refs[`input_${index + 1}`].focus();
-                        }
-                    },
-                    handlePaste(event) {
-                        event.preventDefault();
-                        const pastedData = event.clipboardData.getData('text').slice(0, 6).split('');
-                        pastedData.forEach((char, i) => {
-                            if (i < 6) this.otp[i] = char;
-                        });
-                        if (pastedData.length === 6) {
-                            this.$refs.input_5.focus();
-                        }
-                    },
-                    handleBackspace(index, event) {
-                        if (event.key === 'Backspace' && !this.otp[index] && index > 0) {
-                            this.$refs[`input_${index - 1}`].focus();
-                        }
-                    }
-                }">
+                <form action="{{ route('auth.register.confirm-otp') }}" method="POST" class="space-y-4" x-data="pin">
                     @csrf
                     <input type="hidden" name="email" value="{{ session('registration_data.email') }}">
-                    <input type="hidden" name="otp" :value="code">
+                    <input type="hidden" name="otp" x-model="value">
 
-                    <div class="mt-4 flex justify-center gap-2">
-                        <template x-for="(digit, index) in otp" :key="index">
+                    <div x-ref="container" class="mt-4 flex justify-center gap-2">
+                        <template x-for="(input, index) in length" :key="index">
                             <input type="text"
-                                :x-ref="`input_${index}`"
-                                x-model="otp[index]"
-                                @input="handleInput(index, $event)"
-                                @keydown="handleBackspace(index, $event)"
-                                @paste="handlePaste($event)"
+                                type="tel"
+                                @input="onInput($event, index)"
+                                @keydown.backspace="onBackspace($event, index)"
+                                @paste="onPaste($event)"
                                 maxlength="1"
-                                class="input h-14 w-10 text-center text-xl font-bold"
+                                class="js-pin-input input h-12 min-w-12 text-center text-xl font-bold"
                                 :autofocus="index === 0"
                             >
                         </template>
                     </div>
 
                     @error('otp')
-                        <div class="text-destructive text-center mt-2 text-sm">{{ $message }}</div>
+                        <div class="text-destructive text-start mt-2 text-sm">{{ $message }}</div>
                     @enderror
 
-                    <button type="submit" class="btn btn-primary w-full" :disabled="code.length !== 6">
+                    <button type="submit" class="btn btn-primary w-full" :disabled="value.length !== 6">
                         Verify & Create Account
                     </button>
                 </form>

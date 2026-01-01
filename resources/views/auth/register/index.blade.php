@@ -34,7 +34,7 @@
                     @csrf
 
                     <div class="flex items-center gap-2">
-                        <div class="flex-1">
+                        <div class="flex-1 grid gap-2">
                             <label for="first_name" class="label">First Name <span class="text-destructive">*</span></label>
                             <div>
                                 <input
@@ -52,7 +52,7 @@
                             @enderror
                         </div>
 
-                        <div class="flex-1">
+                        <div class="flex-1 grid gap-2">
                             <label for="last_name" class="label">Last Name <span class="text-destructive">*</span></label>
                             <div>
                                 <input
@@ -71,7 +71,7 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="grid gap-2">
                         <label for="email" class="label">Work Email <span class="text-destructive">*</span></label>
                         <div>
                             <input
@@ -90,7 +90,7 @@
                         <div class="text-muted-foreground text-sm mt-1">Please use your work email. Public email providers are not allowed.</div>
                     </div>
 
-                    <div>
+                    <div class="grid gap-2">
                         <label for="backup_email" class="label">Backup Email</label>
                         <div>
                             <input

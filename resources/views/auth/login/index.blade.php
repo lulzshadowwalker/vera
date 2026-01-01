@@ -32,7 +32,7 @@
 
                 <form action="{{ route('auth.login.store') }}" method="POST" class="space-y-4">
                     @csrf
-                    <div>
+                    <div class="grid gap-2">
                         <label for="email" class="label">Email <span class="text-destructive">*</span></label>
                         <div>
                             <input

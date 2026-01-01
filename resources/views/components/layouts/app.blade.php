@@ -28,15 +28,16 @@
 
 <body class="flex min-h-screen flex-col">
     <x-header />
-    <main class="bg-background text-foreground flex-1">
-        <div
-             class="fixed left-4 right-4 top-4 z-50 sm:bottom-4 sm:left-auto sm:right-4 sm:top-auto sm:w-full sm:max-w-md">
-            <x-alerts />
-        </div>
 
+    <main class="bg-background text-foreground flex-1 mt-20">
         @yield('content')
     </main>
     <x-footer />
+
+<div
+      class="fixed left-4 right-4 top-4 z-50 sm:bottom-4 sm:left-auto sm:right-4 sm:top-auto sm:w-full sm:max-w-md">
+<x-alerts />
+</div>
 
     @stack('scripts')
 </body>

@@ -183,7 +183,7 @@
                         <a href="{{ route('suppliers.show', auth()->user()->supplier) }}"
                            class="btn btn-ghost justify-start">
                             <i class="hgi hgi-stroke hgi-building-03"></i>
-                            My Organization
+16
                         </a>
                     @endif
 
