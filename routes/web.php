@@ -116,3 +116,5 @@ Route::resource('reviews', App\Http\Controllers\ReviewController::class)->only(
     'store',
     'show',
 );
+
+Route::post('/ajax/theme', App\Http\Controllers\ThemeController::class)->name('theme.toggle');

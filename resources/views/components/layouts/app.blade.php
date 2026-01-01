@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="{{ session('theme') === 'dark' ? 'dark' : '' }}">
 
 <head>
     <meta charset="utf-8">
@@ -29,15 +29,35 @@
 <body class="flex min-h-screen flex-col">
     <x-header />
 
-    <main class="bg-background text-foreground flex-1 mt-20">
+    <main class="bg-background text-foreground mt-20 flex-1">
         @yield('content')
     </main>
     <x-footer />
 
-<div
-      class="fixed left-4 right-4 top-4 z-50 sm:bottom-4 sm:left-auto sm:right-4 sm:top-auto sm:w-full sm:max-w-md">
-<x-alerts />
-</div>
+    <div class="fixed left-4 right-4 top-4 z-50 sm:bottom-4 sm:left-auto sm:right-4 sm:top-auto sm:w-full sm:max-w-md">
+        <x-alerts />
+    </div>
+
+    <script>
+        function toggleTheme() {
+            fetch('{{ route('theme.toggle') }}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            });
+        }
+    </script>
 
     @stack('scripts')
 </body>
