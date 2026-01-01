@@ -29,9 +29,10 @@
 <body class="flex min-h-screen flex-col">
     <x-header />
 
-    <main class="bg-background text-foreground mt-20 flex-1">
+    <main class="bg-background text-foreground mt-18 flex-1">
         @yield('content')
     </main>
+
     <x-footer />
 
     <div class="fixed left-4 right-4 top-4 z-50 sm:bottom-4 sm:left-auto sm:right-4 sm:top-auto sm:w-full sm:max-w-md">

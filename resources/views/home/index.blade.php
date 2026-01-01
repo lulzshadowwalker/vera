@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative py-20 md:py-28 bg-black min-h-[90vh]">
+<section class="relative py-20 md:py-28 bg-black min-h-[90vh] -mt-18">
     <!-- Unicorn Studio Background -->
     <div class="absolute inset-0 w-full h-full overflow-hidden">
         <div data-us-project="KJT9Cc9mnGfTRbyIClhJ" data-us-scale="1" data-us-dpi="1.5" data-us-lazyload="true" class="w-full h-full"></div>

@@ -7,7 +7,7 @@
             <div class="mx-auto max-w-7xl px-6 py-4">
                 <nav aria-label="Breadcrumb">
                     <ol
-                        class="text-muted-foreground wrap-break-word mt-18 flex flex-wrap items-center gap-1.5 text-sm sm:gap-2.5">
+                        class="text-muted-foreground wrap-break-word flex flex-wrap items-center gap-1.5 text-sm sm:gap-2.5">
                         <li class="inline-flex items-center gap-1.5">
                             <a href="{{ route('home.index') }}"
                                class="hover:text-foreground transition-colors">Home</a>
