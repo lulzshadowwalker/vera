@@ -95,26 +95,24 @@ Route::get('/terms-and-conditions', [
 Route::get('/suppliers', [
     App\Http\Controllers\SupplierController::class,
     'index',
-])->name('suppliers.index');
+])->name('suppliers.index')->middleware('auth');
 Route::get('/suppliers/{supplier:slug}', [
     App\Http\Controllers\SupplierController::class,
     'show',
-])->name('suppliers.show');
+])->name('suppliers.show')->middleware('auth');
 
 Route::get('/suppliers/{supplier:slug}/reviews/create', [
     App\Http\Controllers\ReviewController::class,
     'create',
-])->name('suppliers.reviews.create');
+])->name('suppliers.reviews.create')->middleware('auth');
 
 Route::post('/reviews/initiate', [
     App\Http\Controllers\ReviewInitiationController::class,
     'store',
 ])->name('reviews.initiate')->middleware('auth');
 
-Route::resource('reviews', App\Http\Controllers\ReviewController::class)->only(
-    'create',
-    'store',
-    'show',
-);
+Route::get('/reviews/create', [App\Http\Controllers\ReviewController::class, 'create'])->name('reviews.create')->middleware('auth');
+Route::post('/reviews', [App\Http\Controllers\ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
+Route::get('/reviews/{review}', [App\Http\Controllers\ReviewController::class, 'show'])->name('reviews.show');
 
 Route::post('/ajax/theme', App\Http\Controllers\ThemeController::class)->name('theme.toggle');
