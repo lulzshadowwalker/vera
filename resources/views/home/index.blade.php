@@ -215,89 +215,91 @@
         </div>
 
         <div class="space-y-4">
-            <details class="group card p-4">
-                <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
-                    How do I leave a review for a supplier?
-                    <span class="transition-transform group-open:rotate-180">
-<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
-                    </span>
-                </summary>
-                <div class="mt-4 text-muted-foreground leading-relaxed">
-                    <p>
-                        Sign up with your work email, verify your account, and search for the supplier you want to review. You'll rate them on 10 key metrics including cost, quality, reliability, and communication. You can also add an optional comment.
-                    </p>
-                </div>
-            </details>
+            <section class="accordion">
+                <details class="group border-b last:border-b-0">
+                    <summary class="w-full focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all outline-none rounded-md">
+                        <h2 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
+                            How do I leave a review for a supplier?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180"><path d="m6 9 6 6 6-6" /></svg>
+                        </h2>
+                    </summary>
+                    <section class="pb-4">
+                        <p class="text-sm text-muted-foreground leading-relaxed">
+                            Sign up with your work email, verify your account, and search for the supplier you want to review. You'll rate them on 10 key metrics including cost, quality, reliability, and communication. You can also add an optional comment.
+                        </p>
+                    </section>
+                </details>
 
-            <details class="group card p-4">
-                <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
-                    Is the platform free to use?
-                    <span class="transition-transform group-open:rotate-180">
-<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
-                    </span>
-                </summary>
-                <div class="mt-4 text-muted-foreground leading-relaxed">
-                    <p>
-                        Yes! Basic access is completely free. You can browse reviews, search suppliers, and leave feedback at no cost. We'll be introducing premium plans in the future with advanced features like team access and detailed analytics.
-                    </p>
-                </div>
-            </details>
+                <details class="group border-b last:border-b-0">
+                    <summary class="w-full focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all outline-none rounded-md">
+                        <h2 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
+                            Is the platform free to use?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180"><path d="m6 9 6 6 6-6" /></svg>
+                        </h2>
+                    </summary>
+                    <section class="pb-4">
+                        <p class="text-sm text-muted-foreground leading-relaxed">
+                            Yes! Basic access is completely free. You can browse reviews, search suppliers, and leave feedback at no cost. We'll be introducing premium plans in the future with advanced features like team access and detailed analytics.
+                        </p>
+                    </section>
+                </details>
 
-            <details class="group card p-4">
-                <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
-                    How are suppliers verified?
-                    <span class="transition-transform group-open:rotate-180">
-<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
-                    </span>
-                </summary>
-                <div class="mt-4 text-muted-foreground leading-relaxed">
-                    <p>
-                        All suppliers are automatically identified by their domain when users submit reviews. Reviews are tied to verified business email addresses, ensuring authenticity. We prevent self-reviews by checking domain matches between reviewers and suppliers.
-                    </p>
-                </div>
-            </details>
+                <details class="group border-b last:border-b-0">
+                    <summary class="w-full focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all outline-none rounded-md">
+                        <h2 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
+                            How are suppliers verified?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180"><path d="m6 9 6 6 6-6" /></svg>
+                        </h2>
+                    </summary>
+                    <section class="pb-4">
+                        <p class="text-sm text-muted-foreground leading-relaxed">
+                            All suppliers are automatically identified by their domain when users submit reviews. Reviews are tied to verified business email addresses, ensuring authenticity. We prevent self-reviews by checking domain matches between reviewers and suppliers.
+                        </p>
+                    </section>
+                </details>
 
-            <details class="group card p-4">
-                <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
-                    Can I share supplier profiles?
-                    <span class="transition-transform group-open:rotate-180">
-<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
-                    </span>
-                </summary>
-                <div class="mt-4 text-muted-foreground leading-relaxed">
-                    <p>
-                        Absolutely! Each supplier has a public profile page with aggregated ratings and recent reviews. Share the link with your team or network to help others make informed decisions.
-                    </p>
-                </div>
-            </details>
+                <details class="group border-b last:border-b-0">
+                    <summary class="w-full focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all outline-none rounded-md">
+                        <h2 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
+                            Can I share supplier profiles?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180"><path d="m6 9 6 6 6-6" /></svg>
+                        </h2>
+                    </summary>
+                    <section class="pb-4">
+                        <p class="text-sm text-muted-foreground leading-relaxed">
+                            Absolutely! Each supplier has a public profile page with aggregated ratings and recent reviews. Share the link with your team or network to help others make informed decisions.
+                        </p>
+                    </section>
+                </details>
 
-            <details class="group card p-4">
-                <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
-                    Can I review anonymously?
-                    <span class="transition-transform group-open:rotate-180">
-<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
-                    </span>
-                </summary>
-                <div class="mt-4 text-muted-foreground leading-relaxed">
-                    <p>
-                        Yes. By default, all reviews are anonymous. If you choose to make your review public, it will display your organization name and first initial (e.g., "ABC Corp - J."). You're always in control of your privacy.
-                    </p>
-                </div>
-            </details>
+                <details class="group border-b last:border-b-0">
+                    <summary class="w-full focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all outline-none rounded-md">
+                        <h2 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
+                            Can I review anonymously?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180"><path d="m6 9 6 6 6-6" /></svg>
+                        </h2>
+                    </summary>
+                    <section class="pb-4">
+                        <p class="text-sm text-muted-foreground leading-relaxed">
+                            Yes. By default, all reviews are anonymous. If you choose to make your review public, it will display your organization name and first initial (e.g., "ABC Corp - J."). You're always in control of your privacy.
+                        </p>
+                    </section>
+                </details>
 
-            <details class="group card p-4">
-                <summary class="flex items-center justify-between cursor-pointer list-none text-lg font-semibold">
-                    What metrics are included in reviews?
-                    <span class="transition-transform group-open:rotate-180">
-<i class="hgi hgi-stroke hgi-arrow-down-01"></i>
-                    </span>
-                </summary>
-                <div class="mt-4 text-muted-foreground leading-relaxed">
-                    <p>
-                        Each review rates suppliers on 10 key metrics: Cost, Speed, Communication, Reliability, Quality, Support, Flexibility, Innovation, Value, and Timeliness. This comprehensive approach gives you a complete picture of supplier performance.
-                    </p>
-                </div>
-            </details>
+                <details class="group border-b last:border-b-0">
+                    <summary class="w-full focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all outline-none rounded-md">
+                        <h2 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
+                            What metrics are included in reviews?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180"><path d="m6 9 6 6 6-6" /></svg>
+                        </h2>
+                    </summary>
+                    <section class="pb-4">
+                        <p class="text-sm text-muted-foreground leading-relaxed">
+                            Each review rates suppliers on 10 key metrics: Cost, Speed, Communication, Reliability, Quality, Support, Flexibility, Innovation, Value, and Timeliness. This comprehensive approach gives you a complete picture of supplier performance.
+                        </p>
+                    </section>
+                </details>
+            </section>
         </div>
     </div>
 </section>
@@ -333,6 +335,24 @@
             UnicornStudio.init().catch(console.error);
         }
     });
+</script>
+<script>
+    (() => {
+        const accordions = document.querySelectorAll(".accordion");
+        accordions.forEach((accordion) => {
+            accordion.addEventListener("click", (event) => {
+                const summary = event.target.closest("summary");
+                if (!summary) return;
+                const details = summary.closest("details");
+                if (!details) return;
+                accordion.querySelectorAll("details").forEach((detailsEl) => {
+                    if (detailsEl !== details) {
+                        detailsEl.removeAttribute("open");
+                    }
+                });
+            });
+        });
+    })();
 </script>
 @endpush
 @endsection
