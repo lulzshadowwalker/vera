@@ -21,7 +21,6 @@ class Review extends Model
         'reviewed_supplier_id',
         'user_id',
         'deal_date',
-        'country',
         'cost',
         'accuracy',
         'compliance',

@@ -157,15 +157,6 @@
                                 <p class="font-semibold">{{ $review->created_at->format('M d, Y') }}</p>
                                 <p class="text-muted-foreground text-xs">{{ $review->created_at->diffForHumans() }}</p>
                             </div>
-                            @if ($review->country)
-                                <div class="bg-muted/50 rounded-lg p-3">
-                                    <p class="text-muted-foreground mb-1 text-xs">Location</p>
-                                    <p class="flex items-center justify-center gap-1 font-semibold">
-                                        <i class="hgi hgi-stroke hgi-location-03"></i>
-                                        {{ $review->country }}
-                                    </p>
-                                </div>
-                            @endif
                         </div>
                     </div>
 

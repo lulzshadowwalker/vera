@@ -41,7 +41,6 @@ class ReviewStoreRequest extends FormRequest
             ],
             'user_id' => ['required', 'integer', 'exists:users,id'],
             'deal_date' => ['required', 'date', 'before:now', 'after:-3 years'],
-            'country' => ['nullable', 'string', 'max:2'],
             'cost' => ['required', 'integer', 'min:1', 'max:10'],
             'accuracy' => ['required', 'integer', 'min:1', 'max:10'],
             'compliance' => ['required', 'integer', 'min:1', 'max:10'],

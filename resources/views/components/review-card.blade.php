@@ -36,13 +36,6 @@
                     <p class="text-sm font-medium">
                         {{ $review->is_anonymous ? 'Anonymous Reviewer' : $review->user->reviewerSupplier->name ?? 'Anonymous' }}
                     </p>
-                    @if ($review->country)
-                        <p
-                           class="text-muted-foreground mt-1 flex items-center justify-center gap-1 text-sm lg:justify-start">
-                            <i class="hgi hgi-stroke hgi-location-03"></i>
-                            {{ $review->country }}
-                        </p>
-                    @endif
                 @endif
             </div>
         </div>

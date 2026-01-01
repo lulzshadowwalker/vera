@@ -58,7 +58,7 @@
              x-data="{
                  anonymous: {{ old('anonymous', false) ? 'true' : 'false' }},
                  comment: '{{ old('comment', '') }}',
-                 dealAgain: {{ old('deal_again', true) ? 'true' : 'false' }},
+                 dealAgain: '{{ old('deal_again', '1') }}',
                  dealDate: '{{ old('deal_date') }}',
                  get isDealDateValid() {
                      if (!this.dealDate) return true;
@@ -123,31 +123,22 @@
                             @enderror
                         </div>
 
-                        <!-- Country -->
+                        <!-- Today's Date -->
                         <div>
-                            <label class="mb-2 block text-sm font-semibold"
-                                   for="country">
-                                Country (ISO2 Code)
+                            <label class="mb-2 block text-sm font-semibold">
+                                Review Date
                             </label>
                             <div class="relative">
-                                <input class="input @error('country') border-destructive @enderror w-full pl-9"
+                                <input class="input w-full pl-9 bg-muted text-muted-foreground cursor-not-allowed"
                                        type="text"
-                                       name="country"
-                                       id="country"
-                                       maxlength="2"
-                                       value="{{ old('country') }}"
-                                       placeholder="e.g., US, JO, DE">
+                                       value="{{ now()->format('F j, Y') }}"
+                                       disabled
+                                       readonly>
                                 <div class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none">
-                                    <i class="hgi hgi-stroke hgi-globe-02"></i>
+                                    <i class="hgi hgi-stroke hgi-calendar-03"></i>
                                 </div>
                             </div>
-                            <p class="text-muted-foreground mt-1 text-xs">2-letter country code (optional)</p>
-                            @error('country')
-                                <p class="text-destructive mt-2 flex items-center gap-1 text-sm">
-                                    <i class="hgi hgi-stroke hgi-alert-square"></i>
-                                    {{ $message }}
-                                </p>
-                            @enderror
+                            <p class="text-muted-foreground mt-1 text-xs">Reviews are dated automatically.</p>
                         </div>
                     </div>
                 </div>
@@ -208,7 +199,7 @@
 
                 <!-- Would Deal Again -->
                 <div class="card p-6">
-                    <div class="flex items-start gap-6">
+                    <div class="flex flex-col gap-4">
                         <div>
                             <h3 class="mb-2 flex items-center gap-2 text-lg font-bold">
                                 <i class="hgi hgi-stroke hgi-thumbs-up font-normal"></i>
@@ -218,25 +209,24 @@
                                 This helps others understand if you'd recommend this vendor for future business.
                             </p>
                         </div>
-                        <div class="shrink-0">
-                            <label class="relative inline-flex cursor-pointer items-center">
-                                <input type="checkbox"
-                                       name="deal_again"
-                                       id="deal_again"
-                                       x-model="dealAgain"
-                                       class="peer sr-only"
-                                       {{ old('deal_again', true) ? 'checked' : '' }}>
-                                <div
-                                     class="bg-muted peer-focus:ring-primary/30 peer-checked:bg-primary peer h-6 w-11 rounded-full after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4">
+                        
+                        <div class="flex gap-4">
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="deal_again" value="1" x-model="dealAgain" class="peer sr-only">
+                                <div class="flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-muted bg-card p-4 text-muted-foreground transition-all hover:bg-muted/50 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary">
+                                    <i class="hgi hgi-stroke hgi-thumbs-up text-2xl"></i>
+                                    <span class="font-semibold">Yes</span>
+                                </div>
+                            </label>
+                            
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="deal_again" value="0" x-model="dealAgain" class="peer sr-only">
+                                <div class="flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-muted bg-card p-4 text-muted-foreground transition-all hover:bg-muted/50 peer-checked:border-destructive peer-checked:bg-destructive/5 peer-checked:text-destructive">
+                                    <i class="hgi hgi-stroke hgi-thumbs-down text-2xl"></i>
+                                    <span class="font-semibold">No</span>
                                 </div>
                             </label>
                         </div>
-                    </div>
-                    <div class="mt-4 rounded-lg p-3 transition-colors"
-                         :class="dealAgain ? 'bg-primary/10 border border-primary/20' : 'bg-muted'">
-                        <p class="text-sm font-medium"
-                           x-text="dealAgain ? 'Yes, I would work with them again' : 'No, I would not work with them again'">
-                        </p>
                     </div>
                 </div>
 
