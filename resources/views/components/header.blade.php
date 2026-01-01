@@ -121,12 +121,12 @@
                     </div>
                 @else
                     <!-- Guest Links -->
-                    <a href="{{ route('auth.login.index') }}"
-                       class="btn btn-outline btn-sm ml-2">
+                    <button href="{{ route('auth.login.index') }}"
+                       class="btn-secondary btn-sm ml-2">
                         Log In
-                    </a>
+                    </button>
                     <a href="{{ route('auth.register.index') }}"
-                       class="btn btn-primary btn-sm">
+                       class="btn-primary btn-sm">
                         Get Started
                     </a>
                 @endauth
@@ -213,12 +213,12 @@
                     <!-- Guest Mobile Links -->
                     <div class="border-border my-2 border-t pt-2"></div>
                     <a href="{{ route('auth.login.index') }}"
-                       class="btn btn-outline justify-start">
+                       class="btn-outline justify-start">
                         <i class="hgi hgi-stroke hgi-login-02"></i>
-                        Sign In
+                        Log In
                     </a>
                     <a href="{{ route('auth.register.index') }}"
-                       class="btn btn-primary justify-start">
+                       class="btn-primary justify-start">
                         <i class="hgi hgi-stroke hgi-user-add-02"></i>
                         Get Started
                     </a>
