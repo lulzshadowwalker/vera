@@ -47,7 +47,10 @@
                                    class="input input-lg w-full pl-9 rounded-r-none z-10 focus:z-20"
                                    placeholder="Search by vendor name or domain..."
                                    value="{{ request('search') }}"
-                                   aria-label="Search vendors" />
+                                   aria-label="Search vendors" 
+                                   x-data
+                                   x-init="$el.focus()"
+                                   />
                         </div>
                         <button type="submit"
                                 class="btn btn-primary rounded-l-none -ml-px z-10 focus:z-20">
@@ -214,17 +217,25 @@
                                 </div>
                             </div>
                         @empty
-                            <x-empty-state
-                                title="No Suppliers Found"
-                                description="Try adjusting your search or filters to find what you're looking for."
-                                icon="hgi-search-01"
-                            >
-                                <x-slot:actions>
-                                    <a href="{{ route('suppliers.index') }}" class="btn btn-primary">
-                                        Clear Search
-                                    </a>
-                                </x-slot:actions>
-                            </x-empty-state>
+                            @if(request('search'))
+                                <x-empty-state
+                                    title="No Suppliers Found"
+                                    description="Try adjusting your search or filters to find what you're looking for."
+                                    icon="hgi-search-01"
+                                >
+                                    <x-slot:actions>
+                                        <a href="{{ route('suppliers.index') }}" class="btn btn-primary">
+                                            Clear Search
+                                        </a>
+                                    </x-slot:actions>
+                                </x-empty-state>
+                            @else
+                                <x-empty-state
+                                    title="Seek Vendors"
+                                    description="Enter a vendor name or domain to start searching."
+                                    icon="hgi-search-01"
+                                />
+                            @endif
                         @endforelse
                     </div>
 
