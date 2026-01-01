@@ -1,6 +1,15 @@
 <dialog id="review-modal"
         class="dialog w-full sm:max-w-[425px]"
-        onclick="if (event.target === this) this.close()">
+        onclick="if (event.target === this) this.close()"
+        x-data="{
+            domain: '',
+            userDomain: '{{ auth()->user()?->supplier?->domain ?? '' }}',
+            get isSelfReview() {
+                if (!this.domain || !this.userDomain) return false;
+                const cleanDomain = (d) => d.toLowerCase().replace(/^(https?:\/\/)?(www\.)?/, '');
+                return cleanDomain(this.domain) === cleanDomain(this.userDomain);
+            }
+        }">
     <div>
         <header class="flex flex-row items-start justify-between">
             <h2 class="text-xl font-bold">Write a Review</h2>
@@ -28,11 +37,15 @@
                     <input type="text"
                            name="domain"
                            id="domain"
+                           x-model="domain"
                            class="input input-lg w-full rounded-l-none"
                            placeholder="example.com"
                            required
                            autofocus>
                 </div>
+                <p x-show="isSelfReview" x-cloak class="text-destructive mt-1 text-sm">
+                    You cannot review your own supplier.
+                </p>
                 @error('domain')
                     <p class="text-destructive mt-1 text-sm">{{ $message }}</p>
                 @enderror
@@ -42,11 +55,14 @@
                 <button class="btn btn-outline"
                         type="button"
                         onclick="this.closest('dialog').close()">Cancel</button>
-                <button class="btn btn-primary"
-                        type="submit">
-                    Continue
-                    <i class="hgi hgi-stroke hgi-arrow-right-02"></i>
-                </button>
+                <div class="inline-block" :title="isSelfReview ? 'You cannot review your own supplier' : ''">
+                    <button class="btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                            type="submit"
+                            :disabled="isSelfReview">
+                        Continue
+                        <i class="hgi hgi-stroke hgi-arrow-right-02"></i>
+                    </button>
+                </div>
             </footer>
         </form>
     </div>

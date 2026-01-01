@@ -58,7 +58,15 @@
              x-data="{
                  anonymous: {{ old('anonymous', false) ? 'true' : 'false' }},
                  comment: '{{ old('comment', '') }}',
-                 dealAgain: {{ old('deal_again', true) ? 'true' : 'false' }}
+                 dealAgain: {{ old('deal_again', true) ? 'true' : 'false' }},
+                 dealDate: '{{ old('deal_date') }}',
+                 get isDealDateValid() {
+                     if (!this.dealDate) return true;
+                     const date = new Date(this.dealDate);
+                     const threeYearsAgo = new Date();
+                     threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
+                     return date >= threeYearsAgo;
+                 }
              }">
             <form action="{{ route('reviews.store') }}"
                   method="POST"
@@ -94,6 +102,7 @@
                                        type="date"
                                        name="deal_date"
                                        id="deal_date"
+                                       x-model="dealDate"
                                        value="{{ old('deal_date') }}"
                                        max="{{ date('Y-m-d') }}"
                                        required>
@@ -102,6 +111,10 @@
                                 </div>
                             </div>
                             <p class="text-muted-foreground mt-1 text-xs">When did you last work with this vendor?</p>
+                            <p x-show="!isDealDateValid" x-cloak class="text-destructive mt-2 flex items-center gap-1 text-sm">
+                                <i class="hgi hgi-stroke hgi-alert-square"></i>
+                                Deal date cannot be more than 3 years old.
+                            </p>
                             @error('deal_date')
                                 <p class="text-destructive mt-2 flex items-center gap-1 text-sm">
                                     <i class="hgi hgi-stroke hgi-alert-square"></i>
@@ -315,11 +328,14 @@
                                 <i class="hgi hgi-stroke hgi-cancel-01"></i>
                                 Cancel
                             </a>
-                            <button type="submit"
-                                    class="btn btn-primary btn-lg cursor-pointer">
-                                <i class="hgi hgi-stroke hgi-sent"></i>
-                                Submit Review
-                            </button>
+                            <div class="inline-block" :data-tooltip="!isDealDateValid ? 'Deal date must be less than 3 years old' : null" data-side="bottom">
+                                <button type="submit"
+                                        class="w-full btn-primary btn-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                        :disabled="!isDealDateValid">
+                                    <i class="hgi hgi-stroke hgi-sent"></i>
+                                    Submit Review
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

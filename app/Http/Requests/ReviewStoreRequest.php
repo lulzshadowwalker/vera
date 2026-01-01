@@ -32,6 +32,7 @@ class ReviewStoreRequest extends FormRequest
                 'required',
                 'integer',
                 'exists:suppliers,id',
+                'different:reviewed_supplier_id',
             ],
             'reviewed_supplier_id' => [
                 'required',
@@ -39,7 +40,7 @@ class ReviewStoreRequest extends FormRequest
                 'exists:suppliers,id',
             ],
             'user_id' => ['required', 'integer', 'exists:users,id'],
-            'deal_date' => ['required', 'date'],
+            'deal_date' => ['required', 'date', 'before:now', 'after:-3 years'],
             'country' => ['nullable', 'string', 'max:2'],
             'cost' => ['required', 'integer', 'min:1', 'max:10'],
             'accuracy' => ['required', 'integer', 'min:1', 'max:10'],
