@@ -36,7 +36,7 @@
                 <form x-target="js-results"
                       action="{{ route('suppliers.index') }}"
                       method="GET">
-                    <div class="flex flex-col gap-3 md:flex-row">
+                    <div class="flex w-full items-stretch">
                         <div class="relative flex-1">
                             <span class="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2">
                                 <i class="hgi hgi-stroke hgi-search-01"></i>
@@ -44,13 +44,13 @@
                             <input type="search"
                                    role="search"
                                    name="search"
-                                   class="input input-lg w-full pl-9"
+                                   class="input input-lg w-full pl-9 rounded-r-none z-10 focus:z-20"
                                    placeholder="Search by supplier name or domain..."
                                    value="{{ request('search') }}"
                                    aria-label="Search suppliers" />
                         </div>
                         <button type="submit"
-                                class="btn btn-primary btn-lg">
+                                class="btn btn-primary rounded-l-none -ml-px z-10 focus:z-20">
                             Search
                         </button>
                     </div>

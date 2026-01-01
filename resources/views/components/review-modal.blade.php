@@ -23,14 +23,12 @@
             <div>
                 <label for="domain"
                        class="mb-2 block text-sm font-medium">Supplier Domain</label>
-                <div class="relative">
-                    <span class="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2">
-                        <i class="hgi hgi-stroke hgi-globe-02"></i>
-                    </span>
+                <div class="flex w-full items-stretch">
+                    <span class="flex items-center bg-muted border border-input border-r-0 px-3 rounded-l-md text-muted-foreground text-sm">https://</span>
                     <input type="text"
                            name="domain"
                            id="domain"
-                           class="input input-lg w-full pl-9"
+                           class="input input-lg w-full rounded-l-none"
                            placeholder="example.com"
                            required
                            autofocus>

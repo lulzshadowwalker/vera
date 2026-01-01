@@ -89,13 +89,18 @@
                                    for="deal_date">
                                 Deal Date <span class="text-destructive">*</span>
                             </label>
-                            <input class="input @error('deal_date') border-destructive @enderror w-full"
-                                   type="date"
-                                   name="deal_date"
-                                   id="deal_date"
-                                   value="{{ old('deal_date') }}"
-                                   max="{{ date('Y-m-d') }}"
-                                   required>
+                            <div class="relative">
+                                <input class="input @error('deal_date') border-destructive @enderror w-full pl-9"
+                                       type="date"
+                                       name="deal_date"
+                                       id="deal_date"
+                                       value="{{ old('deal_date') }}"
+                                       max="{{ date('Y-m-d') }}"
+                                       required>
+                                <div class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none">
+                                    <i class="hgi hgi-stroke hgi-calendar-03"></i>
+                                </div>
+                            </div>
                             <p class="text-muted-foreground mt-1 text-xs">When did you last work with this supplier?</p>
                             @error('deal_date')
                                 <p class="text-destructive mt-2 flex items-center gap-1 text-sm">
@@ -111,13 +116,18 @@
                                    for="country">
                                 Country (ISO2 Code)
                             </label>
-                            <input class="input @error('country') border-destructive @enderror w-full"
-                                   type="text"
-                                   name="country"
-                                   id="country"
-                                   maxlength="2"
-                                   value="{{ old('country') }}"
-                                   placeholder="e.g., US, JO, DE">
+                            <div class="relative">
+                                <input class="input @error('country') border-destructive @enderror w-full pl-9"
+                                       type="text"
+                                       name="country"
+                                       id="country"
+                                       maxlength="2"
+                                       value="{{ old('country') }}"
+                                       placeholder="e.g., US, JO, DE">
+                                <div class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none">
+                                    <i class="hgi hgi-stroke hgi-globe-02"></i>
+                                </div>
+                            </div>
                             <p class="text-muted-foreground mt-1 text-xs">2-letter country code (optional)</p>
                             @error('country')
                                 <p class="text-destructive mt-2 flex items-center gap-1 text-sm">
