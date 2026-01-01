@@ -41,17 +41,22 @@
                     </button>
 
                     <!-- User Dropdown -->
-                    <div class="dropdown-menu relative">
+                    <div id="js-user-dropdown-menu" class="dropdown-menu relative">
                         <button type="button"
-                                popovertarget="user-dropdown-popover"
+                                id="js-user-dropdown-menu-trigger"
+                                aria-haspopup="menu"
+                                aria-controls="js-user-dropdown-menu-menu"
+                                aria-expanded="false"
                                 class="btn btn-outline btn-sm flex h-12 w-12 cursor-pointer items-center gap-2 rounded-full">
                             <i class="hgi hgi-stroke hgi-user"></i>
                         </button>
-                        <div id="user-dropdown-popover"
-                             popover
-                             class="popover min-w-64"
-                             data-pos="bottom-right">
-                            <div role="menu">
+                        <div id="js-user-dropdown-menu-popover"
+                             data-popover
+                             aria-hidden="true"
+                             class="min-w-64"
+                             data-side="bottom"
+                             data-align="end">
+                            <div role="menu" id="js-user-dropdown-menu-menu" aria-labelledby="js-user-dropdown-menu-trigger">
                                 <!-- User Info Header -->
                                 <div role="group">
                                     <div class="px-3 py-2">
