@@ -29,7 +29,7 @@
                 </a>
                 <a href="{{ route('suppliers.index') }}"
                    class="btn btn-ghost btn-sm {{ request()->routeIs('suppliers.*') ? 'active' : '' }}">
-                    Browse Suppliers
+                    Seek Vendors
                 </a>
 
                 @auth
@@ -164,7 +164,7 @@
                 <a href="{{ route('suppliers.index') }}"
                    class="btn btn-ghost {{ request()->routeIs('suppliers.*') ? 'active' : '' }} justify-start">
                     <i class="hgi hgi-stroke hgi-search-01"></i>
-                    Browse Suppliers
+                    Seek Vendors
                 </a>
 
                 @auth

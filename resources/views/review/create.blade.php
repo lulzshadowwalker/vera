@@ -14,7 +14,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
                         </li>
                         <li class="inline-flex items-center gap-1.5">
-                            <a href="{{ route('suppliers.index') }}" class="hover:text-foreground transition-colors">Suppliers</a>
+                            <a href="{{ route('suppliers.index') }}" class="hover:text-foreground transition-colors">Vendors</a>
                         </li>
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
@@ -77,8 +77,8 @@
 
                 <!-- Deal Information -->
                 <div class="card p-6">
-                    <h2 class="mb-6 flex items-center gap-2 text-xl font-bold">
-                        <i class="hgi hgi-stroke hgi-information-circle font-normal"></i>
+                    <h2 class="sr-only">
+                        {{-- <i class="hgi hgi-stroke hgi-information-circle font-normal"></i> --}}
                         Deal Information
                     </h2>
 
@@ -87,7 +87,7 @@
                         <div>
                             <label class="mb-2 block text-sm font-semibold"
                                    for="deal_date">
-                                Deal Date <span class="text-destructive">*</span>
+                                Deal Date with {{ $supplier->name }} <span class="text-destructive">*</span>
                             </label>
                             <div class="relative">
                                 <input class="input @error('deal_date') border-destructive @enderror w-full pl-9"
@@ -101,7 +101,7 @@
                                     <i class="hgi hgi-stroke hgi-calendar-03"></i>
                                 </div>
                             </div>
-                            <p class="text-muted-foreground mt-1 text-xs">When did you last work with this supplier?</p>
+                            <p class="text-muted-foreground mt-1 text-xs">When did you last work with this vendor?</p>
                             @error('deal_date')
                                 <p class="text-destructive mt-2 flex items-center gap-1 text-sm">
                                     <i class="hgi hgi-stroke hgi-alert-square"></i>
@@ -199,10 +199,10 @@
                         <div>
                             <h3 class="mb-2 flex items-center gap-2 text-lg font-bold">
                                 <i class="hgi hgi-stroke hgi-thumbs-up font-normal"></i>
-                                Would you work with this supplier again?
+                                Would you work with this vendor again?
                             </h3>
                             <p class="text-muted-foreground text-sm">
-                                This helps others understand if you'd recommend this supplier for future business.
+                                This helps others understand if you'd recommend this vendor for future business.
                             </p>
                         </div>
                         <div class="shrink-0">

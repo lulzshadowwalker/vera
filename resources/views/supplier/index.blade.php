@@ -14,7 +14,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
                         </li>
                         <li class="inline-flex items-center gap-1.5">
-                            <span aria-current="page">Suppliers</span>
+                            <span aria-current="page">Vendors</span>
                         </li>
                     </ol>
                 </nav>
@@ -24,8 +24,8 @@
         <!-- Page Header -->
         <div class="bg-card border-border border-b">
             <div class="mx-auto max-w-7xl px-6 py-8">
-                <h1 class="mb-2 text-3xl font-bold md:text-4xl">Browse Suppliers</h1>
-                <p class="text-muted-foreground text-lg">Discover trusted industrial suppliers with verified reviews from
+                <h1 class="mb-2 text-3xl font-bold md:text-4xl">Seek Vendors</h1>
+                <p class="text-muted-foreground text-lg">Discover trusted industrial vendors with verified reviews from
                     real businesses</p>
             </div>
         </div>
@@ -45,9 +45,9 @@
                                    role="search"
                                    name="search"
                                    class="input input-lg w-full pl-9 rounded-r-none z-10 focus:z-20"
-                                   placeholder="Search by supplier name or domain..."
+                                   placeholder="Search by vendor name or domain..."
                                    value="{{ request('search') }}"
-                                   aria-label="Search suppliers" />
+                                   aria-label="Search vendors" />
                         </div>
                         <button type="submit"
                                 class="btn btn-primary rounded-l-none -ml-px z-10 focus:z-20">

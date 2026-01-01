@@ -11,7 +11,7 @@
             </button>
         </header>
         <p class="text-muted-foreground mb-4">
-            Enter the website domain of the supplier you want to review. If they aren't in our system yet, we'll add
+            Enter the website domain of the vendor you want to review. If they aren't in our system yet, we'll add
             them for you.
         </p>
 
@@ -22,7 +22,7 @@
 
             <div>
                 <label for="domain"
-                       class="mb-2 block text-sm font-medium">Supplier Domain</label>
+                       class="mb-2 block text-sm font-medium">Vendor Domain</label>
                 <div class="flex w-full items-stretch">
                     <span class="flex items-center bg-muted border border-input border-r-0 px-3 rounded-l-md text-muted-foreground text-sm">https://</span>
                     <input type="text"

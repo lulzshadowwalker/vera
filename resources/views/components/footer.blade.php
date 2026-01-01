@@ -13,7 +13,7 @@
             <h4 class="text-xl md:text-2xl font-semibold mb-5">Quick Links</h4>
             <ul class="text-foreground-accent">
                 <li class="mb-2"><a class="hover:underline" href="/">Home</a></li>
-                <li class="mb-2"><a class="hover:underline" href="/suppliers">Browse Suppliers</a></li>
+                <li class="mb-2"><a class="hover:underline" href="/suppliers">Seek Vendors</a></li>
             </ul>
         </div>
         <div>

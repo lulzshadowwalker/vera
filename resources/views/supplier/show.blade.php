@@ -28,7 +28,7 @@
                         </li>
                         <li class="inline-flex items-center gap-1.5">
                             <a href="{{ route('suppliers.index') }}"
-                               class="hover:text-foreground transition-colors">Suppliers</a>
+                               class="hover:text-foreground transition-colors">Vendors</a>
                         </li>
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg"

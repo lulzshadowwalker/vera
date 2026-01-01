@@ -71,7 +71,7 @@
                     <section class="flex w-full min-w-0 max-w-sm flex-col items-center gap-4 text-balance text-sm">
                         <div class="flex gap-2">
                             <a href="{{ route('suppliers.index') }}" class="btn btn-primary">
-                                Find Suppliers to Review
+                                Find Vendors to Review
                             </a>
                         </div>
                     </section>
