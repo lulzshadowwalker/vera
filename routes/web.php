@@ -92,16 +92,16 @@ Route::get('/terms-and-conditions', [
 //     App\Http\Controllers\SupplierController::class,
 // )->only("index", "show");
 
-Route::get('/suppliers', [
+Route::get('/vendors', [
     App\Http\Controllers\SupplierController::class,
     'index',
 ])->name('suppliers.index')->middleware('auth');
-Route::get('/suppliers/{supplier:slug}', [
+Route::get('/vendors/{supplier:slug}', [
     App\Http\Controllers\SupplierController::class,
     'show',
 ])->name('suppliers.show')->middleware('auth');
 
-Route::get('/suppliers/{supplier:slug}/reviews/create', [
+Route::get('/vendors/{supplier:slug}/reviews/create', [
     App\Http\Controllers\ReviewController::class,
     'create',
 ])->name('suppliers.reviews.create')->middleware('auth');

@@ -25,7 +25,7 @@ class ReviewController extends Controller
                 ->route('suppliers.show', $supplier)
                 ->with(
                     'warning',
-                    'You cannot review your own supplier.',
+                    'You cannot review your own vendor.',
                 );
         }
 

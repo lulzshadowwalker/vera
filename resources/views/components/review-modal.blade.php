@@ -44,7 +44,7 @@
                            autofocus>
                 </div>
                 <p x-show="isSelfReview" x-cloak class="text-destructive mt-1 text-sm">
-                    You cannot review your own supplier.
+                    You cannot review your own vendor.
                 </p>
                 @error('domain')
                     <p class="text-destructive mt-1 text-sm">{{ $message }}</p>
@@ -52,7 +52,7 @@
             </div>
 
             <footer class="mt-6 flex justify-end gap-2">
-                <button class="btn btn-outline"
+                <button class="btn-outline"
                         type="button"
                         onclick="this.closest('dialog').close()">Cancel</button>
                 <div class="inline-block" :title="isSelfReview ? 'You cannot review your own supplier' : ''">
@@ -60,7 +60,6 @@
                             type="submit"
                             :disabled="isSelfReview">
                         Continue
-                        <i class="hgi hgi-stroke hgi-arrow-right-02"></i>
                     </button>
                 </div>
             </footer>
