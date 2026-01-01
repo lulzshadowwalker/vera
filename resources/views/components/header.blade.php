@@ -121,10 +121,10 @@
                     </div>
                 @else
                     <!-- Guest Links -->
-                    <button href="{{ route('auth.login.index') }}"
+                    <a href="{{ route('auth.login.index') }}"
                        class="btn-secondary btn-sm ml-2">
                         Log In
-                    </button>
+                    </a>
                     <a href="{{ route('auth.register.index') }}"
                        class="btn-primary btn-sm">
                         Get Started

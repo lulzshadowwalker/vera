@@ -62,7 +62,8 @@ class LoginControllerTest extends TestCase
         $this->post(route('auth.login.store'), [
             'email' => 'nonexistent@company.com',
         ])
-            ->assertSessionHasErrors(['email']);
+            ->assertRedirect(route('auth.login.verify'))
+            ->assertSessionHas('success');
     }
 
     #[Test]
@@ -132,10 +133,13 @@ class LoginControllerTest extends TestCase
             'supplier_id' => $supplier->id,
         ]);
 
+        // It should fake success even if case doesn't match (if DB is case sensitive)
+        // Or real success if DB is case insensitive
         $this->post(route('auth.login.store'), [
             'email' => 'JOHN@COMPANY.COM',
         ])
-            ->assertSessionHasErrors(['email']);
+            ->assertRedirect(route('auth.login.verify'))
+            ->assertSessionHas('success');
     }
 
     #[Test]

@@ -23,14 +23,14 @@
             <div class="w-xs space-y-4">
                 <div class="flex flex-col space-y-2 text-center">
                     <h1 class="text-2xl font-semibold tracking-tight">
-                        Welcome back
+                        Reset Password
                     </h1>
                     <p class="text-muted-foreground text-sm">
-                        Enter your email below to sign in to your account
+                        Enter your email address and we'll send you a link to reset your password.
                     </p>
                 </div>
 
-                <form action="{{ route('auth.login.store') }}" method="POST" class="space-y-4">
+                <form action="{{ route('password.email') }}" method="POST" class="space-y-4">
                     @csrf
                     <div class="grid gap-2">
                         <label for="email" class="label">Email <span class="text-destructive">*</span></label>
@@ -51,36 +51,14 @@
                         @enderror
                     </div>
 
-                    <div class="grid gap-2">
-                        <div class="flex items-center justify-between">
-                            <label for="password" class="label">Password</label>
-                            <a href="{{ route('password.request') }}" class="text-sm text-primary hover:underline">
-                                Forgot password?
-                            </a>
-                        </div>
-                        <div>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                class="input w-full @error('password') border-destructive @enderror"
-                                placeholder="Optional - leave blank for OTP"
-                            >
-                        </div>
-                        @error('password')
-                            <div class="text-destructive text-sm mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-
                     <button type="submit" class="btn btn-primary w-full">
-                        Continue
+                        Send Password Reset Link
                     </button>
                 </form>
 
-                <div class="text-center text-sm text-muted-foreground">
-                    Don't have an account?
-                    <a href="{{ route('auth.register.index') }}" class="text-primary hover:underline">
-                        Sign Up
+                <div class="text-center text-sm">
+                    <a href="{{ route('auth.login.index') }}" class="text-primary hover:underline">
+                        Back to Login
                     </a>
                 </div>
             </div>

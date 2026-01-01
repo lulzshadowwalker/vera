@@ -28,34 +28,42 @@ class LoginController extends Controller
     {
         $validated = $request->validated();
 
-        $user = User::where('email', $validated['email'])->first();
+        // Password Login
+        if ($request->filled('password')) {
+            if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']], $request->boolean('remember'))) {
+                $request->session()->regenerate();
+                return redirect()->intended(route('suppliers.index'));
+            }
 
-        if (! $user) {
-            return back()
-                ->withErrors(['email' => 'No account found with this email address.'])
-                ->withInput();
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ])->onlyInput('email');
         }
+
+        $user = User::where('email', $validated['email'])->first();
 
         // Store email in session for OTP verification
         session(['login_email' => $validated['email']]);
 
-        try {
-            // Send OTP
-            $user->sendOneTimePassword();
+        if ($user) {
+            try {
+                // Send OTP
+                $user->sendOneTimePassword();
+            } catch (\Exception $e) {
+                Log::error('Failed to send OTP', [
+                    'email' => $validated['email'],
+                    'error' => $e->getMessage(),
+                ]);
 
-            return redirect()
-                ->route('auth.login.verify')
-                ->with('success', 'A verification code has been sent to your email.');
-        } catch (\Exception $e) {
-            Log::error('Failed to send OTP', [
-                'email' => $validated['email'],
-                'error' => $e->getMessage(),
-            ]);
-
-            return back()
-                ->withErrors(['email' => 'Failed to send verification code. Please try again.'])
-                ->withInput();
+                return back()
+                    ->withErrors(['email' => 'Failed to send verification code. Please try again.'])
+                    ->withInput();
+            }
         }
+
+        return redirect()
+            ->route('auth.login.verify')
+            ->with('success', 'A verification code has been sent to your email.');
     }
 
     /**
@@ -89,9 +97,9 @@ class LoginController extends Controller
         $user = User::where('email', $validated['email'])->first();
 
         if (! $user) {
-            return redirect()
-                ->route('auth.login.index')
-                ->withErrors(['email' => 'User not found.']);
+            return back()
+                ->withErrors(['otp' => 'Invalid verification code.'])
+                ->withInput();
         }
 
         $result = $user->attemptLoginUsingOneTimePassword($validated['otp']);
@@ -129,9 +137,8 @@ class LoginController extends Controller
         $user = User::where('email', $loginEmail)->first();
 
         if (! $user) {
-            return redirect()
-                ->route('auth.login.index')
-                ->with('error', 'User not found.');
+            return back()
+                ->with('success', 'A new verification code has been sent to your email.');
         }
 
         try {

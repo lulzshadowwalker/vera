@@ -60,6 +60,12 @@ Route::middleware('guest')->group(function () {
         RegisterController::class,
         'resendOtp',
     ])->name('auth.register.resend-otp');
+
+    // Password Reset
+    Route::get('/auth/forgot-password', [\App\Http\Controllers\PasswordResetController::class, 'create'])->name('password.request');
+    Route::post('/auth/forgot-password', [\App\Http\Controllers\PasswordResetController::class, 'store'])->name('password.email');
+    Route::get('/auth/reset-password/{token}', [\App\Http\Controllers\PasswordResetController::class, 'edit'])->name('password.reset');
+    Route::post('/auth/reset-password', [\App\Http\Controllers\PasswordResetController::class, 'update'])->name('password.update');
 });
 
 // Logout (Authenticated Only)

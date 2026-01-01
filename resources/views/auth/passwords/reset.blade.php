@@ -23,15 +23,17 @@
             <div class="w-xs space-y-4">
                 <div class="flex flex-col space-y-2 text-center">
                     <h1 class="text-2xl font-semibold tracking-tight">
-                        Welcome back
+                        Reset Password
                     </h1>
                     <p class="text-muted-foreground text-sm">
-                        Enter your email below to sign in to your account
+                        Enter your new password below.
                     </p>
                 </div>
 
-                <form action="{{ route('auth.login.store') }}" method="POST" class="space-y-4">
+                <form action="{{ route('password.update') }}" method="POST" class="space-y-4">
                     @csrf
+                    <input type="hidden" name="token" value="{{ $token }}">
+
                     <div class="grid gap-2">
                         <label for="email" class="label">Email <span class="text-destructive">*</span></label>
                         <div>
@@ -41,7 +43,7 @@
                                 name="email"
                                 class="input w-full @error('email') border-destructive @enderror"
                                 placeholder="email@example.com"
-                                value="{{ old('email') }}"
+                                value="{{ $email ?? old('email') }}"
                                 required
                                 autofocus
                             >
@@ -52,19 +54,14 @@
                     </div>
 
                     <div class="grid gap-2">
-                        <div class="flex items-center justify-between">
-                            <label for="password" class="label">Password</label>
-                            <a href="{{ route('password.request') }}" class="text-sm text-primary hover:underline">
-                                Forgot password?
-                            </a>
-                        </div>
+                        <label for="password" class="label">Password <span class="text-destructive">*</span></label>
                         <div>
                             <input
                                 type="password"
                                 id="password"
                                 name="password"
                                 class="input w-full @error('password') border-destructive @enderror"
-                                placeholder="Optional - leave blank for OTP"
+                                required
                             >
                         </div>
                         @error('password')
@@ -72,17 +69,23 @@
                         @enderror
                     </div>
 
+                    <div class="grid gap-2">
+                        <label for="password_confirmation" class="label">Confirm Password <span class="text-destructive">*</span></label>
+                        <div>
+                            <input
+                                type="password"
+                                id="password_confirmation"
+                                name="password_confirmation"
+                                class="input w-full"
+                                required
+                            >
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-primary w-full">
-                        Continue
+                        Reset Password
                     </button>
                 </form>
-
-                <div class="text-center text-sm text-muted-foreground">
-                    Don't have an account?
-                    <a href="{{ route('auth.register.index') }}" class="text-primary hover:underline">
-                        Sign Up
-                    </a>
-                </div>
             </div>
         </div>
     </div>
