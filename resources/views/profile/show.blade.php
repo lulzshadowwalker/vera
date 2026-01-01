@@ -57,26 +57,17 @@
             </div>
 
             @if($reviews->isEmpty())
-            <div class="col-span-full">
-                <div class="border-border flex min-w-0 flex-1 flex-col items-center justify-center gap-6 text-balance rounded-lg border border-dashed p-6 text-center md:p-12">
-                    <header class="flex max-w-sm flex-col items-center gap-2 text-center">
-                        <div class="bg-secondary/20 text-foreground mb-2 flex size-10 shrink-0 items-center justify-center rounded-lg">
-                            <i class="hgi hgi-stroke hgi-star text-xl"></i>
-                        </div>
-                        <h3 class="text-lg font-medium tracking-tight">No reviews yet</h3>
-                        <p class="text-muted-foreground text-sm/relaxed">
-                            You haven't written any reviews yet. Your insights help others make better decisions.
-                        </p>
-                    </header>
-                    <section class="flex w-full min-w-0 max-w-sm flex-col items-center gap-4 text-balance text-sm">
-                        <div class="flex gap-2">
-                            <a href="{{ route('suppliers.index') }}" class="btn btn-primary">
-                                Find Vendors to Review
-                            </a>
-                        </div>
-                    </section>
-                </div>
-            </div>
+                <x-empty-state
+                    title="No reviews yet"
+                    description="You haven't written any reviews yet. Your insights help others make better decisions."
+                    icon="hgi-star"
+                >
+                    <x-slot:actions>
+                        <a href="{{ route('suppliers.index') }}" class="btn btn-primary">
+                            Find Vendors to Review
+                        </a>
+                    </x-slot:actions>
+                </x-empty-state>
             @else
             <ul id="js-reviews" class="space-y-4">
                 @foreach($reviews as $review)

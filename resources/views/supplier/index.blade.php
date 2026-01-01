@@ -214,30 +214,17 @@
                                 </div>
                             </div>
                         @empty
-                            <div class="col-span-full">
-                                <div
-                                     class="border-border flex min-w-0 flex-1 flex-col items-center justify-center gap-6 text-balance rounded-lg border border-dashed p-6 text-center md:p-12">
-                                    <header class="flex max-w-sm flex-col items-center gap-2 text-center">
-                                        <div
-                                             class="bg-secondary/20 text-foreground mb-2 flex size-10 shrink-0 items-center justify-center rounded-lg">
-                                            <i class="hgi hgi-stroke hgi-search-01 text-xl"></i>
-                                        </div>
-                                        <h3 class="text-lg font-medium tracking-tight">No Suppliers Found</h3>
-                                        <p class="text-muted-foreground text-sm/relaxed">
-                                            Try adjusting your search or filters to find what you're looking for.
-                                        </p>
-                                    </header>
-                                    <section
-                                             class="flex w-full min-w-0 max-w-sm flex-col items-center gap-4 text-balance text-sm">
-                                        <div class="flex gap-2">
-                                            <a href="{{ route('suppliers.index') }}"
-                                               class="btn btn-primary">
-                                                Clear Search
-                                            </a>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
+                            <x-empty-state
+                                title="No Suppliers Found"
+                                description="Try adjusting your search or filters to find what you're looking for."
+                                icon="hgi-search-01"
+                            >
+                                <x-slot:actions>
+                                    <a href="{{ route('suppliers.index') }}" class="btn btn-primary">
+                                        Clear Search
+                                    </a>
+                                </x-slot:actions>
+                            </x-empty-state>
                         @endforelse
                     </div>
 

@@ -6,24 +6,60 @@
         <div class="bg-card border-border border-b">
             <div class="mx-auto max-w-7xl px-6 py-4">
                 <nav aria-label="Breadcrumb">
-                    <ol class="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5">
+                    <ol class="text-muted-foreground flex flex-wrap items-center gap-1.5 break-words text-sm sm:gap-2.5">
                         <li class="inline-flex items-center gap-1.5">
-                            <a href="{{ route('home.index') }}" class="hover:text-foreground transition-colors">Home</a>
+                            <a href="{{ route('home.index') }}"
+                               class="hover:text-foreground transition-colors">Home</a>
                         </li>
                         <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="24"
+                                 height="24"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 class="size-3.5">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
                         </li>
                         <li class="inline-flex items-center gap-1.5">
-                            <a href="{{ route('suppliers.index') }}" class="hover:text-foreground transition-colors">Vendors</a>
+                            <a href="{{ route('suppliers.index') }}"
+                               class="hover:text-foreground transition-colors">Vendors</a>
                         </li>
                         <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="24"
+                                 height="24"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 class="size-3.5">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
                         </li>
                         <li class="inline-flex items-center gap-1.5">
-                            <a href="{{ route('suppliers.show', $review->reviewedSupplier) }}" class="hover:text-foreground transition-colors">{{ $review->reviewedSupplier->name }}</a>
+                            <a href="{{ route('suppliers.show', $review->reviewedSupplier) }}"
+                               class="hover:text-foreground transition-colors">{{ $review->reviewedSupplier->name }}</a>
                         </li>
                         <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 width="24"
+                                 height="24"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 class="size-3.5">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
                         </li>
                         <li class="inline-flex items-center gap-1.5">
                             <span aria-current="page">Review</span>
@@ -220,41 +256,96 @@
                         </a>
                     </div>
 
-                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        @foreach ($review->reviewedSupplier->reviews()->where('id', '!=', $review->id)->limit(3)->get() as $otherReview)
-@php
-    $otherAvg = $otherReview->average_score;
-@endphp
-                <div class="card p-6 transition-shadow hover:shadow-lg">
-                    <div class="mb-4 flex items-start gap-4">
-                        <div class="bg-primary/10 border-primary flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl border-2">
-                            <span class="text-primary text-2xl font-bold">{{ number_format($otherAvg, 1) }}</span>
+                    @auth
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            @foreach ($review->reviewedSupplier->reviews()->where('id', '!=', $review->id)->limit(3)->get() as $otherReview)
+                                @php
+                                    $otherAvg = $otherReview->average_score;
+                                @endphp
+                                <div class="card p-6 transition-shadow hover:shadow-lg">
+                                    <div class="mb-4 flex items-start gap-4">
+                                        <div
+                                             class="bg-primary/10 border-primary flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl border-2">
+                                            <span class="text-primary text-2xl font-bold">{{ number_format($otherAvg, 1) }}</span>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <p class="text-muted-foreground text-sm">{{ $otherReview->created_at->diffForHumans() }}
+                                            </p>
+                                            <p class="truncate text-sm font-medium">
+                                                {{ $otherReview->is_anonymous ? 'Anonymous' : $otherReview->user->reviewerSupplier->name ?? 'Anonymous' }}
+                                            </p>
+                                            <div class="text-muted-foreground mt-1 flex items-center gap-1">
+                                                @if ($review->deal_again)
+                                                    <i class="hgi hgi-stroke hgi-checkmark-circle-02"></i>
+                                                @else
+                                                    <i class="hgi hgi-stroke hgi-cancel-circle"></i>
+                                                @endif
+                                                <span
+                                                      class="text-xs">{{ $otherReview->deal_again ? 'Would work again' : 'Would not work again' }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @if ($otherReview->comment)
+                                        <p class="text-muted-foreground mb-4 line-clamp-2 text-sm">
+                                            {{ Str::limit($otherReview->comment, 100) }}</p>
+                                    @endif
+                                    <a href="{{ route('reviews.show', $otherReview) }}"
+                                       class="btn btn-primary btn-sm w-full">
+                                        Read Full Review
+                                        <i class="hgi hgi-stroke hgi-arrow-right-02"></i>
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="min-w-0 flex-1">
-                            <p class="text-muted-foreground text-sm">{{ $otherReview->created_at->diffForHumans() }}</p>
-                            <p class="truncate text-sm font-medium">
-                                {{ $otherReview->is_anonymous ? 'Anonymous' : $otherReview->user->reviewerSupplier->name ?? 'Anonymous' }}
-                            </p>
-                            <div class="text-muted-foreground mt-1 flex items-center gap-1">
-                                                            @if ($review->deal_again)
-<i class="hgi hgi-stroke hgi-checkmark-circle-02"></i>
-@else
-<i class="hgi hgi-stroke hgi-cancel-circle"></i>
-@endif
-                                <span class="text-xs">{{ $otherReview->deal_again ? 'Would work again' : 'Would not work again' }}</span>
+                    @else
+                        <div class="relative overflow-hidden rounded-xl border border-border bg-card">
+                            <!-- Blurred Background (Fake Content) -->
+                            <div
+                                 class="grid grid-cols-1 gap-6 p-6 opacity-50 blur-sm md:grid-cols-2 lg:grid-cols-3 select-none pointer-events-none">
+                                @for ($i = 0; $i < 3; $i++)
+                                    <div class="card p-6">
+                                        <div class="mb-4 flex items-start gap-4">
+                                            <div class="h-16 w-16 rounded-2xl bg-muted"></div>
+                                            <div class="flex-1 space-y-2">
+                                                <div class="h-4 w-24 rounded bg-muted"></div>
+                                                <div class="h-4 w-32 rounded bg-muted"></div>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-2">
+                                            <div class="h-4 w-full rounded bg-muted"></div>
+                                            <div class="h-4 w-2/3 rounded bg-muted"></div>
+                                        </div>
+                                    </div>
+                                @endfor
+                            </div>
+
+                            <!-- Overlay -->
+                            <div
+                                 class="absolute inset-0 flex flex-col items-center justify-center bg-background/60 p-6 text-center backdrop-blur-[2px]">
+                                <div class="max-w-md space-y-4">
+                                    <div
+                                         class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                        <i class="hgi hgi-stroke hgi-square-lock-02 text-2xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold">Join our community to see more</h3>
+                                    <p class="text-muted-foreground">
+                                        Sign in to access detailed reviews and make better procurement decisions. It's free and takes
+                                        less than a minute.
+                                    </p>
+                                    <div class="flex flex-col gap-3 sm:flex-row sm:justify-center">
+                                        <a href="{{ route('auth.login.index') }}"
+                                           class="btn-primary">
+                                            Log In
+                                        </a>
+                                        <a href="{{ route('auth.register.index') }}"
+                                           class="btn-outline">
+                                            Create an Account
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @if ($otherReview->comment)
-<p class="text-muted-foreground mb-4 line-clamp-2 text-sm">{{ Str::limit($otherReview->comment, 100) }}</p>
-@endif
-                    <a href="{{ route('reviews.show', $otherReview) }}" class="btn btn-primary btn-sm w-full">
-                        Read Full Review
-                                                                                                                        <i class="hgi hgi-stroke hgi-arrow-right-02"></i>
-                    </a>
-                </div>
-@endforeach
-            </div>
+                    @endauth
         </div>
 @endif
     </div>
@@ -283,9 +374,8 @@
         }
 
         function copyLink() {
-            const shareText = 'Check out this review for {{ $review->reviewedSupplier->name }}: {{ url()->current() }}';
             // TODO: Use basecoat toast/alert instead of js alert api.
-            navigator.clipboard.writeText(shareText)
+            navigator.clipboard.writeText('{{ url()->current() }}')
                 .then(() => {
                     alert('Link copied to clipboard!');
                 })
