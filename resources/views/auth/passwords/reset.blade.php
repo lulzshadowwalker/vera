@@ -6,8 +6,8 @@
         <img src="https://images.unsplash.com/photo-1536195892759-c8a3c8e1945e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=627"
             alt="Login Image" class="absolute inset-0 h-full w-full object-cover object-center -z-10" />
         <div class="flex items-center text-lg font-medium">
-            <a href="#">
-                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="Acme Inc." />
+            <a href="{{ route('home.index') }}">
+                <img src="{{ asset('images/logo-white-col.png') }}" alt="{{ config('app.name') }}" class="h-14 w-auto" />
             </a>
         </div>
         <blockquote class="space-y-2">

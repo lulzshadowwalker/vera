@@ -7,7 +7,7 @@
             alt="Login Image" class="absolute inset-0 h-full w-full object-cover object-center -z-10" />
         <div class="flex items-center text-lg font-medium">
             <a href="{{ route('home.index') }}">
-                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="{{ config('app.name') }}" />
+                <img src="{{ asset('images/logo-white-col.png') }}" alt="{{ config('app.name') }}" class="h-14 w-auto" />
             </a>
         </div>
         <blockquote class="space-y-2">

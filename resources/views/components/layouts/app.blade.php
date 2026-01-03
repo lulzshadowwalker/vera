@@ -18,10 +18,13 @@
 
     <script src="https://kit.fontawesome.com/a51f251d24.js"
             crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.36/dist/unicornStudio.umd.js"></script>
 
     <link rel="stylesheet"
           href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/basecoat.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/sidebar.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/dropdown-menu.min.js" defer></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -29,7 +32,7 @@
 <body class="flex min-h-screen flex-col">
     <x-header />
 
-    <main class="bg-background text-foreground mt-18 flex-1">
+    <main class="bg-background text-foreground flex-1">
         @yield('content')
     </main>
 

@@ -2,21 +2,13 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="-mt-18 relative min-h-[90vh] bg-black py-20 md:py-28">
-        <!-- Unicorn Studio Background -->
-        <div class="absolute inset-0 h-full w-full overflow-hidden">
-            <div data-us-project="KJT9Cc9mnGfTRbyIClhJ"
-                 data-us-scale="1"
-                 data-us-dpi="1.5"
-                 data-us-lazyload="true"
-                 class="h-full w-full"></div>
-        </div>
+    <section class="-mt-18 bg-background min-h-[90vh] py-20 md:py-28">
         <div class="relative z-10 mx-auto max-w-7xl px-6">
             <div class="mx-auto max-w-4xl text-center">
-                <h1 class="mb-6 text-balance text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+                <h1 class="text-foreground mb-6 text-balance text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
                     Find Trusted Industrial Vendors, Fast
                 </h1>
-                <p class="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-white/70 md:text-xl">
+                <p class="text-muted-foreground mx-auto mb-10 max-w-2xl text-lg leading-relaxed md:text-xl">
                     Access authentic reviews from verified businesses. Make confident procurement decisions backed by real
                     experiences from your peers.
                 </p>
@@ -29,7 +21,7 @@
                         Seek Vendors
                     </a>
                     <a href="{{ route('auth.register.index') }}"
-                       class="btn h-12 w-full border border-white/20 bg-white/10 px-6 text-white hover:bg-white/20 sm:w-auto">
+                       class="btn border-border bg-muted/50 text-foreground hover:bg-muted h-12 w-full border px-6 sm:w-auto">
                         <i class="hgi hgi-stroke hgi-quill-write-01"></i>
                         Write a Review
                     </a>
@@ -40,18 +32,18 @@
                     <form action="{{ route('suppliers.index') }}"
                           method="GET">
                         <div class="relative w-full">
-                            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-white/70">
+                            <span class="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2">
                                 <i class="hgi hgi-stroke hgi-quill-write-01"></i>
                             </span>
                             <input type="search"
                                    role="search"
-                                   class="input h-12 w-full rounded-lg border-white/20 bg-white/10 pl-4 pr-10 text-white shadow-lg placeholder:text-white/50"
+                                   class="input border-border bg-muted/30 text-foreground placeholder:text-muted-foreground h-12 w-full rounded-lg pl-4 pr-10 shadow-lg"
                                    name="search"
                                    placeholder="Search by vendor name or domain..."
                                    aria-label="Search for vendors" />
                         </div>
                     </form>
-                    <p class="mt-3 text-sm text-white/50">
+                    <p class="text-muted-foreground mt-3 text-sm">
                         Try searching for companies like "acme.com" or "ABC Manufacturing"
                     </p>
                 </div>
@@ -60,22 +52,57 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="bg-card border-border border-y py-16">
-        <div class="mx-auto max-w-7xl px-6">
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-                <div class="text-center">
-                    <div class="text-primary mb-2 text-5xl font-bold">{{ number_format($totalReviews ?? 1250) }}</div>
-                    <p class="text-muted-foreground font-medium">Verified Reviews</p>
+    <section class="bg-muted/20 overflow-hidden py-12">
+        <style>
+            @keyframes loop-scroll {
+                from {
+                    transform: translateX(0);
+                }
+
+                to {
+                    transform: translateX(-100%);
+                }
+            }
+
+            .animate-loop-scroll {
+                animation: loop-scroll 30s linear infinite;
+            }
+        </style>
+        <div class="mask-gradient flex w-full overflow-hidden">
+            <!-- Original Set -->
+            @foreach (range(0, 10) as $key)
+                <div class="animate-loop-scroll flex items-center gap-8 pr-8">
+                    <div class="card bg-card w-64 shrink-0 p-6 text-center transition-shadow hover:shadow-md">
+                        <header class="flex flex-col items-center gap-3">
+                            <div class="bg-primary/10 grid h-12 w-12 place-items-center rounded-full">
+                                <i class="hgi hgi-stroke hgi-star-circle text-primary text-2xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($totalReviews ?? 1250) }}
+                                </h2>
+                                <p class="text-muted-foreground text-sm font-medium">Verified Reviews</p>
+                            </div>
+                        </header>
+                    </div>
                 </div>
-                <div class="text-center">
-                    <div class="text-primary mb-2 text-5xl font-bold">{{ number_format($totalSuppliers ?? 500) }}</div>
-                    <p class="text-muted-foreground font-medium">Trusted Vendors</p>
+
+                <!-- Duplicate Set for Infinite Scroll -->
+                <div class="animate-loop-scroll flex items-center gap-8 pr-8"
+                     aria-hidden="true">
+                    <div class="card bg-card w-64 shrink-0 p-6 text-center transition-shadow hover:shadow-md">
+                        <header class="flex flex-col items-center gap-3">
+                            <div class="bg-primary/10 grid h-12 w-12 place-items-center rounded-full">
+                                <i class="hgi hgi-stroke hgi-star-circle text-primary text-2xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($totalReviews ?? 1250) }}
+                                </h2>
+                                <p class="text-muted-foreground text-sm font-medium">Verified Reviews</p>
+                            </div>
+                        </header>
+                    </div>
                 </div>
-                <div class="text-center">
-                    <div class="text-primary mb-2 text-5xl font-bold">{{ number_format($totalUsers ?? 2000) }}</div>
-                    <p class="text-muted-foreground font-medium">Business Users</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 
@@ -283,7 +310,7 @@
                         </summary>
                         <section class="pb-4">
                             <p class="text-muted-foreground text-sm leading-relaxed">
-                            Yes! Basic access is completely free. You can seek reviews, search vendors, and leave
+                                Yes! Basic access is completely free. You can seek reviews, search vendors, and leave
                                 feedback at no cost. We'll be introducing premium plans in the future with advanced features
                                 like team access and detailed analytics.
                             </p>
@@ -411,25 +438,35 @@
 
     <!-- CTA Section -->
     @guest
-        <section class="from-primary to-primary/80 text-primary-foreground bg-gradient-to-br py-20">
-            <div class="mx-auto max-w-7xl px-6">
-                <div class="mx-auto max-w-3xl text-center">
-                    <h2 class="mb-6 text-pretty text-3xl font-bold md:text-4xl">Ready to Make Better Procurement Decisions?
-                    </h2>
-                    <p class="text-primary-foreground/90 mb-10 text-xl leading-6 tracking-wide">
-                        Join thousands of businesses finding trusted vendors through authentic, verified reviews.
-                    </p>
-                    <div class="flex flex-col justify-center gap-4 sm:flex-row">
-                        <a href="{{ route('auth.register.index') }}"
-                           class="btn-primary btn-lg">
-                            <i class="hgi hgi-stroke hgi-user"></i>
-                            Create Free Account
-                        </a>
-                        <a href="{{ route('suppliers.index') }}"
-                           class="btn-lg btn-secondary">
-                            <i class="hgi hgi-stroke hgi-search-01"></i>
-                            Seek Vendors
-                        </a>
+        <section class="px-6 py-24">
+            <div class="mx-auto max-w-7xl">
+                <div
+                     class="card bg-primary text-primary-foreground relative overflow-hidden rounded-3xl px-6 py-16 text-center shadow-2xl md:px-12 md:py-20">
+                    <!-- Background Pattern -->
+                    <div class="pointer-events-none absolute inset-0 opacity-10">
+                        <div class="absolute -left-16 -top-16 h-64 w-64 rounded-full bg-white blur-3xl"></div>
+                        <div class="absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-white blur-3xl"></div>
+                    </div>
+
+                    <div class="relative z-10 mx-auto max-w-3xl">
+                        <h2 class="mb-6 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
+                            Ready to Make Better Procurement Decisions?
+                        </h2>
+                        <p class="text-primary-foreground/90 mb-10 text-lg leading-relaxed md:text-xl">
+                            Join thousands of businesses finding trusted vendors through authentic, verified reviews.
+                        </p>
+                        <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+                            <a href="{{ route('auth.register.index') }}"
+                               class="btn-lg-secondary min-w-[200px]">
+                                <i class="hgi hgi-stroke hgi-user-add-02 mr-2"></i>
+                                Create Free Account
+                            </a>
+                            <a href="{{ route('suppliers.index') }}"
+                               class="btn-lg-secondary min-w-[200px]">
+                                <i class="hgi hgi-stroke hgi-search-01 mr-2"></i>
+                                Seek Vendors
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -437,13 +474,6 @@
     @endguest
 
     @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                if (window.UnicornStudio) {
-                    UnicornStudio.init().catch(console.error);
-                }
-            });
-        </script>
         <script>
             (() => {
                 const accordions = document.querySelectorAll(".accordion");
