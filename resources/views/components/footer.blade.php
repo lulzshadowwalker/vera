@@ -1,53 +1,52 @@
-<footer class="bg-[#1B1B1B] text-[#F0E9D6] py-10">
-    <div class="max-w-7xl w-full mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-        <div>
-            <a class="flex items-center gap-2" href="/">
-                <h3 class="text-3xl md:text-4xl font-semibold cursor-pointer">{{ config('app.name') }}</h3>
-            </a>
-            <p class="mt-3.5 text-foreground-accent leading-6 tracking-wide">
-                A secure, scalable B2B web application built to foster transparency and trust in the industrial supply
-                chain.
-            </p>
-        </div>
-        <div>
-            <h4 class="text-xl md:text-2xl font-semibold mb-5">Quick Links</h4>
-            <ul class="text-foreground-accent">
-                <li class="mb-2"><a class="hover:underline" href="/">Home</a></li>
-                <li class="mb-2"><a class="hover:underline" href="/suppliers">Seek Vendors</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="text-xl md:text-2xl font-semibold mb-5">Legal</h4>
-            <ul class="text-foreground-accent">
-                <li class="mb-2"><a class="hover:underline" href="{{ route('terms-and-conditions.index') }}">Terms of Service</a></li>
-                <li class="mb-2"><a class="hover:underline" href="{{ route('privacy-policy.index') }}">Privacy Policy</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4 class="text-xl md:text-2xl font-semibold mb-5">Contact Us</h4>
-            <div class="flex items-center gap-1">
-                Email: <a href="mailto:contact@vera.com" class="block hover:underline">contact@vera.com</a>
+<footer class="bg-muted/50 border-t border-border py-12 text-muted-foreground">
+    <div class="container mx-auto px-4 md:px-6">
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div>
+                <a href="{{ route('home.index') }}" class="flex items-center gap-2 mb-4">
+                    <span class="text-xl font-bold text-foreground">{{ config('app.name') }}</span>
+                </a>
+                <p class="text-sm leading-relaxed">
+                    A secure, scalable B2B web application built to foster transparency and trust in the industrial supply chain.
+                </p>
             </div>
-            <div class="flex items-center gap-1">
-                Phone: <a href="tel:+11234567890" class="block hover:underline">+1 (123) 456-7890</a>
+            <div>
+                <h3 class="font-semibold text-foreground mb-4">Quick Links</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="{{ route('home.index') }}" class="hover:text-foreground transition-colors">Home</a></li>
+                    <li><a href="{{ route('suppliers.index') }}" class="hover:text-foreground transition-colors">Seek Vendors</a></li>
+                </ul>
             </div>
-            <div class="mt-5 flex items-center gap-5 flex-wrap">
-                <a aria-label="facebook" href="https://facebook.com">
-                    <i class="fa-brands fa-facebook text-xl"></i>
-                </a>
-                <a aria-label="linkedin" href="https://www.linkedin.com">
-                    <i class="fa-brands fa-linkedin text-xl"></i>
-                </a>
-                <a aria-label="instagram" href="https://www.instagram.com">
-                    <i class="fa-brands fa-instagram text-xl"></i>
-                </a>
-                <a aria-label="twitter" href="https://twitter.com">
-                    <i class="fa-brands fa-x text-xl"></i>
-                </a>
+            <div>
+                <h3 class="font-semibold text-foreground mb-4">Legal</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="{{ route('terms-and-conditions.index') }}" class="hover:text-foreground transition-colors">Terms of Service</a></li>
+                    <li><a href="{{ route('privacy-policy.index') }}" class="hover:text-foreground transition-colors">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-semibold text-foreground mb-4">Contact</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="mailto:contact@vera.com" class="hover:text-foreground transition-colors">contact@vera.com</a></li>
+                    <li><a href="tel:+11234567890" class="hover:text-foreground transition-colors">+1 (123) 456-7890</a></li>
+                </ul>
+                <div class="flex gap-4 mt-4">
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+                        <i class="fa-brands fa-facebook text-lg"></i>
+                    </a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+                        <i class="fa-brands fa-linkedin text-lg"></i>
+                    </a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+                        <i class="fa-brands fa-x-twitter text-lg"></i>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="mt-8 md:text-center text-foreground-accent px-6">
-        <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
+        <div class="mt-12 pt-8 border-t border-border text-center text-sm">
+            <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
+        </div>
     </div>
 </footer>

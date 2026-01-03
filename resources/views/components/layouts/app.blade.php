@@ -23,6 +23,10 @@
     <link rel="stylesheet"
           href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
 
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/basecoat.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/sidebar.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/dropdown-menu.min.js" defer></script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
