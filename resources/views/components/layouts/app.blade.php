@@ -32,7 +32,7 @@
 <body class="flex min-h-screen flex-col">
     <x-header />
 
-    <main class="bg-background text-foreground mt-18 flex-1">
+    <main class="bg-background text-foreground flex-1">
         @yield('content')
     </main>
 
