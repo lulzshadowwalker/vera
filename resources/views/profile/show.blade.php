@@ -6,10 +6,17 @@
     <div class="bg-card border-b border-border">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <nav aria-label="Breadcrumb">
-                <ul class="uk-breadcrumb">
-                    <li><a href="{{ route('home.index') }}">Home</a></li>
-                    <li><span aria-current="page">My Profile</span></li>
-                </ul>
+                <ol class="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5">
+                    <li class="inline-flex items-center gap-1.5">
+                        <a href="{{ route('home.index') }}" class="hover:text-foreground transition-colors">Home</a>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
+                    </li>
+                    <li class="inline-flex items-center gap-1.5">
+                        <span aria-current="page">My Profile</span>
+                    </li>
+                </ol>
             </nav>
         </div>
     </div>
@@ -19,19 +26,19 @@
         <div class="max-w-7xl mx-auto px-6 py-8">
             <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
                 <div class="flex items-start gap-6">
-                    <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
-                        <uk-icon icon="user" class="text-primary" width="40" height="40"></uk-icon>
+                    <div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center shrink-0">
+                        <i class="hgi hgi-stroke hgi-user text-3xl"></i>
                     </div>
                     <div>
                         <h1 class="text-3xl md:text-4xl font-bold mb-2">{{ $user->name }}</h1>
                         <div class="flex flex-wrap items-center gap-4 text-muted-foreground">
                             <span class="flex items-center gap-1">
-                                <uk-icon icon="mail" width="16" height="16"></uk-icon>
+                                <i class="hgi hgi-stroke hgi-mail-02 translate-y-[1.5px]"></i>
                                 <span>{{ $user->email }}</span>
                             </span>
                             @if($user->supplier)
                             <a href="{{ route('suppliers.show', $user->supplier) }}" class="hover:text-primary flex items-center gap-1 transition-colors">
-                                <uk-icon icon="building" width="16" height="16"></uk-icon>
+                                <i class="hgi hgi-stroke hgi-building-03"></i>
                                 <span>{{ $user->supplier->name }}</span>
                             </a>
                             @endif
@@ -50,18 +57,17 @@
             </div>
 
             @if($reviews->isEmpty())
-            <div class="uk-card uk-card-default uk-card-body text-center py-12 flex flex-col items-center justify-center border border-dashed border-border shadow-none">
-                <div class="w-16 h-16 bg-primary/5 rounded-full flex items-center justify-center mb-4">
-                    <uk-icon icon="star" class="text-primary/60" width="32" height="32"></uk-icon>
-                </div>
-                <h3 class="text-lg font-medium mb-2">No reviews yet</h3>
-                <p class="text-muted-foreground max-w-sm mx-auto mb-6">
-                    You haven't written any reviews yet. Your insights help others make better decisions.
-                </p>
-                <a href="{{ route('home.index') }}" class="uk-btn uk-btn-primary">
-                    Find Suppliers to Review
-                </a>
-            </div>
+                <x-empty-state
+                    title="No reviews yet"
+                    description="You haven't written any reviews yet. Your insights help others make better decisions."
+                    icon="hgi-star"
+                >
+                    <x-slot:actions>
+                        <a href="{{ route('suppliers.index') }}" class="btn btn-primary">
+                            Find Vendors to Review
+                        </a>
+                    </x-slot:actions>
+                </x-empty-state>
             @else
             <ul id="js-reviews" class="space-y-4">
                 @foreach($reviews as $review)
@@ -72,9 +78,9 @@
                         </p>
                     </x-slot:identity>
                     <x-slot:actions>
-                        <a href="{{ route('reviews.show', $review) }}" class="uk-btn uk-btn-default uk-btn-small">
-                            <uk-icon icon="expand" width="16" height="16" class="mr-1"></uk-icon>
+                        <a href="{{ route('reviews.show', $review) }}" class="btn btn-primary btn-sm">
                             View Details
+                            <i class="hgi hgi-stroke hgi-arrow-right-02"></i>
                         </a>
                     </x-slot:actions>
                 </x-review-card>

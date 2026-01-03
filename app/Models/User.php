@@ -29,6 +29,7 @@ class User extends Authenticatable implements FilamentUser
     protected $fillable = [
         'name',
         'email',
+        'country_id',
         'password',
         'backup_email',
         'supplier_id',
@@ -53,6 +54,11 @@ class User extends Authenticatable implements FilamentUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
     }
 
     public function isAdmin(): Attribute

@@ -29,6 +29,7 @@ class InitApp extends Command
         $this->newLine();
 
         $this->call('upsert:role');
+        $this->call('upsert:countries');
 
         $this->newLine();
         $this->info('⏺ Application initialized successfully.');

@@ -7,7 +7,7 @@
             alt="Login Image" class="absolute inset-0 h-full w-full object-cover object-center -z-10" />
         <div class="flex items-center text-lg font-medium">
             <a href="{{ route('home.index') }}">
-                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="{{ config('app.name') }}" data-uk-svg />
+                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="{{ config('app.name') }}" />
             </a>
         </div>
         <blockquote class="space-y-2">
@@ -30,19 +30,29 @@
                     </p>
                 </div>
 
-                <form action="{{ route('auth.login.confirm-otp') }}" method="POST" class="uk-form-stacked space-y-4" x-data="{ code: '' }" @uk-input-pin:input.window="code = $event.detail.value">
+                <form action="{{ route('auth.login.confirm-otp') }}" method="POST" class="space-y-4" x-data="pin">
                     @csrf
                     <input type="hidden" name="email" value="{{ session('login_email') }}">
+                    <input type="hidden" name="otp" x-model="value">
 
-                    <div class="mt-4 h-14 flex justify-center">
-                        <uk-input-pin name="otp" autofocus cls-custom="uk-form-md"></uk-input-pin>
+                    <div x-ref="container" class="mt-4 flex justify-center gap-2">
+                        <template x-for="(input, index) in length" :key="index">
+                            <input type="text"
+                                @input="onInput($event, index)"
+                                @keydown.backspace="onBackspace($event, index)"
+                                @paste="onPaste($event)"
+                                maxlength="1"
+                                class="js-pin-input input h-12 min-w-12 text-center text-xl font-bold"
+                                :autofocus="index === 0"
+                            >
+                        </template>
                     </div>
 
                     @error('otp')
-                        <div class="uk-form-help text-destructive text-center mt-2">{{ $message }}</div>
+                        <div class="text-destructive text-start mt-2 text-sm">{{ $message }}</div>
                     @enderror
 
-                    <button type="submit" class="uk-btn uk-btn-primary w-full" :disabled="code.length !== 6">
+                    <button type="submit" class="btn btn-primary w-full" :disabled="value.length !== 6">
                         Verify & Sign In
                     </button>
                 </form>
@@ -50,19 +60,19 @@
                 <div class="flex items-center justify-between text-sm text-muted-foreground">
                     <form action="{{ route('auth.login.resend-otp') }}" method="POST">
                         @csrf
-                        <button type="submit" class="uk-link">
+                        <button type="submit" class="text-primary hover:underline">
                             Resend code
                         </button>
                     </form>
 
-                    <a href="{{ route('auth.login.index') }}" class="uk-link">
+                    <a href="{{ route('auth.login.index') }}" class="text-primary hover:underline">
                         Use different email
                     </a>
                 </div>
 
                 <div class="text-center text-sm text-muted-foreground">
                     Don't have an account?
-                    <a href="{{ route('auth.register.index') }}" class="uk-link">
+                    <a href="{{ route('auth.register.index') }}" class="text-primary hover:underline">
                         Sign Up
                     </a>
                 </div>

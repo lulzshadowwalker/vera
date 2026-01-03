@@ -26,7 +26,6 @@ class ReviewFactory extends Factory
             'reviewed_supplier_id' => Supplier::factory(),
             'user_id' => User::factory(),
             'deal_date' => fake()->date(),
-            'country' => fake()->countryCode(),
             'cost' => fake()->numberBetween(1, 10),
             'accuracy' => fake()->numberBetween(1, 10),
             'compliance' => fake()->numberBetween(1, 10),
