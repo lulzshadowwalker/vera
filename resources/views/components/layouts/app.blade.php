@@ -18,7 +18,6 @@
 
     <script src="https://kit.fontawesome.com/a51f251d24.js"
             crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.36/dist/unicornStudio.umd.js"></script>
 
     <link rel="stylesheet"
           href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
