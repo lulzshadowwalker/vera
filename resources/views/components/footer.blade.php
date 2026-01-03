@@ -3,7 +3,7 @@
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div>
                 <a href="{{ route('home.index') }}" class="flex items-center gap-2 mb-4">
-            <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}" class="h-18 scale-200 ml-w-auto translate-y-0.5" />
+            <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}" class="h-12 ml-w-auto" />
                 </a>
                 <p class="text-sm leading-relaxed">
                     A secure, scalable B2B web application built to foster transparency and trust in the industrial supply chain.

@@ -462,7 +462,7 @@
                                 Create Free Account
                             </a>
                             <a href="{{ route('suppliers.index') }}"
-                               class="btn-lg-ghost min-w-[200px]">
+                               class="btn-lg-secondary min-w-[200px]">
                                 <i class="hgi hgi-stroke hgi-search-01 mr-2"></i>
                                 Seek Vendors
                             </a>
