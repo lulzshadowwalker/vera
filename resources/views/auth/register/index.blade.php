@@ -7,7 +7,7 @@
             alt="Login Image" class="absolute inset-0 h-full w-full object-cover object-center -z-10" />
         <div class="flex items-center text-lg font-medium">
             <a href="#">
-                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="Acme Inc." data-uk-svg />
+                <img src="https://pages.franken-ui.dev/logoipsum-284.svg" alt="Acme Inc." />
             </a>
         </div>
         <blockquote class="space-y-2">
@@ -30,97 +30,138 @@
                     </p>
                 </div>
 
-                <form action="{{ route('auth.register.store') }}" method="POST" class="uk-form-stacked space-y-4">
+                <form action="{{ route('auth.register.store') }}" method="POST" class="space-y-4">
                     @csrf
 
                     <div class="flex items-center gap-2">
-                        <div class="flex-1">
-                            <label for="first_name" class="uk-form-label uk-form-label-required">First Name</label>
-                            <div class="uk-form-controls">
+                        <div class="flex-1 grid gap-2">
+                            <label for="first_name" class="label">First Name <span class="text-destructive">*</span></label>
+                            <div>
                                 <input
                                     type="text"
                                     id="first_name"
                                     name="first_name"
-                                    class="uk-input @error('first_name') uk-form-destructive @enderror"
+                                    class="input w-full @error('first_name') border-destructive @enderror"
                                     placeholder="John"
                                     value="{{ old('first_name') }}"
                                     required
                                 >
                             </div>
                             @error('first_name')
-                                <div class="uk-form-help text-destructive mt-1">{{ $message }}</div>
+                                <div class="text-destructive text-sm mt-1">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <div class="flex-1">
-                            <label for="last_name" class="uk-form-label uk-form-label-required">Last Name</label>
-                            <div class="uk-form-controls">
+                        <div class="flex-1 grid gap-2">
+                            <label for="last_name" class="label">Last Name <span class="text-destructive">*</span></label>
+                            <div>
                                 <input
                                     type="text"
                                     id="last_name"
                                     name="last_name"
-                                    class="uk-input @error('last_name') uk-form-destructive @enderror"
+                                    class="input w-full @error('last_name') border-destructive @enderror"
                                     placeholder="Doe"
                                     value="{{ old('last_name') }}"
                                     required
                                 >
                             </div>
                             @error('last_name')
-                                <div class="uk-form-help text-destructive mt-1">{{ $message }}</div>
+                                <div class="text-destructive text-sm mt-1">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
-                    <div>
-                        <label for="email" class="uk-form-label uk-form-label-required">Work Email</label>
-                        <div class="uk-form-controls">
+                    <div class="grid gap-2">
+                        <label for="email" class="label">Work Email <span class="text-destructive">*</span></label>
+                        <div>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
-                                class="uk-input @error('email') uk-form-destructive @enderror"
+                                class="input w-full @error('email') border-destructive @enderror"
                                 placeholder="email@company.com"
                                 value="{{ old('email') }}"
                                 required
                             >
                         </div>
                         @error('email')
-                            <div class="uk-form-help text-destructive mt-1">{{ $message }}</div>
+                            <div class="text-destructive text-sm mt-1">{{ $message }}</div>
                         @enderror
-                        <div class="uk-form-help mt-1">Please use your work email. Public email providers are not allowed.</div>
+                        <div class="text-muted-foreground text-sm mt-1">Please use your work email. Public email providers are not allowed.</div>
                     </div>
 
-                    <div>
-                        <label for="backup_email" class="uk-form-label">Backup Email</label>
-                        <div class="uk-form-controls">
+                    <div class="grid gap-2">
+                        <label for="backup_email" class="label">Backup Email</label>
+                        <div>
                             <input
                                 type="email"
                                 id="backup_email"
                                 name="backup_email"
-                                class="uk-input @error('backup_email') uk-form-destructive @enderror"
+                                class="input w-full @error('backup_email') border-destructive @enderror"
                                 placeholder="backup@company.com"
                                 value="{{ old('backup_email') }}"
                             >
                         </div>
                         @error('backup_email')
-                            <div class="uk-form-help text-destructive mt-1">{{ $message }}</div>
+                            <div class="text-destructive text-sm mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <button type="submit" class="uk-btn uk-btn-primary w-full">
+                    <div class="grid gap-2">
+                        <label for="country_id" class="label">Country</label>
+                        <div id="country-select" class="select w-full">
+                            <button type="button" class="btn-outline justify-between font-normal w-full @error('country_id') border-destructive @enderror" id="country-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="country-select-listbox">
+                                <span class="truncate">
+                                    @if(old('country_id'))
+                                        {{ $countries->firstWhere('id', old('country_id'))?->name ?? 'Select a country' }}
+                                    @else
+                                        Select a country
+                                    @endif
+                                </span>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-up-down-icon lucide-chevrons-up-down text-muted-foreground opacity-50 shrink-0">
+                                    <path d="m7 15 5 5 5-5" />
+                                    <path d="m7 9 5-5 5 5" />
+                                </svg>
+                            </button>
+                            <div id="country-select-popover" data-popover aria-hidden="true" class="w-full">
+                                <header>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search">
+                                        <circle cx="11" cy="11" r="8" />
+                                        <path d="m21 21-4.3-4.3" />
+                                    </svg>
+                                    <input type="text" value="" placeholder="Search country..." autocomplete="off" autocorrect="off" spellcheck="false" aria-autocomplete="list" role="combobox" aria-expanded="false" aria-controls="country-select-listbox" aria-labelledby="country-select-trigger" />
+                                </header>
+
+                                <div role="listbox" id="country-select-listbox" aria-orientation="vertical" aria-labelledby="country-select-trigger" data-empty="No country found." class="max-h-60 overflow-y-auto">
+                                    @foreach($countries as $country)
+                                        <div role="option" data-value="{{ $country->id }}" @if(old('country_id') == $country->id) aria-selected="true" @endif>
+                                            {{ $country->name }}
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <input type="hidden" name="country_id" value="{{ old('country_id') }}" />
+                        </div>
+                        @error('country_id')
+                            <div class="text-destructive text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-full">
                         Continue
                     </button>
                 </form>
 
                 <p class="text-muted-foreground px-8 text-center text-sm">
                     By clicking continue, you agree to our
-                    <a class="uk-link" href="{{ route('terms-and-conditions.index') }}" target="_blank"> Terms of Service </a> and
-                    <a class="uk-link" href="{{ route('privacy-policy.index') }}" target="_blank" uk-toggle> Privacy Policy </a>.
+                    <a class="text-primary hover:underline" href="{{ route('terms-and-conditions.index') }}" target="_blank"> Terms of Service </a> and
+                    <a class="text-primary hover:underline" href="{{ route('privacy-policy.index') }}" target="_blank"> Privacy Policy </a>.
                 </p>
 
                 <div class="text-center text-sm text-muted-foreground mt-2">
                     Already have an account?
-                    <a href="{{ route('auth.login.index') }}" class="uk-link">
+                    <a href="{{ route('auth.login.index') }}" class="text-primary hover:underline">
                         Sign In
                     </a>
                 </div>

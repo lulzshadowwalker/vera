@@ -88,16 +88,12 @@ class Supplier extends Model
 
     public function toSearchableArray(): array
     {
-        return array_merge($this->toArray(), [
-            'id' => (string) $this->id,
+        return [
+            'id' => $this->id,
             'name' => $this->name,
             'domain' => $this->domain,
-            'slug' => $this->slug,
-
-            // TODO: I believe country should be a relation to a countries table instead
-            'country' => $this->country,
             'description' => $this->description,
-            'created_at' => $this->created_at->timestamp,
-        ]);
+            'country' => $this->country,
+        ];
     }
 }

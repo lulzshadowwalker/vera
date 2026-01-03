@@ -12,24 +12,24 @@
         <div>
             <h4 class="text-xl md:text-2xl font-semibold mb-5">Quick Links</h4>
             <ul class="text-foreground-accent">
-                <li class="mb-2"><a class="uk-link-text" href="/">Home</a></li>
-                <li class="mb-2"><a class="uk-link-text" href="/suppliers">Browse Suppliers</a></li>
+                <li class="mb-2"><a class="hover:underline" href="/">Home</a></li>
+                <li class="mb-2"><a class="hover:underline" href="/suppliers">Seek Vendors</a></li>
             </ul>
         </div>
         <div>
             <h4 class="text-xl md:text-2xl font-semibold mb-5">Legal</h4>
             <ul class="text-foreground-accent">
-                <li class="mb-2"><a class="uk-link-text" href="{{ route('terms-and-conditions.index') }}">Terms of Service</a></li>
-                <li class="mb-2"><a class="uk-link-text" href="{{ route('privacy-policy.index') }}">Privacy Policy</a></li>
+                <li class="mb-2"><a class="hover:underline" href="{{ route('terms-and-conditions.index') }}">Terms of Service</a></li>
+                <li class="mb-2"><a class="hover:underline" href="{{ route('privacy-policy.index') }}">Privacy Policy</a></li>
             </ul>
         </div>
         <div>
             <h4 class="text-xl md:text-2xl font-semibold mb-5">Contact Us</h4>
             <div class="flex items-center gap-1">
-                Email: <a href="mailto:contact@vera.com" class="block uk-link-text">contact@vera.com</a>
+                Email: <a href="mailto:contact@vera.com" class="block hover:underline">contact@vera.com</a>
             </div>
             <div class="flex items-center gap-1">
-                Phone: <a href="tel:+11234567890" class="block uk-link-text">+1 (123) 456-7890</a>
+                Phone: <a href="tel:+11234567890" class="block hover:underline">+1 (123) 456-7890</a>
             </div>
             <div class="mt-5 flex items-center gap-5 flex-wrap">
                 <a aria-label="facebook" href="https://facebook.com">

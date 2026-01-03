@@ -20,6 +20,15 @@ class ReviewController extends Controller
 
     public function create(Supplier $supplier): View|RedirectResponse
     {
+        if (Auth::user()->supplier_id === $supplier->id) {
+            return redirect()
+                ->route('suppliers.show', $supplier)
+                ->with(
+                    'warning',
+                    'You cannot review your own vendor.',
+                );
+        }
+
         $existingReview = Review::where('user_id', Auth::id())
             ->where('reviewed_supplier_id', $supplier->id)
             ->exists();

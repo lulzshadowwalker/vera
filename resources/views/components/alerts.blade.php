@@ -1,23 +1,23 @@
-@if (session('success'))
+@if ($message = session()->pull('success'))
     <x-alert type="success">
-        {{ session('success') }}
+        {{ $message }}
     </x-alert>
 @endif
 
-@if (session('error'))
+@if ($message = session()->pull('error'))
     <x-alert type="error">
-        {{ session('error') }}
+        {{ $message }}
     </x-alert>
 @endif
 
-@if (session('warning'))
+@if ($message = session()->pull('warning'))
     <x-alert type="warning">
-        {{ session('warning') }}
+        {{ $message }}
     </x-alert>
 @endif
 
-@if (session('info'))
+@if ($message = session()->pull('info'))
     <x-alert type="info">
-        {{ session('info') }}
+        {{ $message }}
     </x-alert>
 @endif

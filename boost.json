@@ -1,13 +1,6 @@
 {
-    "agents": [
-        "claude_code",
-        "copilot",
-        "cursor",
-        "gemini"
-    ],
-    "editors": [
-        "vscode"
-    ],
-    "guidelines": [],
-    "herd_mcp": true
+  "agents": ["claude_code", "copilot", "cursor", "gemini"],
+  "editors": ["vscode"],
+  "guidelines": [],
+  "herd_mcp": true
 }

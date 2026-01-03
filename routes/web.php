@@ -60,6 +60,12 @@ Route::middleware('guest')->group(function () {
         RegisterController::class,
         'resendOtp',
     ])->name('auth.register.resend-otp');
+
+    // Password Reset
+    Route::get('/auth/forgot-password', [\App\Http\Controllers\PasswordResetController::class, 'create'])->name('password.request');
+    Route::post('/auth/forgot-password', [\App\Http\Controllers\PasswordResetController::class, 'store'])->name('password.email');
+    Route::get('/auth/reset-password/{token}', [\App\Http\Controllers\PasswordResetController::class, 'edit'])->name('password.reset');
+    Route::post('/auth/reset-password', [\App\Http\Controllers\PasswordResetController::class, 'update'])->name('password.update');
 });
 
 // Logout (Authenticated Only)
@@ -92,27 +98,27 @@ Route::get('/terms-and-conditions', [
 //     App\Http\Controllers\SupplierController::class,
 // )->only("index", "show");
 
-Route::get('/suppliers', [
+Route::get('/vendors', [
     App\Http\Controllers\SupplierController::class,
     'index',
-])->name('suppliers.index');
-Route::get('/suppliers/{supplier:slug}', [
+])->name('suppliers.index')->middleware('auth');
+Route::get('/vendors/{supplier:slug}', [
     App\Http\Controllers\SupplierController::class,
     'show',
-])->name('suppliers.show');
+])->name('suppliers.show')->middleware('auth');
 
-Route::get('/suppliers/{supplier:slug}/reviews/create', [
+Route::get('/vendors/{supplier:slug}/reviews/create', [
     App\Http\Controllers\ReviewController::class,
     'create',
-])->name('suppliers.reviews.create');
+])->name('suppliers.reviews.create')->middleware('auth');
 
 Route::post('/reviews/initiate', [
     App\Http\Controllers\ReviewInitiationController::class,
     'store',
 ])->name('reviews.initiate')->middleware('auth');
 
-Route::resource('reviews', App\Http\Controllers\ReviewController::class)->only(
-    'create',
-    'store',
-    'show',
-);
+Route::get('/reviews/create', [App\Http\Controllers\ReviewController::class, 'create'])->name('reviews.create')->middleware('auth');
+Route::post('/reviews', [App\Http\Controllers\ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
+Route::get('/reviews/{review}', [App\Http\Controllers\ReviewController::class, 'show'])->name('reviews.show');
+
+Route::post('/ajax/theme', App\Http\Controllers\ThemeController::class)->name('theme.toggle');

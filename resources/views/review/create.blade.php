@@ -1,296 +1,360 @@
 @extends('components.layouts.app')
 
 @section('content')
-<div class="bg-background text-foreground min-h-screen">
-    <!-- Breadcrumb -->
-    <div class="bg-card border-b border-border">
-        <div class="max-w-5xl mx-auto px-6 py-4">
-            <nav aria-label="Breadcrumb">
-                <ul class="uk-breadcrumb">
-                    <li><a href="{{ route('home.index') }}">Home</a></li>
-                    <li><a href="{{ route('suppliers.index') }}">Suppliers</a></li>
-                    <li><a href="{{ route('suppliers.show', $supplier) }}">{{ $supplier->name }}</a></li>
-                    <li><span aria-current="page">Write Review</span></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-
-    <!-- Page Header -->
-    <div class="bg-card border-b border-border">
-        <div class="max-w-5xl mx-auto px-6 py-8">
-            <div class="flex items-start gap-6">
-                <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <uk-icon icon="pencil" class="text-primary" width="32" height="32"></uk-icon>
-                </div>
-                <div>
-                    <h1 class="text-3xl md:text-4xl font-bold mb-2">Write a Review</h1>
-                    <p class="text-lg text-muted-foreground">Share your experience with <span class="font-semibold text-foreground">{{ $supplier->name }}</span></p>
-                    <a href="{{ route('suppliers.show', $supplier) }}" class="text-primary hover:underline text-sm mt-2 inline-flex items-center gap-1">
-                        <uk-icon icon="arrow-left" width="14" height="14"></uk-icon>
-                        Back to {{ $supplier->name }}
-                    </a>
-                </div>
+    <div class="bg-background text-foreground min-h-screen">
+        <!-- Breadcrumb -->
+        <div class="bg-card border-border border-b">
+            <div class="mx-auto max-w-5xl px-6 py-4">
+                <nav aria-label="Breadcrumb">
+                    <ol class="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5">
+                        <li class="inline-flex items-center gap-1.5">
+                            <a href="{{ route('home.index') }}" class="hover:text-foreground transition-colors">Home</a>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
+                        </li>
+                        <li class="inline-flex items-center gap-1.5">
+                            <a href="{{ route('suppliers.index') }}" class="hover:text-foreground transition-colors">Vendors</a>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
+                        </li>
+                        <li class="inline-flex items-center gap-1.5">
+                            <a href="{{ route('suppliers.show', $supplier) }}" class="hover:text-foreground transition-colors">{{ $supplier->name }}</a>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
+                        </li>
+                        <li class="inline-flex items-center gap-1.5">
+                            <span aria-current="page">Write Review</span>
+                        </li>
+                    </ol>
+                </nav>
             </div>
         </div>
-    </div>
 
-    <div class="max-w-5xl mx-auto px-6 py-8" x-data="{
-        anonymous: {{ old('anonymous', false) ? 'true' : 'false' }},
-        comment: '{{ old('comment', '') }}',
-        dealAgain: {{ old('deal_again', true) ? 'true' : 'false' }}
-    }">
-        <form action="{{ route('reviews.store') }}" method="POST" class="space-y-6">
-            @csrf
-
-            <input type="hidden" name="reviewed_supplier_id" value="{{ $supplier->id }}">
-            <input type="hidden" name="reviewer_supplier_id" value="{{ auth()->user()->supplier->id ?? '' }}">
-            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-
-            <!-- Deal Information -->
-            <div class="uk-card uk-card-default uk-card-body">
-                <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                    <uk-icon icon="info" class="text-primary"></uk-icon>
-                    Deal Information
-                </h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Deal Date -->
-                    <div>
-                        <label class="block text-sm font-semibold mb-2" for="deal_date">
-                            Deal Date <span class="text-destructive">*</span>
-                        </label>
-                        <input
-                            class="uk-input @error('deal_date') uk-form-destructive @enderror"
-                            type="date"
-                            name="deal_date"
-                            id="deal_date"
-                            value="{{ old('deal_date') }}"
-                            max="{{ date('Y-m-d') }}"
-                            required
-                        >
-                        <p class="text-xs text-muted-foreground mt-1">When did you last work with this supplier?</p>
-                        @error('deal_date')
-                            <p class="text-destructive text-sm mt-2 flex items-center gap-1">
-                                <uk-icon icon="warning" width="14" height="14"></uk-icon>
-                                {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
-
-                    <!-- Country -->
-                    <div>
-                        <label class="block text-sm font-semibold mb-2" for="country">
-                            Country (ISO2 Code)
-                        </label>
-                        <input
-                            class="uk-input @error('country') uk-form-destructive @enderror"
-                            type="text"
-                            name="country"
-                            id="country"
-                            maxlength="2"
-                            value="{{ old('country') }}"
-                            placeholder="e.g., US, JO, DE"
-                        >
-                        <p class="text-xs text-muted-foreground mt-1">2-letter country code (optional)</p>
-                        @error('country')
-                            <p class="text-destructive text-sm mt-2 flex items-center gap-1">
-                                <uk-icon icon="warning" width="14" height="14"></uk-icon>
-                                {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            <!-- Rating Metrics -->
-            <div class="uk-card uk-card-default uk-card-body">
-                <h2 class="text-xl font-bold mb-2 flex items-center gap-2">
-                    <uk-icon icon="star" class="text-primary"></uk-icon>
-                    Rate Your Experience
-                </h2>
-                <p class="text-muted-foreground mb-6">Rate each aspect from 1 (poor) to 10 (excellent)</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    @foreach([
-                        'quality' => ['label' => 'Product quality or the service Provided', 'icon' => 'star', 'description' => 'Compliance with the advertisement or description'],
-                        'accuracy' => ['label' => 'Credibility, clarity & accuracy of information', 'icon' => 'shield-check', 'description' => 'Integrity in dealing'],
-                        'communication' => ['label' => 'Customer Service and efficiency of response', 'icon' => 'headset', 'description' => 'Effectiveness of support provided'],
-                        'cost' => ['label' => 'Prices Suitability for the product or service', 'icon' => 'credit-card', 'description' => 'Price level compared to its equivalent'],
-                        'compliance' => ['label' => 'Financial dealing', 'icon' => 'banknote', 'description' => 'Transparency + fulfilment of commitments'],
-                        'timeliness' => ['label' => 'Adherence to delivery deadlines and timely completion', 'icon' => 'clock', 'description' => 'Compliance with the agreed schedule without delay'],
-                        'support' => ['label' => 'After-sale Service', 'icon' => 'wrench', 'description' => 'Quality of support and follow up after sale']
-                    ] as $metric => $data)
-                    <div>
-                        <label class="block mb-3" for="{{ $metric }}">
-                            <div class="flex items-center gap-2 mb-1">
-                                <uk-icon icon="{{ $data['icon'] }}" class="text-primary" width="18" height="18"></uk-icon>
-                                <span class="font-semibold">{{ $data['label'] }}</span>
-                                <span class="text-destructive">*</span>
-                            </div>
-                            <span class="text-xs text-muted-foreground">{{ $data['description'] }}</span>
-                        </label>
-                        <uk-input-range
-                            name="{{ $metric }}"
-                            id="{{ $metric }}"
-                            min="1"
-                            max="10"
-                            step="1"
-                            value="{{ old($metric, 5) }}"
-                            show-tooltip
-                            show-labels
-                            required
-                        ></uk-input-range>
-                        @error($metric)
-                            <p class="text-destructive text-sm mt-2 flex items-center gap-1">
-                                <uk-icon icon="warning" width="14" height="14"></uk-icon>
-                                {{ $message }}
-                            </p>
-                        @enderror
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-
-            <!-- Would Deal Again -->
-            <div class="uk-card uk-card-default uk-card-body">
+        <!-- Page Header -->
+        <div class="bg-card border-border border-b">
+            <div class="mx-auto max-w-5xl px-6 py-8">
                 <div class="flex items-start gap-6">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-bold mb-2 flex items-center gap-2">
-                            <uk-icon icon="thumbs-up" class="text-primary"></uk-icon>
-                            Would you work with this supplier again?
-                        </h3>
-                        <p class="text-muted-foreground text-sm">
-                            This helps others understand if you'd recommend this supplier for future business.
-                        </p>
+                    <div class="bg-primary/10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl">
+                        <i class="hgi hgi-stroke hgi-quill-write-01 text-2xl"></i>
                     </div>
-                    <div class="flex-shrink-0">
-                        <input
-                            class="uk-toggle-switch uk-toggle-switch-primary"
-                            type="checkbox"
-                            name="deal_again"
-                            id="deal_again"
-                            x-model="dealAgain"
-                            {{ old('deal_again', true) ? 'checked' : '' }}
-                        >
-                        <label for="deal_again"></label>
-                    </div>
-                </div>
-                <div class="mt-4 p-3 rounded-lg transition-colors" :class="dealAgain ? 'bg-primary/10 border border-primary/20' : 'bg-muted'">
-                    <p class="text-sm font-medium" x-text="dealAgain ? 'Yes, I would work with them again' : 'No, I would not work with them again'"></p>
-                </div>
-            </div>
-
-            <!-- Anonymous Review -->
-            <div class="uk-card uk-card-default uk-card-body">
-                <div class="flex items-start gap-6">
-                    <div class="flex-1">
-                        <h3 class="text-lg font-bold mb-2 flex items-center gap-2">
-                            <uk-icon icon="lock" class="text-primary"></uk-icon>
-                            Post Anonymously
-                        </h3>
-                        <p class="text-muted-foreground text-sm">
-                            Your review will be posted without your company name or personal details. Note: Anonymous reviews cannot include comments.
-                        </p>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <input
-                            class="uk-toggle-switch uk-toggle-switch-primary"
-                            type="checkbox"
-                            name="anonymous"
-                            id="anonymous"
-                            x-model="anonymous"
-                            {{ old('anonymous') ? 'checked' : '' }}
-                        >
-                        <label for="anonymous"></label>
-                    </div>
-                </div>
-                <div class="mt-4 p-3 rounded-lg bg-muted" x-show="anonymous">
-                    <p class="text-sm flex items-center gap-2">
-                        <uk-icon icon="info" width="16" height="16" class="text-primary"></uk-icon>
-                        <span>Your review will be displayed as "Anonymous Reviewer"</span>
-                    </p>
-                </div>
-            </div>
-
-            <!-- Comment -->
-            <div class="uk-card uk-card-default uk-card-body">
-                <h3 class="text-lg font-bold mb-2 flex items-center gap-2">
-                    <uk-icon icon="file-text" class="text-primary"></uk-icon>
-                    Additional Comments
-                    <span class="text-sm font-normal text-muted-foreground" x-show="anonymous">(disabled for anonymous reviews)</span>
-                </h3>
-                <p class="text-muted-foreground text-sm mb-4">
-                    Share any additional thoughts about your experience (optional, max 160 characters)
-                </p>
-                <textarea
-                    class="uk-textarea @error('comment') uk-form-destructive @enderror"
-                    name="comment"
-                    id="comment"
-                    rows="4"
-                    maxlength="160"
-                    :disabled="anonymous"
-                    x-model="comment"
-                    placeholder="Example: Great communication and fast delivery. Would recommend for urgent projects."
-                >{{ old('comment') }}</textarea>
-                <div class="flex justify-between items-center mt-2">
-                    <p class="text-xs text-muted-foreground">
-                        <span x-text="comment.length"></span>/160 characters
-                    </p>
-                    @error('comment')
-                        <p class="text-destructive text-sm flex items-center gap-1">
-                            <uk-icon icon="warning" width="14" height="14"></uk-icon>
-                            {{ $message }}
-                        </p>
-                    @enderror
-                </div>
-            </div>
-
-            <!-- Submit Section -->
-            <div class="uk-card uk-card-default uk-card-body bg-muted/50">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                    <div class="text-center md:text-left">
-                        <p class="font-semibold mb-1">Ready to submit your review?</p>
-                        <p class="text-sm text-muted-foreground">Your feedback helps the community make better decisions</p>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                        <a href="{{ route('suppliers.show', $supplier) }}" class="uk-btn uk-btn-default uk-btn-large">
-                            <uk-icon icon="x"></uk-icon>
-                            Cancel
+                    <div>
+                        <h1 class="mb-2 text-3xl font-bold md:text-4xl">Write a Review</h1>
+                        <p class="text-muted-foreground text-lg">Share your experience with <span
+                                  class="text-foreground font-semibold">{{ $supplier->name }}</span></p>
+                        <a href="{{ route('suppliers.show', $supplier) }}"
+                           class="text-primary mt-2 inline-flex items-center gap-1 text-sm hover:underline">
+                            <i class="hgi hgi-stroke hgi-arrow-left-02"></i>
+                            Back to {{ $supplier->name }}
                         </a>
-                        <button type="submit" class="uk-btn uk-btn-primary uk-btn-large cursor-pointer">
-                            <uk-icon icon="check"></uk-icon>
-                            Submit Review
-                        </button>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
 
-        <!-- Help Section -->
-        <div class="mt-8 p-6 bg-primary/5 border border-primary/20 rounded-xl">
-            <h4 class="font-bold mb-3 flex items-center gap-2">
-                Review Guidelines
-            </h4>
-            <ul class="space-y-2 text-sm text-muted-foreground">
-                <li class="flex items-start gap-2">
-                    <uk-icon icon="check" class="text-primary mt-0.5" width="16" height="16"></uk-icon>
-                    <span>Be honest and objective about your experience</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <uk-icon icon="check" class="text-primary mt-0.5" width="16" height="16"></uk-icon>
-                    <span>Focus on specific aspects like delivery, quality, and communication</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <uk-icon icon="check" class="text-primary mt-0.5" width="16" height="16"></uk-icon>
-                    <span>Avoid offensive language or personal attacks</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <uk-icon icon="check" class="text-primary mt-0.5" width="16" height="16"></uk-icon>
-                    <span>Your review will be visible to all users once submitted</span>
-                </li>
-            </ul>
+        <div class="mx-auto max-w-5xl px-6 py-8"
+             x-data="{
+                 anonymous: {{ old('anonymous', false) ? 'true' : 'false' }},
+                 comment: '{{ old('comment', '') }}',
+                 dealAgain: '{{ old('deal_again', '1') }}',
+                 dealDate: '{{ old('deal_date') }}',
+                 get isDealDateValid() {
+                     if (!this.dealDate) return true;
+                     const date = new Date(this.dealDate);
+                     const threeYearsAgo = new Date();
+                     threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
+                     return date >= threeYearsAgo;
+                 }
+             }">
+            <form action="{{ route('reviews.store') }}"
+                  method="POST"
+                  class="space-y-6">
+                @csrf
+
+                <input type="hidden"
+                       name="reviewed_supplier_id"
+                       value="{{ $supplier->id }}">
+                <input type="hidden"
+                       name="reviewer_supplier_id"
+                       value="{{ auth()->user()->supplier->id ?? '' }}">
+                <input type="hidden"
+                       name="user_id"
+                       value="{{ auth()->id() }}">
+
+                <!-- Deal Information -->
+                <div class="card p-6">
+                    <h2 class="sr-only">
+                        {{-- <i class="hgi hgi-stroke hgi-information-circle font-normal"></i> --}}
+                        Deal Information
+                    </h2>
+
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <!-- Deal Date -->
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold"
+                                   for="deal_date">
+                                Deal Date with {{ $supplier->name }} <span class="text-destructive">*</span>
+                            </label>
+                            <div class="relative">
+                                <input class="input @error('deal_date') border-destructive @enderror w-full pl-9"
+                                       type="date"
+                                       name="deal_date"
+                                       id="deal_date"
+                                       x-model="dealDate"
+                                       value="{{ old('deal_date') }}"
+                                       max="{{ date('Y-m-d') }}"
+                                       required>
+                                <div class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none">
+                                    <i class="hgi hgi-stroke hgi-calendar-03"></i>
+                                </div>
+                            </div>
+                            <p class="text-muted-foreground mt-1 text-xs">When did you last work with this vendor?</p>
+                            <p x-show="!isDealDateValid" x-cloak class="text-destructive mt-2 flex items-center gap-1 text-sm">
+                                <i class="hgi hgi-stroke hgi-alert-square"></i>
+                                Deal date cannot be more than 3 years old.
+                            </p>
+                            @error('deal_date')
+                                <p class="text-destructive mt-2 flex items-center gap-1 text-sm">
+                                    <i class="hgi hgi-stroke hgi-alert-square"></i>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <!-- Today's Date -->
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold">
+                                Review Date
+                            </label>
+                            <div class="relative">
+                                <input class="input w-full pl-9 bg-muted text-muted-foreground cursor-not-allowed"
+                                       type="text"
+                                       value="{{ now()->format('F j, Y') }}"
+                                       disabled
+                                       readonly>
+                                <div class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none">
+                                    <i class="hgi hgi-stroke hgi-calendar-03"></i>
+                                </div>
+                            </div>
+                            <p class="text-muted-foreground mt-1 text-xs">Reviews are dated automatically.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rating Metrics -->
+                <div class="card p-6">
+                    <div>
+                        <h2 class="mb-2 flex items-center gap-2 text-xl font-bold">
+                            <i class="hgi hgi-stroke hgi-star font-normal"></i>
+                            Rate Your Experience
+                        </h2>
+                        <p class="text-muted-foreground mb-6">Rate each aspect from 1 (poor) to 10 (excellent)</p>
+
+                    </div>
+                    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+                        @foreach ([
+            'quality' => ['label' => 'Product quality or the service Provided', 'icon' => 'hgi-stars', 'description' => 'Compliance with the advertisement or description'],
+            'accuracy' => ['label' => 'Credibility, clarity & accuracy of information', 'icon' => 'hgi-shield-energy', 'description' => 'Integrity in dealing'],
+            'communication' => ['label' => 'Customer Service and efficiency of response', 'icon' => 'hgi-headset', 'description' => 'Effectiveness of support provided'],
+            'cost' => ['label' => 'Prices Suitability for the product or service', 'icon' => 'hgi-credit-card', 'description' => 'Price level compared to its equivalent'],
+            'compliance' => ['label' => 'Financial dealing', 'icon' => 'hgi-bank', 'description' => 'Transparency + fulfilment of commitments'],
+            'timeliness' => ['label' => 'Adherence to delivery deadlines and timely completion', 'icon' => 'hgi-timer-01', 'description' => 'Compliance with the agreed schedule without delay'],
+            'support' => ['label' => 'After-sale Service', 'icon' => 'hgi-wrench-01', 'description' => 'Quality of support and follow up after sale'],
+        ] as $metric => $data)
+                            <div x-data="{ value: {{ old($metric, 5) }} }">
+                                <label class="mb-3 block"
+                                       for="{{ $metric }}">
+                                    <div class="mb-1 flex items-center gap-2">
+                                        <i class="hgi hgi-stroke {{ $data['icon'] }}"></i>
+                                        <span class="font-semibold">{{ $data['label'] }}</span>
+                                        <span class="text-destructive">*</span>
+                                    </div>
+                                    <span class="text-muted-foreground text-xs">{{ $data['description'] }}</span>
+                                </label>
+                                <div class="flex items-center gap-4">
+                                    <input type="range"
+                                           name="{{ $metric }}"
+                                           id="{{ $metric }}"
+                                           min="1"
+                                           max="10"
+                                           step="1"
+                                           x-model="value"
+                                           class="input w-full"
+                                           required>
+                                    <span class="w-8 text-center text-lg font-bold"
+                                          x-text="value"></span>
+                                </div>
+                                @error($metric)
+                                    <p class="text-destructive mt-2 flex items-center gap-1 text-sm">
+                                        <i class="hgi hgi-stroke hgi-alert-square"></i>
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Would Deal Again -->
+                <div class="card p-6">
+                    <div class="flex flex-col gap-4">
+                        <div>
+                            <h3 class="mb-2 flex items-center gap-2 text-lg font-bold">
+                                <i class="hgi hgi-stroke hgi-thumbs-up font-normal"></i>
+                                Would you work with this vendor again?
+                            </h3>
+                            <p class="text-muted-foreground text-sm">
+                                This helps others understand if you'd recommend this vendor for future business.
+                            </p>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="deal_again" value="1" x-model="dealAgain" class="peer sr-only">
+                                <div class="flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-muted bg-card p-4 text-muted-foreground transition-all hover:bg-muted/50 peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary">
+                                    <i class="hgi hgi-stroke hgi-thumbs-up text-2xl"></i>
+                                    <span class="font-semibold">Yes</span>
+                                </div>
+                            </label>
+                            
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="deal_again" value="0" x-model="dealAgain" class="peer sr-only">
+                                <div class="flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-muted bg-card p-4 text-muted-foreground transition-all hover:bg-muted/50 peer-checked:border-destructive peer-checked:bg-destructive/5 peer-checked:text-destructive">
+                                    <i class="hgi hgi-stroke hgi-thumbs-down text-2xl"></i>
+                                    <span class="font-semibold">No</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anonymous Review -->
+                <div class="card p-6">
+                    <div class="flex items-start gap-6">
+                        <div>
+                            <h3 class="mb-2 flex items-center gap-2 text-lg font-bold">
+                                <i class="hgi hgi-stroke hgi-square-lock-02 font-normal"></i>
+                                Post Anonymously
+                            </h3>
+                            <p class="text-muted-foreground text-sm">
+                                Your review will be posted without your company name or personal details. Note: Anonymous
+                                reviews cannot include comments.
+                            </p>
+                        </div>
+                        <div class="shrink-0">
+                            <label class="relative inline-flex cursor-pointer items-center">
+                                <input type="checkbox"
+                                       name="anonymous"
+                                       id="anonymous"
+                                       x-model="anonymous"
+                                       class="peer sr-only"
+                                       {{ old('anonymous') ? 'checked' : '' }}>
+                                <div
+                                     class="bg-muted peer-focus:ring-primary/30 peer-checked:bg-primary peer h-6 w-11 rounded-full after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="bg-muted mt-4 rounded-lg p-3"
+                         x-show="anonymous">
+                        <p class="flex items-center gap-2 text-sm">
+                            <i class="hgi hgi-stroke hgi-information-circle font-normal"></i>
+                            <span>Your review will be displayed as "Anonymous Reviewer"</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Comment -->
+                <div class="card p-6">
+                    <div>
+                        <h3 class="mb-2 flex items-center gap-2 text-lg font-bold">
+                            <i class="hgi hgi-stroke hgi-note-04 font-normal"></i>
+                            Additional Comments
+                            <span class="text-muted-foreground text-sm font-normal"
+                                  x-show="anonymous">(disabled for anonymous reviews)</span>
+                        </h3>
+                        <p class="text-muted-foreground mb-4 text-sm">
+                            Share any additional thoughts about your experience (optional, max 160 characters)
+                        </p>
+                    </div>
+                    <div>
+
+                    <textarea class="textarea @error('comment') border-destructive @enderror w-full"
+                              name="comment"
+                              id="comment"
+                              rows="4"
+                              maxlength="160"
+                              :disabled="anonymous"
+                              x-model="comment"
+                              placeholder="Example: Great communication and fast delivery. Would recommend for urgent projects.">{{ old('comment') }}</textarea>
+                    <div class="flex items-center justify-between">
+                        <p class="mt-2 text-muted-foreground text-xs">
+                            <span x-text="comment.length"></span>/160 characters
+                        </p>
+                        @error('comment')
+                            <p class="text-destructive flex items-center gap-1 text-sm">
+                                <i class="hgi hgi-stroke hgi-alert-square"></i>
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    </div>
+                </div>
+
+                <!-- Submit Section -->
+                <div class="card bg-muted/50 p-6">
+                    <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+                        <div class="text-center md:text-left">
+                            <p class="mb-1 font-semibold">Ready to submit your review?</p>
+                            <p class="text-muted-foreground text-sm">Your feedback helps the community make better
+                                decisions</p>
+                        </div>
+                        <div class="flex w-full flex-col gap-3 sm:flex-row md:w-auto">
+                            <a href="{{ route('suppliers.show', $supplier) }}"
+                               class="btn btn-lg">
+                                <i class="hgi hgi-stroke hgi-cancel-01"></i>
+                                Cancel
+                            </a>
+                            <div class="inline-block" :data-tooltip="!isDealDateValid ? 'Deal date must be less than 3 years old' : null" data-side="bottom">
+                                <button type="submit"
+                                        class="w-full btn-primary btn-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                        :disabled="!isDealDateValid">
+                                    <i class="hgi hgi-stroke hgi-sent"></i>
+                                    Submit Review
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Help Section -->
+            <div class="bg-primary/5 border-primary/20 mt-8 rounded-xl border p-6">
+                <h4 class="mb-3 flex items-center gap-2 font-bold">
+                    Review Guidelines
+                </h4>
+                <ul class="text-muted-foreground space-y-2 text-sm">
+                    <li class="flex items-start gap-2">
+                        <i class="hgi hgi-stroke hgi-checkmark-circle-02"></i>
+                        <span>Be honest and objective about your experience</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="hgi hgi-stroke hgi-checkmark-circle-02"></i>
+                        <span>Focus on specific aspects like delivery, quality, and communication</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="hgi hgi-stroke hgi-checkmark-circle-02"></i>
+                        <span>Avoid offensive language or personal attacks</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="hgi hgi-stroke hgi-checkmark-circle-02"></i>
+                        <span>Your review will be visible to all users once submitted</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 @endsection
