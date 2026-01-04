@@ -23,7 +23,7 @@
                     <a href="{{ route('auth.register.index') }}"
                        class="btn border-border bg-muted/50 text-foreground hover:bg-muted h-12 w-full border px-6 sm:w-auto">
                         <i class="hgi hgi-stroke hgi-quill-write-01"></i>
-                        Write a Review
+                        Assess a Vendor
                     </a>
                 </div>
 

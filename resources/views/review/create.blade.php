@@ -41,7 +41,7 @@
                         <i class="hgi hgi-stroke hgi-quill-write-01 text-2xl"></i>
                     </div>
                     <div>
-                        <h1 class="mb-2 text-3xl font-bold md:text-4xl">Write a Review</h1>
+                        <h1 class="mb-2 text-3xl font-bold md:text-4xl">Assess a Vendor</h1>
                         <p class="text-muted-foreground text-lg">Share your experience with <span
                                   class="text-foreground font-semibold">{{ $supplier->name }}</span></p>
                         <a href="{{ route('suppliers.show', $supplier) }}"
