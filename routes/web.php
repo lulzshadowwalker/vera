@@ -89,7 +89,8 @@ Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index'])->name(
     'privacy-policy.index',
 );
 Route::get('/terms-and-conditions', [
-    TermsAndConditionsController::class,
+    // TermsAndConditionsController::class,
+    PrivacyPolicyController::class,
     'index',
 ])->name('terms-and-conditions.index');
 
