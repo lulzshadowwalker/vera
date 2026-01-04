@@ -45,8 +45,10 @@ class SupplierResource extends Resource
                             ->maxLength(255),
                         Forms\Components\TextInput::make('name')
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('country')
-                            ->maxLength(2),
+                        Forms\Components\Select::make('country')
+                            ->options(\App\Models\Country::pluck('name', 'code'))
+                            ->searchable()
+                            ->preload(),
                         Forms\Components\Textarea::make('description')
                             ->columnSpanFull(),
                     ]),
