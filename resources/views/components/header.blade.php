@@ -22,7 +22,7 @@
             @auth
                 <button class="btn-primary btn-sm hidden md:flex" onclick="document.getElementById('review-modal').showModal()">
                     <i class="hgi hgi-stroke hgi-quill-write-01 mr-2"></i>
-                    Write Review
+                    Assess Vendor
                 </button>
 
                 <!-- User Dropdown -->
@@ -108,7 +108,7 @@
                         <li>
                             <button onclick="document.getElementById('review-modal').showModal()">
                                 <i class="hgi hgi-stroke hgi-quill-write-01"></i>
-                                <span>Write Review</span>
+                                <span>Assess Vendor</span>
                             </button>
                         </li>
                         <li>
