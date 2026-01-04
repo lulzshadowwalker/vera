@@ -26,7 +26,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
                         </li>
                         <li class="inline-flex items-center gap-1.5">
-                            <span aria-current="page">Write Review</span>
+                            <span aria-current="page">Assess Vendor</span>
                         </li>
                     </ol>
                 </nav>
@@ -41,7 +41,7 @@
                         <i class="hgi hgi-stroke hgi-quill-write-01 text-2xl"></i>
                     </div>
                     <div>
-                        <h1 class="mb-2 text-3xl font-bold md:text-4xl">Write a Review</h1>
+                        <h1 class="mb-2 text-3xl font-bold md:text-4xl">Assess a Vendor</h1>
                         <p class="text-muted-foreground text-lg">Share your experience with <span
                                   class="text-foreground font-semibold">{{ $supplier->name }}</span></p>
                         <a href="{{ route('suppliers.show', $supplier) }}"
@@ -148,7 +148,7 @@
                     <div>
                         <h2 class="mb-2 flex items-center gap-2 text-xl font-bold">
                             <i class="hgi hgi-stroke hgi-star font-normal"></i>
-                            Rate Your Experience
+                            We assess our Experience with the above business bartner based on
                         </h2>
                         <p class="text-muted-foreground mb-6">Rate each aspect from 1 (poor) to 10 (excellent)</p>
 

@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="-mt-18 bg-background min-h-[90vh] py-20 md:py-28">
+    <section class="bg-background min-h-[90vh] py-20 md:py-28">
         <div class="relative z-10 mx-auto max-w-7xl px-6">
             <div class="mx-auto max-w-4xl text-center">
                 <h1 class="text-foreground mb-6 text-balance text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
@@ -23,7 +23,7 @@
                     <a href="{{ route('auth.register.index') }}"
                        class="btn border-border bg-muted/50 text-foreground hover:bg-muted h-12 w-full border px-6 sm:w-auto">
                         <i class="hgi hgi-stroke hgi-quill-write-01"></i>
-                        Write a Review
+                        Assess a Vendor
                     </a>
                 </div>
 
@@ -39,7 +39,7 @@
                                    role="search"
                                    class="input border-border bg-muted/30 text-foreground placeholder:text-muted-foreground h-12 w-full rounded-lg pl-4 pr-10 shadow-lg"
                                    name="search"
-                                   placeholder="Search by vendor name or domain..."
+                                   placeholder="Search by vendor domain"
                                    aria-label="Search for vendors" />
                         </div>
                     </form>

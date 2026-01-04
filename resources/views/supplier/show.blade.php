@@ -84,7 +84,7 @@
                         <a href="{{ route('suppliers.reviews.create', ['supplier' => $supplier]) }}"
                            class="btn btn-primary btn-lg w-full lg:w-auto">
                             <i class="hgi hgi-stroke hgi-quill-write-01"></i>
-                            Write a Review
+                            Assess a Vendor
                         </a>
                     @else
                         <a href="{{ route('auth.register.index') }}"
