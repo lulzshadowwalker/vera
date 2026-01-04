@@ -148,7 +148,7 @@
                     <div>
                         <h2 class="mb-2 flex items-center gap-2 text-xl font-bold">
                             <i class="hgi hgi-stroke hgi-star font-normal"></i>
-                            Rate Your Experience
+                            We assess our Experience with the above business bartner based on
                         </h2>
                         <p class="text-muted-foreground mb-6">Rate each aspect from 1 (poor) to 10 (excellent)</p>
 
