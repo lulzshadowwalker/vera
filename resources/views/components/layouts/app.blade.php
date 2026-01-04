@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="{{ session('theme') === 'dark' ? 'dark' : '' }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      class="{{ session('theme') === 'dark' ? 'dark' : '' }}">
 
 <head>
     <meta charset="utf-8">
@@ -22,9 +23,28 @@
     <link rel="stylesheet"
           href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
 
-    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/basecoat.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/sidebar.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/dropdown-menu.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/basecoat.min.js"
+            defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/sidebar.min.js"
+            defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/basecoat-css@0.3.9/dist/js/dropdown-menu.min.js"
+            defer></script>
+
+    @if (app()->environment('production'))
+        <!-- Google tag (gtag.js) -->
+        <script async
+                src="https://www.googletagmanager.com/gtag/js?id=G-RBQQR8LJCY"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-RBQQR8LJCY');
+        </script>
+    @endif
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -45,21 +65,21 @@
     <script>
         function toggleTheme() {
             fetch('{{ route('theme.toggle') }}', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.theme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            });
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.theme === 'dark') {
+                        document.documentElement.classList.add('dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                    }
+                });
         }
     </script>
 

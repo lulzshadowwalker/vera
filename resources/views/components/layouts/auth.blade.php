@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="{{ session('theme') === 'dark' ? 'dark' : '' }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      class="{{ session('theme') === 'dark' ? 'dark' : '' }}">
 
 <head>
     <meta charset="utf-8">
@@ -18,6 +19,22 @@
 
     <link rel="stylesheet"
           href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+
+    @if (app()->environment('production'))
+        <!-- Google tag (gtag.js) -->
+        <script async
+                src="https://www.googletagmanager.com/gtag/js?id=G-RBQQR8LJCY"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-RBQQR8LJCY');
+        </script>
+    @endif
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
