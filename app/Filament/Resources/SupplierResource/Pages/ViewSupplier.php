@@ -16,4 +16,11 @@ class ViewSupplier extends ViewRecord
             Actions\EditAction::make(),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            SupplierResource\Widgets\SupplierStats::class,
+        ];
+    }
 }
