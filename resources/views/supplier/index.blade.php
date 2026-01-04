@@ -45,7 +45,7 @@
                                    role="search"
                                    name="search"
                                    class="input input-lg w-full pl-9 rounded-r-none z-10 focus:z-20"
-                                   placeholder="Search by vendor name or domain..."
+                                   placeholder="Search by vendor domain"
                                    value="{{ request('search') }}"
                                    aria-label="Search vendors" 
                                    x-data

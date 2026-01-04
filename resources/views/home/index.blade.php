@@ -39,7 +39,7 @@
                                    role="search"
                                    class="input border-border bg-muted/30 text-foreground placeholder:text-muted-foreground h-12 w-full rounded-lg pl-4 pr-10 shadow-lg"
                                    name="search"
-                                   placeholder="Search by vendor name or domain..."
+                                   placeholder="Search by vendor domain"
                                    aria-label="Search for vendors" />
                         </div>
                     </form>
