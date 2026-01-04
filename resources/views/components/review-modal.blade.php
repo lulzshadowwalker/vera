@@ -12,7 +12,7 @@
         }">
     <div>
         <header class="flex flex-row items-start justify-between">
-            <h2 class="text-xl font-bold">Write a Review</h2>
+            <h2 class="text-xl font-bold">Assess a Vendor</h2>
             <button type="button"
                     onclick="this.closest('dialog').close()"
                     class="text-muted-foreground hover:text-foreground cursor-pointer">

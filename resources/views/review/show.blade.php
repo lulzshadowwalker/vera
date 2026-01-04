@@ -107,7 +107,7 @@
                             <a href="{{ route('suppliers.reviews.create', ['supplier' => $review->reviewedSupplier]) }}"
                                class="btn btn-primary">
                                 <i class="hgi hgi-stroke hgi-quill-write-01"></i>
-                                Write Review
+                                Assess Vendor
                             </a>
                         @endauth
                     </div>
