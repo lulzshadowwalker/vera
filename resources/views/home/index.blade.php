@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="-mt-18 bg-background min-h-[90vh] py-20 md:py-28">
+    <section class="bg-background min-h-[90vh] py-20 md:py-28">
         <div class="relative z-10 mx-auto max-w-7xl px-6">
             <div class="mx-auto max-w-4xl text-center">
                 <h1 class="text-foreground mb-6 text-balance text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
