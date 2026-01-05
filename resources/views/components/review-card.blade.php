@@ -34,7 +34,7 @@
                     {{ $identity }}
                 @else
                     <p class="text-sm font-medium">
-                        {{ $review->is_anonymous ? 'Anonymous Reviewer' : $review->user->reviewerSupplier->name ?? 'Anonymous' }}
+                        {{ $review->reviewer_display_name }}
                     </p>
                 @endif
             </div>
