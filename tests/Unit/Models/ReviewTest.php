@@ -24,7 +24,7 @@ class ReviewTest extends TestCase
     public function test_review_display_name_displays_correct_name_for_non_anonymous_reviews(): void
     {
         $supplier = Supplier::factory()->create([
-            'name' => 'Acme Corp',
+            'domain' => 'example.com',
         ]);
 
         $user = User::factory()->for($supplier)->create([
@@ -35,6 +35,6 @@ class ReviewTest extends TestCase
             'anonymous' => false,
         ]);
 
-        $this->assertEquals('John Doe | Acme Corp', $review->reviewer_display_name);
+        $this->assertEquals('John Doe @example.com', $review->reviewer_display_name);
     }
 }

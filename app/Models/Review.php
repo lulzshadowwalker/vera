@@ -108,6 +108,6 @@ class Review extends Model
 
         $user = $this->user;
 
-        return "{$user->name} | {$user->supplier->name}";
+        return "{$user->name} @{$user->supplier->domain}";
     }
 }
