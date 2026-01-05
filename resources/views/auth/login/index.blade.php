@@ -51,7 +51,7 @@
                         @enderror
                     </div>
 
-                    <div class="grid gap-2">
+                    {{-- <div class="grid gap-2">
                         <div class="flex items-center justify-between">
                             <label for="password" class="label">Password</label>
                             <a href="{{ route('password.request') }}" class="text-sm text-primary hover:underline">
@@ -70,7 +70,7 @@
                         @error('password')
                             <div class="text-destructive text-sm mt-1">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <button type="submit" class="btn btn-primary w-full">
                         Continue

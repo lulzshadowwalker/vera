@@ -20,11 +20,22 @@
                         <i class="hgi hgi-stroke hgi-search-01"></i>
                         Seek Vendors
                     </a>
-                    <a href="{{ route('auth.register.index') }}"
+                    @auth
+                    <button
+                       onclick="document.getElementById('review-modal').showModal()"
+                       class="btn border-border bg-muted/50 text-foreground hover:bg-muted h-12 w-full border px-6 sm:w-auto">
+                        <i class="hgi hgi-stroke hgi-quill-write-01"></i>
+                        Assess a Vendor
+                    </button>
+                    @endauth
+                    
+                    @guest
+                    <a href="{{ route('auth.login.index') }}"
                        class="btn border-border bg-muted/50 text-foreground hover:bg-muted h-12 w-full border px-6 sm:w-auto">
                         <i class="hgi hgi-stroke hgi-quill-write-01"></i>
                         Assess a Vendor
                     </a>
+                    @endguest
                 </div>
 
                 <!-- Search Box -->
@@ -39,7 +50,7 @@
                                    role="search"
                                    class="input border-border bg-muted/30 text-foreground placeholder:text-muted-foreground h-12 w-full rounded-lg pl-4 pr-10 shadow-lg"
                                    name="search"
-                                   placeholder="Search by vendor domain"
+                                   placeholder="Search by vendor @domain"
                                    aria-label="Search for vendors" />
                         </div>
                     </form>

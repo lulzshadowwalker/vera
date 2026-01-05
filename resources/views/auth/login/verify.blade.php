@@ -43,7 +43,7 @@
                                 @paste="onPaste($event)"
                                 maxlength="1"
                                 class="js-pin-input input h-12 min-w-12 text-center text-xl font-bold"
-                                :autofocus="index === 0"
+                                x-init="if (index === 0) $el.focus()"
                             >
                         </template>
                     </div>

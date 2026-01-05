@@ -122,7 +122,7 @@ The **Industrial Supplier Reviews Platform** is a secure, scalable B2B web appli
 
 ### 4.3 Review
 
-- **Fields**: `id`, `reviewer_supplier_id`, `reviewed_supplier_id`, `user_id`, `deal_date`, `country`, 10 metrics (tinyint 1–10), `deal_again`, `comment`, `is_anonymous`, `published`, timestamps, soft deletes.
+- **Fields**: `id`, `reviewer_supplier_id`, `reviewed_supplier_id`, `user_id`, `deal_date`, `country`, 10 metrics (tinyint 1–10), `deal_again`, `comment`, `anonymous`, `published`, timestamps, soft deletes.
 - **Relations**:
   - `belongsTo(User)`
   - `belongsTo(Supplier as reviewerSupplier)`

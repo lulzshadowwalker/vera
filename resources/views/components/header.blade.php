@@ -27,13 +27,13 @@
 
                 <!-- User Dropdown -->
                 <div id="user-dropdown" class="dropdown-menu">
-                    <button type="button" id="user-dropdown-trigger" aria-haspopup="menu" aria-controls="user-dropdown-menu" aria-expanded="false" class="btn-ghost btn-icon rounded-full">
+                    <button type="button" id="user-dropdown-trigger" aria-haspopup="menu" aria-controls="user-dropdown-menu" aria-expanded="false" class="btn-secondary btn-icon rounded-full">
                         <i class="hgi hgi-stroke hgi-user text-xl"></i>
                     </button>
                     <div id="user-dropdown-popover" data-popover aria-hidden="true" class="min-w-56" data-align="end">
                         <div role="menu" id="user-dropdown-menu" aria-labelledby="user-dropdown-trigger">
                             <div role="group">
-                                <div class="px-2 py-1.5 text-sm font-semibold">{{ auth()->user()->email }}</div>
+                                <div class="px-2 py-1.5 text-sm font-semibold max-w-56 truncate">{{ auth()->user()->name }}</div>
                             </div>
                             <hr role="separator" />
                             <div role="menuitem">
