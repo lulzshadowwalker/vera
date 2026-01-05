@@ -9,7 +9,7 @@
                     Find Trusted Industrial Vendors, Fast
                 </h1>
                 <p class="text-muted-foreground mx-auto mb-10 max-w-2xl text-lg leading-relaxed md:text-xl">
-                    Access authentic reviews from verified businesses. Make confident procurement decisions backed by real
+                    Access authentic assessments from verified businesses. Make confident procurement decisions backed by real
                     experiences from your peers.
                 </p>
 
@@ -91,7 +91,7 @@
                             <div>
                                 <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($totalReviews ?? 1250) }}
                                 </h2>
-                                <p class="text-muted-foreground text-sm font-medium">Verified Reviews</p>
+                                <p class="text-muted-foreground text-sm font-medium">Verified Assessments</p>
                             </div>
                         </header>
                     </div>
@@ -108,7 +108,7 @@
                             <div>
                                 <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($totalReviews ?? 1250) }}
                                 </h2>
-                                <p class="text-muted-foreground text-sm font-medium">Verified Reviews</p>
+                                <p class="text-muted-foreground text-sm font-medium">Verified Assessments</p>
                             </div>
                         </header>
                     </div>
@@ -150,9 +150,9 @@
                              class="bg-primary text-primary-foreground mb-6 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold shadow-lg">
                             2
                         </div>
-                        <h3 class="mb-3 text-xl font-semibold">Seek & Review Vendors</h3>
+                        <h3 class="mb-3 text-xl font-semibold">Seek & Assess Vendors</h3>
                         <p class="text-muted-foreground leading-relaxed">
-                            Search our directory, read authentic reviews, or share your own experience with vendors you've
+                            Search our directory, read authentic assessments, or share your own experience with vendors you've
                             worked with.
                         </p>
                     </div>
@@ -190,9 +190,9 @@
                     <div class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg">
                         <i class="hgi hgi-stroke hgi-checkmark-badge-01 text-2xl"></i>
                     </div>
-                    <h3 class="mb-3 text-xl font-semibold">100% Verified Reviews</h3>
+                    <h3 class="mb-3 text-xl font-semibold">100% Verified Assessments</h3>
                     <p class="text-muted-foreground leading-relaxed">
-                        Every review comes from authenticated business users. No fake reviews, no spam—just honest feedback.
+                        Every assessment comes from authenticated business users. No fake assessments, no spam—just honest feedback.
                     </p>
                 </div>
 
@@ -227,7 +227,7 @@
                     </div>
                     <h3 class="mb-3 text-xl font-semibold">Secure & Private</h3>
                     <p class="text-muted-foreground leading-relaxed">
-                        Your data is protected. Choose to review anonymously or publicly—you're always in control.
+                        Your data is protected. Choose to assess anonymously or publicly—you're always in control.
                     </p>
                 </div>
 
@@ -238,7 +238,7 @@
                     </div>
                     <h3 class="mb-3 text-xl font-semibold">Global Coverage</h3>
                     <p class="text-muted-foreground leading-relaxed">
-                        Connect with vendors worldwide. Reviews include country tags to help you find local or
+                        Connect with vendors worldwide. Assessments include country tags to help you find local or
                         international partners.
                     </p>
                 </div>
@@ -275,7 +275,7 @@
                                  class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
                             <h2
                                 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
-                                How do I leave a review for a vendor?
+                                How do I leave an assessment for a vendor?
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      width="24"
                                      height="24"
@@ -293,7 +293,7 @@
                         <section class="pb-4">
                             <p class="text-muted-foreground text-sm leading-relaxed">
                                 Sign up with your work email, verify your account, and search for the vendor you want to
-                                review. You'll rate them on 10 key metrics including cost, quality, reliability, and
+                                assess. You'll rate them on 10 key metrics including cost, quality, reliability, and
                                 communication. You can also add an optional comment.
                             </p>
                         </section>
@@ -321,7 +321,7 @@
                         </summary>
                         <section class="pb-4">
                             <p class="text-muted-foreground text-sm leading-relaxed">
-                                Yes! Basic access is completely free. You can seek reviews, search vendors, and leave
+                                Yes! Basic access is completely free. You can seek assessments, search vendors, and leave
                                 feedback at no cost. We'll be introducing premium plans in the future with advanced features
                                 like team access and detailed analytics.
                             </p>
@@ -350,9 +350,9 @@
                         </summary>
                         <section class="pb-4">
                             <p class="text-muted-foreground text-sm leading-relaxed">
-                                All vendors are automatically identified by their domain when users submit reviews.
-                                Reviews are tied to verified business email addresses, ensuring authenticity. We prevent
-                                self-reviews by checking domain matches between reviewers and vendors.
+                                All vendors are automatically identified by their domain when users submit assessments.
+                                Assessments are tied to verified business email addresses, ensuring authenticity. We prevent
+                                self-assessments by checking domain matches between reviewers and vendors.
                             </p>
                         </section>
                     </details>
@@ -380,7 +380,7 @@
                         <section class="pb-4">
                             <p class="text-muted-foreground text-sm leading-relaxed">
                                 Absolutely! Each vendor has a public profile page with aggregated ratings and recent
-                                reviews. Share the link with your team or network to help others make informed decisions.
+                                assessments. Share the link with your team or network to help others make informed decisions.
                             </p>
                         </section>
                     </details>
@@ -390,7 +390,7 @@
                                  class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
                             <h2
                                 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
-                                Can I review anonymously?
+                                Can I assess anonymously?
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      width="24"
                                      height="24"
@@ -407,7 +407,7 @@
                         </summary>
                         <section class="pb-4">
                             <p class="text-muted-foreground text-sm leading-relaxed">
-                                Yes. By default, all reviews are anonymous. If you choose to make your review public, it
+                                Yes. By default, all assessments are anonymous. If you choose to make your assessment public, it
                                 will display your organization name and first initial (e.g., "ABC Corp - J."). You're always
                                 in control of your privacy.
                             </p>
@@ -419,7 +419,7 @@
                                  class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
                             <h2
                                 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
-                                What metrics are included in reviews?
+                                What metrics are included in assessments?
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      width="24"
                                      height="24"
@@ -436,7 +436,7 @@
                         </summary>
                         <section class="pb-4">
                             <p class="text-muted-foreground text-sm leading-relaxed">
-                                Each review rates vendors on 10 key metrics: Cost, Speed, Communication, Reliability,
+                                Each assessment rates vendors on 10 key metrics: Cost, Speed, Communication, Reliability,
                                 Quality, Support, Flexibility, Innovation, Value, and Timeliness. This comprehensive
                                 approach gives you a complete picture of vendor performance.
                             </p>
@@ -464,7 +464,7 @@
                             Ready to Make Better Procurement Decisions?
                         </h2>
                         <p class="text-primary-foreground/90 mb-10 text-lg leading-relaxed md:text-xl">
-                            Join thousands of businesses finding trusted vendors through authentic, verified reviews.
+                            Join thousands of businesses finding trusted vendors through authentic, verified assessments.
                         </p>
                         <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
                             <a href="{{ route('auth.register.index') }}"
