@@ -115,7 +115,7 @@
                         <div class="space-y-3">
                             @foreach ([5, 4, 3, 2, 1] as $stars)
                                 @php
-                                    $percentage = [5 => 40, 4 => 35, 3 => 15, 2 => 7, 1 => 3][$stars];
+                                    $percentage = $supplier->getRatingPercentage($stars);
                                 @endphp
                                 <div class="flex items-center gap-3">
                                     <div class="flex w-28 items-center gap-1">

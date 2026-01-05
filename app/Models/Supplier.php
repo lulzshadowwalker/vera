@@ -87,6 +87,29 @@ class Supplier extends Model
         return $count > 0 ? round(($total / $count) / 2, 1) : 0;
     }
 
+    public function getRatingPercentage(int $stars): int
+    {
+        $reviews = $this->reviews;
+
+        if ($reviews->isEmpty()) {
+            return 0;
+        }
+
+        $matchingCount = $reviews->filter(function ($review) use ($stars) {
+            $avg = ($review->quality +
+                    $review->accuracy +
+                    $review->communication +
+                    $review->cost +
+                    $review->compliance +
+                    $review->timeliness +
+                    $review->support) / 7;
+
+            return round($avg / 2) == $stars;
+        })->count();
+
+        return (int) round(($matchingCount / $reviews->count()) * 100);
+    }
+
     public function toSearchableArray(): array
     {
         return [
