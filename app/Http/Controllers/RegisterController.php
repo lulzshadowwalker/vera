@@ -65,7 +65,7 @@ class RegisterController extends Controller
         $otp = $this->generateOtp();
         $cacheKey = $this->getRegistrationOtpCacheKey($validated['email']);
 
-        // Store OTP in cache with metadata (expires in 2 minutes)
+        // Store OTP in cache with metadata (expires in 5 minutes)
         Cache::put(
             $cacheKey,
             [
@@ -75,7 +75,7 @@ class RegisterController extends Controller
                 'user_agent' => $request->userAgent(),
                 'created_at' => now(),
             ],
-            now()->addMinutes(2),
+            now()->addMinutes(5),
         );
 
         // Store registration data in session
@@ -190,7 +190,7 @@ class RegisterController extends Controller
         ) {
             // Increment attempts
             $otpData['attempts']++;
-            Cache::put($cacheKey, $otpData, now()->addMinutes(2));
+            Cache::put($cacheKey, $otpData, now()->addMinutes(5));
 
             return back()
                 ->withErrors(['otp' => 'Invalid verification code.'])
@@ -201,7 +201,7 @@ class RegisterController extends Controller
         if ($otpData['otp'] !== $validated['otp']) {
             // Increment attempts
             $otpData['attempts']++;
-            Cache::put($cacheKey, $otpData, now()->addMinutes(2));
+            Cache::put($cacheKey, $otpData, now()->addMinutes(5));
 
             return back()
                 ->withErrors(['otp' => 'Invalid verification code.'])
@@ -303,7 +303,7 @@ class RegisterController extends Controller
         // Generate new OTP
         $otp = $this->generateOtp();
 
-        // Store OTP in cache (expires in 2 minutes)
+        // Store OTP in cache (expires in 5 minutes)
         Cache::put(
             $cacheKey,
             [
@@ -313,7 +313,7 @@ class RegisterController extends Controller
                 'user_agent' => request()->userAgent(),
                 'created_at' => now(),
             ],
-            now()->addMinutes(2),
+            now()->addMinutes(5),
         );
 
         // Set rate limit (30 seconds)
