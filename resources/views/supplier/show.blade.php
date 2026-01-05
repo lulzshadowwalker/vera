@@ -100,14 +100,9 @@
                 <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
                     <!-- Overall Rating -->
                     <div class="border-border flex flex-col items-center justify-center text-center lg:border-r">
-                        {{-- TODO: Dynamic supplier rating --}}
-                        <div class="text-primary mb-3 text-6xl font-bold">5.0</div>
-                        <div class="mb-2 flex items-center gap-1">
-                            <i class="hgi hgi-stroke hgi-star"></i>
-                            <i class="hgi hgi-stroke hgi-star"></i>
-                            <i class="hgi hgi-stroke hgi-star"></i>
-                            <i class="hgi hgi-stroke hgi-star"></i>
-                            <i class="hgi hgi-stroke hgi-star"></i>
+                        <div class="text-primary mb-3 text-6xl font-bold">{{ number_format($supplier->average_rating, 1) }}</div>
+                        <div class="mb-2">
+                            <x-star-rating :score="$supplier->average_rating" size="size-6" />
                         </div>
                         <p class="text-muted-foreground text-lg">Based on <span
                                   class="text-foreground font-semibold">{{ $supplier->reviews()->count() }}</span> reviews
@@ -123,9 +118,8 @@
                                     $percentage = [5 => 40, 4 => 35, 3 => 15, 2 => 7, 1 => 3][$stars];
                                 @endphp
                                 <div class="flex items-center gap-3">
-                                    <div class="flex w-16 items-center gap-1">
-                                        <span class="text-sm font-medium">{{ $stars }}</span>
-                                        <i class="hgi hgi-stroke hgi-star"></i>
+                                    <div class="flex w-28 items-center gap-1">
+                                        <x-star-rating :score="$stars" size="size-4" />
                                     </div>
                                     <div class="bg-muted h-2 flex-1 overflow-hidden rounded-full">
                                         <div class="bg-primary h-full rounded-full transition-all"

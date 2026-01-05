@@ -83,7 +83,8 @@ class Supplier extends Model
             $count++;
         }
 
-        return $count > 0 ? round($total / $count, 1) : 0;
+        // Normalize to 5 stars (divide by 2 since scores are out of 10)
+        return $count > 0 ? round(($total / $count) / 2, 1) : 0;
     }
 
     public function toSearchableArray(): array
