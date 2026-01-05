@@ -64,13 +64,10 @@
                         <div>
                             <h1 class="mb-2 text-3xl font-bold md:text-4xl">{{ $supplier->name }}</h1>
                             <div class="text-muted-foreground flex flex-wrap items-center gap-4">
-                                <a href="https://{{ $supplier->domain }}"
-                                   target="_blank"
-                                   rel="noopener"
-                                   class="hover:text-primary flex items-center gap-1 transition-colors">
+                                <div class="flex items-center gap-1">
                                     <i class="hgi hgi-stroke hgi-globe-02 translate-y-0.5"></i>
                                     <span>{{ $supplier->domain }}</span>
-                                </a>
+                                </div>
                                 @if ($supplier->country)
                                     <span class="flex items-center gap-1">
                                         <i class="hgi hgi-stroke hgi-location-03"></i>

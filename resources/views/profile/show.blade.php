@@ -74,7 +74,7 @@
                 <x-review-card :review="$review">
                     <x-slot:identity>
                         <p class="text-sm font-medium mt-1">
-                            Reviewed: <a href="{{ route('suppliers.show', $review->reviewedSupplier) }}" class="text-primary hover:underline">{{ $review->reviewedSupplier->name }}</a>
+                            Reviewed {{ $review->reviewedSupplier->name }}
                         </p>
                     </x-slot:identity>
                     <x-slot:actions>
