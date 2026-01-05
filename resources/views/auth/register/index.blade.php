@@ -45,6 +45,7 @@
                                     placeholder="John"
                                     value="{{ old('first_name') }}"
                                     required
+                                    autofocus
                                 >
                             </div>
                             @error('first_name')
