@@ -28,7 +28,8 @@
                     <span
                           class="text-sm font-medium">{{ $review->deal_again ? 'Would work again' : 'Would not work again' }}</span>
                 </div>
-                <p class="text-muted-foreground text-sm">{{ $review->created_at->diffForHumans() }}</p>
+                <p class="text-muted-foreground text-sm">Deal Date: {{ $review->deal_date->format('M d, Y') }}</p>
+                <p class="text-muted-foreground text-xs mb-2">{{ $review->created_at->diffForHumans() }}</p>
 
                 @if (isset($identity))
                     {{ $identity }}

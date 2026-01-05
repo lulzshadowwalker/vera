@@ -153,6 +153,11 @@
                                 </p>
                             </div>
                             <div class="bg-muted/50 rounded-lg p-3">
+                                <p class="text-muted-foreground mb-1 text-xs">Deal Date</p>
+                                <p class="font-semibold">{{ $review->deal_date->format('M d, Y') }}</p>
+                                <p class="text-muted-foreground text-xs">{{ $review->deal_date->diffForHumans() }}</p>
+                            </div>
+                            <div class="bg-muted/50 rounded-lg p-3">
                                 <p class="text-muted-foreground mb-1 text-xs">Review Date</p>
                                 <p class="font-semibold">{{ $review->created_at->format('M d, Y') }}</p>
                                 <p class="text-muted-foreground text-xs">{{ $review->created_at->diffForHumans() }}</p>
