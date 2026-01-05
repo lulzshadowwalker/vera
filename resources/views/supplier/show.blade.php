@@ -87,7 +87,7 @@
                         <a href="{{ route('auth.register.index') }}"
                            class="btn btn-primary btn-lg w-full lg:w-auto">
                             <i class="hgi hgi-stroke hgi-quill-write-01"></i>
-                            Sign Up to Review
+                            Sign Up to Assess
                         </a>
                     @endauth
                 </div>
@@ -105,7 +105,7 @@
                             <x-star-rating :score="$supplier->average_rating" size="size-6" />
                         </div>
                         <p class="text-muted-foreground text-lg">Based on <span
-                                  class="text-foreground font-semibold">{{ $supplier->reviews()->count() }}</span> reviews
+                                  class="text-foreground font-semibold">{{ $supplier->reviews()->count() }}</span> assessments
                         </p>
                     </div>
 
@@ -136,7 +136,7 @@
             <!-- Reviews Section -->
             <div>
                 <div class="mb-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-                    <h2 class="text-2xl font-bold">Reviews ({{ $supplier->reviews()->count() }})</h2>
+                    <h2 class="text-2xl font-bold">Assessments ({{ $supplier->reviews()->count() }})</h2>
                     <div class="flex flex-wrap gap-3">
                         <select class="select w-48">
                             <option>Sort by: Most Recent</option>
@@ -162,11 +162,11 @@
                          x-init
                          x-intersect="$ajax('{{ route('suppliers.show', ['supplier' => $supplier, 'page' => $reviews->currentPage() + 1]) }}', { target: 'js-reviews js-pagination' })">
                         <div class="border-primary mx-auto h-8 w-8 animate-spin rounded-full border-b-2"></div>
-                        <p class="text-muted-foreground mt-2">Loading more reviews...</p>
+                        <p class="text-muted-foreground mt-2">Loading more assessments...</p>
                     </div>
                 @else
                     <div class="py-8 text-center">
-                        <p class="text-muted-foreground">You've reached the end of the reviews</p>
+                        <p class="text-muted-foreground">You've reached the end of the assessments</p>
                     </div>
                 @endif
             </div>
@@ -176,10 +176,10 @@
 
 @push('scripts')
     <script>
-        function shareReview(url, supplierName) {
+        function shareAssessment(url, supplierName) {
             const shareData = {
-                title: `Review for ${supplierName}`,
-                text: `Check out this review for ${supplierName} on our platform`,
+                title: `Assessment for ${supplierName}`,
+                text: `Check out this assessment for ${supplierName} on our platform`,
                 url: url
             };
 

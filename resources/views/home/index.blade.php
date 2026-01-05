@@ -352,7 +352,7 @@
                             <p class="text-muted-foreground text-sm leading-relaxed">
                                 All vendors are automatically identified by their domain when users submit assessments.
                                 Assessments are tied to verified business email addresses, ensuring authenticity. We prevent
-                                self-assessments by checking domain matches between reviewers and vendors.
+                                self-assessments by checking domain matches between assessors and vendors.
                             </p>
                         </section>
                     </details>
