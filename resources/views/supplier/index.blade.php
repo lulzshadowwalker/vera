@@ -25,7 +25,7 @@
         <div class="bg-card border-border border-b">
             <div class="mx-auto max-w-7xl px-6 py-8">
                 <h1 class="mb-2 text-3xl font-bold md:text-4xl">Seek Vendors</h1>
-                <p class="text-muted-foreground text-lg">Discover trusted industrial vendors with verified reviews from
+                <p class="text-muted-foreground text-lg">Discover trusted industrial vendors with verified assessments from
                     real businesses</p>
             </div>
         </div>
@@ -99,12 +99,12 @@
 
                         <!-- Review Count -->
                         <div>
-                            <label class="block text-sm font-semibold mb-3">Minimum Reviews</label>
+                            <label class="block text-sm font-semibold mb-3">Minimum Assessments</label>
                             <select class="select w-full">
                                 <option>Any Amount</option>
-                                <option>10+ Reviews</option>
-                                <option>25+ Reviews</option>
-                                <option>50+ Reviews</option>
+                                <option>10+ Assessments</option>
+                                <option>25+ Assessments</option>
+                                <option>50+ Assessments</option>
                             </select>
                         </div>
 
@@ -114,7 +114,7 @@
                             <select class="select w-full">
                                 <option>Relevance</option>
                                 <option>Highest Rating</option>
-                                <option>Most Reviews</option>
+                                <option>Most Assessments</option>
                                 <option>Name (A-Z)</option>
                                 <option>Name (Z-A)</option>
                             </select>
@@ -183,7 +183,7 @@
                                         <x-star-rating :score="$rating" />
                                         <span class="text-lg font-bold">{{ number_format($rating, 1) }}</span>
                                         <span class="text-muted-foreground text-sm">({{ $reviewCount }}
-                                            {{ Str::plural('review', $reviewCount) }})</span>
+                                            {{ Str::plural('assessment', $reviewCount) }})</span>
                                     </div>
 
                                     <!-- Description -->

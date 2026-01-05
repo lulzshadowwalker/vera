@@ -53,18 +53,18 @@
         <!-- Reviews Section -->
         <div>
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                <h2 class="text-2xl font-bold">My Reviews ({{ $reviews->total() }})</h2>
+                <h2 class="text-2xl font-bold">My Assessments ({{ $reviews->total() }})</h2>
             </div>
 
             @if($reviews->isEmpty())
                 <x-empty-state
-                    title="No reviews yet"
-                    description="You haven't written any reviews yet. Your insights help others make better decisions."
+                    title="No assessments yet"
+                    description="You haven't written any assessments yet. Your insights help others make better decisions."
                     icon="hgi-star"
                 >
                     <x-slot:actions>
                         <a href="{{ route('suppliers.index') }}" class="btn btn-primary">
-                            Find Vendors to Review
+                            Find Vendors to Assess
                         </a>
                     </x-slot:actions>
                 </x-empty-state>
@@ -74,7 +74,7 @@
                 <x-review-card :review="$review">
                     <x-slot:identity>
                         <p class="text-sm font-medium mt-1">
-                            Reviewed {{ $review->reviewedSupplier->name }}
+                            Assessed {{ $review->reviewedSupplier->name }}
                         </p>
                     </x-slot:identity>
                     <x-slot:actions>

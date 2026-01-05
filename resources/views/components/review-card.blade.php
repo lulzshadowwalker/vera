@@ -82,9 +82,9 @@
                 @if (isset($actions))
                     {{ $actions }}
                 @else
-                    <button onclick="shareReview('{{ route('reviews.show', $review) }}', '{{ $review->reviewedSupplier->name }}')"
+                    <button onclick="shareAssessment('{{ route('reviews.show', $review) }}', '{{ $review->reviewedSupplier->name }}')"
                             class="btn btn-secondary btn-sm"
-                            title="Share this review">
+                            title="Share this assessment">
                         Share
                         <i class="hgi hgi-stroke hgi-share-08"></i>
                     </button>
