@@ -20,7 +20,7 @@
             </button>
         </header>
         <p class="text-muted-foreground mb-4">
-            Enter the website domain of the vendor you want to review. If they aren't in our system yet, we'll add
+            Enter the website domain of the vendor you want to assess. If they aren't in our system yet, we'll add
             them for you.
         </p>
 
@@ -33,7 +33,10 @@
                 <label for="domain"
                        class="mb-2 block text-sm font-medium">Vendor Domain</label>
                 <div class="flex w-full items-stretch">
-                    <span class="flex items-center bg-muted border border-input border-r-0 px-3 rounded-l-md text-muted-foreground text-sm">https://</span>
+                    <span
+                          class="bg-muted border-input text-muted-foreground flex items-center rounded-l-md border border-r-0 px-3 text-sm">
+                        @
+                    </span>
                     <input type="text"
                            name="domain"
                            id="domain"
@@ -43,8 +46,10 @@
                            required
                            autofocus>
                 </div>
-                <p x-show="isSelfReview" x-cloak class="text-destructive mt-1 text-sm">
-                    You cannot review your own vendor.
+                <p x-show="isSelfReview"
+                   x-cloak
+                   class="text-destructive mt-1 text-sm">
+                    You cannot assess your own vendor.
                 </p>
                 @error('domain')
                     <p class="text-destructive mt-1 text-sm">{{ $message }}</p>
@@ -55,8 +60,9 @@
                 <button class="btn-outline"
                         type="button"
                         onclick="this.closest('dialog').close()">Cancel</button>
-                <div class="inline-block" :title="isSelfReview ? 'You cannot review your own supplier' : ''">
-                    <button class="btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                <div class="inline-block"
+                     :title="isSelfReview ? 'You cannot assess your own vendor' : ''">
+                    <button class="btn btn-primary disabled:cursor-not-allowed disabled:opacity-50"
                             type="submit"
                             :disabled="isSelfReview">
                         Continue

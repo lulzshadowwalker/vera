@@ -99,4 +99,15 @@ class Review extends Model
             1,
         );
     }
+
+    public function getReviewerDisplayNameAttribute(): string
+    {
+        if ($this->anonymous) {
+            return 'Anonymous';
+        }
+
+        $user = $this->user;
+
+        return "{$user->name} @{$user->supplier->domain}";
+    }
 }

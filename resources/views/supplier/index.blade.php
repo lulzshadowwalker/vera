@@ -178,22 +178,9 @@
                                     <div class="border-border mb-4 flex items-center gap-3 border-b pb-4">
                                         @php
                                             $rating = $supplier->average_rating ?? 0;
-                                            $fullStars = floor($rating);
-                                            $hasHalf = $rating - $fullStars >= 0.5;
                                             $reviewCount = $supplier->reviews()->count();
                                         @endphp
-                                        <div class="flex items-center gap-1">
-                                            @for ($i = 1; $i <= 5; $i++)
-                                                @if ($i <= $fullStars)
-                                                    {{-- TODO: Better star icons setup --}}
-                                                    <i class="hgi hgi-stroke hgi-star"></i>
-                                                @elseif($i == $fullStars + 1 && $hasHalf)
-                                                    <i class="hgi hgi-stroke hgi-star"></i>
-                                                @else
-                                                    <i class="hgi hgi-stroke hgi-star"></i>
-                                                @endif
-                                            @endfor
-                                        </div>
+                                        <x-star-rating :score="$rating" />
                                         <span class="text-lg font-bold">{{ number_format($rating, 1) }}</span>
                                         <span class="text-muted-foreground text-sm">({{ $reviewCount }}
                                             {{ Str::plural('review', $reviewCount) }})</span>

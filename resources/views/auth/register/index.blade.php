@@ -45,6 +45,7 @@
                                     placeholder="John"
                                     value="{{ old('first_name') }}"
                                     required
+                                    autofocus
                                 >
                             </div>
                             @error('first_name')
@@ -90,7 +91,7 @@
                         <div class="text-muted-foreground text-sm mt-1">Please use your work email. Public email providers are not allowed.</div>
                     </div>
 
-                    <div class="grid gap-2">
+                    {{-- <div class="grid gap-2">
                         <label for="backup_email" class="label">Backup Email</label>
                         <div>
                             <input
@@ -105,10 +106,10 @@
                         @error('backup_email')
                             <div class="text-destructive text-sm mt-1">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="grid gap-2">
-                        <label for="country_id" class="label">Country</label>
+                        <label for="country_id" class="label">Country <small class="text-extralight">(optional)</small></label>
                         <div id="country-select" class="select w-full">
                             <button type="button" class="btn-outline justify-between font-normal w-full @error('country_id') border-destructive @enderror" id="country-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="country-select-listbox">
                                 <span class="truncate">
@@ -134,6 +135,9 @@
                                 </header>
 
                                 <div role="listbox" id="country-select-listbox" aria-orientation="vertical" aria-labelledby="country-select-trigger" data-empty="No country found." class="max-h-60 overflow-y-auto">
+                                    <div role="option" data-value="" @if(!old('country_id')) aria-selected="true" @endif>
+                                        Select a country
+                                    </div>
                                     @foreach($countries as $country)
                                         <div role="option" data-value="{{ $country->id }}" @if(old('country_id') == $country->id) aria-selected="true" @endif>
                                             {{ $country->name }}

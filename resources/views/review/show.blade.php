@@ -81,9 +81,9 @@
                             <h1 class="mb-2 text-2xl font-bold md:text-3xl">Review for {{ $review->reviewedSupplier->name }}
                             </h1>
                             <div class="text-muted-foreground flex flex-wrap items-center gap-4">
-                                <a href="https://{{ $review->reviewedSupplier->domain }}"
-                                   target="_blank"
-                                   rel="noopener"
+                                <a href="{{ route('suppliers.show', $review->reviewedSupplier) }}"
+                                    data-tooltip="Vendor Profile"
+                                    data-side="bottom"
                                    class="hover:text-primary flex items-center gap-1 transition-colors">
                                     <i class="hgi hgi-stroke hgi-globe-02"></i>
                                     <span>{{ $review->reviewedSupplier->domain }}</span>
@@ -149,8 +149,13 @@
                             <div class="bg-muted/50 rounded-lg p-3">
                                 <p class="text-muted-foreground mb-1 text-xs">Reviewed By</p>
                                 <p class="font-semibold">
-                                    {{ $review->is_anonymous ? 'Anonymous' : $review->user->reviewerSupplier->name ?? 'Anonymous' }}
+                                    {{ $review->reviewer_display_name }}
                                 </p>
+                            </div>
+                            <div class="bg-muted/50 rounded-lg p-3">
+                                <p class="text-muted-foreground mb-1 text-xs">Deal Date</p>
+                                <p class="font-semibold">{{ $review->deal_date->format('M d, Y') }}</p>
+                                <p class="text-muted-foreground text-xs">{{ $review->deal_date->diffForHumans() }}</p>
                             </div>
                             <div class="bg-muted/50 rounded-lg p-3">
                                 <p class="text-muted-foreground mb-1 text-xs">Review Date</p>
@@ -263,7 +268,7 @@
                                             <p class="text-muted-foreground text-sm">{{ $otherReview->created_at->diffForHumans() }}
                                             </p>
                                             <p class="truncate text-sm font-medium">
-                                                {{ $otherReview->is_anonymous ? 'Anonymous' : $otherReview->user->reviewerSupplier->name ?? 'Anonymous' }}
+                                                {{ $otherReview->reviewer_display_name }}
                                             </p>
                                             <div class="text-muted-foreground mt-1 flex items-center gap-1">
                                                 @if ($review->deal_again)
