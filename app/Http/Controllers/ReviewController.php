@@ -25,7 +25,7 @@ class ReviewController extends Controller
                 ->route('suppliers.show', $supplier)
                 ->with(
                     'warning',
-                    'You cannot review your own vendor.',
+                    'You cannot assess your own vendor.',
                 );
         }
 
@@ -38,7 +38,7 @@ class ReviewController extends Controller
                 ->route('suppliers.show', $supplier)
                 ->with(
                     'warning',
-                    'You have already submitted a review for this supplier.',
+                    'You have already submitted an assessment for this supplier.',
                 );
         }
 
