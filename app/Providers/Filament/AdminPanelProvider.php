@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->authGuard('admin')
             ->defaultThemeMode(ThemeMode::Light)
             ->colors([
                 'primary' => Color::hex('#2e5ec6'),
@@ -53,7 +54,7 @@ class AdminPanelProvider extends PanelProvider
                     ->url(fn (): string => ! app()->environment('testing') ? route('telescope') : '#', shouldOpenInNewTab: true)
                     ->icon('heroicon-o-chart-bar-square')
                     ->group('Monitor')
-                    ->visible(fn (): bool => ! app()->environment('testing') && Auth::user()->isAdmin),
+                    ->visible(fn (): bool => ! app()->environment('testing') && Auth::guard('admin')->user()->isAdmin),
 
                 NavigationItem::make('pulse')
                     ->label('Pulse')
@@ -62,7 +63,7 @@ class AdminPanelProvider extends PanelProvider
                     ->url(fn (): string => route('pulse'), shouldOpenInNewTab: true)
                     ->icon('heroicon-o-heart')
                     ->group('Monitor')
-                    ->visible(fn (): bool => ! app()->environment('testing') && Auth::user()->isAdmin),
+                    ->visible(fn (): bool => ! app()->environment('testing') && Auth::guard('admin')->user()->isAdmin),
 
                 NavigationItem::make('horizon')
                     ->label('Horizon')
@@ -71,7 +72,7 @@ class AdminPanelProvider extends PanelProvider
                     ->url(fn (): string => route('horizon.index'), shouldOpenInNewTab: true)
                     ->icon('heroicon-o-lifebuoy')
                     ->group('Monitor')
-                    ->visible(fn (): bool => ! app()->environment('testing') && Auth::user()->isAdmin),
+                    ->visible(fn (): bool => ! app()->environment('testing') && Auth::guard('admin')->user()->isAdmin),
             ])
             ->middleware([
                 EncryptCookies::class,
