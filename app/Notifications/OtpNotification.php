@@ -38,7 +38,7 @@ class OtpNotification extends Notification implements ShouldQueue
             ->greeting('Hello!')
             ->line('Your verification code is:')
             ->line('**'.$this->otp.'**')
-            ->line('This code will expire in 2 minutes.')
+            ->line('This code will expire in 5 minutes.')
             ->line('If you did not request this code, please ignore this email.');
     }
 
