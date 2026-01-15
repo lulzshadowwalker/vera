@@ -20,8 +20,8 @@ class HomeController extends Controller
         });
 
         return view('home.index', [
-            'suppliersCount' => 1000 + $suppliersCount,
-            'reviewsCount' => 30000 + $reviewsCount,
+            'suppliersCount' => 10_000 + $suppliersCount,
+            'reviewsCount' => 30_000 + $reviewsCount,
         ]);
     }
 }
