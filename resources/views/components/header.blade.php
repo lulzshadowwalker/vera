@@ -1,39 +1,48 @@
-<header class="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+<header
+    class="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
     <div class="container mx-auto flex h-14 items-center px-4 md:px-6">
         <!-- Mobile Menu Trigger -->
-        <button type="button" class="btn-outline btn-icon md:hidden mr-4" onclick="document.dispatchEvent(new CustomEvent('basecoat:sidebar', { detail: { id: 'mobile-sidebar' } }))">
+        <button type="button" class="btn-outline btn-icon md:hidden mr-4"
+            onclick="document.dispatchEvent(new CustomEvent('basecoat:sidebar', { detail: { id: 'mobile-sidebar' } }))">
             <i class="hgi hgi-stroke hgi-menu-01 text-xl text-foreground"></i>
             <span class="sr-only">Toggle Menu</span>
         </button>
 
         <!-- Logo -->
         <a href="{{ route('home.index') }}" class="mr-4 flex items-center space-x-2">
-            <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}" class="h-6 w-auto translate-y-0.5" />
+            <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}"
+                class="h-6 w-auto translate-y-0.5" />
         </a>
 
-        <!-- Desktop Nav -->
         <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-            {{-- <a href="{{ route('home.index') }}" class="transition-colors hover:text-foreground/80 {{ request()->routeIs('home.index') ? 'text-foreground' : 'text-foreground/60' }}">Home</a> --}}
-            <a href="{{ route('suppliers.index') }}" class="transition-colors hover:text-foreground/80 {{ request()->routeIs('suppliers.*') ? 'text-foreground' : 'text-foreground/60' }}">Seek Vendors</a>
+            {{-- <a href="{{ route('home.index') }}"
+                class="transition-colors hover:text-foreground/80 {{ request()->routeIs('home.index') ? 'text-foreground' : 'text-foreground/60' }}">Home</a>
+            --}}
+            <a href="{{ route('suppliers.index') }}"
+                class="transition-colors hover:text-foreground/80 {{ request()->routeIs('suppliers.*') ? 'text-foreground' : 'text-foreground/60' }}">Seek
+                Vendors</a>
         </nav>
 
         <!-- Right Side Actions -->
         <div class="flex flex-1 items-center justify-end space-x-2">
             @auth
-                <button class="btn-primary btn-sm hidden md:flex" onclick="document.getElementById('review-modal').showModal()">
+                <button class="btn-primary btn-sm hidden md:flex"
+                    onclick="document.getElementById('review-modal').showModal()">
                     <i class="hgi hgi-stroke hgi-quill-write-01 mr-2"></i>
                     Assess a Vendor
                 </button>
 
                 <!-- User Dropdown -->
                 <div id="user-dropdown" class="dropdown-menu">
-                    <button type="button" id="user-dropdown-trigger" aria-haspopup="menu" aria-controls="user-dropdown-menu" aria-expanded="false" class="btn-secondary btn-icon rounded-full">
+                    <button type="button" id="user-dropdown-trigger" aria-haspopup="menu" aria-controls="user-dropdown-menu"
+                        aria-expanded="false" class="btn-secondary btn-icon rounded-full">
                         <i class="hgi hgi-stroke hgi-user text-xl"></i>
                     </button>
                     <div id="user-dropdown-popover" data-popover aria-hidden="true" class="min-w-56" data-align="end">
                         <div role="menu" id="user-dropdown-menu" aria-labelledby="user-dropdown-trigger">
                             <div role="group">
-                                <div class="px-2 py-1.5 text-sm font-semibold max-w-56 truncate">{{ auth()->user()->name }}</div>
+                                <div class="px-2 py-1.5 text-sm font-semibold max-w-56 truncate">{{ auth()->user()->name }}
+                                </div>
                             </div>
                             <hr role="separator" />
                             <div role="menuitem">
@@ -43,7 +52,8 @@
                             </div>
                             @if (auth()->user()->supplier)
                                 <div role="menuitem">
-                                    <a href="{{ route('suppliers.show', auth()->user()->supplier) }}" class="flex w-full items-center">
+                                    <a href="{{ route('suppliers.show', auth()->user()->supplier) }}"
+                                        class="flex w-full items-center">
                                         My Organization
                                     </a>
                                 </div>
@@ -75,11 +85,14 @@
 </header>
 
 <!-- Mobile Sidebar -->
-<aside class="sidebar" id="mobile-sidebar" aria-hidden="true" data-initial-open="false" data-initial-mobile-open="false">
+<aside class="sidebar" id="mobile-sidebar" aria-hidden="true" data-initial-open="false"
+    data-initial-mobile-open="false">
     <nav aria-label="Sidebar navigation">
         <header class="flex flex-row items-center justify-between px-4 py-2">
-            <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}" class="h-6 w-auto translate-y-0.5" />
-            <button type="button" class="btn-outline btn-icon" onclick="document.dispatchEvent(new CustomEvent('basecoat:sidebar', { detail: { id: 'mobile-sidebar', action: 'close' } }))">
+            <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}"
+                class="h-6 w-auto translate-y-0.5" />
+            <button type="button" class="btn-outline btn-icon"
+                onclick="document.dispatchEvent(new CustomEvent('basecoat:sidebar', { detail: { id: 'mobile-sidebar', action: 'close' } }))">
                 <i class="hgi hgi-stroke hgi-cancel-01 text-xl text-foreground"></i>
             </button>
         </header>
@@ -96,6 +109,12 @@
                         <a href="{{ route('suppliers.index') }}">
                             <i class="hgi hgi-stroke hgi-search-01"></i>
                             <span>Seek Vendors</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('contact.index') }}">
+                            <i class="hgi hgi-stroke hgi-mail-01"></i>
+                            <span>Contact Us</span>
                         </a>
                     </li>
                 </ul>
@@ -125,7 +144,7 @@
                                 </a>
                             </li>
                         @endif
-                         <li>
+                        <li>
                             <button onclick="toggleTheme()">
                                 <i class="hgi hgi-stroke hgi-paint-board"></i>
                                 <span>Toggle Theme</span>
