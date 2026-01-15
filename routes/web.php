@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PrivacyPolicyController;
@@ -93,6 +94,9 @@ Route::get('/terms-and-conditions', [
     PrivacyPolicyController::class,
     'index',
 ])->name('terms-and-conditions.index');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Route::resource(
 //     "suppliers",
