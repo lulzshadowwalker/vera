@@ -6,7 +6,7 @@
         <!-- Hero Background Illustration -->
         <div class="absolute inset-0 z-0 pointer-events-none">
             <img src="{{ asset('images/hero.png') }}" alt=""
-                class="h-full w-full object-cover scale-105 opacity-30 transition-transform duration-[20s] ease-linear hover:scale-110" />
+                class="h-full w-full object-cover scale-105 opacity-70 transition-transform duration-[20s] ease-linear hover:scale-110" />
             <div class="absolute inset-0 bg-gradient-to-t from-background/60 via-background/30 to-background/80"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background"></div>
         </div>
