@@ -47,18 +47,18 @@ class Supplier extends Model
 
     public function reviewerReviews(): HasMany
     {
-        return $this->hasMany(ReviewAs::class);
+        return $this->hasMany(Review::class, 'reviewer_supplier_id');
     }
 
     public function reviewedReviewsForeigns(): HasMany
     {
-        return $this->hasMany(ReviewAs::class);
+        return $this->hasMany(Review::class, 'reviewed_supplier_id');
     }
 
     /**
-     * Get the indexable data array for the model.
+     * Get the average rating for the supplier.
      *
-     * @return array<string, mixed>
+     * @return float|int
      */
     public function getAverageRatingAttribute()
     {
@@ -97,12 +97,12 @@ class Supplier extends Model
 
         $matchingCount = $reviews->filter(function ($review) use ($stars) {
             $avg = ($review->quality +
-                    $review->accuracy +
-                    $review->communication +
-                    $review->cost +
-                    $review->compliance +
-                    $review->timeliness +
-                    $review->support) / 7;
+                $review->accuracy +
+                $review->communication +
+                $review->cost +
+                $review->compliance +
+                $review->timeliness +
+                $review->support) / 7;
 
             return round($avg / 2) == $stars;
         })->count();

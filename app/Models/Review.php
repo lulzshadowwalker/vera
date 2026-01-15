@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Observers\ReviewObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+#[ObservedBy(ReviewObserver::class)]
 class Review extends Model
 {
     use HasFactory, SoftDeletes;
@@ -67,12 +70,12 @@ class Review extends Model
 
     public function reviewerSupplierForeign(): BelongsTo
     {
-        return $this->belongsTo(SupplierAs::class);
+        return $this->belongsTo(Supplier::class, 'reviewer_supplier_id');
     }
 
     public function reviewedSupplierForeign(): BelongsTo
     {
-        return $this->belongsTo(SupplierAs::class);
+        return $this->belongsTo(Supplier::class, 'reviewed_supplier_id');
     }
 
     public function reviewerSupplier(): BelongsTo
@@ -95,7 +98,7 @@ class Review extends Model
                 $this->compliance +
                 $this->timeliness +
                 $this->support) /
-                7,
+            7,
             1,
         );
     }
