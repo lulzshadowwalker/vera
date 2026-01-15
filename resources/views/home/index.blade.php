@@ -2,60 +2,65 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="bg-background min-h-[90vh] py-20 md:py-28">
-        <div class="relative z-10 mx-auto max-w-7xl px-6">
-            <div class="mx-auto max-w-4xl text-center">
+    <section class="bg-background relative flex min-h-[90vh] items-center overflow-hidden py-20 md:py-28">
+        <!-- Hero Background Illustration -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <img src="{{ asset('images/hero.png') }}" alt=""
+                class="h-full w-full object-cover scale-105 opacity-30 transition-transform duration-[20s] ease-linear hover:scale-110" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background/60 via-background/30 to-background/80"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background"></div>
+        </div>
+
+        <div class="relative z-10 mx-auto max-w-7xl px-6 text-center">
+            <div class="mx-auto max-w-4xl">
                 <h1 class="text-foreground mb-6 text-balance text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-                    Find Trusted Industrial Vendors, Fast
+                    Assess right seek smart
                 </h1>
-                <p class="text-muted-foreground mx-auto mb-10 max-w-2xl text-lg leading-relaxed md:text-xl">
-                    Access authentic assessments from verified businesses. Make confident procurement decisions backed by real
-                    experiences from your peers.
+                <p class="text-muted-foreground mx-auto mb-10 max-w-2xl text-lg leading-relaxed md:text-xl font-medium">
+                    Access authentic assessments from verified businesses. Make confident procurement decisions backed by
+                    real experiences from your peers.
                 </p>
 
                 <!-- Primary Actions -->
                 <div class="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                    @auth
+                        <button onclick="document.getElementById('review-modal').showModal()"
+                            class="btn border-border bg-card/50 backdrop-blur-md text-foreground hover:bg-muted h-12 w-full border px-8 sm:w-auto">
+                            <i class="hgi hgi-stroke hgi-quill-write-01"></i>
+                            Assess a Vendor
+                        </button>
+                    @endauth
+
+                    @guest
+                        <a href="{{ route('auth.login.index') }}"
+                            class="btn border-border bg-card/50 backdrop-blur-md text-foreground hover:bg-muted h-12 w-full border px-8 sm:w-auto">
+                            <i class="hgi hgi-stroke hgi-quill-write-01"></i>
+                            Assess a Vendor
+                        </a>
+                    @endguest
+
                     <a href="{{ route('suppliers.index') }}"
-                       class="btn btn-primary h-12 w-full px-6 sm:w-auto">
+                        class="btn btn-primary h-12 w-full px-8 shadow-xl shadow-primary/20 sm:w-auto">
                         <i class="hgi hgi-stroke hgi-search-01"></i>
                         Seek Vendors
                     </a>
-                    @auth
-                    <button
-                       onclick="document.getElementById('review-modal').showModal()"
-                       class="btn border-border bg-muted/50 text-foreground hover:bg-muted h-12 w-full border px-6 sm:w-auto">
-                        <i class="hgi hgi-stroke hgi-quill-write-01"></i>
-                        Assess a Vendor
-                    </button>
-                    @endauth
-                    
-                    @guest
-                    <a href="{{ route('auth.login.index') }}"
-                       class="btn border-border bg-muted/50 text-foreground hover:bg-muted h-12 w-full border px-6 sm:w-auto">
-                        <i class="hgi hgi-stroke hgi-quill-write-01"></i>
-                        Assess a Vendor
-                    </a>
-                    @endguest
                 </div>
 
                 <!-- Search Box -->
                 <div class="mx-auto max-w-2xl">
-                    <form action="{{ route('suppliers.index') }}"
-                          method="GET">
+                    <form action="{{ route('suppliers.index') }}" method="GET">
                         <div class="relative w-full">
-                            <span class="text-muted-foreground absolute right-3 top-1/2 -translate-y-1/2">
+                            <span class="text-muted-foreground absolute right-4 top-1/2 -translate-y-1/2">
                                 <i class="hgi hgi-stroke hgi-quill-write-01"></i>
                             </span>
-                            <input type="search"
-                                   role="search"
-                                   class="input border-border bg-muted/30 text-foreground placeholder:text-muted-foreground h-12 w-full rounded-lg pl-4 pr-10 shadow-lg"
-                                   name="search"
-                                   placeholder="Search by vendor @domain"
-                                   aria-label="Search for vendors" />
+                            <input type="search" role="search"
+                                class="input border-border bg-card/50 backdrop-blur-md text-foreground placeholder:text-muted-foreground h-14 w-full rounded-xl pl-6 pr-12 shadow-2xl transition-all focus:ring-2 focus:ring-primary/20"
+                                name="search" placeholder="Search by vendor @domain" aria-label="Search for vendors" />
                         </div>
                     </form>
-                    <p class="text-muted-foreground mt-3 text-sm">
-                        Try searching for companies like "acme.com" or "ABC Manufacturing"
+                    <p class="text-muted-foreground mt-4 text-sm">
+                        Try searching for companies like <span class="text-primary font-medium">"acme.com"</span> or <span
+                            class="text-primary font-medium">"ABC Manufacturing"</span>
                     </p>
                 </div>
             </div>
@@ -86,27 +91,56 @@
                     <div class="card bg-card w-64 shrink-0 p-6 text-center transition-shadow hover:shadow-md">
                         <header class="flex flex-col items-center gap-3">
                             <div class="bg-primary/10 grid h-12 w-12 place-items-center rounded-full">
-                                <i class="hgi hgi-stroke hgi-star-circle text-primary text-2xl"></i>
+                                <i class="hgi hgi-stroke hgi-user-multiple-02 text-primary text-2xl"></i>
                             </div>
                             <div>
-                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($totalReviews ?? 1250) }}
+                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($suppliersCount) }}+
                                 </h2>
-                                <p class="text-muted-foreground text-sm font-medium">Verified Assessments</p>
+                                <p class="text-muted-foreground text-sm font-medium">Registered</p>
                             </div>
                         </header>
                     </div>
                 </div>
 
-                <!-- Duplicate Set for Infinite Scroll -->
-                <div class="animate-loop-scroll flex items-center gap-8 pr-8"
-                     aria-hidden="true">
+                <div class="animate-loop-scroll flex items-center gap-8 pr-8">
                     <div class="card bg-card w-64 shrink-0 p-6 text-center transition-shadow hover:shadow-md">
                         <header class="flex flex-col items-center gap-3">
                             <div class="bg-primary/10 grid h-12 w-12 place-items-center rounded-full">
                                 <i class="hgi hgi-stroke hgi-star-circle text-primary text-2xl"></i>
                             </div>
                             <div>
-                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($totalReviews ?? 1250) }}
+                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($reviewsCount) }}+
+                                </h2>
+                                <p class="text-muted-foreground text-sm font-medium">Assessments</p>
+                            </div>
+                        </header>
+                    </div>
+                </div>
+
+                <!-- Duplicate Set for Infinite Scroll -->
+                <div class="animate-loop-scroll flex items-center gap-8 pr-8" aria-hidden="true">
+                    <div class="card bg-card w-64 shrink-0 p-6 text-center transition-shadow hover:shadow-md">
+                        <header class="flex flex-col items-center gap-3">
+                            <div class="bg-primary/10 grid h-12 w-12 place-items-center rounded-full">
+                                <i class="hgi hgi-stroke hgi-user-multiple-02 text-primary text-2xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($suppliersCount) }}+
+                                </h2>
+                                <p class="text-muted-foreground text-sm font-medium">Registered Companies</p>
+                            </div>
+                        </header>
+                    </div>
+                </div>
+
+                <div class="animate-loop-scroll flex items-center gap-8 pr-8" aria-hidden="true">
+                    <div class="card bg-card w-64 shrink-0 p-6 text-center transition-shadow hover:shadow-md">
+                        <header class="flex flex-col items-center gap-3">
+                            <div class="bg-primary/10 grid h-12 w-12 place-items-center rounded-full">
+                                <i class="hgi hgi-stroke hgi-star-circle text-primary text-2xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($reviewsCount) }}+
                                 </h2>
                                 <p class="text-muted-foreground text-sm font-medium">Verified Assessments</p>
                             </div>
@@ -127,12 +161,17 @@
                 </p>
             </div>
 
+            <!-- Process Illustration -->
+            <div class="mb-20 flex justify-center opacity-80">
+                <img src="{{ asset('images/process.png') }}" alt="Our 3-Step Process" class="px-16 w-full select-none" />
+            </div>
+
             <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
                 <!-- Step 1 -->
                 <div class="relative">
                     <div class="flex flex-col items-center text-center">
                         <div
-                             class="bg-primary text-primary-foreground mb-6 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold shadow-lg">
+                            class="bg-primary text-primary-foreground mb-6 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold shadow-lg">
                             1
                         </div>
                         <h3 class="mb-3 text-xl font-semibold">Sign Up with Work Email</h3>
@@ -147,12 +186,13 @@
                 <div class="relative">
                     <div class="flex flex-col items-center text-center">
                         <div
-                             class="bg-primary text-primary-foreground mb-6 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold shadow-lg">
+                            class="bg-primary text-primary-foreground mb-6 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold shadow-lg">
                             2
                         </div>
                         <h3 class="mb-3 text-xl font-semibold">Seek & Assess Vendors</h3>
                         <p class="text-muted-foreground leading-relaxed">
-                            Search our directory, read authentic assessments, or share your own experience with vendors you've
+                            Search our directory, read authentic assessments, or share your own experience with vendors
+                            you've
                             worked with.
                         </p>
                     </div>
@@ -161,7 +201,7 @@
                 <!-- Step 3 -->
                 <div class="flex flex-col items-center text-center">
                     <div
-                         class="bg-primary text-primary-foreground mb-6 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold shadow-lg">
+                        class="bg-primary text-primary-foreground mb-6 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold shadow-lg">
                         3
                     </div>
                     <h3 class="mb-3 text-xl font-semibold">Make Better Decisions</h3>
@@ -192,7 +232,8 @@
                     </div>
                     <h3 class="mb-3 text-xl font-semibold">100% Verified Assessments</h3>
                     <p class="text-muted-foreground leading-relaxed">
-                        Every assessment comes from authenticated business users. No fake assessments, no spam—just honest feedback.
+                        Every assessment comes from authenticated business users. No fake assessments, no spam—just honest
+                        feedback.
                     </p>
                 </div>
 
@@ -258,8 +299,7 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq"
-             class="bg-background py-20">
+    <section id="faq" class="bg-background py-20">
         <div class="mx-auto max-w-4xl px-6">
             <div class="mb-12 text-center">
                 <h2 class="mb-4 text-3xl font-bold md:text-4xl">Frequently Asked Questions</h2>
@@ -272,20 +312,14 @@
                 <section class="accordion">
                     <details class="group border-b last:border-b-0">
                         <summary
-                                 class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
                             <h2
                                 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
                                 How do I leave an assessment for a vendor?
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     width="24"
-                                     height="24"
-                                     viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round"
-                                     class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
                                     <path d="m6 9 6 6 6-6" />
                                 </svg>
                             </h2>
@@ -301,49 +335,37 @@
 
                     <details class="group border-b last:border-b-0">
                         <summary
-                                 class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
                             <h2
                                 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
-                                Is the platform free to use?
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     width="24"
-                                     height="24"
-                                     viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round"
-                                     class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
+                                How much does it cost to use the platform?
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
                                     <path d="m6 9 6 6 6-6" />
                                 </svg>
                             </h2>
                         </summary>
                         <section class="pb-4">
                             <p class="text-muted-foreground text-sm leading-relaxed">
-                                Yes! Basic access is completely free. You can seek assessments, search vendors, and leave
-                                feedback at no cost. We'll be introducing premium plans in the future with advanced features
-                                like team access and detailed analytics.
+                                We offer flexible pricing plans tailored for B2B procurement teams. Whether you're a small
+                                business or a large enterprise, our platform provides the insights you need to make smarter
+                                decisions. Contact our team for a personalized quote.
                             </p>
                         </section>
                     </details>
 
                     <details class="group border-b last:border-b-0">
                         <summary
-                                 class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
                             <h2
                                 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
                                 How are vendors verified?
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     width="24"
-                                     height="24"
-                                     viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round"
-                                     class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
                                     <path d="m6 9 6 6 6-6" />
                                 </svg>
                             </h2>
@@ -359,20 +381,14 @@
 
                     <details class="group border-b last:border-b-0">
                         <summary
-                                 class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
                             <h2
                                 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
                                 Can I share vendor profiles?
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     width="24"
-                                     height="24"
-                                     viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round"
-                                     class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
                                     <path d="m6 9 6 6 6-6" />
                                 </svg>
                             </h2>
@@ -380,34 +396,30 @@
                         <section class="pb-4">
                             <p class="text-muted-foreground text-sm leading-relaxed">
                                 Absolutely! Each vendor has a public profile page with aggregated ratings and recent
-                                assessments. Share the link with your team or network to help others make informed decisions.
+                                assessments. Share the link with your team or network to help others make informed
+                                decisions.
                             </p>
                         </section>
                     </details>
 
                     <details class="group border-b last:border-b-0">
                         <summary
-                                 class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
                             <h2
                                 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
                                 Can I assess anonymously?
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     width="24"
-                                     height="24"
-                                     viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round"
-                                     class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
                                     <path d="m6 9 6 6 6-6" />
                                 </svg>
                             </h2>
                         </summary>
                         <section class="pb-4">
                             <p class="text-muted-foreground text-sm leading-relaxed">
-                                Yes. By default, all assessments are anonymous. If you choose to make your assessment public, it
+                                Yes. By default, all assessments are anonymous. If you choose to make your assessment
+                                public, it
                                 will display your organization name and first initial (e.g., "ABC Corp - J."). You're always
                                 in control of your privacy.
                             </p>
@@ -416,20 +428,14 @@
 
                     <details class="group border-b last:border-b-0">
                         <summary
-                                 class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
+                            class="focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md outline-none transition-all focus-visible:ring-[3px]">
                             <h2
                                 class="flex flex-1 items-start justify-between gap-4 py-4 text-left text-lg font-semibold hover:underline">
                                 What metrics are included in assessments?
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     width="24"
-                                     height="24"
-                                     viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round"
-                                     class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 group-open:rotate-180">
                                     <path d="m6 9 6 6 6-6" />
                                 </svg>
                             </h2>
@@ -452,7 +458,7 @@
         <section class="px-6 py-24">
             <div class="mx-auto max-w-7xl">
                 <div
-                     class="card bg-primary text-primary-foreground relative overflow-hidden rounded-3xl px-6 py-16 text-center shadow-2xl md:px-12 md:py-20">
+                    class="card bg-primary text-primary-foreground relative overflow-hidden rounded-3xl px-6 py-16 text-center shadow-2xl md:px-12 md:py-20">
                     <!-- Background Pattern -->
                     <div class="pointer-events-none absolute inset-0 opacity-10">
                         <div class="absolute -left-16 -top-16 h-64 w-64 rounded-full bg-white blur-3xl"></div>
@@ -467,13 +473,11 @@
                             Join thousands of businesses finding trusted vendors through authentic, verified assessments.
                         </p>
                         <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-                            <a href="{{ route('auth.register.index') }}"
-                               class="btn-lg-secondary min-w-[200px]">
+                            <a href="{{ route('auth.register.index') }}" class="btn-lg-secondary min-w-[200px]">
                                 <i class="hgi hgi-stroke hgi-user-add-02 mr-2"></i>
-                                Create Free Account
+                                Create Account
                             </a>
-                            <a href="{{ route('suppliers.index') }}"
-                               class="btn-lg-secondary min-w-[200px]">
+                            <a href="{{ route('suppliers.index') }}" class="btn-lg-secondary min-w-[200px]">
                                 <i class="hgi hgi-stroke hgi-search-01 mr-2"></i>
                                 Seek Vendors
                             </a>

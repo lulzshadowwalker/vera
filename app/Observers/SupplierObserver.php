@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Supplier;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class SupplierObserver
@@ -17,5 +18,15 @@ class SupplierObserver
             $count++;
         }
         $supplier->slug = $slug;
+    }
+
+    public function created(Supplier $supplier): void
+    {
+        Cache::forget('stats.suppliers_count');
+    }
+
+    public function deleted(Supplier $supplier): void
+    {
+        Cache::forget('stats.suppliers_count');
     }
 }
