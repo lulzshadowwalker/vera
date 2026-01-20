@@ -249,7 +249,7 @@ class RegisterController extends Controller
             $request->session()->regenerate();
 
             return redirect()
-                ->intended(route('dashboard'))
+                ->intended(route('home.index'))
                 ->with(
                     'success',
                     'Registration successful! Welcome to '.

@@ -24,8 +24,9 @@ class LoginControllerTest extends TestCase
     #[Test]
     public function it_requires_email_field(): void
     {
-        $this->post(route('auth.login.store'), [])
-            ->assertSessionHasErrors(['email']);
+        $this->post(route('auth.login.store'), [])->assertSessionHasErrors([
+            'email',
+        ]);
     }
 
     #[Test]
@@ -33,8 +34,7 @@ class LoginControllerTest extends TestCase
     {
         $this->post(route('auth.login.store'), [
             'email' => 'invalid-email',
-        ])
-            ->assertSessionHasErrors(['email']);
+        ])->assertSessionHasErrors(['email']);
     }
 
     #[Test]
@@ -42,18 +42,15 @@ class LoginControllerTest extends TestCase
     {
         $this->post(route('auth.login.store'), [
             'email' => 'user@gmail.com',
-        ])
-            ->assertSessionHasErrors(['email']);
+        ])->assertSessionHasErrors(['email']);
 
         $this->post(route('auth.login.store'), [
             'email' => 'user@yahoo.com',
-        ])
-            ->assertSessionHasErrors(['email']);
+        ])->assertSessionHasErrors(['email']);
 
         $this->post(route('auth.login.store'), [
             'email' => 'user@hotmail.com',
-        ])
-            ->assertSessionHasErrors(['email']);
+        ])->assertSessionHasErrors(['email']);
     }
 
     #[Test]
@@ -81,7 +78,8 @@ class LoginControllerTest extends TestCase
             'email' => 'john@company.com',
         ]);
 
-        $response->assertRedirect(route('auth.login.verify'))
+        $response
+            ->assertRedirect(route('auth.login.verify'))
             ->assertSessionHas('success')
             ->assertSessionHas('login_email', 'john@company.com');
     }
@@ -157,8 +155,7 @@ class LoginControllerTest extends TestCase
         // the domain should be normalized for validation
         $this->post(route('auth.login.store'), [
             'email' => 'john@company.com',
-        ])
-            ->assertRedirect(route('auth.login.verify'));
+        ])->assertRedirect(route('auth.login.verify'));
     }
 
     #[Test]
@@ -224,14 +221,43 @@ class LoginControllerTest extends TestCase
         $this->post(route('auth.login.confirm-otp'), [
             'email' => 'john@company.com',
             'otp' => '123',
-        ])
-            ->assertSessionHasErrors(['otp']);
+        ])->assertSessionHasErrors(['otp']);
 
         $this->post(route('auth.login.confirm-otp'), [
             'email' => 'john@company.com',
             'otp' => 'abcdef',
+        ])->assertSessionHasErrors(['otp']);
+    }
+
+    #[Test]
+    public function it_logs_in_user_on_successful_verification(): void
+    {
+        Notification::fake();
+
+        $supplier = Supplier::factory()->create(['domain' => 'company.com']);
+        $user = User::factory()->create([
+            'email' => 'john@company.com',
+            'supplier_id' => $supplier->id,
+        ]);
+
+        // Request OTP through the store method to ensure correct origin properties are set
+        $this->post(route('auth.login.store'), ['email' => 'john@company.com']);
+
+        $otp = \Spatie\OneTimePasswords\Models\OneTimePassword::where(
+            'authenticatable_id',
+            $user->id,
+        )->first()->password;
+
+        session(['login_email' => 'john@company.com']);
+
+        $this->post(route('auth.login.confirm-otp'), [
+            'email' => 'john@company.com',
+            'otp' => $otp,
         ])
-            ->assertSessionHasErrors(['otp']);
+            ->assertRedirect(route('home.index'))
+            ->assertSessionHas('success');
+
+        $this->assertAuthenticatedAs($user);
     }
 
     #[Test]
@@ -247,7 +273,7 @@ class LoginControllerTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('auth.login.index'))
-            ->assertRedirect(route('dashboard'));
+            ->assertRedirect(route('home.index'));
     }
 
     #[Test]

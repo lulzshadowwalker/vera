@@ -25,7 +25,7 @@
         <div class="bg-card border-border border-b">
             <div class="mx-auto max-w-7xl px-6 py-8">
                 <h1 class="mb-2 text-3xl font-bold md:text-4xl">Seek Vendors</h1>
-                <p class="text-muted-foreground text-lg">Discover trusted industrial vendors with verified assessments from
+                <p class="text-muted-foreground text-lg">Discover trusted vendors with verified assessments from
                     real businesses</p>
             </div>
         </div>
@@ -45,9 +45,9 @@
                                    role="search"
                                    name="search"
                                    class="input input-lg w-full pl-9 rounded-r-none z-10 focus:z-20"
-                                   placeholder="Search by vendor domain"
+                                   placeholder="Search by vendor @domain"
                                    value="{{ request('search') }}"
-                                   aria-label="Search vendors" 
+                                   aria-label="Search vendors"
                                    x-data
                                    x-init="$el.focus()"
                                    />
@@ -64,72 +64,6 @@
         <div id="js-results"
              class="mx-auto max-w-7xl scroll-mt-20 px-6 py-8">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-4">
-                {{-- <!-- Filters Sidebar -->
-            <aside class="lg:col-span-1">
-                <div class="card p-6 sticky top-20">
-                    <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                        <!-- TODO: ICON: settings -->
-                        Filters
-                    </h2>
-
-                    <div class="space-y-6">
-                        <!-- Country Filter -->
-                        <div>
-                            <label class="block text-sm font-semibold mb-3">Country</label>
-                            <select class="select w-full">
-                                <option>All Countries</option>
-                                <option>United States</option>
-                                <option>Germany</option>
-                                <option>China</option>
-                                <option>Japan</option>
-                                <option>Jordan</option>
-                            </select>
-                        </div>
-
-                        <!-- Rating Filter -->
-                        <div>
-                            <label class="block text-sm font-semibold mb-3">Minimum Rating</label>
-                            <select class="select w-full">
-                                <option>Any Rating</option>
-                                <option>⭐ 4+ Stars</option>
-                                <option>⭐ 3+ Stars</option>
-                                <option>⭐ 2+ Stars</option>
-                            </select>
-                        </div>
-
-                        <!-- Review Count -->
-                        <div>
-                            <label class="block text-sm font-semibold mb-3">Minimum Assessments</label>
-                            <select class="select w-full">
-                                <option>Any Amount</option>
-                                <option>10+ Assessments</option>
-                                <option>25+ Assessments</option>
-                                <option>50+ Assessments</option>
-                            </select>
-                        </div>
-
-                        <!-- Sort By -->
-                        <div>
-                            <label class="block text-sm font-semibold mb-3">Sort By</label>
-                            <select class="select w-full">
-                                <option>Relevance</option>
-                                <option>Highest Rating</option>
-                                <option>Most Assessments</option>
-                                <option>Name (A-Z)</option>
-                                <option>Name (Z-A)</option>
-                            </select>
-                        </div>
-
-                        <div class="pt-4 border-t border-border">
-                            <button type="button" class="btn btn-secondary w-full">
-                                <!-- TODO: ICON: refresh-ccw -->
-                                Reset Filters
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </aside> --}}
-
                 <!-- Main Content -->
                 {{-- <div class="lg:col-span-3"> --}}
                 <div class="lg:col-span-4">
@@ -207,7 +141,7 @@
                             @if(request('search'))
                                 <x-empty-state
                                     title="No Suppliers Found"
-                                    description="Try adjusting your search or filters to find what you're looking for."
+                                    description="Try adjusting your search to find what you're looking for."
                                     icon="hgi-search-01"
                                 >
                                     <x-slot:actions>

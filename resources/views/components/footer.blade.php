@@ -13,12 +13,10 @@
             <div>
                 <h3 class="font-semibold text-foreground mb-4">Quick Links</h3>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="{{ route('home.index') }}" class="hover:text-foreground transition-colors">Home</a>
-                    </li>
-                    <li><a href="{{ route('suppliers.index') }}" class="hover:text-foreground transition-colors">Seek
-                            Vendors</a></li>
-                    <li><a href="{{ route('contact.index') }}" class="hover:text-foreground transition-colors">
-                            Contact Us</a></li>
+                    <li><a href="{{ route('home.index') }}" class="hover:text-foreground transition-colors">Home</a> </li>
+                    <li><button class="cursor-pointer hover:text-foreground transition-colors" onclick="document.getElementById('review-modal').showModal()">Assess a Vendor</button></li>
+                    <li><a href="{{ route('suppliers.index') }}" class="hover:text-foreground transition-colors">Seek Vendors</a></li>
+                    <li><a href="{{ route('contact.index') }}" class="hover:text-foreground transition-colors">Contact Us</a></li>
                 </ul>
             </div>
             <div>

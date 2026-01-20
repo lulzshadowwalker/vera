@@ -8,7 +8,7 @@ use App\Models\Review;
 use App\Models\Supplier;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class ReviewController extends Controller
@@ -20,26 +20,12 @@ class ReviewController extends Controller
 
     public function create(Supplier $supplier): View|RedirectResponse
     {
-        if (Auth::user()->supplier_id === $supplier->id) {
+        $response = Gate::inspect('create', [Review::class, $supplier]);
+
+        if ($response->denied()) {
             return redirect()
                 ->route('suppliers.show', $supplier)
-                ->with(
-                    'warning',
-                    'You cannot assess your own vendor.',
-                );
-        }
-
-        $existingReview = Review::where('user_id', Auth::id())
-            ->where('reviewed_supplier_id', $supplier->id)
-            ->exists();
-
-        if ($existingReview) {
-            return redirect()
-                ->route('suppliers.show', $supplier)
-                ->with(
-                    'warning',
-                    'You have already submitted an assessment for this supplier.',
-                );
+                ->with('warning', $response->message());
         }
 
         // Check if we're returning to this page after validation failed
@@ -79,24 +65,17 @@ class ReviewController extends Controller
                 ]);
         }
 
-        $existingReview = Review::where('user_id', $request->user_id)
-            ->where('reviewed_supplier_id', $request->reviewed_supplier_id)
-            ->exists();
+        $supplier = Supplier::findOrFail($request->reviewed_supplier_id);
 
-        if ($existingReview) {
-            $supplier = Supplier::find($request->reviewed_supplier_id);
+        $response = Gate::inspect('create', [Review::class, $supplier]);
 
+        if ($response->denied()) {
             return redirect()
                 ->route('suppliers.show', $supplier)
-                ->with(
-                    'error',
-                    'You have already submitted a review for this supplier.',
-                );
+                ->with('error', $response->message());
         }
 
         Review::create($request->validated());
-
-        $supplier = Supplier::find($request->reviewed_supplier_id);
 
         return redirect()->route('suppliers.show', $supplier);
     }

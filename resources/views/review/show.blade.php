@@ -277,7 +277,7 @@
                                                     <i class="hgi hgi-stroke hgi-cancel-circle"></i>
                                                 @endif
                                                 <span
-                                                      class="text-xs">{{ $otherReview->deal_again ? 'Would work again' : 'Would not work again' }}</span>
+                                                      class="text-xs">{{ $otherReview->deal_again ? 'Will work again' : 'Will not work again' }}</span>
                                             </div>
                                         </div>
                                     </div>

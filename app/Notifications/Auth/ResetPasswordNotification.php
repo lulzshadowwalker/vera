@@ -10,7 +10,6 @@ class ResetPasswordNotification extends ResetPassword
      * Create a notification instance.
      *
      * @param  string  $token
-     * @param  string  $emailForLink
      */
     public function __construct(#[\SensitiveParameter] $token, public string $emailForLink)
     {

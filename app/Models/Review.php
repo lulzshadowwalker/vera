@@ -109,8 +109,6 @@ class Review extends Model
             return 'Anonymous';
         }
 
-        $user = $this->user;
-
-        return "{$user->name} @{$user->supplier->domain}";
+        return "@{$this->user->supplier->domain}";
     }
 }
