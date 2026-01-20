@@ -367,6 +367,7 @@ final class ReviewControllerTest extends TestCase
         Review::factory()->create([
             'reviewer_supplier_id' => $supplier->id,
             'reviewed_supplier_id' => $reviewerSupplier->id,
+            'anonymous' => false,
         ]);
 
         $response = $this->actingAs($user)->get(
@@ -393,6 +394,7 @@ final class ReviewControllerTest extends TestCase
         Review::factory()->create([
             'reviewer_supplier_id' => $supplier->id,
             'reviewed_supplier_id' => $reviewerSupplier->id,
+            'anonymous' => false,
         ]);
 
         $data = [
@@ -419,5 +421,73 @@ final class ReviewControllerTest extends TestCase
             'error',
             'You cannot assess a vendor that has already assessed your company.',
         );
+    }
+
+    #[Test]
+    public function create_allows_reciprocal_review_if_original_is_anonymous(): void
+    {
+        $reviewerSupplier = Supplier::factory()->create();
+        $user = User::factory()->create([
+            'supplier_id' => $reviewerSupplier->id,
+        ]);
+        $supplier = Supplier::factory()->create();
+
+        // The target supplier has already reviewed the user's supplier anonymously
+        Review::factory()->create([
+            'reviewer_supplier_id' => $supplier->id,
+            'reviewed_supplier_id' => $reviewerSupplier->id,
+            'anonymous' => true,
+        ]);
+
+        $response = $this->actingAs($user)->get(
+            route('suppliers.reviews.create', $supplier),
+        );
+
+        $response->assertOk();
+        $response->assertViewIs('review.create');
+    }
+
+    #[Test]
+    public function store_allows_reciprocal_review_if_original_is_anonymous(): void
+    {
+        $reviewerSupplier = Supplier::factory()->create();
+        $user = User::factory()->create([
+            'supplier_id' => $reviewerSupplier->id,
+        ]);
+        $supplier = Supplier::factory()->create();
+
+        // The target supplier has already reviewed the user's supplier anonymously
+        Review::factory()->create([
+            'reviewer_supplier_id' => $supplier->id,
+            'reviewed_supplier_id' => $reviewerSupplier->id,
+            'anonymous' => true,
+        ]);
+
+        $data = [
+            'reviewed_supplier_id' => $supplier->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'user_id' => $user->id,
+            'deal_date' => now()->format('Y-m-d'),
+            'cost' => 5,
+            'accuracy' => 5,
+            'compliance' => 5,
+            'communication' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => false,
+            'comment' => 'Great service',
+        ];
+
+        $response = $this->actingAs($user)->post(route('reviews.store'), $data);
+
+        $response->assertRedirect(route('suppliers.show', $supplier));
+        $this->assertDatabaseHas('reviews', [
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'reviewed_supplier_id' => $supplier->id,
+            'user_id' => $user->id,
+            'comment' => 'Great service',
+        ]);
     }
 }

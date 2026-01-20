@@ -12,11 +12,14 @@ class PreventReciprocalReview implements ReviewRule
     public function passes(User $reviewer, Supplier $reviewedSupplier): bool
     {
         if (! $reviewer->supplier_id) {
-            throw new InvalidArgumentException('user does not belong to a supplier');
+            throw new InvalidArgumentException(
+                'user does not belong to a supplier',
+            );
         }
 
         return ! Review::where('reviewer_supplier_id', $reviewedSupplier->id)
             ->where('reviewed_supplier_id', $reviewer->supplier_id)
+            ->where('anonymous', false)
             ->exists();
     }
 
