@@ -4,7 +4,6 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use App\Notifications\Auth\ResetPasswordNotification;
-use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
@@ -28,7 +27,7 @@ class PasswordResetTest extends TestCase
 
         $response = $this->post(route('password.email'), ['email' => $user->email]);
 
-        $response->assertSessionHas('status', __('passwords.sent'));
+        $response->assertSessionHas('success', __('passwords.sent'));
 
         // Notification should be sent to the anonymous notifiable with the user's email
         Notification::assertSentOnDemand(ResetPasswordNotification::class, function ($notification, $channels, $notifiable) use ($user) {
@@ -47,7 +46,7 @@ class PasswordResetTest extends TestCase
 
         $response = $this->post(route('password.email'), ['email' => 'backup@example.com']);
 
-        $response->assertSessionHas('status', __('passwords.sent'));
+        $response->assertSessionHas('success', __('passwords.sent'));
 
         // Notification should be sent to the backup email
         Notification::assertSentOnDemand(ResetPasswordNotification::class, function ($notification, $channels, $notifiable) use ($user) {
@@ -79,7 +78,7 @@ class PasswordResetTest extends TestCase
             'password_confirmation' => 'password',
         ]);
 
-        $response->assertSessionHas('status', __('passwords.reset'));
+        $response->assertSessionHas('success', __('passwords.reset'));
         $this->assertTrue(auth()->attempt(['email' => $user->email, 'password' => 'password']));
     }
 
@@ -90,7 +89,7 @@ class PasswordResetTest extends TestCase
         $response = $this->post(route('password.email'), ['email' => 'nonexistent@example.com']);
 
         // Should return success status even if user doesn't exist
-        $response->assertSessionHas('status', __('passwords.sent'));
+        $response->assertSessionHas('success', __('passwords.sent'));
 
         Notification::assertNothingSent();
     }

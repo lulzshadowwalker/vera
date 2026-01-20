@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -19,6 +20,9 @@ final class SupplierControllerTest extends TestCase
     {
         Supplier::factory()->count(3)->create();
 
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
         $response = $this->get(route('suppliers.index'));
 
         $response->assertOk();
@@ -34,6 +38,9 @@ final class SupplierControllerTest extends TestCase
             'reviewed_supplier_id' => $supplier->id,
         ]);
 
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
         $response = $this->get(route('suppliers.show', $supplier));
 
         $response->assertOk();
@@ -47,6 +54,9 @@ final class SupplierControllerTest extends TestCase
     {
         Supplier::factory()->create(['name' => 'Searchable Supplier']);
         Supplier::factory()->create(['name' => 'Other Supplier']);
+
+        $user = User::factory()->create();
+        $this->actingAs($user);
 
         $response = $this->get(
             route('suppliers.index', ['search' => 'Searchable']),
@@ -66,6 +76,9 @@ final class SupplierControllerTest extends TestCase
             ->create([
                 'reviewed_supplier_id' => $supplier->id,
             ]);
+
+        $user = User::factory()->create();
+        $this->actingAs($user);
 
         $response = $this->get(route('suppliers.show', $supplier));
 

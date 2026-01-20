@@ -22,6 +22,10 @@ final class ReviewControllerTest extends TestCase
     public function create_displays_view(): void
     {
         $supplier = Supplier::factory()->create();
+
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
         $response = $this->get(route('suppliers.reviews.create', $supplier));
 
         $response->assertOk();
@@ -43,8 +47,7 @@ final class ReviewControllerTest extends TestCase
             'reviewed_supplier_id' => $reviewedSupplier->id,
             'reviewer_supplier_id' => $reviewerSupplier->id,
             'user_id' => $user->id,
-            'deal_date' => '2023-01-01',
-            'country' => 'US',
+            'deal_date' => now()->subYears(2)->format('Y-m-d'),
             'cost' => 5,
             'accuracy' => 5,
             'compliance' => 5,
@@ -64,8 +67,6 @@ final class ReviewControllerTest extends TestCase
             'reviewed_supplier_id' => $reviewedSupplier->id,
             'reviewer_supplier_id' => $reviewerSupplier->id,
             'user_id' => $user->id,
-            'deal_date' => '2023-01-01 00:00:00',
-            'country' => 'US',
             'cost' => 5,
             'accuracy' => 5,
             'compliance' => 5,
@@ -77,6 +78,11 @@ final class ReviewControllerTest extends TestCase
             'anonymous' => 0,
             'comment' => 'Great service',
         ]);
+
+        $this->assertEquals(
+            now()->subYears(2)->toDateString(),
+            Review::first()->deal_date->toDateString(),
+        );
     }
 
     #[Test]
@@ -110,7 +116,7 @@ final class ReviewControllerTest extends TestCase
         $response->assertRedirect(route('suppliers.show', $supplier));
         $response->assertSessionHas(
             'warning',
-            'You have already submitted a review for this supplier.',
+            'You have already submitted an assessment for this supplier.',
         );
     }
 
@@ -134,7 +140,7 @@ final class ReviewControllerTest extends TestCase
             'reviewed_supplier_id' => $reviewedSupplier->id,
             'reviewer_supplier_id' => $reviewerSupplier->id,
             'user_id' => $user->id,
-            'deal_date' => '2023-01-01',
+            'deal_date' => now()->subYears(2)->format('Y-m-d'),
             'country' => 'US',
             'cost' => 5,
             'accuracy' => 5,
@@ -171,7 +177,7 @@ final class ReviewControllerTest extends TestCase
             'reviewed_supplier_id' => $reviewedSupplier->id,
             'reviewer_supplier_id' => $reviewerSupplier->id,
             'user_id' => $user->id,
-            'deal_date' => '2023-01-01',
+            'deal_date' => now()->subYears(2)->format('Y-m-d'),
             'country' => 'US',
             'cost' => 5,
             'accuracy' => 5,
@@ -206,7 +212,7 @@ final class ReviewControllerTest extends TestCase
             'reviewed_supplier_id' => $reviewedSupplier->id,
             'reviewer_supplier_id' => $reviewerSupplier->id,
             'user_id' => $user->id,
-            'deal_date' => '2023-01-01',
+            'deal_date' => now()->subYears(2)->format('Y-m-d'),
             'country' => 'US',
             'cost' => 5,
             'accuracy' => 5,
