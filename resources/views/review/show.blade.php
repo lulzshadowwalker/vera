@@ -381,4 +381,4 @@
                 });
         }
     </script>
-@endpush)
+@endpush

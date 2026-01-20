@@ -2,11 +2,14 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Events\ReviewCreated;
 use App\Models\Review;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Notification;
 use JMac\Testing\Traits\AdditionalAssertions;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -242,6 +245,83 @@ final class ReviewControllerTest extends TestCase
             'reviewer_supplier_id' => $reviewerSupplier->id,
             'user_id' => $user->id,
         ]);
+    }
+
+    #[Test]
+    public function store_dispatches_review_created_event(): void
+    {
+        $user = User::factory()->create();
+        $reviewerSupplier = Supplier::factory()->create();
+        $user->supplier()->associate($reviewerSupplier);
+        $user->save();
+
+        $reviewedSupplier = Supplier::factory()->create();
+
+        $data = [
+            'reviewed_supplier_id' => $reviewedSupplier->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'user_id' => $user->id,
+            'deal_date' => now()->format('Y-m-d'),
+            'cost' => 5,
+            'accuracy' => 5,
+            'compliance' => 5,
+            'communication' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => false,
+            'comment' => 'Great service',
+        ];
+
+        Event::fake([ReviewCreated::class]);
+
+        $this->actingAs($user)->post(route('reviews.store'), $data);
+
+        Event::assertDispatched(ReviewCreated::class);
+    }
+
+    #[Test]
+    public function review_notification_is_sent_to_supplier_users(): void
+    {
+        Notification::fake();
+
+        $user = User::factory()->create();
+        $reviewerSupplier = Supplier::factory()->create();
+        $user->supplier()->associate($reviewerSupplier);
+        $user->save();
+
+        $reviewedSupplier = Supplier::factory()->create();
+        $targetUser = User::factory()->create([
+            'supplier_id' => $reviewedSupplier->id,
+        ]);
+        $targetUser2 = User::factory()->create([
+            'supplier_id' => $reviewedSupplier->id,
+        ]);
+
+        $data = [
+            'reviewed_supplier_id' => $reviewedSupplier->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'user_id' => $user->id,
+            'deal_date' => now()->format('Y-m-d'),
+            'cost' => 5,
+            'accuracy' => 5,
+            'compliance' => 5,
+            'communication' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => false,
+            'comment' => 'Great service',
+        ];
+
+        $this->actingAs($user)->post(route('reviews.store'), $data);
+
+        Notification::assertSentTo(
+            [$targetUser, $targetUser2],
+            \App\Notifications\NewReviewNotification::class,
+        );
     }
 
     #[Test]
