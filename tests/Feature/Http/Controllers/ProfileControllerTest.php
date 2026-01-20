@@ -43,6 +43,24 @@ class ProfileControllerTest extends TestCase
         $response->assertSee($reviewedSupplier->name);
     }
 
+    public function test_it_displays_edit_button_for_reviews()
+    {
+        $user = User::factory()->create();
+        $supplier = Supplier::factory()->create();
+        $reviewedSupplier = Supplier::factory()->create();
+
+        $review = Review::factory()->create([
+            'user_id' => $user->id,
+            'reviewer_supplier_id' => $supplier->id,
+            'reviewed_supplier_id' => $reviewedSupplier->id,
+        ]);
+
+        $response = $this->actingAs($user)->get(route('profile.show'));
+
+        $response->assertSee(route('reviews.edit', $review));
+        $response->assertSee('Edit');
+    }
+
     public function test_it_redirects_unauthenticated_users()
     {
         $response = $this->get(route('profile.show'));

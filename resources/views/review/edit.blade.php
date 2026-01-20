@@ -20,13 +20,13 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
                         </li>
                         <li class="inline-flex items-center gap-1.5">
-                            <a href="{{ route('suppliers.show', $supplier) }}" class="hover:text-foreground transition-colors">{{ $supplier->name }}</a>
+                            <a href="{{ route('suppliers.show', $review->reviewedSupplier) }}" class="hover:text-foreground transition-colors">{{ $review->reviewedSupplier->name }}</a>
                         </li>
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5"><path d="m9 18 6-6-6-6" /></svg>
                         </li>
                         <li class="inline-flex items-center gap-1.5">
-                            <span aria-current="page">Assess Vendor</span>
+                            <span aria-current="page">Edit Review</span>
                         </li>
                     </ol>
                 </nav>
@@ -38,16 +38,16 @@
             <div class="mx-auto max-w-5xl px-6 py-8">
                 <div class="flex items-start gap-6">
                     <div class="bg-primary/10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl">
-                        <i class="hgi hgi-stroke hgi-quill-write-01 text-2xl"></i>
+                        <i class="hgi hgi-stroke hgi-pencil-edit-02 text-2xl"></i>
                     </div>
                     <div>
-                        <h1 class="mb-2 text-3xl font-bold md:text-4xl">Assess a Vendor</h1>
-                        <p class="text-muted-foreground text-lg">Share your experience with <span
-                                  class="text-foreground font-semibold">{{ $supplier->name }}</span></p>
-                        <a href="{{ route('suppliers.show', $supplier) }}"
+                        <h1 class="mb-2 text-3xl font-bold md:text-4xl">Edit Review</h1>
+                        <p class="text-muted-foreground text-lg">Update your experience with <span
+                                  class="text-foreground font-semibold">{{ $review->reviewedSupplier->name }}</span></p>
+                        <a href="{{ route('suppliers.show', $review->reviewedSupplier) }}"
                            class="text-primary mt-2 inline-flex items-center gap-1 text-sm hover:underline">
                             <i class="hgi hgi-stroke hgi-arrow-left-02"></i>
-                            Back to {{ $supplier->name }}
+                            Back to {{ $review->reviewedSupplier->name }}
                         </a>
                     </div>
                 </div>
@@ -55,10 +55,11 @@
         </div>
 
         <div class="mx-auto max-w-5xl px-6 py-8">
-            <form action="{{ route('reviews.store') }}" method="POST">
+            <form action="{{ route('reviews.update', $review) }}" method="POST">
                 @csrf
+                @method('PUT')
 
-                @include('review._form', ['review' => null])
+                @include('review._form', ['review' => $review, 'supplier' => $review->reviewedSupplier])
             </form>
 
             <!-- Help Section -->

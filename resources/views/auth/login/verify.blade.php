@@ -57,11 +57,12 @@
                     </button>
                 </form>
 
-                <div class="flex items-center justify-between text-sm text-muted-foreground">
+                <div class="flex items-center justify-between text-sm text-muted-foreground" x-data="otpTimer({ timeLeft: {{ $timeLeft }} })">
                     <form action="{{ route('auth.login.resend-otp') }}" method="POST">
                         @csrf
-                        <button type="submit" class="text-primary hover:underline">
-                            Resend code
+                        <button type="submit" class="text-primary hover:underline disabled:opacity-50 disabled:no-underline" :disabled="timeLeft > 0">
+                            <span x-show="timeLeft <= 0">Resend code</span>
+                            <span x-show="timeLeft > 0" x-cloak>Resend code (<span x-text="timeLeft"></span>s)</span>
                         </button>
                     </form>
 

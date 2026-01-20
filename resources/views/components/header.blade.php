@@ -14,72 +14,72 @@
                 class="h-6 w-auto translate-y-0.5" />
         </a>
 
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-            {{-- <a href="{{ route('home.index') }}"
-                class="transition-colors hover:text-foreground/80 {{ request()->routeIs('home.index') ? 'text-foreground' : 'text-foreground/60' }}">Home</a>
-            --}}
-            <a href="{{ route('suppliers.index') }}"
-                class="transition-colors hover:text-foreground/80 {{ request()->routeIs('suppliers.*') ? 'text-foreground' : 'text-foreground/60' }}">Seek
-                Vendors</a>
-        </nav>
-
         <!-- Right Side Actions -->
-        <div class="flex flex-1 items-center justify-end space-x-2">
-            @auth
-                <button class="btn-primary btn-sm hidden md:flex"
-                    onclick="document.getElementById('review-modal').showModal()">
-                    <i class="hgi hgi-stroke hgi-quill-write-01"></i>
-                    Assess a Vendor
-                </button>
+        @auth
+        <div class="flex flex-1 items-center justify-end">
+            <button class="btn-primary btn-sm hidden md:flex"
+                onclick="document.getElementById('review-modal').showModal()">
+                <i class="hgi hgi-stroke hgi-quill-write-01"></i>
+                Assess a Vendor
+            </button>
 
-                <!-- User Dropdown -->
-                <div id="user-dropdown" class="dropdown-menu">
-                    <button type="button" id="user-dropdown-trigger" aria-haspopup="menu" aria-controls="user-dropdown-menu"
-                        aria-expanded="false" class="btn-secondary btn-icon rounded-full">
-                        <i class="hgi hgi-stroke hgi-user text-xl"></i>
-                    </button>
-                    <div id="user-dropdown-popover" data-popover aria-hidden="true" class="min-w-56" data-align="end">
-                        <div role="menu" id="user-dropdown-menu" aria-labelledby="user-dropdown-trigger">
-                            <div role="group">
-                                <div class="px-2 py-1.5 text-sm font-semibold max-w-56 truncate">{{ auth()->user()->name }}
-                                </div>
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium mx-5">
+                <a href="{{ route('suppliers.index') }}"
+                    class="transition-colors hover:text-foreground/80 {{ request()->routeIs('suppliers.*') ? 'text-foreground' : 'text-foreground/60' }}">Seek
+                    Vendors</a>
+            </nav>
+
+            <!-- User Dropdown -->
+            <div id="user-dropdown" class="dropdown-menu">
+                <button type="button" id="user-dropdown-trigger" aria-haspopup="menu" aria-controls="user-dropdown-menu"
+                    aria-expanded="false" class="btn-secondary btn-icon rounded-full">
+                    <i class="hgi hgi-stroke hgi-user text-xl"></i>
+                </button>
+                <div id="user-dropdown-popover" data-popover aria-hidden="true" class="min-w-56" data-align="end">
+                    <div role="menu" id="user-dropdown-menu" aria-labelledby="user-dropdown-trigger">
+                        <div role="group">
+                            <div class="px-2 py-1.5 text-sm font-semibold max-w-56 truncate">{{ auth()->user()->name }}
                             </div>
-                            <hr role="separator" />
+                        </div>
+                        <hr role="separator" />
+                        <div role="menuitem">
+                            <a href="{{ route('profile.show') }}" class="flex w-full items-center">
+                                Profile
+                            </a>
+                        </div>
+                        @if (auth()->user()->supplier)
                             <div role="menuitem">
-                                <a href="{{ route('profile.show') }}" class="flex w-full items-center">
-                                    Profile
+                                <a href="{{ route('suppliers.show', auth()->user()->supplier) }}"
+                                    class="flex w-full items-center">
+                                    My Organization
                                 </a>
                             </div>
-                            @if (auth()->user()->supplier)
-                                <div role="menuitem">
-                                    <a href="{{ route('suppliers.show', auth()->user()->supplier) }}"
-                                        class="flex w-full items-center">
-                                        My Organization
-                                    </a>
-                                </div>
-                            @endif
-                            <hr role="separator" />
-                            <div role="menuitem">
-                                <button type="button" onclick="toggleTheme()" class="flex w-full items-center">
-                                    Toggle Theme
+                        @endif
+                        <hr role="separator" />
+                        <div role="menuitem">
+                            <button type="button" onclick="toggleTheme()" class="flex w-full items-center">
+                                Toggle Theme
+                            </button>
+                        </div>
+                        <hr role="separator" />
+                        <div role="menuitem">
+                            <form action="{{ route('auth.logout') }}" method="POST" class="w-full">
+                                @csrf
+                                <button type="submit" class="flex w-full items-center">
+                                    Log out
                                 </button>
-                            </div>
-                            <hr role="separator" />
-                            <div role="menuitem">
-                                <form action="{{ route('auth.logout') }}" method="POST" class="w-full">
-                                    @csrf
-                                    <button type="submit" class="flex w-full items-center">
-                                        Log out
-                                    </button>
-                                </form>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            @else
-                <a href="{{ route('auth.login.index') }}" class="btn-sm-secondary">Log In</a>
-                <a href="{{ route('auth.register.index') }}" class="btn-primary btn-sm">Get Started</a>
-            @endauth
+            </div>
+        </div>
+        @else
+        <div class="flex flex-1 items-center justify-end gap-2">
+            <a href="{{ route('auth.login.index') }}" class="btn-sm-secondary">Log In</a>
+            <a href="{{ route('auth.register.index') }}" class="btn-primary btn-sm">Get Started</a>
+        </div>
+        @endauth
         </div>
     </div>
 </header>

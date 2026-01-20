@@ -96,6 +96,13 @@ class RegisterController extends Controller
                 new OtpNotification($otp),
             );
 
+            $rateLimitKey = "otp_resend:{$validated['email']}";
+            Cache::put(
+                $rateLimitKey,
+                now()->addMinute()->timestamp,
+                now()->addMinute(),
+            );
+
             return redirect()
                 ->route('auth.register.verify')
                 ->with(
@@ -124,7 +131,9 @@ class RegisterController extends Controller
      */
     public function verify(): View|RedirectResponse
     {
-        if (! session()->has('registration_data')) {
+        $registrationData = session('registration_data');
+
+        if (! $registrationData) {
             return redirect()
                 ->route('auth.register.index')
                 ->with(
@@ -133,7 +142,14 @@ class RegisterController extends Controller
                 );
         }
 
-        return view('auth.register.verify');
+        $email = $registrationData['email'];
+        $rateLimitKey = "otp_resend:{$email}";
+        $expiresAt = Cache::get($rateLimitKey);
+        $timeLeft = $expiresAt ? max(0, $expiresAt - now()->timestamp) : 0;
+
+        return view('auth.register.verify', [
+            'timeLeft' => $timeLeft,
+        ]);
     }
 
     /**
@@ -316,8 +332,12 @@ class RegisterController extends Controller
             now()->addMinutes(5),
         );
 
-        // Set rate limit (30 seconds)
-        Cache::put($rateLimitKey, true, now()->addSeconds(30));
+        // Set rate limit (1 minute)
+        Cache::put(
+            $rateLimitKey,
+            now()->addMinute()->timestamp,
+            now()->addMinute(),
+        );
 
         try {
             Notification::route('mail', $email)->notify(
