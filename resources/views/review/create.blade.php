@@ -164,7 +164,7 @@
             'support' => ['label' => 'After-sale Service', 'icon' => 'hgi-wrench-01', 'description' => 'Quality of support and follow up after sale'],
         ] as $metric => $data)
                             <div x-data="{ value: {{ old($metric, 5) }} }">
-                                <label class="mb-3 block"
+                                <label class="mb-3 block min-h-19"
                                        for="{{ $metric }}">
                                     <div class="mb-1 flex items-center gap-2">
                                         <i class="hgi hgi-stroke {{ $data['icon'] }}"></i>
@@ -209,7 +209,7 @@
                                 This helps others understand if you'd recommend this vendor for future business.
                             </p>
                         </div>
-                        
+
                         <div class="flex gap-4">
                             <label class="flex-1 cursor-pointer">
                                 <input type="radio" name="deal_again" value="1" x-model="dealAgain" class="peer sr-only">
@@ -218,7 +218,7 @@
                                     <span class="font-semibold">Yes</span>
                                 </div>
                             </label>
-                            
+
                             <label class="flex-1 cursor-pointer">
                                 <input type="radio" name="deal_again" value="0" x-model="dealAgain" class="peer sr-only">
                                 <div class="flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-muted bg-card p-4 text-muted-foreground transition-all hover:bg-muted/50 peer-checked:border-destructive peer-checked:bg-destructive/5 peer-checked:text-destructive">
@@ -314,7 +314,7 @@
                         </div>
                         <div class="flex w-full flex-col gap-3 sm:flex-row md:w-auto">
                             <a href="{{ route('suppliers.show', $supplier) }}"
-                               class="btn btn-lg">
+                               class="btn-lg-outline">
                                 <i class="hgi hgi-stroke hgi-cancel-01"></i>
                                 Cancel
                             </a>

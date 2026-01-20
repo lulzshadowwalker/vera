@@ -14,11 +14,11 @@
         <div class="relative z-10 mx-auto max-w-7xl px-6 text-center">
             <div class="mx-auto max-w-4xl">
                 <h1 class="text-foreground mb-6 text-balance text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-                    Assess right seek smart
+                    Assess Right Seek Smart
                 </h1>
-                <p class="text-muted-foreground mx-auto mb-10 max-w-2xl text-lg leading-relaxed md:text-xl font-medium">
-                    Access authentic assessments from verified businesses. Make confident procurement decisions backed by
-                    real experiences from your peers.
+                <p class="text-muted-foreground mx-auto mb-10 max-w-3xl text-lg leading-relaxed md:text-xl font-medium">
+                    A trusted platform for verified corporate assessments.
+                    <span class="block mt-2">Real business experiences. Real accountability. Better decisions.</span>
                 </p>
 
                 <!-- Primary Actions -->
@@ -152,6 +152,32 @@
     </section>
 
     <!-- How It Works Section -->
+    <section class="bg-card relative overflow-hidden border-y border-border py-24">
+        <div class="pointer-events-none absolute left-1/2 top-0 h-full w-full max-w-4xl -translate-x-1/2 opacity-10">
+            <div class="from-primary/20 absolute inset-0 rounded-full bg-gradient-to-b to-transparent blur-3xl"></div>
+        </div>
+        <div class="relative z-10 mx-auto max-w-4xl px-6 text-center">
+            <div
+                class="bg-primary/10 text-primary mb-8 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-bold uppercase tracking-wider">
+                <i class="hgi hgi-stroke hgi-shield-user text-lg"></i>
+                <span>Corporate Integrity</span>
+            </div>
+            <p class="text-foreground mb-8 text-2xl font-medium leading-relaxed md:text-3xl">
+                Our platform enables businesses and institutions to assess companies and service providers based on <span
+                    class="text-primary font-bold">real professional interactions.</span>
+            </p>
+            <p class="text-muted-foreground mb-10 text-lg leading-relaxed md:text-xl">
+                All assessments are verified through corporate email domains, ensuring credibility and serious
+                participation.
+            </p>
+            <div class="border-primary inline-block border-l-4 py-2 pl-6 text-left">
+                <p class="text-foreground text-xl font-bold leading-tight md:text-2xl">
+                    Here, businesses speak and real experience is the reference.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <section class="bg-background py-20">
         <div class="mx-auto max-w-7xl px-6">
             <div class="mb-16 text-center">
@@ -189,11 +215,9 @@
                             class="bg-primary text-primary-foreground mb-6 flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold shadow-lg">
                             2
                         </div>
-                        <h3 class="mb-3 text-xl font-semibold">Seek & Assess Vendors</h3>
+                        <h3 class="mb-3 text-xl font-semibold">Assess & Seek Vendors</h3>
                         <p class="text-muted-foreground leading-relaxed">
-                            Search our directory, read authentic assessments, or share your own experience with vendors
-                            you've
-                            worked with.
+                            Assess your own experience with vendors you've worked with or seek our directory and read authentic assessments.
                         </p>
                     </div>
                 </div>

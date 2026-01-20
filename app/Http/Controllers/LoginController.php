@@ -29,16 +29,16 @@ class LoginController extends Controller
         $validated = $request->validated();
 
         // Password Login
-        if ($request->filled('password')) {
-            if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']], $request->boolean('remember'))) {
-                $request->session()->regenerate();
-                return redirect()->intended(route('suppliers.index'));
-            }
+        // if ($request->filled('password')) {
+        //     if (Auth::attempt(['email' => $validated['email'], 'password' => $validated['password']], $request->boolean('remember'))) {
+        //         $request->session()->regenerate();
+        //         return redirect()->intended(route('suppliers.index'));
+        //     }
 
-            return back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
-            ])->onlyInput('email');
-        }
+        //     return back()->withErrors([
+        //         'email' => 'The provided credentials do not match our records.',
+        //     ])->onlyInput('email');
+        // }
 
         $user = User::where('email', $validated['email'])->first();
 
@@ -56,14 +56,19 @@ class LoginController extends Controller
                 ]);
 
                 return back()
-                    ->withErrors(['email' => 'Failed to send verification code. Please try again.'])
+                    ->withErrors([
+                        'email' => 'Failed to send verification code. Please try again.',
+                    ])
                     ->withInput();
             }
         }
 
         return redirect()
             ->route('auth.login.verify')
-            ->with('success', 'A verification code has been sent to your email.');
+            ->with(
+                'success',
+                'A verification code has been sent to your email.',
+            );
     }
 
     /**
@@ -117,7 +122,7 @@ class LoginController extends Controller
         $request->session()->regenerate();
 
         return redirect()
-            ->intended(route('dashboard'))
+            ->intended(route('home.index'))
             ->with('success', 'Welcome back!');
     }
 
@@ -137,23 +142,29 @@ class LoginController extends Controller
         $user = User::where('email', $loginEmail)->first();
 
         if (! $user) {
-            return back()
-                ->with('success', 'A new verification code has been sent to your email.');
+            return back()->with(
+                'success',
+                'A new verification code has been sent to your email.',
+            );
         }
 
         try {
             $user->sendOneTimePassword();
 
-            return back()
-                ->with('success', 'A new verification code has been sent to your email.');
+            return back()->with(
+                'success',
+                'A new verification code has been sent to your email.',
+            );
         } catch (\Exception $e) {
             Log::error('Failed to resend OTP', [
                 'email' => $loginEmail,
                 'error' => $e->getMessage(),
             ]);
 
-            return back()
-                ->with('error', 'Failed to resend verification code. Please try again.');
+            return back()->with(
+                'error',
+                'Failed to resend verification code. Please try again.',
+            );
         }
     }
 

@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Notification;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -24,8 +25,11 @@ class RegisterControllerTest extends TestCase
     #[Test]
     public function it_requires_all_mandatory_fields(): void
     {
-        $this->post(route('auth.register.store'), [])
-            ->assertSessionHasErrors(['first_name', 'last_name', 'email']);
+        $this->post(route('auth.register.store'), [])->assertSessionHasErrors([
+            'first_name',
+            'last_name',
+            'email',
+        ]);
     }
 
     #[Test]
@@ -35,8 +39,7 @@ class RegisterControllerTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'invalid-email',
-        ])
-            ->assertSessionHasErrors(['email']);
+        ])->assertSessionHasErrors(['email']);
     }
 
     #[Test]
@@ -46,15 +49,13 @@ class RegisterControllerTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@gmail.com',
-        ])
-            ->assertSessionHasErrors(['email']);
+        ])->assertSessionHasErrors(['email']);
 
         $this->post(route('auth.register.store'), [
             'first_name' => 'Jane',
             'last_name' => 'Smith',
             'email' => 'jane@yahoo.com',
-        ])
-            ->assertSessionHasErrors(['email']);
+        ])->assertSessionHasErrors(['email']);
     }
 
     #[Test]
@@ -68,7 +69,8 @@ class RegisterControllerTest extends TestCase
             'email' => 'john@company.com',
         ]);
 
-        $response->assertRedirect(route('auth.register.verify'))
+        $response
+            ->assertRedirect(route('auth.register.verify'))
             ->assertSessionHas('success')
             ->assertSessionHas('registration_data');
     }
@@ -88,8 +90,14 @@ class RegisterControllerTest extends TestCase
         $this->assertNotNull(session('registration_data'));
         $this->assertEquals('John', session('registration_data.first_name'));
         $this->assertEquals('Doe', session('registration_data.last_name'));
-        $this->assertEquals('john@company.com', session('registration_data.email'));
-        $this->assertEquals('john.backup@company.com', session('registration_data.backup_email'));
+        $this->assertEquals(
+            'john@company.com',
+            session('registration_data.email'),
+        );
+        $this->assertEquals(
+            'john.backup@company.com',
+            session('registration_data.backup_email'),
+        );
         $this->assertEquals('company.com', session('registration_data.domain'));
     }
 
@@ -102,8 +110,7 @@ class RegisterControllerTest extends TestCase
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'existing@company.com',
-        ])
-            ->assertSessionHasErrors(['email']);
+        ])->assertSessionHasErrors(['email']);
     }
 
     #[Test]
@@ -114,8 +121,7 @@ class RegisterControllerTest extends TestCase
             'last_name' => 'Doe',
             'email' => 'john@company.com',
             'backup_email' => 'john@company.com',
-        ])
-            ->assertSessionHasErrors(['backup_email']);
+        ])->assertSessionHasErrors(['backup_email']);
     }
 
     #[Test]
@@ -126,8 +132,7 @@ class RegisterControllerTest extends TestCase
             'last_name' => 'Doe',
             'email' => 'john@company.com',
             'backup_email' => 'john@gmail.com',
-        ])
-            ->assertSessionHasErrors(['backup_email']);
+        ])->assertSessionHasErrors(['backup_email']);
     }
 
     #[Test]
@@ -158,20 +163,47 @@ class RegisterControllerTest extends TestCase
     #[Test]
     public function it_creates_user_and_supplier_on_successful_verification(): void
     {
+        $email = 'john@newcompany.com';
+        $otp = '123456';
+        $cacheKey = 'registration_otp:'.hash('sha256', strtolower($email));
+
         session([
             'registration_data' => [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
-                'email' => 'john@newcompany.com',
-                'backup_email' => null,
+                'email' => $email,
+                'backup_email' => 'backup@other.com',
                 'domain' => 'newcompany.com',
             ],
         ]);
 
-        // Note: In real tests, you'd mock the OTP verification
-        // This is a simplified version
-        $this->assertEquals(0, User::count());
-        $this->assertEquals(0, Supplier::count());
+        Cache::put($cacheKey, [
+            'otp' => $otp,
+            'attempts' => 0,
+            'ip' => '127.0.0.1',
+            'user_agent' => 'Symfony',
+            'created_at' => now(),
+        ]);
+
+        $response = $this->post(route('auth.register.confirm-otp'), [
+            'email' => $email,
+            'otp' => $otp,
+        ]);
+
+        $response
+            ->assertRedirect(route('home.index'))
+            ->assertSessionHas('success');
+
+        $this->assertDatabaseHas('users', [
+            'email' => $email,
+            'name' => 'John Doe',
+        ]);
+
+        $this->assertDatabaseHas('suppliers', [
+            'domain' => 'newcompany.com',
+        ]);
+
+        $this->assertAuthenticated();
     }
 
     #[Test]
@@ -220,6 +252,9 @@ class RegisterControllerTest extends TestCase
             'email' => 'john@mail.company.com',
         ]);
 
-        $this->assertEquals('mail.company.com', session('registration_data.domain'));
+        $this->assertEquals(
+            'mail.company.com',
+            session('registration_data.domain'),
+        );
     }
 }
