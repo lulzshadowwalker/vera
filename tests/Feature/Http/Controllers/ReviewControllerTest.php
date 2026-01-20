@@ -100,12 +100,16 @@ final class ReviewControllerTest extends TestCase
     #[Test]
     public function create_redirects_with_warning_if_already_reviewed(): void
     {
-        $user = User::factory()->create();
+        $reviewerSupplier = Supplier::factory()->create();
+        $user = User::factory()->create([
+            'supplier_id' => $reviewerSupplier->id,
+        ]);
         $supplier = Supplier::factory()->create();
 
         // Create an existing review
         Review::factory()->create([
             'user_id' => $user->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
             'reviewed_supplier_id' => $supplier->id,
         ]);
 
@@ -116,7 +120,7 @@ final class ReviewControllerTest extends TestCase
         $response->assertRedirect(route('suppliers.show', $supplier));
         $response->assertSessionHas(
             'warning',
-            'You have already submitted an assessment for this supplier.',
+            'Your company has already assessed this vendor.',
         );
     }
 
@@ -133,6 +137,7 @@ final class ReviewControllerTest extends TestCase
         // Create an existing review
         Review::factory()->create([
             'user_id' => $user->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
             'reviewed_supplier_id' => $reviewedSupplier->id,
         ]);
 
@@ -159,7 +164,7 @@ final class ReviewControllerTest extends TestCase
         $response->assertRedirect(route('suppliers.show', $reviewedSupplier));
         $response->assertSessionHas(
             'error',
-            'You have already submitted a review for this supplier.',
+            'Your company has already assessed this vendor.',
         );
     }
 
@@ -237,5 +242,102 @@ final class ReviewControllerTest extends TestCase
             'reviewer_supplier_id' => $reviewerSupplier->id,
             'user_id' => $user->id,
         ]);
+    }
+
+    #[Test]
+    public function create_redirects_with_warning_if_colleague_already_reviewed(): void
+    {
+        $reviewerSupplier = Supplier::factory()->create();
+        $colleague = User::factory()->create([
+            'supplier_id' => $reviewerSupplier->id,
+        ]);
+        $user = User::factory()->create([
+            'supplier_id' => $reviewerSupplier->id,
+        ]);
+        $supplier = Supplier::factory()->create();
+
+        // Colleague has already reviewed the supplier
+        Review::factory()->create([
+            'user_id' => $colleague->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'reviewed_supplier_id' => $supplier->id,
+        ]);
+
+        $response = $this->actingAs($user)->get(
+            route('suppliers.reviews.create', $supplier),
+        );
+
+        $response->assertRedirect(route('suppliers.show', $supplier));
+        $response->assertSessionHas(
+            'warning',
+            'Your company has already assessed this vendor.',
+        );
+    }
+
+    #[Test]
+    public function create_redirects_with_warning_if_reciprocal_review(): void
+    {
+        $reviewerSupplier = Supplier::factory()->create();
+        $user = User::factory()->create([
+            'supplier_id' => $reviewerSupplier->id,
+        ]);
+        $supplier = Supplier::factory()->create();
+
+        // The target supplier has already reviewed the user's supplier
+        Review::factory()->create([
+            'reviewer_supplier_id' => $supplier->id,
+            'reviewed_supplier_id' => $reviewerSupplier->id,
+        ]);
+
+        $response = $this->actingAs($user)->get(
+            route('suppliers.reviews.create', $supplier),
+        );
+
+        $response->assertRedirect(route('suppliers.show', $supplier));
+        $response->assertSessionHas(
+            'warning',
+            'You cannot assess a vendor that has already assessed your company.',
+        );
+    }
+
+    #[Test]
+    public function store_redirects_with_error_if_reciprocal_review(): void
+    {
+        $reviewerSupplier = Supplier::factory()->create();
+        $user = User::factory()->create([
+            'supplier_id' => $reviewerSupplier->id,
+        ]);
+        $supplier = Supplier::factory()->create();
+
+        // The target supplier has already reviewed the user's supplier
+        Review::factory()->create([
+            'reviewer_supplier_id' => $supplier->id,
+            'reviewed_supplier_id' => $reviewerSupplier->id,
+        ]);
+
+        $data = [
+            'reviewed_supplier_id' => $supplier->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'user_id' => $user->id,
+            'deal_date' => now()->format('Y-m-d'),
+            'cost' => 5,
+            'accuracy' => 5,
+            'compliance' => 5,
+            'communication' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => false,
+            'comment' => 'Great service',
+        ];
+
+        $response = $this->actingAs($user)->post(route('reviews.store'), $data);
+
+        $response->assertRedirect(route('suppliers.show', $supplier));
+        $response->assertSessionHas(
+            'error',
+            'You cannot assess a vendor that has already assessed your company.',
+        );
     }
 }
