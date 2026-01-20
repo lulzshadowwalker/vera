@@ -109,7 +109,7 @@
                     </div> --}}
 
                     <div class="grid gap-2">
-                        <label for="country_id" class="label">Country <small class="text-extralight">(optional)</small></label>
+                        <label for="country_id" class="label">Country <span class="text-destructive">*</span></label>
                         <div id="country-select" class="select w-full">
                             <button type="button" class="btn-outline justify-between font-normal w-full @error('country_id') border-destructive @enderror" id="country-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="country-select-listbox">
                                 <span class="truncate">
@@ -145,7 +145,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <input type="hidden" name="country_id" value="{{ old('country_id') }}" />
+                            <input type="hidden" name="country_id" value="{{ old('country_id') }}" required />
                         </div>
                         @error('country_id')
                             <div class="text-destructive text-sm mt-1">{{ $message }}</div>

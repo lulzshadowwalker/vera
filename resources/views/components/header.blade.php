@@ -14,23 +14,20 @@
                 class="h-6 w-auto translate-y-0.5" />
         </a>
 
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-            {{-- <a href="{{ route('home.index') }}"
-                class="transition-colors hover:text-foreground/80 {{ request()->routeIs('home.index') ? 'text-foreground' : 'text-foreground/60' }}">Home</a>
-            --}}
-            <a href="{{ route('suppliers.index') }}"
-                class="transition-colors hover:text-foreground/80 {{ request()->routeIs('suppliers.*') ? 'text-foreground' : 'text-foreground/60' }}">Seek
-                Vendors</a>
-        </nav>
-
         <!-- Right Side Actions -->
-        <div class="flex flex-1 items-center justify-end space-x-2">
+        <div class="flex flex-1 items-center justify-end">
             @auth
                 <button class="btn-primary btn-sm hidden md:flex"
                     onclick="document.getElementById('review-modal').showModal()">
                     <i class="hgi hgi-stroke hgi-quill-write-01"></i>
                     Assess a Vendor
                 </button>
+
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium mx-5">
+                    <a href="{{ route('suppliers.index') }}"
+                        class="transition-colors hover:text-foreground/80 {{ request()->routeIs('suppliers.*') ? 'text-foreground' : 'text-foreground/60' }}">Seek
+                        Vendors</a>
+                </nav>
 
                 <!-- User Dropdown -->
                 <div id="user-dropdown" class="dropdown-menu">

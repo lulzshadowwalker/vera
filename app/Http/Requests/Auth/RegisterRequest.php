@@ -26,9 +26,21 @@ class RegisterRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'backup_email' => ['nullable', 'string', 'email', 'max:255', 'different:email'],
-            'country_id' => ['nullable', 'exists:countries,id'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users,email',
+            ],
+            'backup_email' => [
+                'nullable',
+                'string',
+                'email',
+                'max:255',
+                'different:email',
+            ],
+            'country_id' => ['required', 'exists:countries,id'],
         ];
     }
 
@@ -47,10 +59,12 @@ class RegisterRequest extends FormRequest
 
             // Check if it's a blocked public email provider
             if ($domainService->isBlockedProvider($email)) {
-                $validator->errors()->add(
-                    'email',
-                    'Please use a work email address. Public email providers are not allowed.'
-                );
+                $validator
+                    ->errors()
+                    ->add(
+                        'email',
+                        'Please use a work email address. Public email providers are not allowed.',
+                    );
             }
 
             // Validate backup email if provided
@@ -58,10 +72,12 @@ class RegisterRequest extends FormRequest
                 $backupEmail = $this->input('backup_email');
 
                 if ($domainService->isBlockedProvider($backupEmail)) {
-                    $validator->errors()->add(
-                        'backup_email',
-                        'Please use a work email address. Public email providers are not allowed.'
-                    );
+                    $validator
+                        ->errors()
+                        ->add(
+                            'backup_email',
+                            'Please use a work email address. Public email providers are not allowed.',
+                        );
                 }
             }
         });
@@ -91,6 +107,8 @@ class RegisterRequest extends FormRequest
         return [
             'email.unique' => 'This email address is already registered.',
             'backup_email.different' => 'The backup email must be different from your primary email.',
+            'country_id.required' => 'Please select a country.',
+            'country_id.exists' => 'The selected country is invalid.',
         ];
     }
 }
