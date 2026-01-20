@@ -1,14 +1,15 @@
-import axios from 'axios'
-import Alpine from 'alpinejs'
-import ajax from '@imacrayon/alpine-ajax'
-import intersect from '@alpinejs/intersect'
+import axios from "axios";
+import Alpine from "alpinejs";
+import ajax from "@imacrayon/alpine-ajax";
+import intersect from "@alpinejs/intersect";
 
-import './alpine/pin-input'
+import "./alpine/pin-input";
+import "./alpine/otp-timer";
 
-window.axios = axios
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+window.axios = axios;
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
-window.Alpine = Alpine
-Alpine.plugin(ajax)
-Alpine.plugin(intersect)
-Alpine.start()
+window.Alpine = Alpine;
+Alpine.plugin(ajax);
+Alpine.plugin(intersect);
+Alpine.start();

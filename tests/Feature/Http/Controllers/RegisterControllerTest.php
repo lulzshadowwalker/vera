@@ -266,4 +266,32 @@ class RegisterControllerTest extends TestCase
             session('registration_data.domain'),
         );
     }
+
+    #[Test]
+    public function resend_otp_is_rate_limited(): void
+    {
+        Notification::fake();
+
+        session([
+            'registration_data' => [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'email' => 'john@company.com',
+                'domain' => 'company.com',
+            ],
+        ]);
+
+        // First resend
+        $this->post(route('auth.register.resend-otp'))
+            ->assertRedirect()
+            ->assertSessionHas('success');
+
+        // Second resend immediately
+        $this->post(route('auth.register.resend-otp'))
+            ->assertRedirect()
+            ->assertSessionHas(
+                'error',
+                'Please wait before requesting another code.',
+            );
+    }
 }
