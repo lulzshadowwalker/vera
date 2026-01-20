@@ -15,8 +15,7 @@ Route::get('/robots.txt', function () {
         $content = "User-agent: *\nDisallow: /";
     }
 
-    return response($content, 200)
-        ->header('Content-Type', 'text/plain');
+    return response($content, 200)->header('Content-Type', 'text/plain');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -63,10 +62,22 @@ Route::middleware('guest')->group(function () {
     ])->name('auth.register.resend-otp');
 
     // Password Reset
-    Route::get('/auth/forgot-password', [\App\Http\Controllers\PasswordResetController::class, 'create'])->name('password.request');
-    Route::post('/auth/forgot-password', [\App\Http\Controllers\PasswordResetController::class, 'store'])->name('password.email');
-    Route::get('/auth/reset-password/{token}', [\App\Http\Controllers\PasswordResetController::class, 'edit'])->name('password.reset');
-    Route::post('/auth/reset-password', [\App\Http\Controllers\PasswordResetController::class, 'update'])->name('password.update');
+    Route::get('/auth/forgot-password', [
+        \App\Http\Controllers\PasswordResetController::class,
+        'create',
+    ])->name('password.request');
+    Route::post('/auth/forgot-password', [
+        \App\Http\Controllers\PasswordResetController::class,
+        'store',
+    ])->name('password.email');
+    Route::get('/auth/reset-password/{token}', [
+        \App\Http\Controllers\PasswordResetController::class,
+        'edit',
+    ])->name('password.reset');
+    Route::post('/auth/reset-password', [
+        \App\Http\Controllers\PasswordResetController::class,
+        'update',
+    ])->name('password.update');
 });
 
 // Logout (Authenticated Only)
@@ -87,8 +98,12 @@ Route::get('/terms-and-conditions', [
     'index',
 ])->name('terms-and-conditions.index');
 
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/contact', [ContactController::class, 'index'])->name(
+    'contact.index',
+);
+Route::post('/contact', [ContactController::class, 'store'])->name(
+    'contact.store',
+);
 
 // Route::resource(
 //     "suppliers",
@@ -98,24 +113,56 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 Route::get('/vendors', [
     App\Http\Controllers\SupplierController::class,
     'index',
-])->name('suppliers.index')->middleware('auth');
+])
+    ->name('suppliers.index')
+    ->middleware('auth');
 Route::get('/vendors/{supplier:slug}', [
     App\Http\Controllers\SupplierController::class,
     'show',
-])->name('suppliers.show')->middleware('auth');
+])
+    ->name('suppliers.show')
+    ->middleware('auth');
 
 Route::get('/vendors/{supplier:slug}/reviews/create', [
     App\Http\Controllers\ReviewController::class,
     'create',
-])->name('suppliers.reviews.create')->middleware('auth');
+])
+    ->name('suppliers.reviews.create')
+    ->middleware('auth');
 
 Route::post('/reviews/initiate', [
     App\Http\Controllers\ReviewInitiationController::class,
     'store',
-])->name('reviews.initiate')->middleware('auth');
+])
+    ->name('reviews.initiate')
+    ->middleware('auth');
 
-Route::get('/reviews/create', [App\Http\Controllers\ReviewController::class, 'create'])->name('reviews.create')->middleware('auth');
-Route::post('/reviews', [App\Http\Controllers\ReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
-Route::get('/reviews/{review}', [App\Http\Controllers\ReviewController::class, 'show'])->name('reviews.show');
+Route::get('/reviews/create', [
+    App\Http\Controllers\ReviewController::class,
+    'create',
+])
+    ->name('reviews.create')
+    ->middleware('auth');
+Route::post('/reviews', [App\Http\Controllers\ReviewController::class, 'store'])
+    ->name('reviews.store')
+    ->middleware('auth');
+Route::get('/reviews/{review}/edit', [
+    App\Http\Controllers\ReviewController::class,
+    'edit',
+])
+    ->name('reviews.edit')
+    ->middleware('auth');
+Route::put('/reviews/{review}', [
+    App\Http\Controllers\ReviewController::class,
+    'update',
+])
+    ->name('reviews.update')
+    ->middleware('auth');
+Route::get('/reviews/{review}', [
+    App\Http\Controllers\ReviewController::class,
+    'show',
+])->name('reviews.show');
 
-Route::post('/ajax/theme', App\Http\Controllers\ThemeController::class)->name('theme.toggle');
+Route::post('/ajax/theme', App\Http\Controllers\ThemeController::class)->name(
+    'theme.toggle',
+);

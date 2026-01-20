@@ -2,11 +2,14 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Events\ReviewCreated;
 use App\Models\Review;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Notification;
 use JMac\Testing\Traits\AdditionalAssertions;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -245,6 +248,83 @@ final class ReviewControllerTest extends TestCase
     }
 
     #[Test]
+    public function store_dispatches_review_created_event(): void
+    {
+        $user = User::factory()->create();
+        $reviewerSupplier = Supplier::factory()->create();
+        $user->supplier()->associate($reviewerSupplier);
+        $user->save();
+
+        $reviewedSupplier = Supplier::factory()->create();
+
+        $data = [
+            'reviewed_supplier_id' => $reviewedSupplier->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'user_id' => $user->id,
+            'deal_date' => now()->format('Y-m-d'),
+            'cost' => 5,
+            'accuracy' => 5,
+            'compliance' => 5,
+            'communication' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => false,
+            'comment' => 'Great service',
+        ];
+
+        Event::fake([ReviewCreated::class]);
+
+        $this->actingAs($user)->post(route('reviews.store'), $data);
+
+        Event::assertDispatched(ReviewCreated::class);
+    }
+
+    #[Test]
+    public function review_notification_is_sent_to_supplier_users(): void
+    {
+        Notification::fake();
+
+        $user = User::factory()->create();
+        $reviewerSupplier = Supplier::factory()->create();
+        $user->supplier()->associate($reviewerSupplier);
+        $user->save();
+
+        $reviewedSupplier = Supplier::factory()->create();
+        $targetUser = User::factory()->create([
+            'supplier_id' => $reviewedSupplier->id,
+        ]);
+        $targetUser2 = User::factory()->create([
+            'supplier_id' => $reviewedSupplier->id,
+        ]);
+
+        $data = [
+            'reviewed_supplier_id' => $reviewedSupplier->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'user_id' => $user->id,
+            'deal_date' => now()->format('Y-m-d'),
+            'cost' => 5,
+            'accuracy' => 5,
+            'compliance' => 5,
+            'communication' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => false,
+            'comment' => 'Great service',
+        ];
+
+        $this->actingAs($user)->post(route('reviews.store'), $data);
+
+        Notification::assertSentTo(
+            [$targetUser, $targetUser2],
+            \App\Notifications\NewReviewNotification::class,
+        );
+    }
+
+    #[Test]
     public function create_redirects_with_warning_if_colleague_already_reviewed(): void
     {
         $reviewerSupplier = Supplier::factory()->create();
@@ -287,6 +367,7 @@ final class ReviewControllerTest extends TestCase
         Review::factory()->create([
             'reviewer_supplier_id' => $supplier->id,
             'reviewed_supplier_id' => $reviewerSupplier->id,
+            'anonymous' => false,
         ]);
 
         $response = $this->actingAs($user)->get(
@@ -313,6 +394,7 @@ final class ReviewControllerTest extends TestCase
         Review::factory()->create([
             'reviewer_supplier_id' => $supplier->id,
             'reviewed_supplier_id' => $reviewerSupplier->id,
+            'anonymous' => false,
         ]);
 
         $data = [
@@ -339,5 +421,267 @@ final class ReviewControllerTest extends TestCase
             'error',
             'You cannot assess a vendor that has already assessed your company.',
         );
+    }
+
+    #[Test]
+    public function create_allows_reciprocal_review_if_original_is_anonymous(): void
+    {
+        $reviewerSupplier = Supplier::factory()->create();
+        $user = User::factory()->create([
+            'supplier_id' => $reviewerSupplier->id,
+        ]);
+        $supplier = Supplier::factory()->create();
+
+        // The target supplier has already reviewed the user's supplier anonymously
+        Review::factory()->create([
+            'reviewer_supplier_id' => $supplier->id,
+            'reviewed_supplier_id' => $reviewerSupplier->id,
+            'anonymous' => true,
+        ]);
+
+        $response = $this->actingAs($user)->get(
+            route('suppliers.reviews.create', $supplier),
+        );
+
+        $response->assertOk();
+        $response->assertViewIs('review.create');
+    }
+
+    #[Test]
+    public function store_allows_reciprocal_review_if_original_is_anonymous(): void
+    {
+        $reviewerSupplier = Supplier::factory()->create();
+        $user = User::factory()->create([
+            'supplier_id' => $reviewerSupplier->id,
+        ]);
+        $supplier = Supplier::factory()->create();
+
+        // The target supplier has already reviewed the user's supplier anonymously
+        Review::factory()->create([
+            'reviewer_supplier_id' => $supplier->id,
+            'reviewed_supplier_id' => $reviewerSupplier->id,
+            'anonymous' => true,
+        ]);
+
+        $data = [
+            'reviewed_supplier_id' => $supplier->id,
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'user_id' => $user->id,
+            'deal_date' => now()->format('Y-m-d'),
+            'cost' => 5,
+            'accuracy' => 5,
+            'compliance' => 5,
+            'communication' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => false,
+            'comment' => 'Great service',
+        ];
+
+        $response = $this->actingAs($user)->post(route('reviews.store'), $data);
+
+        $response->assertRedirect(route('suppliers.show', $supplier));
+        $this->assertDatabaseHas('reviews', [
+            'reviewer_supplier_id' => $reviewerSupplier->id,
+            'reviewed_supplier_id' => $supplier->id,
+            'user_id' => $user->id,
+            'comment' => 'Great service',
+        ]);
+    }
+
+    #[Test]
+    public function edit_displays_view(): void
+    {
+        $user = User::factory()->create();
+        $review = Review::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->get(route('reviews.edit', $review));
+
+        $response->assertOk();
+        $response->assertViewIs('review.edit');
+        $response->assertViewHas('review');
+    }
+
+    #[Test]
+    public function edit_denies_access_to_non_owner(): void
+    {
+        $owner = User::factory()->create();
+        $review = Review::factory()->create(['user_id' => $owner->id]);
+        $otherUser = User::factory()->create();
+
+        $response = $this->actingAs($otherUser)->get(
+            route('reviews.edit', $review),
+        );
+
+        $response->assertForbidden();
+    }
+
+    #[Test]
+    public function update_updates_review(): void
+    {
+        $user = User::factory()->create();
+        $review = Review::factory()->create(['user_id' => $user->id]);
+
+        $data = [
+            'deal_date' => now()->subYears(2)->format('Y-m-d'),
+            'cost' => 8,
+            'accuracy' => 8,
+            'compliance' => 8,
+            'communication' => 8,
+            'quality' => 8,
+            'support' => 8,
+            'timeliness' => 8,
+            'deal_again' => false,
+            'anonymous' => false,
+            'comment' => 'Updated comment',
+        ];
+
+        $response = $this->actingAs($user)->put(
+            route('reviews.update', $review),
+            $data,
+        );
+
+        $response->assertRedirect(
+            route('suppliers.show', $review->reviewedSupplier),
+        );
+        $this->assertDatabaseHas('reviews', [
+            'id' => $review->id,
+            'cost' => 8,
+            'deal_again' => 0,
+            'comment' => 'Updated comment',
+        ]);
+    }
+
+    #[Test]
+    public function update_validates_deal_date_relative_to_creation_date(): void
+    {
+        $user = User::factory()->create();
+        // Review created 4 years ago
+        $review = Review::factory()->create([
+            'user_id' => $user->id,
+            'created_at' => now()->subYears(4),
+        ]);
+
+        // Trying to update deal_date to be 8 years ago (4 years before creation)
+        // Should fail because limit is 3 years before creation.
+        $invalidData = [
+            'deal_date' => now()->subYears(8)->format('Y-m-d'),
+            'cost' => 5,
+            'accuracy' => 5,
+            'compliance' => 5,
+            'communication' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => false,
+            'comment' => 'Updated comment',
+        ];
+
+        $response = $this->actingAs($user)->put(
+            route('reviews.update', $review),
+            $invalidData,
+        );
+        $response->assertSessionHasErrors('deal_date');
+
+        // valid date: 6 years ago (2 years before creation, since creation is 4 years ago)
+        $validData = $invalidData;
+        $validData['deal_date'] = now()->subYears(6)->format('Y-m-d');
+
+        $response = $this->actingAs($user)->put(
+            route('reviews.update', $review),
+            $validData,
+        );
+        $response->assertSessionHasNoErrors();
+    }
+
+    #[Test]
+    public function update_fails_validation_when_comment_provided_for_anonymous_review(): void
+    {
+        $user = User::factory()->create();
+        $review = Review::factory()->create(['user_id' => $user->id]);
+
+        $data = [
+            'deal_date' => now()->subYears(1)->format('Y-m-d'),
+            'cost' => 5,
+            'accuracy' => 5,
+            'compliance' => 5,
+            'communication' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => true,
+            'comment' => 'Should fail',
+        ];
+
+        $response = $this->actingAs($user)->put(
+            route('reviews.update', $review),
+            $data,
+        );
+
+        $response->assertSessionHasErrors([
+            'comment' => 'Comments are not allowed for anonymous reviews.',
+        ]);
+    }
+
+    #[Test]
+    public function update_rejects_reviews_with_profanity(): void
+    {
+        $user = User::factory()->create();
+        $review = Review::factory()->create(['user_id' => $user->id]);
+
+        $data = [
+            'deal_date' => now()->subYears(1)->format('Y-m-d'),
+            'cost' => 5,
+            'accuracy' => 5,
+            'compliance' => 5,
+            'communication' => 5,
+            'quality' => 5,
+            'support' => 5,
+            'timeliness' => 5,
+            'deal_again' => true,
+            'anonymous' => false,
+            'comment' => 'This is fucking bad',
+        ];
+
+        $response = $this->actingAs($user)->put(
+            route('reviews.update', $review),
+            $data,
+        );
+
+        $response->assertRedirect();
+        $response->assertSessionHasErrors([
+            'comment' => 'Your comment contains offensive language. Please review the masked words and modify accordingly.',
+        ]);
+    }
+
+    #[Test]
+    public function show_displays_edit_button_for_owner(): void
+    {
+        $user = User::factory()->create();
+        $review = Review::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->get(route('reviews.show', $review));
+
+        $response->assertSee('Edit Review');
+        $response->assertSee(route('reviews.edit', $review));
+    }
+
+    #[Test]
+    public function show_does_not_display_edit_button_for_others(): void
+    {
+        $owner = User::factory()->create();
+        $review = Review::factory()->create(['user_id' => $owner->id]);
+        $otherUser = User::factory()->create();
+
+        $response = $this->actingAs($otherUser)->get(
+            route('reviews.show', $review),
+        );
+
+        $response->assertDontSee('Edit Review');
+        $response->assertDontSee(route('reviews.edit', $review));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\ProfanityFilter;
 use App\Http\Requests\ReviewStoreRequest;
+use App\Http\Requests\ReviewUpdateRequest;
 use App\Models\Review;
 use App\Models\Supplier;
 use Illuminate\Http\RedirectResponse;
@@ -78,6 +79,56 @@ class ReviewController extends Controller
         Review::create($request->validated());
 
         return redirect()->route('suppliers.show', $supplier);
+    }
+
+    public function edit(Review $review): View
+    {
+        Gate::authorize('update', $review);
+
+        $review->load(['reviewedSupplier']);
+
+        // Check if we're returning to this page after validation failed
+        $oldComment = old('comment');
+
+        if ($oldComment) {
+            // Blur offensive words using your profanity filter
+            $blurredComment = $this->profanityFilter->filter($oldComment);
+
+            // Replace the old input in the session (so Blade old('comment') works)
+            session()->flashInput(
+                array_merge(old(), ['comment' => $blurredComment]),
+            );
+        }
+
+        return view('review.edit', ['review' => $review]);
+    }
+
+    public function update(
+        ReviewUpdateRequest $request,
+        Review $review,
+    ): RedirectResponse {
+        $requestData = $request->all();
+
+        // Check for profanity and restrict submission
+        if (
+            isset($requestData['comment']) &&
+            $this->profanityFilter->hasProfanity($requestData['comment'])
+        ) {
+            $requestData['comment'] = $this->profanityFilter->filter(
+                $requestData['comment'],
+            );
+
+            return redirect()
+                ->back()
+                ->withInput($requestData)
+                ->withErrors([
+                    'comment' => 'Your comment contains offensive language. Please review the masked words and modify accordingly.',
+                ]);
+        }
+
+        $review->update($request->validated());
+
+        return redirect()->route('suppliers.show', $review->reviewedSupplier);
     }
 
     public function show(Request $request, Review $review): View

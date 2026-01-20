@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\ReviewCreated;
 use App\Models\Review;
 use Illuminate\Support\Facades\Cache;
 
@@ -13,6 +14,8 @@ class ReviewObserver
     public function created(Review $review): void
     {
         Cache::forget('stats.reviews_count');
+
+        ReviewCreated::dispatch($review);
     }
 
     /**

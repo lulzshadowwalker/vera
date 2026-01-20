@@ -1,4 +1,4 @@
-import './bootstrap'
+import "./bootstrap";
 
-import 'basecoat-css/all'
-import './basecoat-slider'
+import "basecoat-css/all";
+import "./basecoat-slider";

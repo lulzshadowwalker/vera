@@ -185,6 +185,33 @@ class LoginControllerTest extends TestCase
     }
 
     #[Test]
+    public function resend_otp_is_rate_limited(): void
+    {
+        Notification::fake();
+
+        $supplier = Supplier::factory()->create(['domain' => 'company.com']);
+        User::factory()->create([
+            'email' => 'john@company.com',
+            'supplier_id' => $supplier->id,
+        ]);
+
+        session(['login_email' => 'john@company.com']);
+
+        // First resend
+        $this->post(route('auth.login.resend-otp'))
+            ->assertRedirect()
+            ->assertSessionHas('success');
+
+        // Second resend immediately
+        $this->post(route('auth.login.resend-otp'))
+            ->assertRedirect()
+            ->assertSessionHas(
+                'error',
+                'Please wait before requesting another code.',
+            );
+    }
+
+    #[Test]
     public function verify_otp_requires_valid_session(): void
     {
         Notification::fake();

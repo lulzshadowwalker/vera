@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
@@ -49,6 +50,13 @@ class LoginController extends Controller
             try {
                 // Send OTP
                 $user->sendOneTimePassword();
+
+                $rateLimitKey = "otp_resend:{$validated['email']}";
+                Cache::put(
+                    $rateLimitKey,
+                    now()->addMinute()->timestamp,
+                    now()->addMinute(),
+                );
             } catch (\Exception $e) {
                 Log::error('Failed to send OTP', [
                     'email' => $validated['email'],
@@ -76,13 +84,21 @@ class LoginController extends Controller
      */
     public function verify(): View|RedirectResponse
     {
-        if (! session()->has('login_email')) {
+        $loginEmail = session('login_email');
+
+        if (! $loginEmail) {
             return redirect()
                 ->route('auth.login.index')
                 ->with('error', 'Login session expired. Please start again.');
         }
 
-        return view('auth.login.verify');
+        $rateLimitKey = "otp_resend:{$loginEmail}";
+        $expiresAt = Cache::get($rateLimitKey);
+        $timeLeft = $expiresAt ? max(0, $expiresAt - now()->timestamp) : 0;
+
+        return view('auth.login.verify', [
+            'timeLeft' => $timeLeft,
+        ]);
     }
 
     /**
@@ -139,9 +155,24 @@ class LoginController extends Controller
                 ->with('error', 'Login session expired. Please start again.');
         }
 
+        $rateLimitKey = "otp_resend:{$loginEmail}";
+
+        if (Cache::has($rateLimitKey)) {
+            return back()->with(
+                'error',
+                'Please wait before requesting another code.',
+            );
+        }
+
         $user = User::where('email', $loginEmail)->first();
 
         if (! $user) {
+            Cache::put(
+                $rateLimitKey,
+                now()->addMinute()->timestamp,
+                now()->addMinute(),
+            );
+
             return back()->with(
                 'success',
                 'A new verification code has been sent to your email.',
@@ -150,6 +181,12 @@ class LoginController extends Controller
 
         try {
             $user->sendOneTimePassword();
+
+            Cache::put(
+                $rateLimitKey,
+                now()->addMinute()->timestamp,
+                now()->addMinute(),
+            );
 
             return back()->with(
                 'success',

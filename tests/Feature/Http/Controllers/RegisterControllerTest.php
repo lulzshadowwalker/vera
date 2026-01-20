@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -62,11 +63,13 @@ class RegisterControllerTest extends TestCase
     public function it_accepts_work_email_addresses(): void
     {
         Notification::fake();
+        $country = Country::factory()->create();
 
         $response = $this->post(route('auth.register.store'), [
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@company.com',
+            'country_id' => $country->id,
         ]);
 
         $response
@@ -79,12 +82,14 @@ class RegisterControllerTest extends TestCase
     public function it_stores_registration_data_in_session(): void
     {
         Notification::fake();
+        $country = Country::factory()->create();
 
         $this->post(route('auth.register.store'), [
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@company.com',
             'backup_email' => 'john.backup@company.com',
+            'country_id' => $country->id,
         ]);
 
         $this->assertNotNull(session('registration_data'));
@@ -231,11 +236,13 @@ class RegisterControllerTest extends TestCase
     public function it_normalizes_domain_from_email(): void
     {
         Notification::fake();
+        $country = Country::factory()->create();
 
         $this->post(route('auth.register.store'), [
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@WWW.COMPANY.COM',
+            'country_id' => $country->id,
         ]);
 
         $this->assertEquals('company.com', session('registration_data.domain'));
@@ -245,16 +252,46 @@ class RegisterControllerTest extends TestCase
     public function it_handles_subdomain_emails(): void
     {
         Notification::fake();
+        $country = Country::factory()->create();
 
         $this->post(route('auth.register.store'), [
             'first_name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@mail.company.com',
+            'country_id' => $country->id,
         ]);
 
         $this->assertEquals(
             'mail.company.com',
             session('registration_data.domain'),
         );
+    }
+
+    #[Test]
+    public function resend_otp_is_rate_limited(): void
+    {
+        Notification::fake();
+
+        session([
+            'registration_data' => [
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'email' => 'john@company.com',
+                'domain' => 'company.com',
+            ],
+        ]);
+
+        // First resend
+        $this->post(route('auth.register.resend-otp'))
+            ->assertRedirect()
+            ->assertSessionHas('success');
+
+        // Second resend immediately
+        $this->post(route('auth.register.resend-otp'))
+            ->assertRedirect()
+            ->assertSessionHas(
+                'error',
+                'Please wait before requesting another code.',
+            );
     }
 }
