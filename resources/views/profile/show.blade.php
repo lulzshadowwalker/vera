@@ -82,6 +82,12 @@
                             View Details
                             <i class="hgi hgi-stroke hgi-arrow-right-02"></i>
                         </a>
+                        @can('update', $review)
+                            <a href="{{ route('reviews.edit', $review) }}" class="btn btn-secondary btn-sm">
+                                Edit
+                                <i class="hgi hgi-stroke hgi-pencil-edit-02"></i>
+                            </a>
+                        @endcan
                     </x-slot:actions>
                 </x-review-card>
                 @endforeach

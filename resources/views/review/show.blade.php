@@ -104,6 +104,13 @@
                             All Reviews
                         </a>
                         @auth
+                            @can('update', $review)
+                                <a href="{{ route('reviews.edit', $review) }}"
+                                   class="btn btn-secondary">
+                                    <i class="hgi hgi-stroke hgi-pencil-edit-02"></i>
+                                    Edit Review
+                                </a>
+                            @endcan
                             <a href="{{ route('suppliers.reviews.create', ['supplier' => $review->reviewedSupplier]) }}"
                                class="btn btn-primary">
                                 <i class="hgi hgi-stroke hgi-quill-write-01"></i>

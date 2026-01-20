@@ -6,6 +6,7 @@ use App\BusinessRules\PreventDuplicateSupplierReview;
 use App\BusinessRules\PreventReciprocalReview;
 use App\BusinessRules\PreventSelfReview;
 use App\BusinessRules\ReviewRule;
+use App\Models\Review;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -37,5 +38,10 @@ class ReviewPolicy
         }
 
         return Response::allow();
+    }
+
+    public function update(User $user, Review $review): bool
+    {
+        return $user->id === $review->user_id;
     }
 }
