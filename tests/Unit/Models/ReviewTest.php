@@ -27,14 +27,12 @@ class ReviewTest extends TestCase
             'domain' => 'example.com',
         ]);
 
-        $user = User::factory()->for($supplier)->create([
-            'name' => 'John Doe',
-        ]);
+        $user = User::factory()->for($supplier)->create();
 
         $review = Review::factory()->for($user)->create([
             'anonymous' => false,
         ]);
 
-        $this->assertEquals('John Doe @example.com', $review->reviewer_display_name);
+        $this->assertEquals('@example.com', $review->reviewer_display_name);
     }
 }

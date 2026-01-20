@@ -16,11 +16,16 @@ class PulseServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        Gate::define('viewPulse', fn (User $user) => $user?->is_admin);
+        Gate::define(
+            'viewPulse',
+            fn (User $user) => auth('admin')->user()?->is_admin,
+        );
 
-        Pulse::user(fn ($user) => [
-            'name' => $user->name,
-            'extra' => $user->email,
-        ]);
+        Pulse::user(
+            fn ($user) => [
+                'name' => $user->name,
+                'extra' => $user->email,
+            ],
+        );
     }
 }

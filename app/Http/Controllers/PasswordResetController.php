@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\Auth\ResetPasswordNotification;
 use Illuminate\Auth\Events\PasswordReset;
@@ -42,10 +41,10 @@ class PasswordResetController extends Controller
             // Send reset link to the requested email (primary or backup)
             // We use the primary email for the token link so validation works
             $token = Password::broker()->createToken($user);
-            
+
             Notification::route('mail', $request->email)
                 ->notify(new ResetPasswordNotification($token, $user->email));
-                
+
             $status = Password::RESET_LINK_SENT;
         } else {
             // Simulate success to prevent user enumeration
@@ -78,7 +77,7 @@ class PasswordResetController extends Controller
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {
                 $user->forceFill([
-                    'password' => Hash::make($password)
+                    'password' => Hash::make($password),
                 ])->setRememberToken(Str::random(60));
 
                 $user->save();

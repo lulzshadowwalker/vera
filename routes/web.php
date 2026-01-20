@@ -74,14 +74,6 @@ Route::post('/auth/logout', [LoginController::class, 'destroy'])
     ->name('auth.logout')
     ->middleware('auth');
 
-// Dashboard (Authenticated Only)
-Route::get('/dashboard', function () {
-    return redirect()->route('suppliers.index');
-    // return view('dashboard');
-})
-    ->middleware('auth')
-    ->name('dashboard');
-
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])
     ->middleware('auth')
     ->name('profile.show');
