@@ -34,9 +34,12 @@ class NewReviewNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $parts = explode(' ', trim($notifiable->name));
+        $firstName = ! empty($parts[0]) ? $parts[0] : 'there';
+
         return new MailMessage()
             ->subject('New Assessment Received')
-            ->greeting('Hello '.$notifiable->name.',')
+            ->greeting("Hello $firstName,")
             ->line(
                 'Your company, '.
                     $this->review->reviewedSupplier->name.
