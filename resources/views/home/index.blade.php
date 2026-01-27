@@ -5,10 +5,12 @@
     <section class="bg-background relative flex min-h-[90vh] items-center overflow-hidden py-20 md:py-28">
         <!-- Hero Background Illustration -->
         <div class="absolute inset-0 z-0 pointer-events-none">
-            <img src="{{ asset('images/hero.png') }}" alt=""
-                class="h-full w-full object-cover scale-105 opacity-70 transition-transform duration-[20s] ease-linear hover:scale-110" />
-            <div class="absolute inset-0 bg-gradient-to-t from-background/60 via-background/30 to-background/80"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background"></div>
+            <picture>
+                <source src="{{ asset('images/hero.webp') }}" type="image/webp">
+                <img src="{{ asset('images/hero.jpg') }}" alt=""
+                    class="h-full w-full object-cover scale-105 opacity-70 transition-transform duration-[20s] ease-linear hover:scale-110" />
+            </picture>
+            <div class="absolute inset-0 bg-gradient-to-t from-background/30 via-background/20 to-background/80"></div>
         </div>
 
         <div class="relative z-10 mx-auto max-w-7xl px-6 text-center">
