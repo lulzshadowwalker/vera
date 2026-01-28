@@ -6,6 +6,7 @@ use App\Models\Review;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class NewReviewNotification extends Notification
 {
@@ -35,11 +36,11 @@ class NewReviewNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $parts = explode(' ', trim($notifiable->name));
-        $firstName = ! empty($parts[0]) ? $parts[0] : 'there';
+        $name = ! empty($parts[0]) ? $parts[0] : 'there';
 
         return new MailMessage()
             ->subject('New Assessment Received')
-            ->greeting("Hello $firstName,")
+            ->greeting("Hello $name,")
             ->line(
                 'Your company, '.
                     $this->review->reviewedSupplier->name.
@@ -49,7 +50,8 @@ class NewReviewNotification extends Notification
                 'Log in to your dashboard to view the full details and improved analytics.',
             )
             ->action('View Assessment', route('reviews.show', $this->review))
-            ->line('Thank you for being part of our trusted community.');
+            ->line('Thank you for being part of our trusted community.')
+            ->salutation(new HtmlString('Regards,<br>Assesk Team'));
     }
 
     /**
