@@ -2,14 +2,18 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Enums\Role;
 use App\Models\User;
+use App\Notifications\ContactMessageNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Notification;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
+use Tests\Traits\WithRoles;
 
 class ContactControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithRoles;
 
     #[Test]
     public function it_renders_the_contact_page(): void
@@ -20,8 +24,13 @@ class ContactControllerTest extends TestCase
     }
 
     #[Test]
-    public function it_stores_a_contact_message_from_a_guest(): void
+    public function it_stores_a_contact_message_from_a_guest_and_notifies_admins(): void
     {
+        Notification::fake();
+
+        $admin = User::factory()->create();
+        $admin->assignRole(Role::admin->value);
+
         $data = [
             'name' => 'Guest User',
             'email' => 'guest@example.com',
@@ -41,11 +50,24 @@ class ContactControllerTest extends TestCase
             'message' => 'This is a message from a guest user.',
             'user_id' => null,
         ]);
+
+        Notification::assertSentTo(
+            $admin,
+            ContactMessageNotification::class,
+            function (ContactMessageNotification $notification) use ($data) {
+                return $notification->contactMessage->subject === $data['subject'];
+            }
+        );
     }
 
     #[Test]
-    public function it_stores_a_contact_message_from_an_authenticated_user(): void
+    public function it_stores_a_contact_message_from_an_authenticated_user_and_notifies_admins(): void
     {
+        Notification::fake();
+
+        $admin = User::factory()->create();
+        $admin->assignRole(Role::admin->value);
+
         $user = User::factory()->create();
 
         $data = [
@@ -67,6 +89,14 @@ class ContactControllerTest extends TestCase
             'message' => 'This is a message from an authenticated user.',
             'user_id' => $user->id,
         ]);
+
+        Notification::assertSentTo(
+            $admin,
+            ContactMessageNotification::class,
+            function (ContactMessageNotification $notification) use ($data) {
+                return $notification->contactMessage->subject === $data['subject'];
+            }
+        );
     }
 
     #[Test]
