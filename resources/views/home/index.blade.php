@@ -96,9 +96,9 @@
                                 <i class="hgi hgi-stroke hgi-user-multiple-02 text-primary text-2xl"></i>
                             </div>
                             <div>
-                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($suppliersCount) }}+
+                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($usersCount) }}+
                                 </h2>
-                                <p class="text-muted-foreground text-sm font-medium">Registered</p>
+                                <p class="text-muted-foreground text-sm font-medium">Registered Users</p>
                             </div>
                         </header>
                     </div>

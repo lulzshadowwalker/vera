@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
@@ -19,9 +20,14 @@ class HomeController extends Controller
             return Review::count();
         });
 
+        $usersCount = Cache::remember('stats.users_count', now()->addDay(), function () {
+            return User::count();
+        });
+
         return view('home.index', [
             'suppliersCount' => 10_000 + $suppliersCount,
             'reviewsCount' => 30_000 + $reviewsCount,
+            'usersCount' => 5_000 + $usersCount,
         ]);
     }
 }
