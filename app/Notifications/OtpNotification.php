@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class OtpNotification extends Notification implements ShouldQueue
 {
@@ -14,9 +15,10 @@ class OtpNotification extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      */
-    public function __construct(
-        public string $otp
-    ) {}
+    public function __construct(public string $otp)
+    {
+        //
+    }
 
     /**
      * Get the notification's delivery channels.
@@ -37,9 +39,10 @@ class OtpNotification extends Notification implements ShouldQueue
             ->subject('Your Verification Code')
             ->greeting('Hello!')
             ->line('Your verification code is:')
-            ->line('**'.$this->otp.'**')
+            ->line('**' . $this->otp . '**')
             ->line('This code will expire in 5 minutes.')
-            ->line('If you did not request this code, please ignore this email.');
+            ->line('If you did not request this code, please ignore this email.')
+            ->salutation(new HtmlString('Regards,<br>Assesk Team'));
     }
 
     /**
