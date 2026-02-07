@@ -8,6 +8,7 @@
     class="space-y-6"
     x-data="{
         anonymous: {{ old('anonymous', $review->anonymous ?? false) ? 'true' : 'false' }},
+        __comment: null,
         comment: '{{ old('comment', $review->comment ?? '') }}',
         dealAgain: '{{ old('deal_again', $review->deal_again ?? true) ? '1' : '0' }}',
         dealDate: '{{ old('deal_date', isset($review) ? $review->deal_date->format('Y-m-d') : '') }}',
@@ -22,6 +23,23 @@
             return date >= minDate;
         }
     }"
+    x-init="if (anonymous) {
+        __comment = comment;
+        comment = '';
+    }
+    
+    $watch('anonymous', (value) => {
+        if (value) {
+            __comment = comment;
+            comment = '';
+            return;
+        }
+    
+        if (!value && typeof __comment !== 'undefined') {
+            comment = __comment;
+            __comment = null;
+        }
+    })"
 >
 
     @if (!isset($review))
