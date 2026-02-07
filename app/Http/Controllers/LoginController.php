@@ -54,8 +54,8 @@ class LoginController extends Controller
                 $rateLimitKey = "otp_resend:{$validated['email']}";
                 Cache::put(
                     $rateLimitKey,
-                    now()->addMinute()->timestamp,
-                    now()->addMinute(),
+                    now()->addMinutes(2)->timestamp,
+                    now()->addMinutes(2),
                 );
             } catch (\Exception $e) {
                 Log::error('Failed to send OTP', [
@@ -137,8 +137,10 @@ class LoginController extends Controller
         // Regenerate session
         $request->session()->regenerate();
 
+        $request->session()->forget('url.intended');
+
         return redirect()
-            ->intended(route('home.index'))
+            ->route('home.index')
             ->with('success', 'Welcome back!');
     }
 
@@ -169,8 +171,8 @@ class LoginController extends Controller
         if (! $user) {
             Cache::put(
                 $rateLimitKey,
-                now()->addMinute()->timestamp,
-                now()->addMinute(),
+                now()->addMinutes(2)->timestamp,
+                now()->addMinutes(2),
             );
 
             return back()->with(
@@ -184,8 +186,8 @@ class LoginController extends Controller
 
             Cache::put(
                 $rateLimitKey,
-                now()->addMinute()->timestamp,
-                now()->addMinute(),
+                now()->addMinutes(2)->timestamp,
+                now()->addMinutes(2),
             );
 
             return back()->with(
