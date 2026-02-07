@@ -1,16 +1,17 @@
 {
     "agents": [
         "copilot",
-        "gemini",
-        "opencode"
-    ],
-    "editors": [
-        "gemini",
         "opencode",
-        "vscode"
+        "codex"
     ],
-    "guidelines": [
+    "guidelines": true,
+    "herd_mcp": true,
+    "mcp": true,
+    "packages": [
         "filament/filament"
     ],
-    "herd_mcp": true
+    "sail": false,
+    "skills": [
+        "tailwindcss-development"
+    ]
 }

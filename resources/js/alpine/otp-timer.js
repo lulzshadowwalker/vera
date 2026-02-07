@@ -1,6 +1,6 @@
 document.addEventListener("alpine:init", () => {
     Alpine.data("otpTimer", ({ timeLeft }) => ({
-        timeLeft: Math.max(0, timeLeft ?? 60),
+        timeLeft: Math.max(0, timeLeft ?? 120),
         timer: null,
 
         init() {
