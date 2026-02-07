@@ -1,6 +1,6 @@
 <?php
 
-use Laravel\Pulse\Http\Middleware\Authorize;
+use Filament\Http\Middleware\Authenticate;
 use Laravel\Pulse\Pulse;
 use Laravel\Pulse\Recorders;
 
@@ -122,7 +122,11 @@ return [
 
     'middleware' => [
         'web',
-        Authorize::class,
+
+        // since we are using another auth guard for the admin panel at [AdminPanelProvider]
+        // pulse seems to bug out I guess and always throws 403 Forbidden.
+        // So we are using Filament's auth middleware instead.
+        Authenticate::class,
     ],
 
     /*
