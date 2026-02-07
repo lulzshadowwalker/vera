@@ -99,8 +99,8 @@ class RegisterController extends Controller
             $rateLimitKey = "otp_resend:{$validated['email']}";
             Cache::put(
                 $rateLimitKey,
-                now()->addMinute()->timestamp,
-                now()->addMinute(),
+                now()->addMinutes(2)->timestamp,
+                now()->addMinutes(2),
             );
 
             return redirect()
@@ -264,8 +264,10 @@ class RegisterController extends Controller
             Auth::login($user);
             $request->session()->regenerate();
 
+            $request->session()->forget('url.intended');
+
             return redirect()
-                ->intended(route('home.index'))
+                ->route('home.index')
                 ->with(
                     'success',
                     'Registration successful! Welcome to '.
@@ -332,11 +334,11 @@ class RegisterController extends Controller
             now()->addMinutes(5),
         );
 
-        // Set rate limit (1 minute)
+        // Set rate limit (2 minutes)
         Cache::put(
             $rateLimitKey,
-            now()->addMinute()->timestamp,
-            now()->addMinute(),
+            now()->addMinutes(2)->timestamp,
+            now()->addMinutes(2),
         );
 
         try {

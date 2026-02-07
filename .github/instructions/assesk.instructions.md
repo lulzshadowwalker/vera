@@ -1,0 +1,13 @@
+=== architecture snapshot ===
+- routes/web.php wires the public experience: home, contact, privacy/terms, theme toggle, vendor search, OTP auth, review initiation/creation/edit/show, and the suppliers.* named routes.
+- RegisterController and LoginController orchestrate spatie/one-time-passwords OTPs, Cache keys like registration_otp:* and otp_resend:*, and the DomainNormalizationService-backed blocked-email guard before redirecting to home.index.
+- DomainNormalizationService is reused by Register/Login/ReviewInitiation to normalize email/domain input and consult config/app.php blocked_email_providers so only business domains are accepted.
+- ReviewInitiationController normalizes a submitted domain, firstOrCreates the supplier, and immediately redirects to suppliers.reviews.create once the vendor record exists.
+- ReviewController relies on ReviewStoreRequest + ReviewUpdateRequest (comment limits, anonymous/boolean toggles, minimum dates, profanity filtering) before Gate::inspect against ReviewPolicy.
+- ReviewPolicy simply instantiates the ReviewRule stack (PreventSelfReview, PreventDuplicateSupplierReview, PreventReciprocalReview) so the rules in app/BusinessRules are consistently enforced.
+- ReviewObserver forgets stats.reviews_count, dispatches ReviewCreated, and NotifySupplierUsers sends NewReviewNotification (route reviews.show) so supplier users always get email alerts.
+- Review model keeps SoftDeletes, supplier/user relations, getAverageScoreAttribute, and getReviewerDisplayNameAttribute for Filament tables/forms to render consistently.
+- Supplier model is Scout Searchable; SupplierController::index uses Supplier::search($query) while show paginates reviews, and SupplierObserver manages slug creation plus stats.suppliers_count cache keys.
+- Admin flows leverage the Filament resources under app/Filament/Resources (ReviewResource, SupplierResource, ContactMessageResource) for CRUD tables/forms rather than building separate Livewire stacks.
+- AppServiceProvider binds the ProfanityFilter contract to app/Services/BlaspProfanityFilter so ReviewController and app/Rules/NoProfanity can mask offensive comments uniformly.
+- User implements FilamentUser, HasOneTimePasswords, and HasRoles, so LoginController can call sendOneTimePassword() and attemptLoginUsingOneTimePassword() without custom logic.

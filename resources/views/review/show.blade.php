@@ -139,7 +139,7 @@
                             <p class="text-muted-foreground text-sm font-semibold">Overall Rating</p>
                         </div>
 
-                        <!-- Would Deal Again -->
+                        <!-- Will Deal Again -->
                         <div class="bg-muted/50 border-border w-full rounded-xl border-2 p-4 text-center">
                             @if ($review->deal_again)
                                 <i class="hgi hgi-stroke hgi-checkmark-circle-02"></i>
@@ -147,7 +147,7 @@
                                 <i class="hgi hgi-stroke hgi-cancel-circle"></i>
                             @endif
                             <p class="mt-2 text-sm font-semibold">
-                                {{ $review->deal_again ? 'Would Work Together Again' : 'Would Not Work Together Again' }}
+                                {{ $review->deal_again ? 'Will Work Together Again' : 'Will Not Work Together Again' }}
                             </p>
                         </div>
 
