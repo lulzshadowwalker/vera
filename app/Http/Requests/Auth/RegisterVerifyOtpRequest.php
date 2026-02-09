@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class RegisterVerifyOtpRequest extends FormRequest
 {
@@ -25,6 +26,18 @@ class RegisterVerifyOtpRequest extends FormRequest
             'email' => ['required', 'string', 'email'],
             'otp' => ['required', 'string', 'size:6', 'regex:/^[0-9]{6}$/'],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'email' => $this->input('email')
+                ? Str::lower($this->input('email'))
+                : null,
+        ]);
     }
 
     /**

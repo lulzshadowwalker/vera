@@ -56,11 +56,23 @@ class LoginControllerTest extends TestCase
     #[Test]
     public function it_rejects_non_existent_email_addresses(): void
     {
+        $this->markTestSkipped('Client requested a real error message for unknown emails.');
+
         $this->post(route('auth.login.store'), [
             'email' => 'nonexistent@company.com',
         ])
             ->assertRedirect(route('auth.login.verify'))
             ->assertSessionHas('success');
+    }
+
+    #[Test]
+    public function it_shows_an_error_for_non_existent_email_addresses(): void
+    {
+        $this->post(route('auth.login.store'), [
+            'email' => 'nonexistent@company.com',
+        ])
+            ->assertSessionHasErrors(['email'])
+            ->assertSessionMissing('login_email');
     }
 
     #[Test]

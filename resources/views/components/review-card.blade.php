@@ -19,17 +19,17 @@
 
             <div class="text-center lg:text-left">
                 <div
-                     class="{{ $review->deal_again ? 'text-green-600' : 'text-red-600' }} mb-2 flex items-center justify-center gap-2 lg:justify-start">
+                    class="{{ $review->deal_again ? 'text-green-600' : 'text-red-600' }} mb-2 flex items-center justify-center gap-2 lg:justify-start">
                     @if ($review->deal_again)
                         <i class="hgi hgi-stroke hgi-checkmark-circle-02"></i>
                     @else
                         <i class="hgi hgi-stroke hgi-cancel-circle"></i>
                     @endif
                     <span
-                          class="text-sm font-medium">{{ $review->deal_again ? 'Will work again' : 'Will not work again' }}</span>
+                        class="text-sm font-medium">{{ $review->deal_again ? 'Will work again' : 'Will not work again' }}</span>
                 </div>
                 <p class="text-muted-foreground text-sm">Deal Date: {{ $review->deal_date->format('M d, Y') }}</p>
-                <p class="text-muted-foreground text-xs mb-2">{{ $review->created_at->diffForHumans() }}</p>
+                <p class="text-muted-foreground mb-2 text-xs">{{ $review->created_at->diffForHumans() }}</p>
 
                 @if (isset($identity))
                     {{ $identity }}
@@ -44,7 +44,7 @@
         <!-- Right: Details -->
         <div class="lg:col-span-9">
             <!-- Comment -->
-            @if ($review->comment)
+            @if ($review->comment && !$review->anonymous)
                 <blockquote class="border-primary mb-4 border-l-4 pl-4 text-lg italic">
                     "{{ $review->comment }}"
                 </blockquote>
@@ -82,20 +82,26 @@
                 @if (isset($actions))
                     {{ $actions }}
                 @else
-                    <button onclick="shareAssessment('{{ route('reviews.show', $review) }}', '{{ $review->reviewedSupplier->name }}')"
-                            class="btn btn-secondary btn-sm"
-                            title="Share this assessment">
+                    <button
+                        class="btn btn-secondary btn-sm"
+                        title="Share this assessment"
+                        onclick="shareAssessment('{{ route('reviews.show', $review) }}', '{{ $review->reviewedSupplier->name }}')"
+                    >
                         Share
                         <i class="hgi hgi-stroke hgi-share-08"></i>
                     </button>
-                    <a href="{{ route('reviews.show', $review) }}"
-                       class="btn btn-secondary btn-sm">
+                    <a
+                        class="btn btn-secondary btn-sm"
+                        href="{{ route('reviews.show', $review) }}"
+                    >
                         View Details
                         <i class="hgi hgi-stroke hgi-arrow-right-02"></i>
                     </a>
                     @can('update', $review)
-                        <a href="{{ route('reviews.edit', $review) }}"
-                           class="btn btn-secondary btn-sm">
+                        <a
+                            class="btn btn-secondary btn-sm"
+                            href="{{ route('reviews.edit', $review) }}"
+                        >
                             Edit
                             <i class="hgi hgi-stroke hgi-pencil-edit-02"></i>
                         </a>

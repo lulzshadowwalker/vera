@@ -107,6 +107,30 @@ class RegisterControllerTest extends TestCase
     }
 
     #[Test]
+    public function it_normalizes_emails_to_lowercase_in_session(): void
+    {
+        Notification::fake();
+        $country = Country::factory()->create();
+
+        $this->post(route('auth.register.store'), [
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'John.Doe@Company.com',
+            'backup_email' => 'Backup@Company.com',
+            'country_id' => $country->id,
+        ]);
+
+        $this->assertEquals(
+            'john.doe@company.com',
+            session('registration_data.email'),
+        );
+        $this->assertEquals(
+            'backup@company.com',
+            session('registration_data.backup_email'),
+        );
+    }
+
+    #[Test]
     public function it_prevents_duplicate_email_registration(): void
     {
         User::factory()->create(['email' => 'existing@company.com']);
@@ -168,7 +192,7 @@ class RegisterControllerTest extends TestCase
     #[Test]
     public function it_creates_user_and_supplier_on_successful_verification(): void
     {
-        $email = 'john@newcompany.com';
+        $email = 'John@NewCompany.com';
         $otp = '123456';
         $cacheKey = 'registration_otp:'.hash('sha256', strtolower($email));
 
@@ -176,7 +200,7 @@ class RegisterControllerTest extends TestCase
             'registration_data' => [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
-                'email' => $email,
+                'email' => strtolower($email),
                 'backup_email' => 'backup@other.com',
                 'domain' => 'newcompany.com',
             ],
@@ -200,7 +224,7 @@ class RegisterControllerTest extends TestCase
             ->assertSessionHas('success');
 
         $this->assertDatabaseHas('users', [
-            'email' => $email,
+            'email' => strtolower($email),
             'name' => 'John Doe',
         ]);
 
