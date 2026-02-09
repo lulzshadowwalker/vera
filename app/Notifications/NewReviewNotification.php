@@ -38,7 +38,7 @@ class NewReviewNotification extends Notification
         $parts = explode(' ', trim($notifiable->name));
         $name = ! empty($parts[0]) ? $parts[0] : 'there';
 
-        return new MailMessage()
+        return (new MailMessage)
             ->subject('New Assessment Received')
             ->greeting("Hello $name,")
             ->line(
