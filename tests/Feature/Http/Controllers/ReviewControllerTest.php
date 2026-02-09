@@ -101,6 +101,20 @@ final class ReviewControllerTest extends TestCase
     }
 
     #[Test]
+    public function show_hides_comment_for_anonymous_reviews(): void
+    {
+        $review = Review::factory()->create([
+            'anonymous' => true,
+            'comment' => 'This comment should be hidden.',
+        ]);
+
+        $response = $this->get(route('reviews.show', $review));
+
+        $response->assertOk();
+        $response->assertDontSee('This comment should be hidden.');
+    }
+
+    #[Test]
     public function create_redirects_with_warning_if_already_reviewed(): void
     {
         $reviewerSupplier = Supplier::factory()->create();

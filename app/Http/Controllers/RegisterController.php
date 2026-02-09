@@ -52,15 +52,6 @@ class RegisterController extends Controller
                 ->withInput();
         }
 
-        // Check if user already exists
-        if (User::where('email', $validated['email'])->exists()) {
-            return back()
-                ->withErrors([
-                    'email' => 'An account with this email already exists.',
-                ])
-                ->withInput();
-        }
-
         // Generate OTP
         $otp = $this->generateOtp();
         $cacheKey = $this->getRegistrationOtpCacheKey($validated['email']);

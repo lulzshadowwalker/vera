@@ -175,7 +175,7 @@
                     <!-- Right Column: Review Content -->
                     <div class="lg:col-span-9">
                         <!-- Comment -->
-                        @if ($review->comment)
+                        @if ($review->comment && ! $review->anonymous)
                             <div class="mb-8">
                                 <h2 class="mb-4 text-xl font-bold">Reviewer's Comment</h2>
                                 <blockquote class="border-primary bg-primary/5 rounded-r-xl border-l-4 p-6">
@@ -288,7 +288,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if ($otherReview->comment)
+                                    @if ($otherReview->comment && ! $otherReview->anonymous)
                                         <p class="text-muted-foreground mb-4 line-clamp-2 text-sm">
                                             {{ Str::limit($otherReview->comment, 100) }}</p>
                                     @endif

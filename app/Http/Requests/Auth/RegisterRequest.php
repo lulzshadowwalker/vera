@@ -4,6 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use App\Services\DomainNormalizationService;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Validator;
 
 class RegisterRequest extends FormRequest
@@ -42,6 +43,21 @@ class RegisterRequest extends FormRequest
             ],
             'country_id' => ['required', 'exists:countries,id'],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'email' => $this->input('email')
+                ? Str::lower($this->input('email'))
+                : null,
+            'backup_email' => $this->input('backup_email')
+                ? Str::lower($this->input('backup_email'))
+                : null,
+        ]);
     }
 
     /**

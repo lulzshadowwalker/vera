@@ -4,6 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use App\Services\DomainNormalizationService;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Validator;
 
 class LoginRequest extends FormRequest
@@ -24,9 +25,27 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'exists:users,email',
+            ],
             'password' => ['nullable', 'string'],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'email' => $this->input('email')
+                ? Str::lower($this->input('email'))
+                : null,
+        ]);
     }
 
     /**
@@ -60,7 +79,7 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.exists' => 'No account found with this email address. Please sign up first.',
+            'email.exists' => 'No account found with this email address. Please register first.',
         ];
     }
 }
