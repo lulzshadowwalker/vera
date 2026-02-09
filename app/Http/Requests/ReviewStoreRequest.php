@@ -70,7 +70,7 @@ class ReviewStoreRequest extends FormRequest
         return [
             'deal_date.required' => 'Please provide the date of your last deal.',
             'deal_date.date' => 'Please provide a valid deal date.',
-            'deal_date.before' => 'Deal date must be in the past.',
+            'deal_date.before' => 'Invalid deal date. Please provide a date in the past.',
             'deal_date.after' => 'Deal date must be within the last 3 years.',
         ];
     }
