@@ -41,34 +41,34 @@ class LoginController extends Controller
         //     ])->onlyInput('email');
         // }
 
-        $user = User::where('email', $validated['email'])->first();
+        $user = User::query()
+            ->where('email', $validated['email'])
+            ->first();
 
-        // Store email in session for OTP verification
-        session(['login_email' => $validated['email']]);
+        try {
+            // Send OTP
+            $user->sendOneTimePassword();
 
-        if ($user) {
-            try {
-                // Send OTP
-                $user->sendOneTimePassword();
+            $rateLimitKey = "otp_resend:{$user->email}";
+            Cache::put(
+                $rateLimitKey,
+                now()->addMinutes(2)->timestamp,
+                now()->addMinutes(2),
+            );
 
-                $rateLimitKey = "otp_resend:{$validated['email']}";
-                Cache::put(
-                    $rateLimitKey,
-                    now()->addMinutes(2)->timestamp,
-                    now()->addMinutes(2),
-                );
-            } catch (\Exception $e) {
-                Log::error('Failed to send OTP', [
-                    'email' => $validated['email'],
-                    'error' => $e->getMessage(),
-                ]);
+            // Store email in session for OTP verification
+            session(['login_email' => $user->email]);
+        } catch (\Exception $e) {
+            Log::error('Failed to send OTP', [
+                'email' => $validated['email'],
+                'error' => $e->getMessage(),
+            ]);
 
-                return back()
-                    ->withErrors([
-                        'email' => 'Failed to send verification code. Please try again.',
-                    ])
-                    ->withInput();
-            }
+            return back()
+                ->withErrors([
+                    'email' => 'Failed to send verification code. Please try again.',
+                ])
+                ->withInput();
         }
 
         return redirect()

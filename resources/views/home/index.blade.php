@@ -70,24 +70,24 @@
                             class="relative w-full"
                             x-data="{ value: '' }"
                         >
+                            <div class="flex w-full items-stretch">
+                                <span
+                                    class="bg-muted border-border text-muted-foreground flex items-center rounded-l-xl border border-r-0 px-4 text-base font-black"
+                                >
+                                    @
+                                </span>
+                                <input
+                                    class="input border-border bg-card/50 text-foreground focus:ring-primary/20 peer h-14 w-full rounded-l-none rounded-r-xl pl-4 pr-12 shadow-2xl backdrop-blur-md transition-all placeholder:text-muted-foreground/70 focus:ring-2"
+                                    name="search"
+                                    type="search"
+                                    role="search"
+                                    aria-label="Search for vendors"
+                                    placeholder="Seek by vendor's domain"
+                                    x-model="value"
+                                />
+                            </div>
                             <span class="text-muted-foreground absolute right-4 top-1/2 -translate-y-1/2">
                                 <i class="hgi hgi-stroke hgi-quill-write-01"></i>
-                            </span>
-                            <input
-                                class="input border-border bg-card/50 text-foreground focus:ring-primary/20 peer h-14 w-full rounded-xl pl-6 pr-12 shadow-2xl backdrop-blur-md transition-all placeholder:text-transparent focus:ring-2"
-                                name="search"
-                                type="search"
-                                role="search"
-                                aria-label="Search for vendors"
-                                placeholder="@Seek by vendor's domain"
-                                x-model="value"
-                            />
-                            <span
-                                class="text-muted-foreground/80 pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 text-sm"
-                                x-show="value.length === 0"
-                                x-cloak
-                            >
-                                <span class="font-black">@</span>Seek by vendor's domain
                             </span>
                         </div>
                     </form>
@@ -130,21 +130,6 @@
                                 <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($usersCount) }}+
                                 </h2>
                                 <p class="text-muted-foreground text-sm font-medium">Registered Users</p>
-                            </div>
-                        </header>
-                    </div>
-                </div>
-
-                <div class="animate-loop-scroll flex items-center gap-8 pr-8">
-                    <div class="card bg-card w-64 shrink-0 p-6 text-center transition-shadow hover:shadow-md">
-                        <header class="flex flex-col items-center gap-3">
-                            <div class="bg-primary/10 grid h-12 w-12 place-items-center rounded-full">
-                                <i class="hgi hgi-stroke hgi-star-circle text-primary text-2xl"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($reviewsCount) }}+
-                                </h2>
-                                <p class="text-muted-foreground text-sm font-medium">Assessments</p>
                             </div>
                         </header>
                     </div>

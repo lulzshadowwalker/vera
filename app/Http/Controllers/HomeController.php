@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index(): View
     {
         $suppliersCount = Cache::remember('stats.suppliers_count', now()->addDay(), function () {
-            return Supplier::count();
+            return Supplier::query()->has('users')->count();
         });
 
         $reviewsCount = Cache::remember('stats.reviews_count', now()->addDay(), function () {
