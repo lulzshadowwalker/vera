@@ -81,7 +81,7 @@
                         type="date"
                         x-model="dealDate"
                         max="{{ date('Y-m-d') }}"
-                        required
+                        {{-- required --}}
                     >
                     <div class="text-muted-foreground pointer-events-none absolute left-3 top-1/2 -translate-y-1/2">
                         <i class="hgi hgi-stroke hgi-calendar-03"></i>
