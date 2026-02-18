@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\Review;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -35,5 +36,22 @@ class HomeControllerTest extends TestCase
         $this->get(route('home.index'))
             ->assertOk()
             ->assertViewHas('suppliersCount', 10_000 + 2);
+    }
+
+    #[Test]
+    public function it_counts_distinct_assessed_companies(): void
+    {
+        Cache::flush();
+
+        $reviewedSupplierA = Supplier::factory()->create();
+        $reviewedSupplierB = Supplier::factory()->create();
+
+        Review::factory()->create(['reviewed_supplier_id' => $reviewedSupplierA->id]);
+        Review::factory()->create(['reviewed_supplier_id' => $reviewedSupplierA->id]);
+        Review::factory()->create(['reviewed_supplier_id' => $reviewedSupplierB->id]);
+
+        $this->get(route('home.index'))
+            ->assertOk()
+            ->assertViewHas('assessedCompaniesCount', 7_500 + 2);
     }
 }
