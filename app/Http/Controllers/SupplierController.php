@@ -14,7 +14,7 @@ class SupplierController extends Controller
         $query = $request->get('search');
 
         if ($query) {
-            $suppliers = Supplier::search($query)->paginate(12);
+            $suppliers = Supplier::where('domain', $query)->paginate(12);
         } else {
             $suppliers = new LengthAwarePaginator([], 0, 12);
         }
