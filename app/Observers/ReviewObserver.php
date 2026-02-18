@@ -22,6 +22,7 @@ class ReviewObserver
     public function created(Review $review): void
     {
         Cache::forget('stats.reviews_count');
+        Cache::forget('stats.assessed_companies_count');
 
         ReviewCreated::dispatch($review);
     }
@@ -32,5 +33,6 @@ class ReviewObserver
     public function deleted(Review $review): void
     {
         Cache::forget('stats.reviews_count');
+        Cache::forget('stats.assessed_companies_count');
     }
 }

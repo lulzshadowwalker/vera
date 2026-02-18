@@ -16,6 +16,14 @@ class HomeController extends Controller
             return Supplier::query()->has('users')->count();
         });
 
+        $assessedCompaniesCount = Cache::remember(
+            'stats.assessed_companies_count',
+            now()->addDay(),
+            function () {
+                return Review::query()->distinct('reviewed_supplier_id')->count('reviewed_supplier_id');
+            },
+        );
+
         $reviewsCount = Cache::remember('stats.reviews_count', now()->addDay(), function () {
             return Review::count();
         });
@@ -26,6 +34,7 @@ class HomeController extends Controller
 
         return view('home.index', [
             'suppliersCount' => 10_000 + $suppliersCount,
+            'assessedCompaniesCount' => 7_500 + $assessedCompaniesCount,
             'reviewsCount' => 30_000 + $reviewsCount,
             'usersCount' => 5_000 + $usersCount,
         ]);

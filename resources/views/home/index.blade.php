@@ -161,6 +161,24 @@
                     <div class="card bg-card w-64 shrink-0 p-6 text-center transition-shadow hover:shadow-md">
                         <header class="flex flex-col items-center gap-3">
                             <div class="bg-primary/10 grid h-12 w-12 place-items-center rounded-full">
+                                <i class="hgi hgi-stroke hgi-building-03 text-primary text-2xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-primary mb-1 text-3xl font-bold">{{ number_format($assessedCompaniesCount) }}+
+                                </h2>
+                                <p class="text-muted-foreground text-sm font-medium">Assessed Companies</p>
+                            </div>
+                        </header>
+                    </div>
+                </div>
+
+                <div
+                    class="animate-loop-scroll flex items-center gap-8 pr-8"
+                    aria-hidden="true"
+                >
+                    <div class="card bg-card w-64 shrink-0 p-6 text-center transition-shadow hover:shadow-md">
+                        <header class="flex flex-col items-center gap-3">
+                            <div class="bg-primary/10 grid h-12 w-12 place-items-center rounded-full">
                                 <i class="hgi hgi-stroke hgi-star-circle text-primary text-2xl"></i>
                             </div>
                             <div>
