@@ -37,23 +37,31 @@
                       action="{{ route('suppliers.index') }}"
                       method="GET">
                     <div class="flex w-full items-stretch">
-                        <div class="relative flex-1">
-                            <span class="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2">
-                                <i class="hgi hgi-stroke hgi-search-01"></i>
+                        <div class="relative flex-1"
+                             x-data="{ value: @js(request('search', '')) }">
+                            <div class="flex w-full items-stretch">
+                                <span
+                                      class="bg-muted border-border text-muted-foreground flex items-center rounded-l-xl border border-r-0 px-4 text-base font-black">
+                                    @
+                                </span>
+                                <input type="search"
+                                       role="search"
+                                       name="search"
+                                       class="input input-lg border-border peer z-10 w-full rounded-l-none rounded-r-none pl-[0.6rem] focus:z-20 placeholder:text-transparent"
+                                       placeholder="Seek by vendor's domain"
+                                       value="{{ request('search') }}"
+                                       aria-label="Search vendors"
+                                       x-model="value"
+                                       x-init="$el.focus()" />
+                            </div>
+                            <span class="text-muted-foreground pointer-events-none absolute left-[3.5rem] top-1/2 -translate-y-1/2 rounded bg-transparent px-0.5 transition-opacity peer-focus:opacity-0"
+                                  x-show="!value"
+                                  x-cloak>
+                                Seek by vendor's domain
                             </span>
-                            <input type="search"
-                                   role="search"
-                                   name="search"
-                                   class="input input-lg w-full pl-9 rounded-r-none z-10 focus:z-20"
-                                   placeholder="Search by vendor @domain"
-                                   value="{{ request('search') }}"
-                                   aria-label="Search vendors"
-                                   x-data
-                                   x-init="$el.focus()"
-                                   />
                         </div>
                         <button type="submit"
-                                class="btn btn-primary rounded-l-none -ml-px z-10 focus:z-20">
+                                class="btn btn-primary -ml-px rounded-l-none z-10 focus:z-20">
                             Search
                         </button>
                     </div>

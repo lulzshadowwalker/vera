@@ -698,4 +698,28 @@ final class ReviewControllerTest extends TestCase
         $response->assertDontSee('Edit Review');
         $response->assertDontSee(route('reviews.edit', $review));
     }
+
+    #[Test]
+    public function reviews_routes_use_ulid_as_route_key(): void
+    {
+        $review = Review::factory()->create();
+
+        $showUrl = route('reviews.show', $review);
+        $editUrl = route('reviews.edit', $review);
+
+        $this->assertStringContainsString('/reviews/'.$review->ulid, $showUrl);
+        $this->assertStringContainsString(
+            '/reviews/'.$review->ulid.'/edit',
+            $editUrl,
+        );
+    }
+
+    #[Test]
+    public function show_route_resolves_by_ulid_and_not_numeric_id(): void
+    {
+        $review = Review::factory()->create();
+
+        $this->get('/reviews/'.$review->ulid)->assertOk();
+        $this->get('/reviews/'.$review->id)->assertNotFound();
+    }
 }
