@@ -120,8 +120,7 @@ Route::get('/vendors/{supplier:slug}', [
     App\Http\Controllers\SupplierController::class,
     'show',
 ])
-    ->name('suppliers.show')
-    ->middleware('auth');
+    ->name('suppliers.show');
 
 Route::get('/vendors/{supplier:slug}/reviews/create', [
     App\Http\Controllers\ReviewController::class,

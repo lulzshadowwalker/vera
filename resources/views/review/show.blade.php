@@ -293,7 +293,7 @@
                                             {{ Str::limit($otherReview->comment, 100) }}</p>
                                     @endif
                                     <a href="{{ route('reviews.show', $otherReview) }}"
-                                       class="btn btn-primary btn-sm w-full">
+                                       class="btn btn-primary btn-sm w-full mt-auto">
                                         Read Full Review
                                         <i class="hgi hgi-stroke hgi-arrow-right-02"></i>
                                     </a>

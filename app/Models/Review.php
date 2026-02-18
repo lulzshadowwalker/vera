@@ -20,6 +20,7 @@ class Review extends Model
      * @var array
      */
     protected $fillable = [
+        'ulid',
         'reviewer_supplier_id',
         'reviewed_supplier_id',
         'user_id',
@@ -46,6 +47,7 @@ class Review extends Model
     {
         return [
             'id' => 'integer',
+            'ulid' => 'string',
             'reviewer_supplier_id' => 'integer',
             'reviewed_supplier_id' => 'integer',
             'user_id' => 'integer',
@@ -86,6 +88,11 @@ class Review extends Model
     public function reviewedSupplier(): BelongsTo
     {
         return $this->belongsTo(Supplier::class);
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'ulid';
     }
 
     public function getAverageScoreAttribute(): float
