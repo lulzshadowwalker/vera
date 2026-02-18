@@ -34,9 +34,9 @@ class HomeController extends Controller
 
         return view('home.index', [
             'suppliersCount' => 10_000 + $suppliersCount,
-            'assessedCompaniesCount' => 7_500 + $assessedCompaniesCount,
-            'reviewsCount' => 30_000 + $reviewsCount,
-            'usersCount' => 5_000 + $usersCount,
+            'assessedCompaniesCount' => 25_000 + $assessedCompaniesCount,
+            'reviewsCount' => 35_000 + $reviewsCount,
+            'usersCount' => 11_500 + $usersCount,
         ]);
     }
 }
